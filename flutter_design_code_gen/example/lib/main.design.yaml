@@ -1,0 +1,51 @@
+--- # file: myapp_design.yaml (to be configured in pubspec.yaml)
+# this design is based on Material Design https://material.io/design/
+# however it is possible to use another design language or even create your own
+# 
+based_on: material_default # based on the default Flutter Material UI design
+builder: # builder configurations
+  generate_single_file: true
+theme:
+  light:
+  darkmode:
+  darkmode_special:
+    based_on: darkmode
+palette:
+  grayscale:  
+      offblack: 
+        light: 0xFF14142B
+      ash: 0xFF373448
+      #...
+  primary:
+    default: 
+      light: 0xFFD8041D
+      darkmode: 0xFFFF5D66
+      darkmode_special: 0xFFFF3D26
+    dark: 
+      light: 0xFF980101
+    #...
+  accent:
+    #...
+  error:
+    #...
+  #...
+size:
+  padding:
+    placeholder: 96
+    large: 32
+    big: 24
+    medium: 16
+    small: 8
+    tiny: 4
+    line: 2
+    #...
+text:
+  h1:
+    color: grayscale.offblack # this is the default color, all color variation will be generated
+    size: 96
+    weight: bold
+  #...
+icon:
+  lg:
+    size: 24
+#...
