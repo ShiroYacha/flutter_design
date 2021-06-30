@@ -1,7 +1,0 @@
-builders:
-  design_builder:
-    import: "package:flutter_design_code_gen/builder.dart"
-    builder_factories: ["designBuilder"]
-    build_extensions: {".design.yaml": ["design.dart"]}
-    auto_apply: dependents
-    build_to: source

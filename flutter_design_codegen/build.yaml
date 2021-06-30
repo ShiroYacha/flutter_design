@@ -1,0 +1,13 @@
+targets:
+  $default:
+    builders:
+      design_builder:
+        enabled: true
+
+builders:
+  design_builder:
+    import: "package:flutter_design_codegen/builder.dart"
+    builder_factories: ["designBuilder"]
+    build_extensions: {".design.yaml": [".design.dart"]}
+    auto_apply: dependents
+    build_to: source

@@ -10,10 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  # code
-  build: 2.0.2
   analyzer: ^1.7.1
-  freezed_annotation: ^0.14.1
   # formatting
   recase: ^4.0.0
 
@@ -21,12 +18,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   # code
-  build_runner:
   effective_dart: ^1.3.2
-  freezed: ^0.14.1+3
-
-dependency_overrides:
-  code_builder: ^4.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

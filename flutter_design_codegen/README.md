@@ -1,4 +1,4 @@
-# fds_code_gen
+# flutter_design_codegen
 
 A new Flutter package project.
 

@@ -27,7 +27,8 @@ palette:
   grayscale:  
       offblack: 
         light: 0xFF14142B
-      ash: 0xFF373448
+        darkmode: 0xFFFF5D66
+      ash: 0xFF373448 # indifferent to theme
       #...
   primary:
     default: 
@@ -37,6 +38,9 @@ palette:
     dark: 
       light: 0xFF980101
     #...
+  background:
+    special:
+      light: 0xFFD8041D
   accent:
     #...
   error:
@@ -62,17 +66,52 @@ icon:
 
 and after running the builder `flutter packages pub run build_runner build --delete-conflicting-outputs`, you can use the code in Dart, such as the following (for further detail check the API docs):
 
+using **extension methods**
+
 ```dart
 AppBar(
-  title: "This is an example".h1.primaryDefault(), // override with specific color
-  leading: Icons.arrow_back.md().padLeftMd(), // add margin
-  backgroundColor: Palette.primaryLight()
+  title: "This is an example".h1.primaryDefault, // override with specific color
+  leading: Icons.arrow_back.md.padLeftMd(), // add margin
+  backgroundColor: Palette.backgroundSpecial // this is an alias that you created
 )
 ```
 
+or using **static methods**
+
+```dart
+AppBar(
+  title: d.text("This is an example").h1.primaryDefault, // override with specific color
+  leading: d.icon(Icons.arrow_back).md.padLeftMd(), // add margin
+  backgroundColor: Palette.backgroundSpecial // this is an alias that you created
+)
+```
+
+instead of
+
+```dart
+final theme = Theme.of(context);
+//...
+AppBar(
+  title: Text("This is an example", style: theme.textTheme!.heading1!.copyWith(color: theme.primaryColor)), 
+  leading: Padding(padding: paddingLeftMd, child: Icon(Icons.arrow_black, size: iconSizeMd)), // add margin
+  backgroundColor: theme.brightness === Brightness.light ? 
+    backgroundSpecialLightColor : backgroundSpecialDarkColor // sometimes you need another themed color but it's not possible
+)
+```
+
+```dart
+///
+extension test on Text {
+  Text get md => this..style = TextStyle(this.style.copyWith(fontSize: 15));
+
+}
+///
+```
+
+
 #### Theme modes
 
-By defining the basic theme modes (e.g. `light`, `dark`, etc.), the builder automatically generates all widgets with according themes. You can also bootstrap the theme configuration easily which is synchronized to the device or can be configured programmatically.
+By defining the basic theme modes (e.g. `light`, `dark`, etc.), the builder automatically generates all widgets with according themes. You can also bootstrap the theme configuration easily which is synchronized to the device or can be configured programmatically. 
 
 #### Autoscaling (vNext)
 

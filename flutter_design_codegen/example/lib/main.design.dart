@@ -4,7 +4,27 @@
 import 'package:flutter/material.dart';
 
 
+/// Palette 
+const Color grayscaleOffblackLight = Color(4279505963);
+const Color grayscaleOffblackDarkmode = Color(4279505963);
+const Color grayscaleOffblackDarkmodeSpecial = Color(4279505963);
+const Color grayscaleAshLight = Color(4281807944);
+const Color grayscaleAshDarkmode = Color(4281807944);
+const Color grayscaleAshDarkmodeSpecial = Color(4281807944);
+const Color primaryDefaultLight = Color(4292346909);
+const Color primaryDefaultDarkmode = Color(4294925670);
+const Color primaryDefaultDarkmodeSpecial = Color(4294917414);
+const Color primaryDarkLight = Color(4288151809);
+const Color primaryDarkDarkmode = Color(4288151809);
+const Color primaryDarkDarkmodeSpecial = Color(4288151809);
+const Color accentDefaultLight = Color(4281807944);
+const Color accentDefaultDarkmode = Color(4281807944);
+const Color accentDefaultDarkmodeSpecial = Color(4281807944);
+const Color errorDefaultLight = Color(4281807944);
+const Color errorDefaultDarkmode = Color(4281807944);
+const Color errorDefaultDarkmodeSpecial = Color(4281807944);
 
+/// Padding 
 const double paddingSizePlaceholder = 96;
 const double paddingSizeLarge = 32;
 const double paddingSizeBig = 24;

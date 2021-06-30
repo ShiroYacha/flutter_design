@@ -1,4 +1,4 @@
-library fds_code_gen.builder;
+library flutter_design_codegen.builder;
 
 import 'package:build/build.dart';
 import 'src/design_builder.dart';

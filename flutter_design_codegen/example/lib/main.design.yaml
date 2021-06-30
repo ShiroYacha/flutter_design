@@ -12,10 +12,10 @@ theme:
     based_on: darkmode
 palette:
   grayscale:  
-      offblack: 
-        light: 0xFF14142B
-      ash: 0xFF373448
-      #...
+    offblack: 
+      light: 0xFF14142B
+    ash: 0xFF373448
+    #...
   primary:
     default: 
       light: 0xFFD8041D
@@ -25,20 +25,21 @@ palette:
       light: 0xFF980101
     #...
   accent:
+    default: 0xFF373448
     #...
   error:
+    default: 0xFF373448
     #...
   #...
-size:
-  padding:
-    placeholder: 96
-    large: 32
-    big: 24
-    medium: 16
-    small: 8
-    tiny: 4
-    line: 2
-    #...
+padding:
+  placeholder: 96
+  large: 32
+  big: 24
+  medium: 16
+  small: 8
+  tiny: 4
+  line: 2
+  #...
 text:
   h1:
     color: grayscale.offblack # this is the default color, all color variation will be generated
