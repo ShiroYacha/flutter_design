@@ -23,16 +23,22 @@ themes:
   darkmode:
   darkmode_special:
     based_on: darkmode
+color:
+  chili:
+    50: 0xFFF2F2
+    #...
+    900: 0x660000
+  #...
 palette:
   grayscale:  
       offblack: 
-        light: 0xFF14142B
-        darkmode: 0xFFFF5D66
-      ash: 0xFF373448 # indifferent to theme
+        light: cool[900] # use the color system
+        darkmode: cool[200]
+      ash: cool[600] # indifferent to theme
       #...
   primary:
     default: 
-      light: 0xFFD8041D
+      light: 0xFFD8041D # use a specific hex color
       darkmode: 0xFFFF5D66
       darkmode_special: 0xFFFF3D26
     dark: 
@@ -61,6 +67,35 @@ text:
 icon:
   lg:
     size: 24
+
+variants:
+  themed:
+    based_on: flutter_design.themed
+    options: [light, darkmode]
+
+widgets:
+  button:
+    variants:
+      type: [raised, outlined, text]
+      size: [huge, large, medium, small]
+      icon: [none, left, right, only]
+      radius: [pill, semi-rounded]
+      theme: 
+        use: themed
+
+  card:
+    variants:
+      type: [commerce, blog, product, social, category, photo]
+      size: [large, medium, small]
+      theme: [light, darkmode]
+
+  badge_tag:
+    variants:
+      type: [solid, outline]
+      color: [default, info, success, warning, error, custom]
+      dismissable: [true, false]
+      size: [large, small]
+      theme: [light, darkmode]
 #...
 ```
 
@@ -118,10 +153,35 @@ By defining the basic theme modes (e.g. `light`, `dark`, etc.), the builder auto
 ...
 
 
+#### Design system
+
+You can also define the entier design system in YAML and generate the classes for implementation. For each widget you can define multiple variant properties and sometimes impl. each aspect of them independently, using mixins, and reuse them across different wigdets.
+
+```dart
+/*
+  button:
+    variants:
+      type: [raised, outlined, text]
+      size: [huge, large, medium, small]
+      icon: [none, left, right, only]
+      radius: [pill, semi-rounded]
+      theme: [light, darkmode]
+*/
+
+
+
+class MyButton = _MyButton with _$MyButton;
+
+abstract class _MyButton with HookDesignElement {
+
+}
+```
 
 
 
 
+
+This is obsolete ... 
 
 ```yaml
 --- # file: myapp_design.yaml (to be configured in pubspec.yaml)

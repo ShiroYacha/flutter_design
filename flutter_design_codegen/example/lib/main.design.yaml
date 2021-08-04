@@ -33,7 +33,7 @@ palette:
   #...
 padding:
   placeholder: 96
-  large: 32
+  large: 36
   big: 24
   medium: 16
   small: 8

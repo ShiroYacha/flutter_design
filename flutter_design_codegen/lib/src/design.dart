@@ -12,6 +12,6 @@ class PaletteCategory {
 
 class PaletteElement {
   final String name;
-  final Map<ThemeElement, int> colorHex;
+  final Map<ThemeElement, String> colorHex;
   PaletteElement({required this.name, required this.colorHex});
 }

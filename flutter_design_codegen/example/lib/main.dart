@@ -99,13 +99,17 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Text(
               '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+              style: Theme.of(context)
+                  .textTheme
+                  .headline4!
+                  .copyWith(color: primaryDefaultLight),
             ).padLarge(),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
+        backgroundColor: primaryDefaultLight,
         tooltip: 'Increment',
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
