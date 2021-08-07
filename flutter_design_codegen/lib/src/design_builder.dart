@@ -5,14 +5,45 @@ import 'package:yaml/yaml.dart';
 import 'design.dart';
 import 'extension.dart';
 
+final _debugMode = true;
+void _logIfDebug(String log, {String step = ''}) {
+  if (_debugMode) {
+    print('====> ${step.isNotEmpty ? step : '(uknown step)'}:   $log');
+  }
+}
+
+extension YamlMapExtension on YamlMap {
+  T get<T>(String key) {
+    _logIfDebug('inspecting key = $key', step: '(yaml)');
+    if (T == double && this[key] is int) {
+      return (this[key] as int).toDouble() as T;
+    }
+    return this[key] as T;
+  }
+
+  T? getMaybe<T>(String key) {
+    _logIfDebug('inspecting key = $key', step: '(yaml)');
+    return this[key] as T?;
+  }
+
+  YamlMap on<T>(String key, void Function(T) callback) {
+    if (this[key] is T) {
+      callback(this[key] as T);
+    }
+    return this;
+  }
+}
+
 const kDefaultSupportedThemeModeBrightnessMap = {
   'darkmode': 'dark',
   'lightmode': 'light'
 };
 
 class DesignBuilder implements Builder {
-  Map<String, ThemeElement> _themeElementMap = {};
+  String? _defaultTheme;
+  Map<String, ThemeElement> _themeMap = {};
   Map<String, PaletteCategory> _paletteCategoryMap = {};
+  Map<String, TextStyleElement> _textStyleMap = {};
 
   @override
   Future build(BuildStep buildStep) async {
@@ -20,6 +51,7 @@ class DesignBuilder implements Builder {
 
     // read yaml design declaration file
     dynamic yaml = loadYaml(await buildStep.readAsString(inputId));
+    _logIfDebug('YAML = $yaml', step: 'build');
 
     // generate code
     final code = _generateDesignCode(yaml);
@@ -39,8 +71,10 @@ class DesignBuilder implements Builder {
     sb.writeAll(<String>[
       _renderHeader(),
       _renderImports(),
-      _renderThemeCode(yaml['theme'] as YamlMap?),
+      _renderThemeModeCode(yaml['theme_modes'] as YamlMap?),
       _renderPaletteCode(yaml['palette'] as YamlMap?),
+      _renderTextStyleCode(yaml['text_styles'] as YamlMap?),
+      _renderThemeDataCode(yaml['theme_data'] as YamlMap?),
       _renderPaddingCode(yaml['padding'] as YamlMap?),
     ], '\n');
     return sb.toString();
@@ -59,93 +93,201 @@ import 'package:flutter/material.dart';
 ''';
   }
 
-  String _renderThemeCode(YamlMap? themeYaml) {
+  String _renderThemeModeCode(YamlMap? themeModeYaml) {
+    _logIfDebug('Begin', step: '_renderThemeModeCode');
     final sb = StringBuffer();
-    if (themeYaml == null) return sb.toString();
-    sb.writeln('''/// Theme ''');
+    if (themeModeYaml == null) return sb.toString();
     // Compute theme modes
     //  - cache the theme modes for later usage
-    _themeElementMap = <String, ThemeElement>{};
-    final themeModes = themeYaml['modes'] as YamlMap;
-    final supportedKeys = themeModes.keys
+    _themeMap = <String, ThemeElement>{};
+    final supportedKeys = themeModeYaml.keys
         .cast<String>()
         .where((k) => kDefaultSupportedThemeModeBrightnessMap.containsKey(k))
         .toList();
     for (final key in supportedKeys) {
-      _themeElementMap[key] = ThemeElement(name: key, basedOn: null);
+      _themeMap[key] = ThemeElement(name: key, basedOn: null);
+      if (_defaultTheme == null || themeModeYaml[key] == 'default') {
+        _defaultTheme = key;
+      }
     }
+    _logIfDebug('_defaultTheme = $_defaultTheme', step: '_renderThemeCode');
+
     //  - process the basedOn relationship
     for (final key in supportedKeys) {
-      final basedOn = themeModes[key]?['basedOn'] as String?;
+      final basedOn = themeModeYaml[key] is YamlMap
+          ? themeModeYaml.get<YamlMap>(key).get<String?>('basedOn')
+          : null;
       if (basedOn != null) {
-        _themeElementMap[key]!.basedOn = _themeElementMap.values
+        _themeMap[key]!.basedOn = _themeMap.values
             .firstWhereOrNull((element) => element.name == basedOn);
       }
     }
-    // Compute theme data for dark, light brightness mode
-    _themeElementMap.forEach((key, value) {
-      final themeMappings = themeYaml['mappings'] as YamlMap;
-      // Color mappings
-      final themeColorMappings = themeMappings['color'] as YamlMap;
-      final themeDataColorStatements =
-          themeColorMappings.keys.cast<String>().map((k) {
-        final labelParts = (themeColorMappings[k] as String).split('.');
-        var label = labelParts[0];
-        for (var labelPart in labelParts.skip(1)) {
-          label += labelPart.pascalCase;
-        }
-        return '''$k: $label${key.pascalCase},''';
-      }).toList();
-      // Font mappings
-      final themeFontMappings = themeMappings['font'] as YamlMap;
-      final themeDataFontStatements = themeFontMappings.keys
-          .cast<String>()
-          .map((k) => '''$k: \'${themeFontMappings[k]}\'''')
-          .toList();
-      // Text mappings
-      sb.writeln('''final ${key}ThemeData = ThemeData(
-  brightness: Brightness.${kDefaultSupportedThemeModeBrightnessMap[key]},
-  // Color
-  ${themeDataColorStatements.join('\n  ')}
-  // Font
-  ${themeDataFontStatements.join('\n  ')}
-);''');
-    });
+    _logIfDebug('_themeElementMap = $_themeMap', step: '_renderThemeCode');
     return sb.toString();
   }
 
   String _renderPaletteCode(YamlMap? paletteYaml) {
+    _logIfDebug('Begin', step: '_renderPaletteCode');
     final sb = StringBuffer();
     if (paletteYaml == null) return sb.toString();
     sb.writeln('''/// Palette ''');
     _paletteCategoryMap = {};
     // Parse palette category and elements
-    for (final category in paletteYaml.keys.cast<String>()) {
-      final paletteYamlMap = paletteYaml[category] as YamlMap;
+    for (final categoryName in paletteYaml.keys.cast<String>()) {
+      final category = PaletteCategory(name: categoryName, items: {});
+      final paletteYamlMap = paletteYaml.get<YamlMap>(categoryName);
       final elementMap = {
         for (final key in paletteYamlMap.keys.cast<String>())
-          key: PaletteElement(name: key, colorHex: {
-            for (final theme in _themeElementMap.values)
-              theme:
-                  '0x${_parsePaletteElementColor(paletteYamlMap[key], theme).toRadixString(16)}'
-          })
+          key: paletteYamlMap[key] is int
+              ? PaletteElement(
+                  name: key,
+                  category: category,
+                  colorHex:
+                      '0x${_parsePaletteElementColor(paletteYamlMap[key], null).toRadixString(16)}')
+              : PaletteElement(name: key, category: category, colorHexMap: {
+                  for (final theme in _themeMap.values)
+                    theme:
+                        '0x${_parsePaletteElementColor(paletteYamlMap[key], theme).toRadixString(16)}'
+                })
       };
-      _paletteCategoryMap[category] =
-          PaletteCategory(name: category, items: elementMap);
+      _paletteCategoryMap[categoryName] = category..items.addAll(elementMap);
     }
     // Create colors
     for (final category in _paletteCategoryMap.values) {
       for (final element in category.items.values) {
-        for (final theme in element.colorHex.keys) {
+        if (element.colorHex != null) {
           sb.writeln(
-              '''const Color ${category.name.toLowerCase()}${element.name.pascalCase}${theme.name.pascalCase} = Color(${element.colorHex[theme]});''');
+              '''const Color ${category.name.toLowerCase()}${element.name.pascalCase} = Color(${element.colorHex});''');
+        } else if (element.colorHexMap != null) {
+          for (final theme in element.colorHexMap!.keys) {
+            sb.writeln(
+                '''const Color ${category.name.toLowerCase()}${element.name.pascalCase}${theme.name.pascalCase} = Color(${element.colorHexMap![theme]});''');
+          }
         }
       }
     }
     return sb.toString();
   }
 
+  String _renderTextStyleCode(YamlMap? textYaml) {
+    _logIfDebug('Begin', step: '_renderTextCode');
+    final sb = StringBuffer();
+    if (textYaml == null) return sb.toString();
+    sb.writeln('''/// Text ''');
+
+    // Parse text style elements
+    for (var name in textYaml.keys.cast<String>()) {
+      final textYamlElement = textYaml.get<YamlMap>(name);
+      _textStyleMap[name] = TextStyleElement(
+        name: name,
+        color:
+            _locatePaletteElementByCode(textYamlElement.get<String>('color'))!,
+        fontWeight: textYamlElement.get<String>('weight'),
+        size: textYamlElement.get<double>('size'),
+      );
+    }
+
+    // Rendering
+    for (var textStyle in _textStyleMap.values) {
+      if (textStyle.color.isSingleColor) {
+        sb.writeln(textStyle.renderCode(null));
+      } else {
+        for (var themeName in _themeMap.keys) {
+          sb.writeln(textStyle.renderCode(themeName));
+        }
+      }
+    }
+
+    return sb.toString();
+  }
+
+  String _renderThemeDataCode(YamlMap? themeDataYaml) {
+    _logIfDebug('Begin', step: '_renderThemeDataCode');
+    final sb = StringBuffer();
+    if (themeDataYaml == null) return sb.toString();
+    sb.writeln('''/// Theme ''');
+    _themeMap.forEach((themeName, value) {
+      // Parse color mappings
+      final themeColorMappings = themeDataYaml.get<YamlMap>('color');
+      final themeDataColorStatements = _renderColorStatementUsingCode(
+          themeColorMappings, themeName, _renderColorVariableNameUsingCode);
+
+      // Parse font mappings
+      final themeFontMappings = themeDataYaml.get<YamlMap>('font');
+      final themeDataFontStatements = themeFontMappings.keys
+          .cast<String>()
+          .map((k) => '''$k: \'${themeFontMappings[k]}\',''')
+          .toList();
+
+      // Parse text mappings
+      final themeTextThemeMappings = themeDataYaml.get<YamlMap>('text');
+      final themeDataTextThemeStatements = themeTextThemeMappings.keys
+          .cast<String>()
+          .map((k) =>
+              '''$k: ${_textStyleMap[themeTextThemeMappings.get<String>(k)]!.renderVariableName(themeName)},''')
+          .toList();
+
+      // Rendering
+      sb.writeln('''final ${themeName}ThemeData = ThemeData(
+  brightness: Brightness.${kDefaultSupportedThemeModeBrightnessMap[themeName]},
+  // Color
+  ${themeDataColorStatements.join('\n  ')}
+  // Font
+  ${themeDataFontStatements.join('\n  ')}
+  // Text theme
+  textTheme: TextTheme(
+    ${themeDataTextThemeStatements.join('\n    ')}
+  ),
+);\n''');
+    });
+    return sb.toString();
+  }
+
+  List<String> _renderColorStatementUsingCode(
+      YamlMap themeColorMappings,
+      String themeName,
+      String Function(String code, String themeName) statementBuilder) {
+    return themeColorMappings.keys.cast<String>().map((k) {
+      final sb = StringBuffer();
+      themeColorMappings.on<String>(k, (stringKey) {
+        // If a direct color string is provided
+        //   e.g. primaryColor: primary.default
+        sb.write('''$k: ${statementBuilder(stringKey, themeName)},''');
+      }).on<YamlMap>(k, (modeMap) {
+        // If a theme mode color string map is provided
+        //   e.g. canvasColor:
+        //          lightmode: grayscale.background
+        //          darkmode: grayscale.line
+        for (var mode in modeMap.keys.cast<String>()) {
+          if (mode == themeName) {
+            sb.write(
+                '''$k: ${statementBuilder(modeMap.get<String>(mode), themeName)},''');
+          }
+        }
+      });
+      return sb.toString();
+    }).toList();
+  }
+
+  PaletteElement? _locatePaletteElementByCode(String code) {
+    final labelParts = code.split('.');
+    return _paletteCategoryMap[labelParts[0]]?.items[labelParts[1]];
+  }
+
+  String _renderColorVariableNameUsingCode(String code, String themeName) {
+    final palette = _locatePaletteElementByCode(code);
+    if (palette == null) {
+      return '?, //ERROR: stringKey = $code, reason: palette == null';
+    }
+    try {
+      return palette.formatVariableName(themeName);
+    } on Exception catch (e) {
+      return '?, //ERROR: stringKey = $code, reason: $e';
+    }
+  }
+
   String _renderPaddingCode(YamlMap? paddingYaml) {
+    _logIfDebug('Begin', step: '_renderPaddingCode');
     final sb = StringBuffer();
     if (paddingYaml == null) return sb.toString();
     sb.writeln('''/// Padding ''');
@@ -195,7 +337,7 @@ import 'package:flutter/material.dart';
     return sb.toString();
   }
 
-  int _parsePaletteElementColor(dynamic paletteYamlMap, ThemeElement theme) {
+  int _parsePaletteElementColor(dynamic paletteYamlMap, ThemeElement? theme) {
     if (paletteYamlMap is int) {
       return paletteYamlMap;
     }
@@ -205,7 +347,7 @@ import 'package:flutter/material.dart';
       assert(paletteYamlMap.keys.isNotEmpty);
       final selectedTheme = paletteYamlMap.keys.cast<String>().firstWhere(
           (themeName) =>
-              theme.name == themeName || theme.basedOn?.name == themeName,
+              theme?.name == themeName || theme?.basedOn?.name == themeName,
           orElse: () => paletteYamlMap.keys.first as String);
       return paletteYamlMap[selectedTheme] as int;
     }
