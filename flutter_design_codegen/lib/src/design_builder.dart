@@ -1,9 +1,11 @@
+import 'dart:io';
+
 import 'package:build/build.dart';
 import 'package:collection/collection.dart';
+import 'package:recase/recase.dart';
 import 'package:yaml/yaml.dart';
 
 import 'design.dart';
-import 'extension.dart';
 
 final _debugMode = true;
 void _logIfDebug(String log, {String step = ''}) {
@@ -41,9 +43,9 @@ const kDefaultSupportedThemeModeBrightnessMap = {
 
 class DesignBuilder implements Builder {
   String? _defaultTheme;
-  Map<String, ThemeElement> _themeMap = {};
-  Map<String, PaletteCategory> _paletteCategoryMap = {};
-  Map<String, TextStyleElement> _textStyleMap = {};
+  final Map<String, ThemeElement> _themeMap = {};
+  final Map<String, PaletteCategory> _paletteCategoryMap = {};
+  final Map<String, TextStyleElement> _textStyleMap = {};
 
   @override
   Future build(BuildStep buildStep) async {
@@ -76,6 +78,7 @@ class DesignBuilder implements Builder {
       _renderTextStyleCode(yaml['text_styles'] as YamlMap?),
       _renderThemeDataCode(yaml['theme_data'] as YamlMap?),
       _renderPaddingCode(yaml['padding'] as YamlMap?),
+      _renderWidgetCode(yaml['widgets'] as YamlMap?),
     ], '\n');
     return sb.toString();
   }
@@ -99,7 +102,7 @@ import 'package:flutter/material.dart';
     if (themeModeYaml == null) return sb.toString();
     // Compute theme modes
     //  - cache the theme modes for later usage
-    _themeMap = <String, ThemeElement>{};
+    _themeMap.clear();
     final supportedKeys = themeModeYaml.keys
         .cast<String>()
         .where((k) => kDefaultSupportedThemeModeBrightnessMap.containsKey(k))
@@ -131,7 +134,8 @@ import 'package:flutter/material.dart';
     final sb = StringBuffer();
     if (paletteYaml == null) return sb.toString();
     sb.writeln('''/// Palette ''');
-    _paletteCategoryMap = {};
+
+    _paletteCategoryMap.clear();
     // Parse palette category and elements
     for (final categoryName in paletteYaml.keys.cast<String>()) {
       final category = PaletteCategory(name: categoryName, items: {});
@@ -176,6 +180,7 @@ import 'package:flutter/material.dart';
     sb.writeln('''/// Text ''');
 
     // Parse text style elements
+    _textStyleMap.clear();
     for (var name in textYaml.keys.cast<String>()) {
       final textYamlElement = textYaml.get<YamlMap>(name);
       _textStyleMap[name] = TextStyleElement(
@@ -206,6 +211,7 @@ import 'package:flutter/material.dart';
     final sb = StringBuffer();
     if (themeDataYaml == null) return sb.toString();
     sb.writeln('''/// Theme ''');
+
     _themeMap.forEach((themeName, value) {
       // Parse color mappings
       final themeColorMappings = themeDataYaml.get<YamlMap>('color');
@@ -291,6 +297,7 @@ import 'package:flutter/material.dart';
     final sb = StringBuffer();
     if (paddingYaml == null) return sb.toString();
     sb.writeln('''/// Padding ''');
+
     const orientationLabelMap = {
       'all': [''],
       'symmetric': ['horizontal', 'vertical'],
@@ -352,5 +359,31 @@ import 'package:flutter/material.dart';
       return paletteYamlMap[selectedTheme] as int;
     }
     throw Error(); // Bad palette element format
+  }
+
+  String _renderWidgetCode(YamlMap? widgetYaml) {
+    _logIfDebug('Begin', step: '_renderWidgetCode');
+    final sb = StringBuffer();
+    if (widgetYaml == null) return sb.toString();
+    sb.writeln('''/// Widgets ''');
+
+    final widgetDirectory = Directory('lib/widgets');
+    if (!widgetDirectory.existsSync()) {
+      widgetDirectory.createSync();
+    }
+    for (var key in widgetYaml.keys.cast<String>()) {
+      final file = File('lib/widgets/$key.dart');
+      if (!file.existsSync()) {
+        file.writeAsString('''
+part \'$key.g.dart\';
+
+class ${key.pascalCase} extends String {
+
+}
+''');
+      }
+    }
+
+    return sb.toString();
   }
 }
