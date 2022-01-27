@@ -1,6 +1,0 @@
-# Flutter design system
-
-```yaml
-
-```
-
