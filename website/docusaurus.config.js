@@ -6,15 +6,15 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'My Site',
-  tagline: 'Dinosaurs are cool',
+  title: 'Flutter design',
+  tagline: 'Create and visualize beautiful Flutter designs',
   url: 'https://your-docusaurus-test-site.com',
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
-  organizationName: 'facebook', // Usually your GitHub org/user name.
-  projectName: 'docusaurus', // Usually your repo name.
+  organizationName: 'ShiroYacha', // Usually your GitHub org/user name.
+  projectName: 'flutter_design', // Usually your repo name.
 
   presets: [
     [
@@ -41,23 +41,31 @@ const config = {
 
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
-    ({
+    ({ 
+      colorMode: {
+        defaultMode: 'light',
+      },
       navbar: {
-        title: 'My Site',
+        title: 'Flutter Design',
         logo: {
-          alt: 'My Site Logo',
+          alt: 'Flutter Design Logo',
           src: 'img/logo.svg',
+          srcDark: 'img/logo_dark.svg',
         },
         items: [
           {
             type: 'doc',
             docId: 'intro',
             position: 'left',
-            label: 'Tutorial',
+            label: 'Docs',
           },
-          {to: '/blog', label: 'Blog', position: 'left'},
           {
-            href: 'https://github.com/facebook/docusaurus',
+            href: 'https://test',
+            label: 'Demo',
+            position: 'left',
+          },
+          {
+            href: 'https://github.com/shiroyacha/flutter_design',
             label: 'GitHub',
             position: 'right',
           },
