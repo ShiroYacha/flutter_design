@@ -1,7 +1,8 @@
 name: flutter_design
 description: A new Flutter package project.
 version: 0.0.1
-# homepage: 
+publish_to: none
+# homepage:
 
 environment:
   sdk: ">=2.15.1 <3.0.0"
@@ -10,11 +11,26 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  # internal
+  flutter_design_annotation:
+    path: ../flutter_design_annotation
+  # data
+  freezed_annotation: ^1.1.0
+  json_annotation: ^4.4.0
+  faker: ^2.0.0
+  recase: ^4.0.0
 
 dev_dependencies:
+  # testing
   flutter_test:
     sdk: flutter
+  # tools
   flutter_lints: ^1.0.0
+  # build
+  build_runner: ^2.1.7
+  # data
+  freezed: ^1.1.1
+  json_serializable: ^6.1.4
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

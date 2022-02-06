@@ -1,7 +1,7 @@
-name: flutter_design_viewer
+name: flutter_design_annotation
 description: A new Flutter package project.
 version: 0.0.1
-publish_to: none
+homepage:
 
 environment:
   sdk: ">=2.15.1 <3.0.0"
@@ -10,47 +10,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  # internal
-  flutter_design:
-    path: ../flutter_design
-  # framework
-  flutter_hooks: ^0.18.2
-  vrouter: ^1.2.0+21
-  # state management
-  hooks_riverpod: ^1.0.3
-  # data
-  freezed_annotation: ^1.1.0
-  json_annotation: ^4.4.0
-  faker: ^2.0.0
-  # font
-  google_fonts: ^2.1.0
-  # controls
-  material_floating_search_bar: ^0.3.6
-  linked_scroll_controller: ^0.2.0
-  dotted_border: ^2.0.0+1
-  device_preview: ^1.0.0
-  clipboard: ^0.1.3
-  # icon
-  flutter_feather_icons: ^2.0.0+1
-  ionicons: ^0.1.2
-  # notification
-  bot_toast: ^4.0.1
-  # media
-  cached_network_image: ^3.2.0
-  flutter_cache_manager: ^3.3.0
-  # system
-  url_launcher: ^6.0.18
-  localstorage: ^4.0.0+1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^1.0.0
-  # build
-  build_runner: ^2.1.7
-  # data
-  freezed: ^1.1.1
-  json_serializable: ^6.1.4
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

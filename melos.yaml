@@ -2,3 +2,56 @@ name: flutter_design
 
 packages:
   - packages/**
+
+scripts:
+  postbootstrap: |
+
+  analyze:
+    run: |
+      melos exec -c 1 -- \
+        flutter analyze .
+    description: |
+      Run `dart analyze` in all packages.
+       - Note: you can also rely on your IDEs Dart Analysis / Issues window.
+
+  build:
+    run: melos run build:dart && melos run build:flutter
+    description: Build all build files for Dart & Flutter packages in this project.
+
+  build:dart:
+    run: melos exec -c 1 --depends-on="build_runner" --no-flutter -- "dart run build_runner build --delete-conflicting-outputs"
+    description: Build all build files for Dart packages in this project.
+
+  build:flutter:
+    run: melos exec -c 1 --depends-on="build_runner" --flutter -- "flutter pub run build_runner build --delete-conflicting-outputs"
+    description: Build all build files for Flutter packages in this project.
+
+  watch:
+    run: melos run watch:dart && melos run watch:flutter
+    description: Watch all build files for Dart & Flutter packages in this project.
+
+  watch:dart:
+    run: melos exec -c 1 --depends-on="build_runner" --no-flutter -- "dart run build_runner watch --delete-conflicting-outputs"
+    description: Watch all build files for Dart packages in this project.
+
+  watch:flutter:
+    run: melos exec -c 1 --depends-on="build_runner" --flutter -- "flutter pub run build_runner watch --delete-conflicting-outputs"
+    description: Watch all build files for Flutter packages in this project.
+
+  test:
+    run: melos run test:dart --no-select && melos run test:flutter --no-select
+    description: Run all Dart & Flutter tests in this project.
+
+  test:dart:
+    run: melos exec  -c 1 --fail-fast -- "\$MELOS_ROOT_PATH/scripts/coverage.sh"
+    description: Run Dart tests for a specific package in this project.
+    select-package:
+      flutter: false
+      dir-exists: test
+
+  test:flutter:
+    run: melos exec --dir-exists="test" -c 1 --fail-fast -- "flutter test --coverage"
+    description: Run Flutter tests for a specific package in this project.
+    select-package:
+      flutter: true
+      dir-exists: test

@@ -1,0 +1,5 @@
+targets:
+  $default:
+    builders:
+      flutter_design_codegen|design_builder:
+        enabled: true

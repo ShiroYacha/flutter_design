@@ -1,0 +1,21 @@
+name: flutter_design_codegen
+description: A new Flutter package project.
+publish_to: none
+
+environment:
+  sdk: ">=2.15.1 <3.0.0"
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_design_annotation:
+    path: ../flutter_design_annotation
+  source_gen:
+  analyzer:
+  build_resolvers: ^2.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^1.0.0
