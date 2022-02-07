@@ -20,14 +20,14 @@ class _$ViewerPageGroupTearOff {
 
   _ViewerPageGroup call(
       {required String id,
-      required List<String> namespace,
       required String title,
+      Color? color,
       ViewerGlyphUnion? glyph,
       List<ViewerPageUnion> children = const []}) {
     return _ViewerPageGroup(
       id: id,
-      namespace: namespace,
       title: title,
+      color: color,
       glyph: glyph,
       children: children,
     );
@@ -40,8 +40,8 @@ const $ViewerPageGroup = _$ViewerPageGroupTearOff();
 /// @nodoc
 mixin _$ViewerPageGroup {
   String get id => throw _privateConstructorUsedError;
-  List<String> get namespace => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
+  Color? get color => throw _privateConstructorUsedError;
   ViewerGlyphUnion? get glyph => throw _privateConstructorUsedError;
   List<ViewerPageUnion> get children => throw _privateConstructorUsedError;
 
@@ -57,8 +57,8 @@ abstract class $ViewerPageGroupCopyWith<$Res> {
       _$ViewerPageGroupCopyWithImpl<$Res>;
   $Res call(
       {String id,
-      List<String> namespace,
       String title,
+      Color? color,
       ViewerGlyphUnion? glyph,
       List<ViewerPageUnion> children});
 
@@ -77,8 +77,8 @@ class _$ViewerPageGroupCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
-    Object? namespace = freezed,
     Object? title = freezed,
+    Object? color = freezed,
     Object? glyph = freezed,
     Object? children = freezed,
   }) {
@@ -87,14 +87,14 @@ class _$ViewerPageGroupCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      namespace: namespace == freezed
-          ? _value.namespace
-          : namespace // ignore: cast_nullable_to_non_nullable
-              as List<String>,
       title: title == freezed
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
+      color: color == freezed
+          ? _value.color
+          : color // ignore: cast_nullable_to_non_nullable
+              as Color?,
       glyph: glyph == freezed
           ? _value.glyph
           : glyph // ignore: cast_nullable_to_non_nullable
@@ -127,8 +127,8 @@ abstract class _$ViewerPageGroupCopyWith<$Res>
   @override
   $Res call(
       {String id,
-      List<String> namespace,
       String title,
+      Color? color,
       ViewerGlyphUnion? glyph,
       List<ViewerPageUnion> children});
 
@@ -150,8 +150,8 @@ class __$ViewerPageGroupCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
-    Object? namespace = freezed,
     Object? title = freezed,
+    Object? color = freezed,
     Object? glyph = freezed,
     Object? children = freezed,
   }) {
@@ -160,14 +160,14 @@ class __$ViewerPageGroupCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      namespace: namespace == freezed
-          ? _value.namespace
-          : namespace // ignore: cast_nullable_to_non_nullable
-              as List<String>,
       title: title == freezed
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
+      color: color == freezed
+          ? _value.color
+          : color // ignore: cast_nullable_to_non_nullable
+              as Color?,
       glyph: glyph == freezed
           ? _value.glyph
           : glyph // ignore: cast_nullable_to_non_nullable
@@ -187,17 +187,17 @@ class _$_ViewerPageGroup
     implements _ViewerPageGroup {
   const _$_ViewerPageGroup(
       {required this.id,
-      required this.namespace,
       required this.title,
+      this.color,
       this.glyph,
       this.children = const []});
 
   @override
   final String id;
   @override
-  final List<String> namespace;
-  @override
   final String title;
+  @override
+  final Color? color;
   @override
   final ViewerGlyphUnion? glyph;
   @JsonKey()
@@ -206,7 +206,7 @@ class _$_ViewerPageGroup
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ViewerPageGroup(id: $id, namespace: $namespace, title: $title, glyph: $glyph, children: $children)';
+    return 'ViewerPageGroup(id: $id, title: $title, color: $color, glyph: $glyph, children: $children)';
   }
 
   @override
@@ -215,8 +215,8 @@ class _$_ViewerPageGroup
     properties
       ..add(DiagnosticsProperty('type', 'ViewerPageGroup'))
       ..add(DiagnosticsProperty('id', id))
-      ..add(DiagnosticsProperty('namespace', namespace))
       ..add(DiagnosticsProperty('title', title))
+      ..add(DiagnosticsProperty('color', color))
       ..add(DiagnosticsProperty('glyph', glyph))
       ..add(DiagnosticsProperty('children', children));
   }
@@ -227,8 +227,8 @@ class _$_ViewerPageGroup
         (other.runtimeType == runtimeType &&
             other is _ViewerPageGroup &&
             const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.namespace, namespace) &&
             const DeepCollectionEquality().equals(other.title, title) &&
+            const DeepCollectionEquality().equals(other.color, color) &&
             const DeepCollectionEquality().equals(other.glyph, glyph) &&
             const DeepCollectionEquality().equals(other.children, children));
   }
@@ -237,8 +237,8 @@ class _$_ViewerPageGroup
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(namespace),
       const DeepCollectionEquality().hash(title),
+      const DeepCollectionEquality().hash(color),
       const DeepCollectionEquality().hash(glyph),
       const DeepCollectionEquality().hash(children));
 
@@ -251,17 +251,17 @@ class _$_ViewerPageGroup
 abstract class _ViewerPageGroup implements ViewerPageGroup {
   const factory _ViewerPageGroup(
       {required String id,
-      required List<String> namespace,
       required String title,
+      Color? color,
       ViewerGlyphUnion? glyph,
       List<ViewerPageUnion> children}) = _$_ViewerPageGroup;
 
   @override
   String get id;
   @override
-  List<String> get namespace;
-  @override
   String get title;
+  @override
+  Color? get color;
   @override
   ViewerGlyphUnion? get glyph;
   @override
@@ -276,14 +276,26 @@ abstract class _ViewerPageGroup implements ViewerPageGroup {
 class _$ViewerPageUnionTearOff {
   const _$ViewerPageUnionTearOff();
 
+  ViewerGroupPage group(
+      {required String id,
+      required List<String> namespace,
+      required String title,
+      List<ViewerPageUnion> children = const []}) {
+    return ViewerGroupPage(
+      id: id,
+      namespace: namespace,
+      title: title,
+      children: children,
+    );
+  }
+
   ViewerDocumentationPage documentation(
       {required String id,
       required List<String> namespace,
       required String title,
       String? description,
       List<String> tags = const [],
-      required String content,
-      List<ViewerPageUnion> children = const []}) {
+      required String content}) {
     return ViewerDocumentationPage(
       id: id,
       namespace: namespace,
@@ -291,7 +303,6 @@ class _$ViewerPageUnionTearOff {
       description: description,
       tags: tags,
       content: content,
-      children: children,
     );
   }
 
@@ -302,8 +313,7 @@ class _$ViewerPageUnionTearOff {
       List<String> tags = const [],
       String? description,
       String? embeddedDesignLink,
-      required String catalogBuilderId,
-      List<ViewerPageUnion> children = const []}) {
+      required String catalogBuilderId}) {
     return ViewerCatalogPage(
       id: id,
       namespace: namespace,
@@ -312,7 +322,6 @@ class _$ViewerPageUnionTearOff {
       description: description,
       embeddedDesignLink: embeddedDesignLink,
       catalogBuilderId: catalogBuilderId,
-      children: children,
     );
   }
 }
@@ -325,20 +334,14 @@ mixin _$ViewerPageUnion {
   String get id => throw _privateConstructorUsedError;
   List<String> get namespace => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
-  String? get description => throw _privateConstructorUsedError;
-  List<String> get tags => throw _privateConstructorUsedError;
-  List<ViewerPageUnion> get children => throw _privateConstructorUsedError;
 
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            String id,
-            List<String> namespace,
-            String title,
-            String? description,
-            List<String> tags,
-            String content,
+    required TResult Function(String id, List<String> namespace, String title,
             List<ViewerPageUnion> children)
+        group,
+    required TResult Function(String id, List<String> namespace, String title,
+            String? description, List<String> tags, String content)
         documentation,
     required TResult Function(
             String id,
@@ -347,21 +350,17 @@ mixin _$ViewerPageUnion {
             List<String> tags,
             String? description,
             String? embeddedDesignLink,
-            String catalogBuilderId,
-            List<ViewerPageUnion> children)
+            String catalogBuilderId)
         catalog,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(
-            String id,
-            List<String> namespace,
-            String title,
-            String? description,
-            List<String> tags,
-            String content,
+    TResult Function(String id, List<String> namespace, String title,
             List<ViewerPageUnion> children)?
+        group,
+    TResult Function(String id, List<String> namespace, String title,
+            String? description, List<String> tags, String content)?
         documentation,
     TResult Function(
             String id,
@@ -370,21 +369,17 @@ mixin _$ViewerPageUnion {
             List<String> tags,
             String? description,
             String? embeddedDesignLink,
-            String catalogBuilderId,
-            List<ViewerPageUnion> children)?
+            String catalogBuilderId)?
         catalog,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            String id,
-            List<String> namespace,
-            String title,
-            String? description,
-            List<String> tags,
-            String content,
+    TResult Function(String id, List<String> namespace, String title,
             List<ViewerPageUnion> children)?
+        group,
+    TResult Function(String id, List<String> namespace, String title,
+            String? description, List<String> tags, String content)?
         documentation,
     TResult Function(
             String id,
@@ -393,26 +388,28 @@ mixin _$ViewerPageUnion {
             List<String> tags,
             String? description,
             String? embeddedDesignLink,
-            String catalogBuilderId,
-            List<ViewerPageUnion> children)?
+            String catalogBuilderId)?
         catalog,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(ViewerGroupPage value) group,
     required TResult Function(ViewerDocumentationPage value) documentation,
     required TResult Function(ViewerCatalogPage value) catalog,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(ViewerGroupPage value)? group,
     TResult Function(ViewerDocumentationPage value)? documentation,
     TResult Function(ViewerCatalogPage value)? catalog,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(ViewerGroupPage value)? group,
     TResult Function(ViewerDocumentationPage value)? documentation,
     TResult Function(ViewerCatalogPage value)? catalog,
     required TResult orElse(),
@@ -429,13 +426,7 @@ abstract class $ViewerPageUnionCopyWith<$Res> {
   factory $ViewerPageUnionCopyWith(
           ViewerPageUnion value, $Res Function(ViewerPageUnion) then) =
       _$ViewerPageUnionCopyWithImpl<$Res>;
-  $Res call(
-      {String id,
-      List<String> namespace,
-      String title,
-      String? description,
-      List<String> tags,
-      List<ViewerPageUnion> children});
+  $Res call({String id, List<String> namespace, String title});
 }
 
 /// @nodoc
@@ -452,9 +443,6 @@ class _$ViewerPageUnionCopyWithImpl<$Res>
     Object? id = freezed,
     Object? namespace = freezed,
     Object? title = freezed,
-    Object? description = freezed,
-    Object? tags = freezed,
-    Object? children = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -469,20 +457,247 @@ class _$ViewerPageUnionCopyWithImpl<$Res>
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      description: description == freezed
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String?,
-      tags: tags == freezed
-          ? _value.tags
-          : tags // ignore: cast_nullable_to_non_nullable
+    ));
+  }
+}
+
+/// @nodoc
+abstract class $ViewerGroupPageCopyWith<$Res>
+    implements $ViewerPageUnionCopyWith<$Res> {
+  factory $ViewerGroupPageCopyWith(
+          ViewerGroupPage value, $Res Function(ViewerGroupPage) then) =
+      _$ViewerGroupPageCopyWithImpl<$Res>;
+  @override
+  $Res call(
+      {String id,
+      List<String> namespace,
+      String title,
+      List<ViewerPageUnion> children});
+}
+
+/// @nodoc
+class _$ViewerGroupPageCopyWithImpl<$Res>
+    extends _$ViewerPageUnionCopyWithImpl<$Res>
+    implements $ViewerGroupPageCopyWith<$Res> {
+  _$ViewerGroupPageCopyWithImpl(
+      ViewerGroupPage _value, $Res Function(ViewerGroupPage) _then)
+      : super(_value, (v) => _then(v as ViewerGroupPage));
+
+  @override
+  ViewerGroupPage get _value => super._value as ViewerGroupPage;
+
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? namespace = freezed,
+    Object? title = freezed,
+    Object? children = freezed,
+  }) {
+    return _then(ViewerGroupPage(
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      namespace: namespace == freezed
+          ? _value.namespace
+          : namespace // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      title: title == freezed
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
       children: children == freezed
           ? _value.children
           : children // ignore: cast_nullable_to_non_nullable
               as List<ViewerPageUnion>,
     ));
   }
+}
+
+/// @nodoc
+
+class _$ViewerGroupPage extends ViewerGroupPage with DiagnosticableTreeMixin {
+  const _$ViewerGroupPage(
+      {required this.id,
+      required this.namespace,
+      required this.title,
+      this.children = const []})
+      : super._();
+
+  @override
+  final String id;
+  @override
+  final List<String> namespace;
+  @override
+  final String title;
+  @JsonKey()
+  @override
+  final List<ViewerPageUnion> children;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'ViewerPageUnion.group(id: $id, namespace: $namespace, title: $title, children: $children)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'ViewerPageUnion.group'))
+      ..add(DiagnosticsProperty('id', id))
+      ..add(DiagnosticsProperty('namespace', namespace))
+      ..add(DiagnosticsProperty('title', title))
+      ..add(DiagnosticsProperty('children', children));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is ViewerGroupPage &&
+            const DeepCollectionEquality().equals(other.id, id) &&
+            const DeepCollectionEquality().equals(other.namespace, namespace) &&
+            const DeepCollectionEquality().equals(other.title, title) &&
+            const DeepCollectionEquality().equals(other.children, children));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(id),
+      const DeepCollectionEquality().hash(namespace),
+      const DeepCollectionEquality().hash(title),
+      const DeepCollectionEquality().hash(children));
+
+  @JsonKey(ignore: true)
+  @override
+  $ViewerGroupPageCopyWith<ViewerGroupPage> get copyWith =>
+      _$ViewerGroupPageCopyWithImpl<ViewerGroupPage>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String id, List<String> namespace, String title,
+            List<ViewerPageUnion> children)
+        group,
+    required TResult Function(String id, List<String> namespace, String title,
+            String? description, List<String> tags, String content)
+        documentation,
+    required TResult Function(
+            String id,
+            List<String> namespace,
+            String title,
+            List<String> tags,
+            String? description,
+            String? embeddedDesignLink,
+            String catalogBuilderId)
+        catalog,
+  }) {
+    return group(id, namespace, title, children);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(String id, List<String> namespace, String title,
+            List<ViewerPageUnion> children)?
+        group,
+    TResult Function(String id, List<String> namespace, String title,
+            String? description, List<String> tags, String content)?
+        documentation,
+    TResult Function(
+            String id,
+            List<String> namespace,
+            String title,
+            List<String> tags,
+            String? description,
+            String? embeddedDesignLink,
+            String catalogBuilderId)?
+        catalog,
+  }) {
+    return group?.call(id, namespace, title, children);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String id, List<String> namespace, String title,
+            List<ViewerPageUnion> children)?
+        group,
+    TResult Function(String id, List<String> namespace, String title,
+            String? description, List<String> tags, String content)?
+        documentation,
+    TResult Function(
+            String id,
+            List<String> namespace,
+            String title,
+            List<String> tags,
+            String? description,
+            String? embeddedDesignLink,
+            String catalogBuilderId)?
+        catalog,
+    required TResult orElse(),
+  }) {
+    if (group != null) {
+      return group(id, namespace, title, children);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(ViewerGroupPage value) group,
+    required TResult Function(ViewerDocumentationPage value) documentation,
+    required TResult Function(ViewerCatalogPage value) catalog,
+  }) {
+    return group(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(ViewerGroupPage value)? group,
+    TResult Function(ViewerDocumentationPage value)? documentation,
+    TResult Function(ViewerCatalogPage value)? catalog,
+  }) {
+    return group?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(ViewerGroupPage value)? group,
+    TResult Function(ViewerDocumentationPage value)? documentation,
+    TResult Function(ViewerCatalogPage value)? catalog,
+    required TResult orElse(),
+  }) {
+    if (group != null) {
+      return group(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ViewerGroupPage extends ViewerPageUnion {
+  const factory ViewerGroupPage(
+      {required String id,
+      required List<String> namespace,
+      required String title,
+      List<ViewerPageUnion> children}) = _$ViewerGroupPage;
+  const ViewerGroupPage._() : super._();
+
+  @override
+  String get id;
+  @override
+  List<String> get namespace;
+  @override
+  String get title;
+  List<ViewerPageUnion> get children;
+  @override
+  @JsonKey(ignore: true)
+  $ViewerGroupPageCopyWith<ViewerGroupPage> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -498,8 +713,7 @@ abstract class $ViewerDocumentationPageCopyWith<$Res>
       String title,
       String? description,
       List<String> tags,
-      String content,
-      List<ViewerPageUnion> children});
+      String content});
 }
 
 /// @nodoc
@@ -521,7 +735,6 @@ class _$ViewerDocumentationPageCopyWithImpl<$Res>
     Object? description = freezed,
     Object? tags = freezed,
     Object? content = freezed,
-    Object? children = freezed,
   }) {
     return _then(ViewerDocumentationPage(
       id: id == freezed
@@ -548,10 +761,6 @@ class _$ViewerDocumentationPageCopyWithImpl<$Res>
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as String,
-      children: children == freezed
-          ? _value.children
-          : children // ignore: cast_nullable_to_non_nullable
-              as List<ViewerPageUnion>,
     ));
   }
 }
@@ -566,8 +775,7 @@ class _$ViewerDocumentationPage extends ViewerDocumentationPage
       required this.title,
       this.description,
       this.tags = const [],
-      required this.content,
-      this.children = const []})
+      required this.content})
       : super._();
 
   @override
@@ -583,13 +791,10 @@ class _$ViewerDocumentationPage extends ViewerDocumentationPage
   final List<String> tags;
   @override
   final String content;
-  @JsonKey()
-  @override
-  final List<ViewerPageUnion> children;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ViewerPageUnion.documentation(id: $id, namespace: $namespace, title: $title, description: $description, tags: $tags, content: $content, children: $children)';
+    return 'ViewerPageUnion.documentation(id: $id, namespace: $namespace, title: $title, description: $description, tags: $tags, content: $content)';
   }
 
   @override
@@ -602,8 +807,7 @@ class _$ViewerDocumentationPage extends ViewerDocumentationPage
       ..add(DiagnosticsProperty('title', title))
       ..add(DiagnosticsProperty('description', description))
       ..add(DiagnosticsProperty('tags', tags))
-      ..add(DiagnosticsProperty('content', content))
-      ..add(DiagnosticsProperty('children', children));
+      ..add(DiagnosticsProperty('content', content));
   }
 
   @override
@@ -617,8 +821,7 @@ class _$ViewerDocumentationPage extends ViewerDocumentationPage
             const DeepCollectionEquality()
                 .equals(other.description, description) &&
             const DeepCollectionEquality().equals(other.tags, tags) &&
-            const DeepCollectionEquality().equals(other.content, content) &&
-            const DeepCollectionEquality().equals(other.children, children));
+            const DeepCollectionEquality().equals(other.content, content));
   }
 
   @override
@@ -629,8 +832,7 @@ class _$ViewerDocumentationPage extends ViewerDocumentationPage
       const DeepCollectionEquality().hash(title),
       const DeepCollectionEquality().hash(description),
       const DeepCollectionEquality().hash(tags),
-      const DeepCollectionEquality().hash(content),
-      const DeepCollectionEquality().hash(children));
+      const DeepCollectionEquality().hash(content));
 
   @JsonKey(ignore: true)
   @override
@@ -641,14 +843,11 @@ class _$ViewerDocumentationPage extends ViewerDocumentationPage
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            String id,
-            List<String> namespace,
-            String title,
-            String? description,
-            List<String> tags,
-            String content,
+    required TResult Function(String id, List<String> namespace, String title,
             List<ViewerPageUnion> children)
+        group,
+    required TResult Function(String id, List<String> namespace, String title,
+            String? description, List<String> tags, String content)
         documentation,
     required TResult Function(
             String id,
@@ -657,25 +856,20 @@ class _$ViewerDocumentationPage extends ViewerDocumentationPage
             List<String> tags,
             String? description,
             String? embeddedDesignLink,
-            String catalogBuilderId,
-            List<ViewerPageUnion> children)
+            String catalogBuilderId)
         catalog,
   }) {
-    return documentation(
-        id, namespace, title, description, tags, content, children);
+    return documentation(id, namespace, title, description, tags, content);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(
-            String id,
-            List<String> namespace,
-            String title,
-            String? description,
-            List<String> tags,
-            String content,
+    TResult Function(String id, List<String> namespace, String title,
             List<ViewerPageUnion> children)?
+        group,
+    TResult Function(String id, List<String> namespace, String title,
+            String? description, List<String> tags, String content)?
         documentation,
     TResult Function(
             String id,
@@ -684,25 +878,21 @@ class _$ViewerDocumentationPage extends ViewerDocumentationPage
             List<String> tags,
             String? description,
             String? embeddedDesignLink,
-            String catalogBuilderId,
-            List<ViewerPageUnion> children)?
+            String catalogBuilderId)?
         catalog,
   }) {
     return documentation?.call(
-        id, namespace, title, description, tags, content, children);
+        id, namespace, title, description, tags, content);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            String id,
-            List<String> namespace,
-            String title,
-            String? description,
-            List<String> tags,
-            String content,
+    TResult Function(String id, List<String> namespace, String title,
             List<ViewerPageUnion> children)?
+        group,
+    TResult Function(String id, List<String> namespace, String title,
+            String? description, List<String> tags, String content)?
         documentation,
     TResult Function(
             String id,
@@ -711,14 +901,12 @@ class _$ViewerDocumentationPage extends ViewerDocumentationPage
             List<String> tags,
             String? description,
             String? embeddedDesignLink,
-            String catalogBuilderId,
-            List<ViewerPageUnion> children)?
+            String catalogBuilderId)?
         catalog,
     required TResult orElse(),
   }) {
     if (documentation != null) {
-      return documentation(
-          id, namespace, title, description, tags, content, children);
+      return documentation(id, namespace, title, description, tags, content);
     }
     return orElse();
   }
@@ -726,6 +914,7 @@ class _$ViewerDocumentationPage extends ViewerDocumentationPage
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(ViewerGroupPage value) group,
     required TResult Function(ViewerDocumentationPage value) documentation,
     required TResult Function(ViewerCatalogPage value) catalog,
   }) {
@@ -735,6 +924,7 @@ class _$ViewerDocumentationPage extends ViewerDocumentationPage
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(ViewerGroupPage value)? group,
     TResult Function(ViewerDocumentationPage value)? documentation,
     TResult Function(ViewerCatalogPage value)? catalog,
   }) {
@@ -744,6 +934,7 @@ class _$ViewerDocumentationPage extends ViewerDocumentationPage
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(ViewerGroupPage value)? group,
     TResult Function(ViewerDocumentationPage value)? documentation,
     TResult Function(ViewerCatalogPage value)? catalog,
     required TResult orElse(),
@@ -762,8 +953,7 @@ abstract class ViewerDocumentationPage extends ViewerPageUnion {
       required String title,
       String? description,
       List<String> tags,
-      required String content,
-      List<ViewerPageUnion> children}) = _$ViewerDocumentationPage;
+      required String content}) = _$ViewerDocumentationPage;
   const ViewerDocumentationPage._() : super._();
 
   @override
@@ -772,13 +962,9 @@ abstract class ViewerDocumentationPage extends ViewerPageUnion {
   List<String> get namespace;
   @override
   String get title;
-  @override
   String? get description;
-  @override
   List<String> get tags;
   String get content;
-  @override
-  List<ViewerPageUnion> get children;
   @override
   @JsonKey(ignore: true)
   $ViewerDocumentationPageCopyWith<ViewerDocumentationPage> get copyWith =>
@@ -799,8 +985,7 @@ abstract class $ViewerCatalogPageCopyWith<$Res>
       List<String> tags,
       String? description,
       String? embeddedDesignLink,
-      String catalogBuilderId,
-      List<ViewerPageUnion> children});
+      String catalogBuilderId});
 }
 
 /// @nodoc
@@ -823,7 +1008,6 @@ class _$ViewerCatalogPageCopyWithImpl<$Res>
     Object? description = freezed,
     Object? embeddedDesignLink = freezed,
     Object? catalogBuilderId = freezed,
-    Object? children = freezed,
   }) {
     return _then(ViewerCatalogPage(
       id: id == freezed
@@ -854,10 +1038,6 @@ class _$ViewerCatalogPageCopyWithImpl<$Res>
           ? _value.catalogBuilderId
           : catalogBuilderId // ignore: cast_nullable_to_non_nullable
               as String,
-      children: children == freezed
-          ? _value.children
-          : children // ignore: cast_nullable_to_non_nullable
-              as List<ViewerPageUnion>,
     ));
   }
 }
@@ -873,8 +1053,7 @@ class _$ViewerCatalogPage extends ViewerCatalogPage
       this.tags = const [],
       this.description,
       this.embeddedDesignLink,
-      required this.catalogBuilderId,
-      this.children = const []})
+      required this.catalogBuilderId})
       : super._();
 
   @override
@@ -892,13 +1071,10 @@ class _$ViewerCatalogPage extends ViewerCatalogPage
   final String? embeddedDesignLink;
   @override
   final String catalogBuilderId;
-  @JsonKey()
-  @override
-  final List<ViewerPageUnion> children;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ViewerPageUnion.catalog(id: $id, namespace: $namespace, title: $title, tags: $tags, description: $description, embeddedDesignLink: $embeddedDesignLink, catalogBuilderId: $catalogBuilderId, children: $children)';
+    return 'ViewerPageUnion.catalog(id: $id, namespace: $namespace, title: $title, tags: $tags, description: $description, embeddedDesignLink: $embeddedDesignLink, catalogBuilderId: $catalogBuilderId)';
   }
 
   @override
@@ -912,8 +1088,7 @@ class _$ViewerCatalogPage extends ViewerCatalogPage
       ..add(DiagnosticsProperty('tags', tags))
       ..add(DiagnosticsProperty('description', description))
       ..add(DiagnosticsProperty('embeddedDesignLink', embeddedDesignLink))
-      ..add(DiagnosticsProperty('catalogBuilderId', catalogBuilderId))
-      ..add(DiagnosticsProperty('children', children));
+      ..add(DiagnosticsProperty('catalogBuilderId', catalogBuilderId));
   }
 
   @override
@@ -930,8 +1105,7 @@ class _$ViewerCatalogPage extends ViewerCatalogPage
             const DeepCollectionEquality()
                 .equals(other.embeddedDesignLink, embeddedDesignLink) &&
             const DeepCollectionEquality()
-                .equals(other.catalogBuilderId, catalogBuilderId) &&
-            const DeepCollectionEquality().equals(other.children, children));
+                .equals(other.catalogBuilderId, catalogBuilderId));
   }
 
   @override
@@ -943,8 +1117,7 @@ class _$ViewerCatalogPage extends ViewerCatalogPage
       const DeepCollectionEquality().hash(tags),
       const DeepCollectionEquality().hash(description),
       const DeepCollectionEquality().hash(embeddedDesignLink),
-      const DeepCollectionEquality().hash(catalogBuilderId),
-      const DeepCollectionEquality().hash(children));
+      const DeepCollectionEquality().hash(catalogBuilderId));
 
   @JsonKey(ignore: true)
   @override
@@ -954,14 +1127,11 @@ class _$ViewerCatalogPage extends ViewerCatalogPage
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            String id,
-            List<String> namespace,
-            String title,
-            String? description,
-            List<String> tags,
-            String content,
+    required TResult Function(String id, List<String> namespace, String title,
             List<ViewerPageUnion> children)
+        group,
+    required TResult Function(String id, List<String> namespace, String title,
+            String? description, List<String> tags, String content)
         documentation,
     required TResult Function(
             String id,
@@ -970,25 +1140,21 @@ class _$ViewerCatalogPage extends ViewerCatalogPage
             List<String> tags,
             String? description,
             String? embeddedDesignLink,
-            String catalogBuilderId,
-            List<ViewerPageUnion> children)
+            String catalogBuilderId)
         catalog,
   }) {
     return catalog(id, namespace, title, tags, description, embeddedDesignLink,
-        catalogBuilderId, children);
+        catalogBuilderId);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(
-            String id,
-            List<String> namespace,
-            String title,
-            String? description,
-            List<String> tags,
-            String content,
+    TResult Function(String id, List<String> namespace, String title,
             List<ViewerPageUnion> children)?
+        group,
+    TResult Function(String id, List<String> namespace, String title,
+            String? description, List<String> tags, String content)?
         documentation,
     TResult Function(
             String id,
@@ -997,25 +1163,21 @@ class _$ViewerCatalogPage extends ViewerCatalogPage
             List<String> tags,
             String? description,
             String? embeddedDesignLink,
-            String catalogBuilderId,
-            List<ViewerPageUnion> children)?
+            String catalogBuilderId)?
         catalog,
   }) {
     return catalog?.call(id, namespace, title, tags, description,
-        embeddedDesignLink, catalogBuilderId, children);
+        embeddedDesignLink, catalogBuilderId);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            String id,
-            List<String> namespace,
-            String title,
-            String? description,
-            List<String> tags,
-            String content,
+    TResult Function(String id, List<String> namespace, String title,
             List<ViewerPageUnion> children)?
+        group,
+    TResult Function(String id, List<String> namespace, String title,
+            String? description, List<String> tags, String content)?
         documentation,
     TResult Function(
             String id,
@@ -1024,14 +1186,13 @@ class _$ViewerCatalogPage extends ViewerCatalogPage
             List<String> tags,
             String? description,
             String? embeddedDesignLink,
-            String catalogBuilderId,
-            List<ViewerPageUnion> children)?
+            String catalogBuilderId)?
         catalog,
     required TResult orElse(),
   }) {
     if (catalog != null) {
       return catalog(id, namespace, title, tags, description,
-          embeddedDesignLink, catalogBuilderId, children);
+          embeddedDesignLink, catalogBuilderId);
     }
     return orElse();
   }
@@ -1039,6 +1200,7 @@ class _$ViewerCatalogPage extends ViewerCatalogPage
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(ViewerGroupPage value) group,
     required TResult Function(ViewerDocumentationPage value) documentation,
     required TResult Function(ViewerCatalogPage value) catalog,
   }) {
@@ -1048,6 +1210,7 @@ class _$ViewerCatalogPage extends ViewerCatalogPage
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(ViewerGroupPage value)? group,
     TResult Function(ViewerDocumentationPage value)? documentation,
     TResult Function(ViewerCatalogPage value)? catalog,
   }) {
@@ -1057,6 +1220,7 @@ class _$ViewerCatalogPage extends ViewerCatalogPage
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(ViewerGroupPage value)? group,
     TResult Function(ViewerDocumentationPage value)? documentation,
     TResult Function(ViewerCatalogPage value)? catalog,
     required TResult orElse(),
@@ -1076,8 +1240,7 @@ abstract class ViewerCatalogPage extends ViewerPageUnion {
       List<String> tags,
       String? description,
       String? embeddedDesignLink,
-      required String catalogBuilderId,
-      List<ViewerPageUnion> children}) = _$ViewerCatalogPage;
+      required String catalogBuilderId}) = _$ViewerCatalogPage;
   const ViewerCatalogPage._() : super._();
 
   @override
@@ -1086,14 +1249,10 @@ abstract class ViewerCatalogPage extends ViewerPageUnion {
   List<String> get namespace;
   @override
   String get title;
-  @override
   List<String> get tags;
-  @override
   String? get description;
   String? get embeddedDesignLink;
   String get catalogBuilderId;
-  @override
-  List<ViewerPageUnion> get children;
   @override
   @JsonKey(ignore: true)
   $ViewerCatalogPageCopyWith<ViewerCatalogPage> get copyWith =>
@@ -1104,14 +1263,14 @@ abstract class ViewerCatalogPage extends ViewerPageUnion {
 class _$ViewerGlyphUnionTearOff {
   const _$ViewerGlyphUnionTearOff();
 
-  ViewerIconGlyph icon({required IconData icon, double size = 16}) {
+  ViewerIconGlyph icon({required IconData icon, double size = 14}) {
     return ViewerIconGlyph(
       icon: icon,
       size: size,
     );
   }
 
-  ViewerImageGlyph image({required String uri, double size = 16}) {
+  ViewerImageGlyph image({required String uri, double size = 14}) {
     return ViewerImageGlyph(
       uri: uri,
       size: size,
@@ -1242,7 +1401,7 @@ class _$ViewerIconGlyphCopyWithImpl<$Res>
 /// @nodoc
 
 class _$ViewerIconGlyph extends ViewerIconGlyph with DiagnosticableTreeMixin {
-  const _$ViewerIconGlyph({required this.icon, this.size = 16}) : super._();
+  const _$ViewerIconGlyph({required this.icon, this.size = 14}) : super._();
 
   @override
   final IconData icon;
@@ -1403,7 +1562,7 @@ class _$ViewerImageGlyphCopyWithImpl<$Res>
 /// @nodoc
 
 class _$ViewerImageGlyph extends ViewerImageGlyph with DiagnosticableTreeMixin {
-  const _$ViewerImageGlyph({required this.uri, this.size = 16}) : super._();
+  const _$ViewerImageGlyph({required this.uri, this.size = 14}) : super._();
 
   @override
   final String uri;

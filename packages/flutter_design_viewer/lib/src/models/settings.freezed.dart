@@ -14,15 +14,15 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-ViewerSettings _$ViewerSettingsFromJson(Map<String, dynamic> json) {
-  return _ViewerSettings.fromJson(json);
+ViewerState _$ViewerStateFromJson(Map<String, dynamic> json) {
+  return _ViewerState.fromJson(json);
 }
 
 /// @nodoc
-class _$ViewerSettingsTearOff {
-  const _$ViewerSettingsTearOff();
+class _$ViewerStateTearOff {
+  const _$ViewerStateTearOff();
 
-  _ViewerSettings call(
+  _ViewerState call(
       {required ViewMode viewMode,
       required List<String> enabledDeviceIds,
       required String targetDeviceId,
@@ -30,7 +30,7 @@ class _$ViewerSettingsTearOff {
       required List<String> enabledLocaleCodes,
       required String targetLocaleCode,
       String? catalogId}) {
-    return _ViewerSettings(
+    return _ViewerState(
       viewMode: viewMode,
       enabledDeviceIds: enabledDeviceIds,
       targetDeviceId: targetDeviceId,
@@ -41,16 +41,16 @@ class _$ViewerSettingsTearOff {
     );
   }
 
-  ViewerSettings fromJson(Map<String, Object?> json) {
-    return ViewerSettings.fromJson(json);
+  ViewerState fromJson(Map<String, Object?> json) {
+    return ViewerState.fromJson(json);
   }
 }
 
 /// @nodoc
-const $ViewerSettings = _$ViewerSettingsTearOff();
+const $ViewerState = _$ViewerStateTearOff();
 
 /// @nodoc
-mixin _$ViewerSettings {
+mixin _$ViewerState {
   ViewMode get viewMode => throw _privateConstructorUsedError;
   List<String> get enabledDeviceIds => throw _privateConstructorUsedError;
   String get targetDeviceId => throw _privateConstructorUsedError;
@@ -61,15 +61,15 @@ mixin _$ViewerSettings {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $ViewerSettingsCopyWith<ViewerSettings> get copyWith =>
+  $ViewerStateCopyWith<ViewerState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ViewerSettingsCopyWith<$Res> {
-  factory $ViewerSettingsCopyWith(
-          ViewerSettings value, $Res Function(ViewerSettings) then) =
-      _$ViewerSettingsCopyWithImpl<$Res>;
+abstract class $ViewerStateCopyWith<$Res> {
+  factory $ViewerStateCopyWith(
+          ViewerState value, $Res Function(ViewerState) then) =
+      _$ViewerStateCopyWithImpl<$Res>;
   $Res call(
       {ViewMode viewMode,
       List<String> enabledDeviceIds,
@@ -81,13 +81,12 @@ abstract class $ViewerSettingsCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$ViewerSettingsCopyWithImpl<$Res>
-    implements $ViewerSettingsCopyWith<$Res> {
-  _$ViewerSettingsCopyWithImpl(this._value, this._then);
+class _$ViewerStateCopyWithImpl<$Res> implements $ViewerStateCopyWith<$Res> {
+  _$ViewerStateCopyWithImpl(this._value, this._then);
 
-  final ViewerSettings _value;
+  final ViewerState _value;
   // ignore: unused_field
-  final $Res Function(ViewerSettings) _then;
+  final $Res Function(ViewerState) _then;
 
   @override
   $Res call({
@@ -133,11 +132,11 @@ class _$ViewerSettingsCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$ViewerSettingsCopyWith<$Res>
-    implements $ViewerSettingsCopyWith<$Res> {
-  factory _$ViewerSettingsCopyWith(
-          _ViewerSettings value, $Res Function(_ViewerSettings) then) =
-      __$ViewerSettingsCopyWithImpl<$Res>;
+abstract class _$ViewerStateCopyWith<$Res>
+    implements $ViewerStateCopyWith<$Res> {
+  factory _$ViewerStateCopyWith(
+          _ViewerState value, $Res Function(_ViewerState) then) =
+      __$ViewerStateCopyWithImpl<$Res>;
   @override
   $Res call(
       {ViewMode viewMode,
@@ -150,15 +149,14 @@ abstract class _$ViewerSettingsCopyWith<$Res>
 }
 
 /// @nodoc
-class __$ViewerSettingsCopyWithImpl<$Res>
-    extends _$ViewerSettingsCopyWithImpl<$Res>
-    implements _$ViewerSettingsCopyWith<$Res> {
-  __$ViewerSettingsCopyWithImpl(
-      _ViewerSettings _value, $Res Function(_ViewerSettings) _then)
-      : super(_value, (v) => _then(v as _ViewerSettings));
+class __$ViewerStateCopyWithImpl<$Res> extends _$ViewerStateCopyWithImpl<$Res>
+    implements _$ViewerStateCopyWith<$Res> {
+  __$ViewerStateCopyWithImpl(
+      _ViewerState _value, $Res Function(_ViewerState) _then)
+      : super(_value, (v) => _then(v as _ViewerState));
 
   @override
-  _ViewerSettings get _value => super._value as _ViewerSettings;
+  _ViewerState get _value => super._value as _ViewerState;
 
   @override
   $Res call({
@@ -170,7 +168,7 @@ class __$ViewerSettingsCopyWithImpl<$Res>
     Object? targetLocaleCode = freezed,
     Object? catalogId = freezed,
   }) {
-    return _then(_ViewerSettings(
+    return _then(_ViewerState(
       viewMode: viewMode == freezed
           ? _value.viewMode
           : viewMode // ignore: cast_nullable_to_non_nullable
@@ -205,8 +203,8 @@ class __$ViewerSettingsCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ViewerSettings extends _ViewerSettings {
-  const _$_ViewerSettings(
+class _$_ViewerState extends _ViewerState {
+  const _$_ViewerState(
       {required this.viewMode,
       required this.enabledDeviceIds,
       required this.targetDeviceId,
@@ -216,8 +214,8 @@ class _$_ViewerSettings extends _ViewerSettings {
       this.catalogId})
       : super._();
 
-  factory _$_ViewerSettings.fromJson(Map<String, dynamic> json) =>
-      _$$_ViewerSettingsFromJson(json);
+  factory _$_ViewerState.fromJson(Map<String, dynamic> json) =>
+      _$$_ViewerStateFromJson(json);
 
   @override
   final ViewMode viewMode;
@@ -236,14 +234,14 @@ class _$_ViewerSettings extends _ViewerSettings {
 
   @override
   String toString() {
-    return 'ViewerSettings(viewMode: $viewMode, enabledDeviceIds: $enabledDeviceIds, targetDeviceId: $targetDeviceId, targetThemeId: $targetThemeId, enabledLocaleCodes: $enabledLocaleCodes, targetLocaleCode: $targetLocaleCode, catalogId: $catalogId)';
+    return 'ViewerState(viewMode: $viewMode, enabledDeviceIds: $enabledDeviceIds, targetDeviceId: $targetDeviceId, targetThemeId: $targetThemeId, enabledLocaleCodes: $enabledLocaleCodes, targetLocaleCode: $targetLocaleCode, catalogId: $catalogId)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _ViewerSettings &&
+            other is _ViewerState &&
             const DeepCollectionEquality().equals(other.viewMode, viewMode) &&
             const DeepCollectionEquality()
                 .equals(other.enabledDeviceIds, enabledDeviceIds) &&
@@ -271,28 +269,28 @@ class _$_ViewerSettings extends _ViewerSettings {
 
   @JsonKey(ignore: true)
   @override
-  _$ViewerSettingsCopyWith<_ViewerSettings> get copyWith =>
-      __$ViewerSettingsCopyWithImpl<_ViewerSettings>(this, _$identity);
+  _$ViewerStateCopyWith<_ViewerState> get copyWith =>
+      __$ViewerStateCopyWithImpl<_ViewerState>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ViewerSettingsToJson(this);
+    return _$$_ViewerStateToJson(this);
   }
 }
 
-abstract class _ViewerSettings extends ViewerSettings {
-  const factory _ViewerSettings(
+abstract class _ViewerState extends ViewerState {
+  const factory _ViewerState(
       {required ViewMode viewMode,
       required List<String> enabledDeviceIds,
       required String targetDeviceId,
       required String targetThemeId,
       required List<String> enabledLocaleCodes,
       required String targetLocaleCode,
-      String? catalogId}) = _$_ViewerSettings;
-  const _ViewerSettings._() : super._();
+      String? catalogId}) = _$_ViewerState;
+  const _ViewerState._() : super._();
 
-  factory _ViewerSettings.fromJson(Map<String, dynamic> json) =
-      _$_ViewerSettings.fromJson;
+  factory _ViewerState.fromJson(Map<String, dynamic> json) =
+      _$_ViewerState.fromJson;
 
   @override
   ViewMode get viewMode;
@@ -310,6 +308,339 @@ abstract class _ViewerSettings extends ViewerSettings {
   String? get catalogId;
   @override
   @JsonKey(ignore: true)
-  _$ViewerSettingsCopyWith<_ViewerSettings> get copyWith =>
+  _$ViewerStateCopyWith<_ViewerState> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+class _$ViewerSettingsTearOff {
+  const _$ViewerSettingsTearOff();
+
+  _ViewerSettigns call({Breakpoints breakpoints = const Breakpoints()}) {
+    return _ViewerSettigns(
+      breakpoints: breakpoints,
+    );
+  }
+}
+
+/// @nodoc
+const $ViewerSettings = _$ViewerSettingsTearOff();
+
+/// @nodoc
+mixin _$ViewerSettings {
+  Breakpoints get breakpoints => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $ViewerSettingsCopyWith<ViewerSettings> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ViewerSettingsCopyWith<$Res> {
+  factory $ViewerSettingsCopyWith(
+          ViewerSettings value, $Res Function(ViewerSettings) then) =
+      _$ViewerSettingsCopyWithImpl<$Res>;
+  $Res call({Breakpoints breakpoints});
+
+  $BreakpointsCopyWith<$Res> get breakpoints;
+}
+
+/// @nodoc
+class _$ViewerSettingsCopyWithImpl<$Res>
+    implements $ViewerSettingsCopyWith<$Res> {
+  _$ViewerSettingsCopyWithImpl(this._value, this._then);
+
+  final ViewerSettings _value;
+  // ignore: unused_field
+  final $Res Function(ViewerSettings) _then;
+
+  @override
+  $Res call({
+    Object? breakpoints = freezed,
+  }) {
+    return _then(_value.copyWith(
+      breakpoints: breakpoints == freezed
+          ? _value.breakpoints
+          : breakpoints // ignore: cast_nullable_to_non_nullable
+              as Breakpoints,
+    ));
+  }
+
+  @override
+  $BreakpointsCopyWith<$Res> get breakpoints {
+    return $BreakpointsCopyWith<$Res>(_value.breakpoints, (value) {
+      return _then(_value.copyWith(breakpoints: value));
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$ViewerSettignsCopyWith<$Res>
+    implements $ViewerSettingsCopyWith<$Res> {
+  factory _$ViewerSettignsCopyWith(
+          _ViewerSettigns value, $Res Function(_ViewerSettigns) then) =
+      __$ViewerSettignsCopyWithImpl<$Res>;
+  @override
+  $Res call({Breakpoints breakpoints});
+
+  @override
+  $BreakpointsCopyWith<$Res> get breakpoints;
+}
+
+/// @nodoc
+class __$ViewerSettignsCopyWithImpl<$Res>
+    extends _$ViewerSettingsCopyWithImpl<$Res>
+    implements _$ViewerSettignsCopyWith<$Res> {
+  __$ViewerSettignsCopyWithImpl(
+      _ViewerSettigns _value, $Res Function(_ViewerSettigns) _then)
+      : super(_value, (v) => _then(v as _ViewerSettigns));
+
+  @override
+  _ViewerSettigns get _value => super._value as _ViewerSettigns;
+
+  @override
+  $Res call({
+    Object? breakpoints = freezed,
+  }) {
+    return _then(_ViewerSettigns(
+      breakpoints: breakpoints == freezed
+          ? _value.breakpoints
+          : breakpoints // ignore: cast_nullable_to_non_nullable
+              as Breakpoints,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_ViewerSettigns implements _ViewerSettigns {
+  const _$_ViewerSettigns({this.breakpoints = const Breakpoints()});
+
+  @JsonKey()
+  @override
+  final Breakpoints breakpoints;
+
+  @override
+  String toString() {
+    return 'ViewerSettings(breakpoints: $breakpoints)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _ViewerSettigns &&
+            const DeepCollectionEquality()
+                .equals(other.breakpoints, breakpoints));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(breakpoints));
+
+  @JsonKey(ignore: true)
+  @override
+  _$ViewerSettignsCopyWith<_ViewerSettigns> get copyWith =>
+      __$ViewerSettignsCopyWithImpl<_ViewerSettigns>(this, _$identity);
+}
+
+abstract class _ViewerSettigns implements ViewerSettings {
+  const factory _ViewerSettigns({Breakpoints breakpoints}) = _$_ViewerSettigns;
+
+  @override
+  Breakpoints get breakpoints;
+  @override
+  @JsonKey(ignore: true)
+  _$ViewerSettignsCopyWith<_ViewerSettigns> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+Breakpoints _$BreakpointsFromJson(Map<String, dynamic> json) {
+  return _Breakpoints.fromJson(json);
+}
+
+/// @nodoc
+class _$BreakpointsTearOff {
+  const _$BreakpointsTearOff();
+
+  _Breakpoints call(
+      {double mobile = 320, double tablet = 768, double desktop = 1024}) {
+    return _Breakpoints(
+      mobile: mobile,
+      tablet: tablet,
+      desktop: desktop,
+    );
+  }
+
+  Breakpoints fromJson(Map<String, Object?> json) {
+    return Breakpoints.fromJson(json);
+  }
+}
+
+/// @nodoc
+const $Breakpoints = _$BreakpointsTearOff();
+
+/// @nodoc
+mixin _$Breakpoints {
+  double get mobile => throw _privateConstructorUsedError;
+  double get tablet => throw _privateConstructorUsedError;
+  double get desktop => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $BreakpointsCopyWith<Breakpoints> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $BreakpointsCopyWith<$Res> {
+  factory $BreakpointsCopyWith(
+          Breakpoints value, $Res Function(Breakpoints) then) =
+      _$BreakpointsCopyWithImpl<$Res>;
+  $Res call({double mobile, double tablet, double desktop});
+}
+
+/// @nodoc
+class _$BreakpointsCopyWithImpl<$Res> implements $BreakpointsCopyWith<$Res> {
+  _$BreakpointsCopyWithImpl(this._value, this._then);
+
+  final Breakpoints _value;
+  // ignore: unused_field
+  final $Res Function(Breakpoints) _then;
+
+  @override
+  $Res call({
+    Object? mobile = freezed,
+    Object? tablet = freezed,
+    Object? desktop = freezed,
+  }) {
+    return _then(_value.copyWith(
+      mobile: mobile == freezed
+          ? _value.mobile
+          : mobile // ignore: cast_nullable_to_non_nullable
+              as double,
+      tablet: tablet == freezed
+          ? _value.tablet
+          : tablet // ignore: cast_nullable_to_non_nullable
+              as double,
+      desktop: desktop == freezed
+          ? _value.desktop
+          : desktop // ignore: cast_nullable_to_non_nullable
+              as double,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$BreakpointsCopyWith<$Res>
+    implements $BreakpointsCopyWith<$Res> {
+  factory _$BreakpointsCopyWith(
+          _Breakpoints value, $Res Function(_Breakpoints) then) =
+      __$BreakpointsCopyWithImpl<$Res>;
+  @override
+  $Res call({double mobile, double tablet, double desktop});
+}
+
+/// @nodoc
+class __$BreakpointsCopyWithImpl<$Res> extends _$BreakpointsCopyWithImpl<$Res>
+    implements _$BreakpointsCopyWith<$Res> {
+  __$BreakpointsCopyWithImpl(
+      _Breakpoints _value, $Res Function(_Breakpoints) _then)
+      : super(_value, (v) => _then(v as _Breakpoints));
+
+  @override
+  _Breakpoints get _value => super._value as _Breakpoints;
+
+  @override
+  $Res call({
+    Object? mobile = freezed,
+    Object? tablet = freezed,
+    Object? desktop = freezed,
+  }) {
+    return _then(_Breakpoints(
+      mobile: mobile == freezed
+          ? _value.mobile
+          : mobile // ignore: cast_nullable_to_non_nullable
+              as double,
+      tablet: tablet == freezed
+          ? _value.tablet
+          : tablet // ignore: cast_nullable_to_non_nullable
+              as double,
+      desktop: desktop == freezed
+          ? _value.desktop
+          : desktop // ignore: cast_nullable_to_non_nullable
+              as double,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_Breakpoints implements _Breakpoints {
+  const _$_Breakpoints(
+      {this.mobile = 320, this.tablet = 768, this.desktop = 1024});
+
+  factory _$_Breakpoints.fromJson(Map<String, dynamic> json) =>
+      _$$_BreakpointsFromJson(json);
+
+  @JsonKey()
+  @override
+  final double mobile;
+  @JsonKey()
+  @override
+  final double tablet;
+  @JsonKey()
+  @override
+  final double desktop;
+
+  @override
+  String toString() {
+    return 'Breakpoints(mobile: $mobile, tablet: $tablet, desktop: $desktop)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _Breakpoints &&
+            const DeepCollectionEquality().equals(other.mobile, mobile) &&
+            const DeepCollectionEquality().equals(other.tablet, tablet) &&
+            const DeepCollectionEquality().equals(other.desktop, desktop));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(mobile),
+      const DeepCollectionEquality().hash(tablet),
+      const DeepCollectionEquality().hash(desktop));
+
+  @JsonKey(ignore: true)
+  @override
+  _$BreakpointsCopyWith<_Breakpoints> get copyWith =>
+      __$BreakpointsCopyWithImpl<_Breakpoints>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_BreakpointsToJson(this);
+  }
+}
+
+abstract class _Breakpoints implements Breakpoints {
+  const factory _Breakpoints({double mobile, double tablet, double desktop}) =
+      _$_Breakpoints;
+
+  factory _Breakpoints.fromJson(Map<String, dynamic> json) =
+      _$_Breakpoints.fromJson;
+
+  @override
+  double get mobile;
+  @override
+  double get tablet;
+  @override
+  double get desktop;
+  @override
+  @JsonKey(ignore: true)
+  _$BreakpointsCopyWith<_Breakpoints> get copyWith =>
       throw _privateConstructorUsedError;
 }

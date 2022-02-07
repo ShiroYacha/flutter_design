@@ -29,12 +29,16 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  # internal
   flutter_design:
     path: ../../flutter_design
   flutter_design_codegen:
     path: ../../flutter_design_codegen
   flutter_design_viewer:
     path: ../
+  # icon
+  flutter_feather_icons: ^2.0.0+1
+  ionicons: ^0.1.2
 
 dev_dependencies:
   flutter_test:

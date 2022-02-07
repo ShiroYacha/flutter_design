@@ -6,8 +6,8 @@ part of 'settings.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_ViewerSettings _$$_ViewerSettingsFromJson(Map<String, dynamic> json) =>
-    _$_ViewerSettings(
+_$_ViewerState _$$_ViewerStateFromJson(Map<String, dynamic> json) =>
+    _$_ViewerState(
       viewMode: $enumDecode(_$ViewModeEnumMap, json['viewMode']),
       enabledDeviceIds: (json['enabledDeviceIds'] as List<dynamic>)
           .map((e) => e as String)
@@ -21,7 +21,7 @@ _$_ViewerSettings _$$_ViewerSettingsFromJson(Map<String, dynamic> json) =>
       catalogId: json['catalogId'] as String?,
     );
 
-Map<String, dynamic> _$$_ViewerSettingsToJson(_$_ViewerSettings instance) =>
+Map<String, dynamic> _$$_ViewerStateToJson(_$_ViewerState instance) =>
     <String, dynamic>{
       'viewMode': _$ViewModeEnumMap[instance.viewMode],
       'enabledDeviceIds': instance.enabledDeviceIds,
@@ -38,3 +38,17 @@ const _$ViewModeEnumMap = {
   ViewMode.themes: 'themes',
   ViewMode.locales: 'locales',
 };
+
+_$_Breakpoints _$$_BreakpointsFromJson(Map<String, dynamic> json) =>
+    _$_Breakpoints(
+      mobile: (json['mobile'] as num?)?.toDouble() ?? 320,
+      tablet: (json['tablet'] as num?)?.toDouble() ?? 768,
+      desktop: (json['desktop'] as num?)?.toDouble() ?? 1024,
+    );
+
+Map<String, dynamic> _$$_BreakpointsToJson(_$_Breakpoints instance) =>
+    <String, dynamic>{
+      'mobile': instance.mobile,
+      'tablet': instance.tablet,
+      'desktop': instance.desktop,
+    };

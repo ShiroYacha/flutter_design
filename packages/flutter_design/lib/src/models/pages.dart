@@ -1,7 +1,7 @@
+import 'package:faker/faker.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:flutter/foundation.dart';
-import 'package:faker/faker.dart';
 import 'package:recase/recase.dart';
 
 part 'pages.freezed.dart';
@@ -10,8 +10,8 @@ part 'pages.freezed.dart';
 class ViewerPageGroup with _$ViewerPageGroup {
   const factory ViewerPageGroup({
     required String id,
-    required List<String> namespace,
     required String title,
+    Color? color,
     ViewerGlyphUnion? glyph,
     @Default([]) List<ViewerPageUnion> children,
   }) = _ViewerPageGroup;
@@ -20,6 +20,12 @@ class ViewerPageGroup with _$ViewerPageGroup {
 @freezed
 class ViewerPageUnion with _$ViewerPageUnion {
   const ViewerPageUnion._();
+  const factory ViewerPageUnion.group({
+    required String id,
+    required List<String> namespace,
+    required String title,
+    @Default([]) List<ViewerPageUnion> children,
+  }) = ViewerGroupPage;
   const factory ViewerPageUnion.documentation({
     required String id,
     required List<String> namespace,
@@ -27,7 +33,6 @@ class ViewerPageUnion with _$ViewerPageUnion {
     String? description,
     @Default([]) List<String> tags,
     required String content,
-    @Default([]) List<ViewerPageUnion> children,
   }) = ViewerDocumentationPage;
   const factory ViewerPageUnion.catalog({
     required String id,
@@ -37,8 +42,10 @@ class ViewerPageUnion with _$ViewerPageUnion {
     String? description,
     String? embeddedDesignLink,
     required String catalogBuilderId,
-    @Default([]) List<ViewerPageUnion> children,
   }) = ViewerCatalogPage;
+
+  List<String> get segments => [...namespace, id];
+  String get segmentsUrl => '/${segments.join('/')}';
 }
 
 @Freezed(unionKey: 'type')
@@ -46,11 +53,11 @@ class ViewerGlyphUnion with _$ViewerGlyphUnion {
   const ViewerGlyphUnion._();
   const factory ViewerGlyphUnion.icon({
     required IconData icon,
-    @Default(16) double size,
+    @Default(14) double size,
   }) = ViewerIconGlyph;
   const factory ViewerGlyphUnion.image({
     required String uri,
-    @Default(16) double size,
+    @Default(14) double size,
   }) = ViewerImageGlyph;
 }
 

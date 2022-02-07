@@ -4,8 +4,6 @@ packages:
   - packages/**
 
 scripts:
-  postbootstrap: |
-
   analyze:
     run: |
       melos exec -c 1 -- \
