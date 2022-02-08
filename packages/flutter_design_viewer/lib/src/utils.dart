@@ -1,3 +1,5 @@
+import 'package:flutter_hooks/flutter_hooks.dart';
+
 ///
 /// Helper method to create an item based on predicate of an input value. This method
 /// takes item creation methods as map value in order to lazily create the widget
@@ -54,4 +56,12 @@ U? buildIf<U>(
     }
   }
   return (orElse ?? () => null)();
+}
+
+/// Similar to [useEffect] but async using [Future.microtask].
+void useAsyncEffect(Future<Dispose?> Function() effect, [List<Object?>? keys]) {
+  useEffect(() {
+    final disposeFuture = Future.microtask(effect);
+    return () => disposeFuture.then((dispose) => dispose?.call());
+  }, keys);
 }

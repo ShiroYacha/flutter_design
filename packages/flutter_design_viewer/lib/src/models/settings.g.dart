@@ -9,26 +9,21 @@ part of 'settings.dart';
 _$_ViewerState _$$_ViewerStateFromJson(Map<String, dynamic> json) =>
     _$_ViewerState(
       viewMode: $enumDecode(_$ViewModeEnumMap, json['viewMode']),
-      enabledDeviceIds: (json['enabledDeviceIds'] as List<dynamic>)
-          .map((e) => e as String)
-          .toList(),
       targetDeviceId: json['targetDeviceId'] as String,
       targetThemeId: json['targetThemeId'] as String,
-      enabledLocaleCodes: (json['enabledLocaleCodes'] as List<dynamic>)
-          .map((e) => e as String)
-          .toList(),
       targetLocaleCode: json['targetLocaleCode'] as String,
+      themeMode: $enumDecodeNullable(_$ThemeModeEnumMap, json['themeMode']) ??
+          ThemeMode.system,
       catalogId: json['catalogId'] as String?,
     );
 
 Map<String, dynamic> _$$_ViewerStateToJson(_$_ViewerState instance) =>
     <String, dynamic>{
       'viewMode': _$ViewModeEnumMap[instance.viewMode],
-      'enabledDeviceIds': instance.enabledDeviceIds,
       'targetDeviceId': instance.targetDeviceId,
       'targetThemeId': instance.targetThemeId,
-      'enabledLocaleCodes': instance.enabledLocaleCodes,
       'targetLocaleCode': instance.targetLocaleCode,
+      'themeMode': _$ThemeModeEnumMap[instance.themeMode],
       'catalogId': instance.catalogId,
     };
 
@@ -37,6 +32,12 @@ const _$ViewModeEnumMap = {
   ViewMode.devices: 'devices',
   ViewMode.themes: 'themes',
   ViewMode.locales: 'locales',
+};
+
+const _$ThemeModeEnumMap = {
+  ThemeMode.system: 'system',
+  ThemeMode.light: 'light',
+  ThemeMode.dark: 'dark',
 };
 
 _$_Breakpoints _$$_BreakpointsFromJson(Map<String, dynamic> json) =>

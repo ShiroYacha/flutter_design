@@ -2,23 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter_design/flutter_design.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class Glyph extends StatelessWidget {
+class ThemableGlyph extends StatelessWidget {
   final ViewerGlyphUnion glyph;
   final Color? color;
+  final bool useTheme;
 
-  const Glyph({
+  const ThemableGlyph({
     required this.glyph,
+    this.useTheme = true,
     this.color,
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return glyph.when(
       icon: (icon, size) => Icon(
         icon,
         size: size,
-        color: color,
+        color: color ?? (useTheme ? theme.colorScheme.onBackground : null),
       ),
       image: (image, size) => ThemableImage(
         uri: image,

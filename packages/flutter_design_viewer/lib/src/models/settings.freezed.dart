@@ -24,19 +24,17 @@ class _$ViewerStateTearOff {
 
   _ViewerState call(
       {required ViewMode viewMode,
-      required List<String> enabledDeviceIds,
       required String targetDeviceId,
       required String targetThemeId,
-      required List<String> enabledLocaleCodes,
       required String targetLocaleCode,
+      ThemeMode themeMode = ThemeMode.system,
       String? catalogId}) {
     return _ViewerState(
       viewMode: viewMode,
-      enabledDeviceIds: enabledDeviceIds,
       targetDeviceId: targetDeviceId,
       targetThemeId: targetThemeId,
-      enabledLocaleCodes: enabledLocaleCodes,
       targetLocaleCode: targetLocaleCode,
+      themeMode: themeMode,
       catalogId: catalogId,
     );
   }
@@ -52,11 +50,10 @@ const $ViewerState = _$ViewerStateTearOff();
 /// @nodoc
 mixin _$ViewerState {
   ViewMode get viewMode => throw _privateConstructorUsedError;
-  List<String> get enabledDeviceIds => throw _privateConstructorUsedError;
   String get targetDeviceId => throw _privateConstructorUsedError;
   String get targetThemeId => throw _privateConstructorUsedError;
-  List<String> get enabledLocaleCodes => throw _privateConstructorUsedError;
   String get targetLocaleCode => throw _privateConstructorUsedError;
+  ThemeMode get themeMode => throw _privateConstructorUsedError;
   String? get catalogId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -72,11 +69,10 @@ abstract class $ViewerStateCopyWith<$Res> {
       _$ViewerStateCopyWithImpl<$Res>;
   $Res call(
       {ViewMode viewMode,
-      List<String> enabledDeviceIds,
       String targetDeviceId,
       String targetThemeId,
-      List<String> enabledLocaleCodes,
       String targetLocaleCode,
+      ThemeMode themeMode,
       String? catalogId});
 }
 
@@ -91,11 +87,10 @@ class _$ViewerStateCopyWithImpl<$Res> implements $ViewerStateCopyWith<$Res> {
   @override
   $Res call({
     Object? viewMode = freezed,
-    Object? enabledDeviceIds = freezed,
     Object? targetDeviceId = freezed,
     Object? targetThemeId = freezed,
-    Object? enabledLocaleCodes = freezed,
     Object? targetLocaleCode = freezed,
+    Object? themeMode = freezed,
     Object? catalogId = freezed,
   }) {
     return _then(_value.copyWith(
@@ -103,10 +98,6 @@ class _$ViewerStateCopyWithImpl<$Res> implements $ViewerStateCopyWith<$Res> {
           ? _value.viewMode
           : viewMode // ignore: cast_nullable_to_non_nullable
               as ViewMode,
-      enabledDeviceIds: enabledDeviceIds == freezed
-          ? _value.enabledDeviceIds
-          : enabledDeviceIds // ignore: cast_nullable_to_non_nullable
-              as List<String>,
       targetDeviceId: targetDeviceId == freezed
           ? _value.targetDeviceId
           : targetDeviceId // ignore: cast_nullable_to_non_nullable
@@ -115,14 +106,14 @@ class _$ViewerStateCopyWithImpl<$Res> implements $ViewerStateCopyWith<$Res> {
           ? _value.targetThemeId
           : targetThemeId // ignore: cast_nullable_to_non_nullable
               as String,
-      enabledLocaleCodes: enabledLocaleCodes == freezed
-          ? _value.enabledLocaleCodes
-          : enabledLocaleCodes // ignore: cast_nullable_to_non_nullable
-              as List<String>,
       targetLocaleCode: targetLocaleCode == freezed
           ? _value.targetLocaleCode
           : targetLocaleCode // ignore: cast_nullable_to_non_nullable
               as String,
+      themeMode: themeMode == freezed
+          ? _value.themeMode
+          : themeMode // ignore: cast_nullable_to_non_nullable
+              as ThemeMode,
       catalogId: catalogId == freezed
           ? _value.catalogId
           : catalogId // ignore: cast_nullable_to_non_nullable
@@ -140,11 +131,10 @@ abstract class _$ViewerStateCopyWith<$Res>
   @override
   $Res call(
       {ViewMode viewMode,
-      List<String> enabledDeviceIds,
       String targetDeviceId,
       String targetThemeId,
-      List<String> enabledLocaleCodes,
       String targetLocaleCode,
+      ThemeMode themeMode,
       String? catalogId});
 }
 
@@ -161,11 +151,10 @@ class __$ViewerStateCopyWithImpl<$Res> extends _$ViewerStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? viewMode = freezed,
-    Object? enabledDeviceIds = freezed,
     Object? targetDeviceId = freezed,
     Object? targetThemeId = freezed,
-    Object? enabledLocaleCodes = freezed,
     Object? targetLocaleCode = freezed,
+    Object? themeMode = freezed,
     Object? catalogId = freezed,
   }) {
     return _then(_ViewerState(
@@ -173,10 +162,6 @@ class __$ViewerStateCopyWithImpl<$Res> extends _$ViewerStateCopyWithImpl<$Res>
           ? _value.viewMode
           : viewMode // ignore: cast_nullable_to_non_nullable
               as ViewMode,
-      enabledDeviceIds: enabledDeviceIds == freezed
-          ? _value.enabledDeviceIds
-          : enabledDeviceIds // ignore: cast_nullable_to_non_nullable
-              as List<String>,
       targetDeviceId: targetDeviceId == freezed
           ? _value.targetDeviceId
           : targetDeviceId // ignore: cast_nullable_to_non_nullable
@@ -185,14 +170,14 @@ class __$ViewerStateCopyWithImpl<$Res> extends _$ViewerStateCopyWithImpl<$Res>
           ? _value.targetThemeId
           : targetThemeId // ignore: cast_nullable_to_non_nullable
               as String,
-      enabledLocaleCodes: enabledLocaleCodes == freezed
-          ? _value.enabledLocaleCodes
-          : enabledLocaleCodes // ignore: cast_nullable_to_non_nullable
-              as List<String>,
       targetLocaleCode: targetLocaleCode == freezed
           ? _value.targetLocaleCode
           : targetLocaleCode // ignore: cast_nullable_to_non_nullable
               as String,
+      themeMode: themeMode == freezed
+          ? _value.themeMode
+          : themeMode // ignore: cast_nullable_to_non_nullable
+              as ThemeMode,
       catalogId: catalogId == freezed
           ? _value.catalogId
           : catalogId // ignore: cast_nullable_to_non_nullable
@@ -206,11 +191,10 @@ class __$ViewerStateCopyWithImpl<$Res> extends _$ViewerStateCopyWithImpl<$Res>
 class _$_ViewerState extends _ViewerState {
   const _$_ViewerState(
       {required this.viewMode,
-      required this.enabledDeviceIds,
       required this.targetDeviceId,
       required this.targetThemeId,
-      required this.enabledLocaleCodes,
       required this.targetLocaleCode,
+      this.themeMode = ThemeMode.system,
       this.catalogId})
       : super._();
 
@@ -220,21 +204,20 @@ class _$_ViewerState extends _ViewerState {
   @override
   final ViewMode viewMode;
   @override
-  final List<String> enabledDeviceIds;
-  @override
   final String targetDeviceId;
   @override
   final String targetThemeId;
   @override
-  final List<String> enabledLocaleCodes;
-  @override
   final String targetLocaleCode;
+  @JsonKey()
+  @override
+  final ThemeMode themeMode;
   @override
   final String? catalogId;
 
   @override
   String toString() {
-    return 'ViewerState(viewMode: $viewMode, enabledDeviceIds: $enabledDeviceIds, targetDeviceId: $targetDeviceId, targetThemeId: $targetThemeId, enabledLocaleCodes: $enabledLocaleCodes, targetLocaleCode: $targetLocaleCode, catalogId: $catalogId)';
+    return 'ViewerState(viewMode: $viewMode, targetDeviceId: $targetDeviceId, targetThemeId: $targetThemeId, targetLocaleCode: $targetLocaleCode, themeMode: $themeMode, catalogId: $catalogId)';
   }
 
   @override
@@ -244,15 +227,12 @@ class _$_ViewerState extends _ViewerState {
             other is _ViewerState &&
             const DeepCollectionEquality().equals(other.viewMode, viewMode) &&
             const DeepCollectionEquality()
-                .equals(other.enabledDeviceIds, enabledDeviceIds) &&
-            const DeepCollectionEquality()
                 .equals(other.targetDeviceId, targetDeviceId) &&
             const DeepCollectionEquality()
                 .equals(other.targetThemeId, targetThemeId) &&
             const DeepCollectionEquality()
-                .equals(other.enabledLocaleCodes, enabledLocaleCodes) &&
-            const DeepCollectionEquality()
                 .equals(other.targetLocaleCode, targetLocaleCode) &&
+            const DeepCollectionEquality().equals(other.themeMode, themeMode) &&
             const DeepCollectionEquality().equals(other.catalogId, catalogId));
   }
 
@@ -260,11 +240,10 @@ class _$_ViewerState extends _ViewerState {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(viewMode),
-      const DeepCollectionEquality().hash(enabledDeviceIds),
       const DeepCollectionEquality().hash(targetDeviceId),
       const DeepCollectionEquality().hash(targetThemeId),
-      const DeepCollectionEquality().hash(enabledLocaleCodes),
       const DeepCollectionEquality().hash(targetLocaleCode),
+      const DeepCollectionEquality().hash(themeMode),
       const DeepCollectionEquality().hash(catalogId));
 
   @JsonKey(ignore: true)
@@ -281,11 +260,10 @@ class _$_ViewerState extends _ViewerState {
 abstract class _ViewerState extends ViewerState {
   const factory _ViewerState(
       {required ViewMode viewMode,
-      required List<String> enabledDeviceIds,
       required String targetDeviceId,
       required String targetThemeId,
-      required List<String> enabledLocaleCodes,
       required String targetLocaleCode,
+      ThemeMode themeMode,
       String? catalogId}) = _$_ViewerState;
   const _ViewerState._() : super._();
 
@@ -295,15 +273,13 @@ abstract class _ViewerState extends ViewerState {
   @override
   ViewMode get viewMode;
   @override
-  List<String> get enabledDeviceIds;
-  @override
   String get targetDeviceId;
   @override
   String get targetThemeId;
   @override
-  List<String> get enabledLocaleCodes;
-  @override
   String get targetLocaleCode;
+  @override
+  ThemeMode get themeMode;
   @override
   String? get catalogId;
   @override
@@ -316,8 +292,13 @@ abstract class _ViewerState extends ViewerState {
 class _$ViewerSettingsTearOff {
   const _$ViewerSettingsTearOff();
 
-  _ViewerSettigns call({Breakpoints breakpoints = const Breakpoints()}) {
+  _ViewerSettigns call(
+      {required Map<String, Locale> enabledLocales,
+      required Map<String, ThemeData> enabledThemes,
+      Breakpoints breakpoints = const Breakpoints()}) {
     return _ViewerSettigns(
+      enabledLocales: enabledLocales,
+      enabledThemes: enabledThemes,
       breakpoints: breakpoints,
     );
   }
@@ -328,6 +309,9 @@ const $ViewerSettings = _$ViewerSettingsTearOff();
 
 /// @nodoc
 mixin _$ViewerSettings {
+  Map<String, Locale> get enabledLocales => throw _privateConstructorUsedError;
+  Map<String, ThemeData> get enabledThemes =>
+      throw _privateConstructorUsedError;
   Breakpoints get breakpoints => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -340,7 +324,10 @@ abstract class $ViewerSettingsCopyWith<$Res> {
   factory $ViewerSettingsCopyWith(
           ViewerSettings value, $Res Function(ViewerSettings) then) =
       _$ViewerSettingsCopyWithImpl<$Res>;
-  $Res call({Breakpoints breakpoints});
+  $Res call(
+      {Map<String, Locale> enabledLocales,
+      Map<String, ThemeData> enabledThemes,
+      Breakpoints breakpoints});
 
   $BreakpointsCopyWith<$Res> get breakpoints;
 }
@@ -356,9 +343,19 @@ class _$ViewerSettingsCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? enabledLocales = freezed,
+    Object? enabledThemes = freezed,
     Object? breakpoints = freezed,
   }) {
     return _then(_value.copyWith(
+      enabledLocales: enabledLocales == freezed
+          ? _value.enabledLocales
+          : enabledLocales // ignore: cast_nullable_to_non_nullable
+              as Map<String, Locale>,
+      enabledThemes: enabledThemes == freezed
+          ? _value.enabledThemes
+          : enabledThemes // ignore: cast_nullable_to_non_nullable
+              as Map<String, ThemeData>,
       breakpoints: breakpoints == freezed
           ? _value.breakpoints
           : breakpoints // ignore: cast_nullable_to_non_nullable
@@ -381,7 +378,10 @@ abstract class _$ViewerSettignsCopyWith<$Res>
           _ViewerSettigns value, $Res Function(_ViewerSettigns) then) =
       __$ViewerSettignsCopyWithImpl<$Res>;
   @override
-  $Res call({Breakpoints breakpoints});
+  $Res call(
+      {Map<String, Locale> enabledLocales,
+      Map<String, ThemeData> enabledThemes,
+      Breakpoints breakpoints});
 
   @override
   $BreakpointsCopyWith<$Res> get breakpoints;
@@ -400,9 +400,19 @@ class __$ViewerSettignsCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? enabledLocales = freezed,
+    Object? enabledThemes = freezed,
     Object? breakpoints = freezed,
   }) {
     return _then(_ViewerSettigns(
+      enabledLocales: enabledLocales == freezed
+          ? _value.enabledLocales
+          : enabledLocales // ignore: cast_nullable_to_non_nullable
+              as Map<String, Locale>,
+      enabledThemes: enabledThemes == freezed
+          ? _value.enabledThemes
+          : enabledThemes // ignore: cast_nullable_to_non_nullable
+              as Map<String, ThemeData>,
       breakpoints: breakpoints == freezed
           ? _value.breakpoints
           : breakpoints // ignore: cast_nullable_to_non_nullable
@@ -414,15 +424,22 @@ class __$ViewerSettignsCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_ViewerSettigns implements _ViewerSettigns {
-  const _$_ViewerSettigns({this.breakpoints = const Breakpoints()});
+  const _$_ViewerSettigns(
+      {required this.enabledLocales,
+      required this.enabledThemes,
+      this.breakpoints = const Breakpoints()});
 
+  @override
+  final Map<String, Locale> enabledLocales;
+  @override
+  final Map<String, ThemeData> enabledThemes;
   @JsonKey()
   @override
   final Breakpoints breakpoints;
 
   @override
   String toString() {
-    return 'ViewerSettings(breakpoints: $breakpoints)';
+    return 'ViewerSettings(enabledLocales: $enabledLocales, enabledThemes: $enabledThemes, breakpoints: $breakpoints)';
   }
 
   @override
@@ -431,12 +448,19 @@ class _$_ViewerSettigns implements _ViewerSettigns {
         (other.runtimeType == runtimeType &&
             other is _ViewerSettigns &&
             const DeepCollectionEquality()
+                .equals(other.enabledLocales, enabledLocales) &&
+            const DeepCollectionEquality()
+                .equals(other.enabledThemes, enabledThemes) &&
+            const DeepCollectionEquality()
                 .equals(other.breakpoints, breakpoints));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(breakpoints));
+      runtimeType,
+      const DeepCollectionEquality().hash(enabledLocales),
+      const DeepCollectionEquality().hash(enabledThemes),
+      const DeepCollectionEquality().hash(breakpoints));
 
   @JsonKey(ignore: true)
   @override
@@ -445,8 +469,15 @@ class _$_ViewerSettigns implements _ViewerSettigns {
 }
 
 abstract class _ViewerSettigns implements ViewerSettings {
-  const factory _ViewerSettigns({Breakpoints breakpoints}) = _$_ViewerSettigns;
+  const factory _ViewerSettigns(
+      {required Map<String, Locale> enabledLocales,
+      required Map<String, ThemeData> enabledThemes,
+      Breakpoints breakpoints}) = _$_ViewerSettigns;
 
+  @override
+  Map<String, Locale> get enabledLocales;
+  @override
+  Map<String, ThemeData> get enabledThemes;
   @override
   Breakpoints get breakpoints;
   @override

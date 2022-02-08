@@ -2,7 +2,9 @@
 
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:ionicons/ionicons.dart';
 import 'package:localstorage/localstorage.dart';
 
 part 'settings.freezed.dart';
@@ -17,16 +19,26 @@ class ViewerState with _$ViewerState {
   const ViewerState._();
   const factory ViewerState({
     required ViewMode viewMode,
-    required List<String> enabledDeviceIds,
     required String targetDeviceId,
     required String targetThemeId,
-    required List<String> enabledLocaleCodes,
     required String targetLocaleCode,
+    @Default(ThemeMode.system) ThemeMode themeMode,
     String? catalogId,
   }) = _ViewerState;
 
   factory ViewerState.fromJson(Map<String, dynamic> json) =>
       _$ViewerStateFromJson(json);
+
+  IconData get themeModeIcon => {
+        ThemeMode.system: Ionicons.partly_sunny,
+        ThemeMode.dark: Ionicons.moon,
+        ThemeMode.light: Ionicons.sunny,
+      }[themeMode]!;
+
+  String get themeModeTooltip => themeMode.name;
+
+  ThemeMode get nextThemeMode => ThemeMode.values[
+      (ThemeMode.values.indexOf(themeMode) + 1) % ThemeMode.values.length];
 
   static Future<ViewerState?> getFromStorage() async {
     final storage = LocalStorage(storageKey);
@@ -62,6 +74,8 @@ class ViewerState with _$ViewerState {
 @freezed
 class ViewerSettings with _$ViewerSettings {
   const factory ViewerSettings({
+    required Map<String, Locale> enabledLocales,
+    required Map<String, ThemeData> enabledThemes,
     @Default(Breakpoints()) Breakpoints breakpoints,
   }) = _ViewerSettigns;
 }

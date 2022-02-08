@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_design/flutter_design.dart';
 import 'package:flutter_design_viewer/flutter_design_viewer.dart';
 import 'package:flutter_design_viewer/src/measures.dart';
-import 'package:flutter_design_viewer/src/widgets/items/brandings.dart';
+import 'package:flutter_design_viewer/src/widgets/items/buttons.dart';
 import 'package:flutter_design_viewer/src/widgets/items/images.dart';
+import 'package:flutter_design_viewer/src/widgets/scaffolds/root_scaffold.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:vrouter/vrouter.dart';
@@ -13,17 +14,29 @@ class ExplorerDrawer extends HookConsumerWidget {
   const ExplorerDrawer({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    print(VRouter.of(context).path);
     final theme = Theme.of(context);
     final branding = ref.watch(brandingProvider);
-    final rootPages = ref.watch(rootPagesProvider);
+    final rootPages = ref.watch(pageGroupsProvider);
     return Container(
       padding: SpacingDesign.paddingVertical16,
-      color: theme.backgroundColor,
+      decoration: BoxDecoration(
+        color: theme.backgroundColor,
+        border: Border.all(
+          color: theme.dividerColor,
+          width: 0.5,
+        ),
+      ),
       width: 300,
-      child: Column(
+      child: ListView(
         children: [
-          Paddings.horizontal16(child: branding ?? const DefaultBranding()),
+          GestureDetector(
+            onTap: () {
+              VRouter.of(context).to('/');
+            },
+            child: Paddings.horizontal16(
+              child: branding,
+            ),
+          ).asMouseClickRegion,
           Spacers.v20(),
           ...rootPages.fold(
             [],
@@ -72,7 +85,10 @@ class PageGroupNode extends HookConsumerWidget {
     final theme = Theme.of(context);
     final router = VRouter.of(context);
     final isTopLevel = viewerPage.namespace.length <= 1;
+    final explorerDrawerController =
+        ref.watch(explorerDrawerControllerProvider);
     final label = SizedBox(
+      width: double.infinity,
       child: Padding(
         padding: EdgeInsets.only(
           left: 20.0 * (viewerPage.namespace.length - 1),
@@ -92,6 +108,10 @@ class PageGroupNode extends HookConsumerWidget {
     );
     return viewerPage.maybeMap(
       group: (group) => ExpandablePanel(
+        key: Key(group.id),
+        controller: ExpandableController(
+            initialExpanded:
+                group.segments.skip(1).any((s) => router.path.contains(s))),
         theme: ExpandableThemeData(
           hasIcon: group.children.isNotEmpty,
           iconSize: 16,
@@ -117,16 +137,16 @@ class PageGroupNode extends HookConsumerWidget {
           ),
         ),
       ),
-      orElse: () => MouseRegion(
-        cursor: SystemMouseCursors.click,
-        child: GestureDetector(
-          behavior: HitTestBehavior.opaque,
-          child: label,
-          onTap: () {
-            router.toSegments(viewerPage.segments);
-          },
-        ),
-      ),
+      orElse: () => GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        child: label,
+        onTap: () {
+          if (explorerDrawerController.isOpen?.call() == true) {
+            explorerDrawerController.close?.call();
+          }
+          router.toSegments(viewerPage.segments);
+        },
+      ).asMouseClickRegion,
     );
   }
 }
@@ -145,14 +165,14 @@ class PageGroupHeader extends StatelessWidget {
     return Row(
       children: [
         if (pageGroup.glyph != null)
-          Glyph(
+          ThemableGlyph(
             glyph: pageGroup.glyph!,
-            color: pageGroup.color,
+            color: theme.hintColor,
           ),
         Spacers.h6(),
         Text(
           pageGroup.title,
-          style: theme.textTheme.subtitle2?.copyWith(color: pageGroup.color),
+          style: theme.textTheme.subtitle2?.copyWith(color: theme.hintColor),
         ),
       ],
     );

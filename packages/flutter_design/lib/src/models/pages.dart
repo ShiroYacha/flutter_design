@@ -11,7 +11,6 @@ class ViewerPageGroup with _$ViewerPageGroup {
   const factory ViewerPageGroup({
     required String id,
     required String title,
-    Color? color,
     ViewerGlyphUnion? glyph,
     @Default([]) List<ViewerPageUnion> children,
   }) = _ViewerPageGroup;
@@ -24,6 +23,7 @@ class ViewerPageUnion with _$ViewerPageUnion {
     required String id,
     required List<String> namespace,
     required String title,
+    String? description,
     @Default([]) List<ViewerPageUnion> children,
   }) = ViewerGroupPage;
   const factory ViewerPageUnion.documentation({
@@ -53,11 +53,11 @@ class ViewerGlyphUnion with _$ViewerGlyphUnion {
   const ViewerGlyphUnion._();
   const factory ViewerGlyphUnion.icon({
     required IconData icon,
-    @Default(14) double size,
+    @Default(18) double size,
   }) = ViewerIconGlyph;
   const factory ViewerGlyphUnion.image({
     required String uri,
-    @Default(14) double size,
+    @Default(18) double size,
   }) = ViewerImageGlyph;
 }
 
