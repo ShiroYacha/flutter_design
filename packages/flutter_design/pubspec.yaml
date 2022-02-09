@@ -19,6 +19,8 @@ dependencies:
   json_annotation: ^4.4.0
   faker: ^2.0.0
   recase: ^4.0.0
+  # meta
+  analyzer: ^3.2.0
 
 dev_dependencies:
   # testing

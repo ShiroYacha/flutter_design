@@ -6,17 +6,21 @@ import 'package:flutter_design_viewer/src/measures.dart';
 import 'package:flutter_design_viewer/src/widgets/items/buttons.dart';
 import 'package:flutter_design_viewer/src/widgets/items/images.dart';
 import 'package:flutter_design_viewer/src/widgets/scaffolds/root_scaffold.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:vrouter/vrouter.dart';
 
 class ExplorerDrawer extends HookConsumerWidget {
-  const ExplorerDrawer({Key? key}) : super(key: key);
+  const ExplorerDrawer({
+    Key? key,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
     final branding = ref.watch(brandingProvider);
     final rootPages = ref.watch(pageGroupsProvider);
+    final scrollController = useScrollController();
     return Container(
       padding: SpacingDesign.paddingVertical16,
       decoration: BoxDecoration(
@@ -28,6 +32,7 @@ class ExplorerDrawer extends HookConsumerWidget {
       ),
       width: 300,
       child: ListView(
+        controller: scrollController,
         children: [
           GestureDetector(
             onTap: () {
@@ -37,7 +42,7 @@ class ExplorerDrawer extends HookConsumerWidget {
               child: branding,
             ),
           ).asMouseClickRegion,
-          Spacers.v20(),
+          Spacers.v20,
           ...rootPages.fold(
             [],
             (previousValue, element) => [
@@ -65,9 +70,9 @@ class PageGroup extends HookConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           PageGroupHeader(pageGroup: pageGroup),
-          Spacers.v10(),
+          Spacers.v10,
           ...pageGroup.children.map((e) => PageGroupNode(viewerPage: e)),
-          Spacers.v10(),
+          Spacers.v10,
         ],
       ),
     );
@@ -85,8 +90,7 @@ class PageGroupNode extends HookConsumerWidget {
     final theme = Theme.of(context);
     final router = VRouter.of(context);
     final isTopLevel = viewerPage.namespace.length <= 1;
-    final explorerDrawerController =
-        ref.watch(explorerDrawerControllerProvider);
+    final rootScaffoldKey = ref.watch(rootScaffoldKeyProvider);
     final label = SizedBox(
       width: double.infinity,
       child: Padding(
@@ -99,9 +103,7 @@ class PageGroupNode extends HookConsumerWidget {
           viewerPage.title,
           style: theme.textTheme.subtitle1!.copyWith(
             fontWeight: isTopLevel ? FontWeight.w400 : FontWeight.w300,
-            color: router.path == viewerPage.segmentsUrl
-                ? theme.highlightColor
-                : null,
+            color: router.path == viewerPage.uri ? theme.highlightColor : null,
           ),
         ),
       ),
@@ -128,12 +130,8 @@ class PageGroupNode extends HookConsumerWidget {
         expanded: Column(
           children: group.children.fold(
             [],
-            (previousValue, element) => [
-              ...previousValue,
-              PageGroupNode(
-                viewerPage: element,
-              )
-            ],
+            (previousValue, element) =>
+                [...previousValue, PageGroupNode(viewerPage: element)],
           ),
         ),
       ),
@@ -141,8 +139,8 @@ class PageGroupNode extends HookConsumerWidget {
         behavior: HitTestBehavior.opaque,
         child: label,
         onTap: () {
-          if (explorerDrawerController.isOpen?.call() == true) {
-            explorerDrawerController.close?.call();
+          if (rootScaffoldKey.currentState?.isDrawerOpen == true) {
+            Navigator.of(rootScaffoldKey.currentContext!).pop();
           }
           router.toSegments(viewerPage.segments);
         },
@@ -166,10 +164,9 @@ class PageGroupHeader extends StatelessWidget {
       children: [
         if (pageGroup.glyph != null)
           ThemableGlyph(
-            glyph: pageGroup.glyph!,
-            color: theme.hintColor,
+            glyph: pageGroup.glyph!.copyWith(color: theme.hintColor),
           ),
-        Spacers.h6(),
+        Spacers.h6,
         Text(
           pageGroup.title,
           style: theme.textTheme.subtitle2?.copyWith(color: theme.hintColor),

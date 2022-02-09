@@ -12,7 +12,7 @@ class DefaultBranding extends StatelessWidget {
     return Row(
       children: [
         const ThemableImage(uri: 'assets/images/logo.png'),
-        Spacers.h10(),
+        Spacers.h10,
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

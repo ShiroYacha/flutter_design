@@ -1,3 +1,4 @@
+import 'package:analyzer/dart/element/element.dart';
 import 'package:faker/faker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -26,26 +27,17 @@ class ViewerPageUnion with _$ViewerPageUnion {
     String? description,
     @Default([]) List<ViewerPageUnion> children,
   }) = ViewerGroupPage;
-  const factory ViewerPageUnion.documentation({
+  const factory ViewerPageUnion.document({
     required String id,
     required List<String> namespace,
     required String title,
     String? description,
     @Default([]) List<String> tags,
-    required String content,
-  }) = ViewerDocumentationPage;
-  const factory ViewerPageUnion.catalog({
-    required String id,
-    required List<String> namespace,
-    required String title,
-    @Default([]) List<String> tags,
-    String? description,
-    String? embeddedDesignLink,
-    required String catalogBuilderId,
-  }) = ViewerCatalogPage;
+    @Default([]) List<ViewerSectionUnion> sections,
+  }) = ViewerDocumentPage;
 
   List<String> get segments => [...namespace, id];
-  String get segmentsUrl => '/${segments.join('/')}';
+  String get uri => '/${segments.join('/')}';
 }
 
 @Freezed(unionKey: 'type')
@@ -53,10 +45,12 @@ class ViewerGlyphUnion with _$ViewerGlyphUnion {
   const ViewerGlyphUnion._();
   const factory ViewerGlyphUnion.icon({
     required IconData icon,
+    Color? color,
     @Default(18) double size,
   }) = ViewerIconGlyph;
   const factory ViewerGlyphUnion.image({
     required String uri,
+    Color? color,
     @Default(18) double size,
   }) = ViewerImageGlyph;
 }
@@ -70,34 +64,63 @@ class ViewerSourceCode with _$ViewerSourceCode {
 }
 
 @freezed
-class ViewerCatalogUnion with _$ViewerCatalogUnion {
-  const factory ViewerCatalogUnion.primaryComponent({
+class ViewerSectionUnion with _$ViewerSectionUnion {
+  const factory ViewerSectionUnion.paragraph({
     required String id,
-    @Default([]) List<ViewerCatalogFeature> features,
-    @Default([]) List<ViewerCatalogLink> links,
-    required WidgetBuilder builder,
-    required ViewerSourceCode sourceCode,
-    required List<ViewerExampleUnion> examples,
-    @Default([]) List<ViewerSecondaryComponentCatalog> secondaryComponents,
-  }) = ViewerPrimaryComponentCatalog;
-  const factory ViewerCatalogUnion.secondaryComponent({
-    required String name,
+    required String title,
+    String? description,
+    @Default([]) List<List<ViewerCollectionItemUnion>> contents,
+  }) = ViewerParagraphSection;
+  const factory ViewerSectionUnion.primaryComponent({
+    required String id,
+    required String title,
     String? description,
     required WidgetBuilder builder,
     required ViewerSourceCode sourceCode,
-    required List<ViewerExampleUnion> examples,
-  }) = ViewerSecondaryComponentCatalog;
-  const factory ViewerCatalogUnion.prototype({
+    @Default([]) List<ViewerExampleUnion> examples,
+    @Default([]) List<ViewerSecondaryComponentSubSection> secondaryComponents,
+  }) = ViewerPrimaryComponentSection;
+  const factory ViewerSectionUnion.apiDocs({
     required String id,
-  }) = ViewerPrototypeCatalog;
+    required String title,
+    String? description,
+    required List<ClassMemberElement> items,
+  }) = ViewerApiDocsSection;
 }
 
 @freezed
-class ViewerCatalogFeature with _$ViewerCatalogFeature {
-  const factory ViewerCatalogFeature({
-    required bool capable,
+class ViewerSubSection with _$ViewerSubSection {
+  const factory ViewerSubSection.secondaryComponent({
     required String title,
-  }) = _ViewerCatalogFeature;
+    String? description,
+    required WidgetBuilder builder,
+    required ViewerSourceCode sourceCode,
+    @Default([]) List<ViewerExampleUnion> examples,
+  }) = ViewerSecondaryComponentSubSection;
+}
+
+@freezed
+class ViewerCollectionItemUnion with _$ViewerCollectionItemUnion {
+  const factory ViewerCollectionItemUnion.text({
+    String? title,
+    String? description,
+  }) = ViewerTextCollectionItem;
+  const factory ViewerCollectionItemUnion.glyph({
+    required ViewerGlyphUnion glyph,
+    required String title,
+  }) = ViewerGlyphCollectionItem;
+  const factory ViewerCollectionItemUnion.link({
+    required String title,
+    required String url,
+  }) = ViewerLinkCollectionItem;
+  const factory ViewerCollectionItemUnion.image({
+    required String url,
+    String? title,
+    String? description,
+  }) = ViewerImageCollectionItem;
+  const factory ViewerCollectionItemUnion.widget({
+    required Widget widget,
+  }) = ViewerWidgetCollectionItem;
 }
 
 @freezed
@@ -178,33 +201,3 @@ class ViewerDataTemplateGeneratorUnion<T>
     ) as T;
   }
 }
-
-// const src = ViewerSourceCode(location: 'location', code: 'code');
-// final test = ViewerStaticExample(
-//   name: '',
-//   builder: (ctx) => Container(),
-//   sourceCode: src,
-// );
-// final test2 = ViewerDynamicExample<String>(
-//   name: '',
-//   builder: (ctx, dataTemplate) => Container(),
-//   sourceCode: src,
-// );
-// final test3 = ViewerDynamicExample<String>(
-//   name: '',
-//   builder: (ctx, dataGeneratorFactory) => Text(
-//     dataGeneratorFactory.generateFirst(ctx, dataKey: ''),
-//   ),
-//   sourceCode: src,
-// );
-
-// class Test extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return test3.builder(
-//         context,
-//         const ViewerDataGeneratorFactory(dataGenerators: [
-//           ViewerTextDataGenerator<String>(dataKey: 'asdf'),
-//         ]));
-//   }
-// }

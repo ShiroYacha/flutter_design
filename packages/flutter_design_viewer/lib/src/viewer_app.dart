@@ -126,9 +126,9 @@ class DesignSystemViewerRouter extends HookConsumerWidget {
 
   List<VRouteElement> _buildRoutes(List<ViewerPageUnion> pages) {
     return [
-      ...pages.where((e) => e is! ViewerGroupPage).map(
+      ...pages.whereType<ViewerDocumentPage>().map(
             (e) => VWidget(
-              path: e.segmentsUrl,
+              path: e.uri,
               widget: ProviderScope(
                 overrides: [
                   currentPageProvider.overrideWithValue(e),

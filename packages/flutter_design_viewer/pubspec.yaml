@@ -44,7 +44,8 @@ dependencies:
   # system
   url_launcher: ^6.0.18
   localstorage: ^4.0.0+1
-
+  # meta
+  analyzer: ^3.2.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

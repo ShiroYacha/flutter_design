@@ -57,13 +57,13 @@ class SearchButton extends HookConsumerWidget {
           child: Row(
             children: [
               const Icon(Ionicons.search, size: 16),
-              Spacers.h6(),
+              Spacers.h6,
               Text(
                 'Search',
                 style: theme.textTheme.subtitle1,
               ),
               if (screenBreakpoint != ScreenBreakpoint.mobile) ...[
-                Spacers.h6(),
+                Spacers.h6,
                 buildIf({
                       () => [TargetPlatform.macOS, TargetPlatform.iOS]
                               .contains(defaultTargetPlatform):
@@ -73,7 +73,7 @@ class SearchButton extends HookConsumerWidget {
                               ),
                     }) ??
                     const KeyContainer(label: 'Ctrl', size: keyContainerSize),
-                Spacers.h3(),
+                Spacers.h3,
                 const KeyContainer(label: 'K', size: keyContainerSize),
               ] else
                 const SizedBox(
@@ -92,33 +92,44 @@ class GlyphButton extends StatelessWidget {
   final GestureTapCallback? onTap;
   final String? tooltip;
   final EdgeInsets padding;
+  final bool iconOnly;
   const GlyphButton({
     required this.glyph,
     this.onTap,
     this.tooltip,
     this.padding = SpacingDesign.paddingAll6,
+    this.iconOnly = false,
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final child = ThemableGlyph(glyph: glyph);
+    final glyphWidget = ThemableGlyph(glyph: glyph);
+    final child = tooltip != null
+        ? Tooltip(
+            message: tooltip,
+            child: glyphWidget,
+          )
+        : glyphWidget;
+
     return Ink(
       decoration: const BoxDecoration(shape: BoxShape.circle),
-      child: InkWell(
-        onTap: onTap,
-        customBorder: const CircleBorder(),
-        child: Padding(
-          padding: padding,
-          // child: child,
-          child: tooltip != null
-              ? Tooltip(
-                  message: tooltip,
-                  child: child,
-                )
-              : child,
-        ),
-      ),
+      child: iconOnly
+          ? MouseRegion(
+              cursor: SystemMouseCursors.click,
+              child: GestureDetector(
+                onTap: onTap,
+                child: child,
+              ),
+            )
+          : InkWell(
+              onTap: onTap,
+              customBorder: const CircleBorder(),
+              child: Padding(
+                padding: padding,
+                child: child,
+              ),
+            ),
     );
   }
 }

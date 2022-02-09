@@ -4,13 +4,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class ThemableGlyph extends StatelessWidget {
   final ViewerGlyphUnion glyph;
-  final Color? color;
   final bool useTheme;
 
   const ThemableGlyph({
     required this.glyph,
     this.useTheme = true,
-    this.color,
     Key? key,
   }) : super(key: key);
 
@@ -18,18 +16,13 @@ class ThemableGlyph extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return glyph.when(
-      icon: (icon, size) => Icon(
+      icon: (icon, color, size) => Icon(
         icon,
         size: size,
         color: color ?? (useTheme ? theme.colorScheme.onBackground : null),
       ),
-      image: (image, size) => ThemableImage(
-        uri: image,
-        width: size,
-        height: size,
-        useTheme: false,
-        color: color,
-      ),
+      image: (image, color, size) => ThemableImage(
+          uri: image, width: size, height: size, useTheme: false, color: color),
     );
   }
 }

@@ -39,9 +39,9 @@ class KeyContainer extends StatelessWidget {
               ? Text(
                   label!,
                   style: theme.textTheme.button!.copyWith(
-                    fontFeatures: [const FontFeature.tabularFigures()],
-                    textBaseline: TextBaseline.alphabetic,
-                  ),
+                      fontFeatures: [const FontFeature.tabularFigures()],
+                      textBaseline: TextBaseline.alphabetic,
+                      fontSize: label!.length >= 3 ? 10 : null),
                 )
               : Icon(
                   icon,

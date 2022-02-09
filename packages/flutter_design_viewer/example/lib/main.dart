@@ -24,13 +24,33 @@ void main() {
             size: 14,
           ),
           children: [
-            ViewerDocumentationPage(
+            ViewerDocumentPage(
               id: 'intro',
               namespace: ['get_started'],
               title: 'Introduction',
               description:
                   'Wanda is Wonderflow\'s open-source design system built for products and digital experiences.',
-              content: 'Lorem ipsum',
+              tags: ['guideline'],
+              sections: [
+                ViewerSectionUnion.paragraph(
+                  id: 'overview',
+                  title: 'Overview',
+                  description: '''
+A Design System is the single source of truth which groups all the elements that will allow teams to build digital products.
+\n
+We, as diverse humans, have our own unique way to think about problems and we walk different roads to find solutions. Usually, that is celebrated, but when cooperating to build products, that could lead to an uncoordinated user experience. Wanda aims to provide a solid guidance for designers and developers, to reduce the risks of divergence.
+                    ''',
+                ),
+                ViewerSectionUnion.paragraph(
+                  id: 'overview2',
+                  title: 'Overview2',
+                  description: '''
+A Design System is the single source of truth which groups all the elements that will allow teams to build digital products.
+\n
+We, as diverse humans, have our own unique way to think about problems and we walk different roads to find solutions. Usually, that is celebrated, but when cooperating to build products, that could lead to an uncoordinated user experience. Wanda aims to provide a solid guidance for designers and developers, to reduce the risks of divergence.
+                    ''',
+                ),
+              ],
             ),
           ],
         ),
@@ -42,66 +62,58 @@ void main() {
             size: 14,
           ),
           children: [
-            ViewerDocumentationPage(
+            ViewerDocumentPage(
               id: 'brand',
               namespace: ['design'],
               title: 'Brand',
               description: 'Wonderflow\'s digital identity',
-              content: 'Lorem ipsum',
             ),
             ViewerGroupPage(
               id: 'foundations',
               namespace: ['design'],
               title: 'Foundations',
               children: [
-                ViewerDocumentationPage(
+                ViewerDocumentPage(
                   id: 'colors',
                   namespace: ['design', 'foundations'],
                   title: 'Colors',
-                  content: 'Lorem ipsum',
                 ),
-                ViewerDocumentationPage(
+                ViewerDocumentPage(
                   id: 'typography',
                   namespace: ['design', 'foundations'],
                   title: 'Typography',
-                  content: 'Lorem ipsum',
                 ),
-                ViewerDocumentationPage(
+                ViewerDocumentPage(
                   id: 'elevations',
                   namespace: ['design', 'foundations'],
                   title: 'Elevations',
-                  content: 'Lorem ipsum',
                 ),
               ],
             ),
-            ViewerDocumentationPage(
+            ViewerDocumentPage(
               id: 'iconography',
               namespace: ['design'],
               title: 'Iconography',
-              content: 'Lorem ipsum',
             ),
-            ViewerDocumentationPage(
+            ViewerDocumentPage(
               id: 'themes',
               namespace: ['design'],
               title: 'Themes',
-              content: 'Lorem ipsum',
             ),
             ViewerGroupPage(
               id: 'recipes',
               namespace: ['design'],
               title: 'Recipes',
               children: [
-                ViewerDocumentationPage(
+                ViewerDocumentPage(
                   id: 'buttons',
                   namespace: ['design', 'recipes'],
                   title: 'Buttons',
-                  content: 'Lorem ipsum',
                 ),
-                ViewerDocumentationPage(
+                ViewerDocumentPage(
                   id: 'dropdown',
                   namespace: ['design', 'recipes'],
                   title: 'Dropdown',
-                  content: 'Lorem ipsum',
                 ),
               ],
             ),
@@ -124,13 +136,13 @@ void main() {
             size: 14,
           ),
           children: [
-            ViewerCatalogPage(
-                id: 'button',
-                namespace: ['components'],
-                title: 'Button',
-                description:
-                    'A button is a box area or text that communicates and triggers user actions when clicked.',
-                catalogBuilderId: 'button_catalog'),
+            ViewerDocumentPage(
+              id: 'button',
+              namespace: ['components'],
+              title: 'Button',
+              description:
+                  'A button is a box area or text that communicates and triggers user actions when clicked.',
+            ),
           ],
         ),
       ],

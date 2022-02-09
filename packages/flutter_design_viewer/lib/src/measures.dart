@@ -598,43 +598,43 @@ class Paddings {
 }
 
 class Spacers {
-  static SizedBox h1() => const SizedBox(width: SpacingDesign.s1);
+  static const SizedBox h1 = SizedBox(width: SpacingDesign.s1);
 
-  static SizedBox v1() => const SizedBox(height: SpacingDesign.s1);
+  static const SizedBox v1 = SizedBox(height: SpacingDesign.s1);
 
-  static SizedBox h3() => const SizedBox(width: SpacingDesign.s3);
+  static const SizedBox h3 = SizedBox(width: SpacingDesign.s3);
 
-  static SizedBox v3() => const SizedBox(height: SpacingDesign.s3);
+  static const SizedBox v3 = SizedBox(height: SpacingDesign.s3);
 
-  static SizedBox h6() => const SizedBox(width: SpacingDesign.s6);
+  static const SizedBox h6 = SizedBox(width: SpacingDesign.s6);
 
-  static SizedBox v6() => const SizedBox(height: SpacingDesign.s6);
+  static const SizedBox v6 = SizedBox(height: SpacingDesign.s6);
 
-  static SizedBox h10() => const SizedBox(width: SpacingDesign.s10);
+  static const SizedBox h10 = SizedBox(width: SpacingDesign.s10);
 
-  static SizedBox v10() => const SizedBox(height: SpacingDesign.s10);
+  static const SizedBox v10 = SizedBox(height: SpacingDesign.s10);
 
-  static SizedBox h16() => const SizedBox(width: SpacingDesign.s16);
+  static const SizedBox h16 = SizedBox(width: SpacingDesign.s16);
 
-  static SizedBox v16() => const SizedBox(height: SpacingDesign.s16);
+  static const SizedBox v16 = SizedBox(height: SpacingDesign.s16);
 
-  static SizedBox h20() => const SizedBox(width: SpacingDesign.s20);
+  static const SizedBox h20 = SizedBox(width: SpacingDesign.s20);
 
-  static SizedBox v20() => const SizedBox(height: SpacingDesign.s20);
+  static const SizedBox v20 = SizedBox(height: SpacingDesign.s20);
 
-  static SizedBox h30() => const SizedBox(width: SpacingDesign.s30);
+  static const SizedBox h30 = SizedBox(width: SpacingDesign.s30);
 
-  static SizedBox v30() => const SizedBox(height: SpacingDesign.s30);
+  static const SizedBox v30 = SizedBox(height: SpacingDesign.s30);
 
-  static SizedBox h40() => const SizedBox(width: SpacingDesign.s40);
+  static const SizedBox h40 = SizedBox(width: SpacingDesign.s40);
 
-  static SizedBox v40() => const SizedBox(height: SpacingDesign.s40);
+  static const SizedBox v40 = SizedBox(height: SpacingDesign.s40);
 
-  static SizedBox h60() => const SizedBox(width: SpacingDesign.s60);
+  static const SizedBox h60 = SizedBox(width: SpacingDesign.s60);
 
-  static SizedBox v60() => const SizedBox(height: SpacingDesign.s60);
+  static const SizedBox v60 = SizedBox(height: SpacingDesign.s60);
 
-  static SizedBox h100() => const SizedBox(width: SpacingDesign.s100);
+  static const SizedBox h100 = SizedBox(width: SpacingDesign.s100);
 
-  static SizedBox v100() => const SizedBox(height: SpacingDesign.s100);
+  static const SizedBox v100 = SizedBox(height: SpacingDesign.s100);
 }

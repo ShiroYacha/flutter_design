@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'measures.dart';
+
 final primaryColor = Colors.amber.shade600;
 final primaryDarkColor = Colors.amber.shade400;
 final secondaryColor = Colors.teal.shade600;
@@ -26,6 +28,7 @@ final defaultLightTheme = ThemeData(
     secondary: secondaryColor,
   ),
   highlightColor: primaryColor,
+  textButtonTheme: _textButtonThemeData,
 );
 
 /// Standard material [ThemeData] for [Brightness.dark]
@@ -44,11 +47,19 @@ final defaultDarkTheme = ThemeData(
     secondary: secondaryDarkColor,
   ),
   highlightColor: primaryDarkColor,
+  textButtonTheme: _textButtonThemeData,
 );
 
-extension TextStyleExtension on TextStyle {
-  TextStyle buildExtraBold(BuildContext context) => copyWith(
-        fontWeight: FontWeight.w800,
-        color: Theme.of(context).colorScheme.onBackground,
-      );
-}
+final TextButtonThemeData _textButtonThemeData = TextButtonThemeData(
+  style: ButtonStyle(
+    padding: MaterialStateProperty.all(
+      const EdgeInsets.symmetric(
+        vertical: SpacingDesign.s20,
+        horizontal: SpacingDesign.s10,
+      ),
+    ),
+    splashFactory: NoSplash.splashFactory,
+    overlayColor: MaterialStateProperty.resolveWith<Color>(
+        (states) => Colors.transparent),
+  ),
+);

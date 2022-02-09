@@ -26,17 +26,17 @@ class TopAppBar extends HookConsumerWidget {
         children: [
           const Expanded(child: SizedBox.shrink()),
           const SearchButton(),
-          Spacers.h20(),
+          Spacers.h20,
           GlyphButton(
             glyph: const ViewerGlyphUnion.icon(icon: Ionicons.logo_github),
             onTap: () {},
           ),
-          Spacers.h10(),
+          Spacers.h10,
           GlyphButton(
             onTap: () {},
             glyph: const ViewerGlyphUnion.icon(icon: Ionicons.logo_twitter),
           ),
-          Spacers.h10(),
+          Spacers.h10,
           GlyphButton(
             onTap: () {
               viewerStateNotifier.update(
