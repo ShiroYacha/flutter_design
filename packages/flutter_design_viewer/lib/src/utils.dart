@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
 ///
@@ -64,4 +65,16 @@ void useAsyncEffect(Future<Dispose?> Function() effect, [List<Object?>? keys]) {
     final disposeFuture = Future.microtask(effect);
     return () => disposeFuture.then((dispose) => dispose?.call());
   }, keys);
+}
+
+void ensureScrollableVisible(
+  BuildContext context, {
+  int milliseconds = 500,
+}) {
+  WidgetsBinding.instance?.scheduleFrameCallback((timeStamp) {
+    Scrollable.ensureVisible(
+      context,
+      duration: Duration(milliseconds: milliseconds),
+    );
+  });
 }

@@ -14,6 +14,213 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
+/// @nodoc
+class _$SearchableElementTearOff {
+  const _$SearchableElementTearOff();
+
+  _SearchableElement call(
+      {required SearchableType type,
+      required SearchableHitType hitType,
+      required Searchable searchable,
+      required String text}) {
+    return _SearchableElement(
+      type: type,
+      hitType: hitType,
+      searchable: searchable,
+      text: text,
+    );
+  }
+}
+
+/// @nodoc
+const $SearchableElement = _$SearchableElementTearOff();
+
+/// @nodoc
+mixin _$SearchableElement {
+  SearchableType get type => throw _privateConstructorUsedError;
+  SearchableHitType get hitType => throw _privateConstructorUsedError;
+  Searchable get searchable => throw _privateConstructorUsedError;
+  String get text => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $SearchableElementCopyWith<SearchableElement> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $SearchableElementCopyWith<$Res> {
+  factory $SearchableElementCopyWith(
+          SearchableElement value, $Res Function(SearchableElement) then) =
+      _$SearchableElementCopyWithImpl<$Res>;
+  $Res call(
+      {SearchableType type,
+      SearchableHitType hitType,
+      Searchable searchable,
+      String text});
+}
+
+/// @nodoc
+class _$SearchableElementCopyWithImpl<$Res>
+    implements $SearchableElementCopyWith<$Res> {
+  _$SearchableElementCopyWithImpl(this._value, this._then);
+
+  final SearchableElement _value;
+  // ignore: unused_field
+  final $Res Function(SearchableElement) _then;
+
+  @override
+  $Res call({
+    Object? type = freezed,
+    Object? hitType = freezed,
+    Object? searchable = freezed,
+    Object? text = freezed,
+  }) {
+    return _then(_value.copyWith(
+      type: type == freezed
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as SearchableType,
+      hitType: hitType == freezed
+          ? _value.hitType
+          : hitType // ignore: cast_nullable_to_non_nullable
+              as SearchableHitType,
+      searchable: searchable == freezed
+          ? _value.searchable
+          : searchable // ignore: cast_nullable_to_non_nullable
+              as Searchable,
+      text: text == freezed
+          ? _value.text
+          : text // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$SearchableElementCopyWith<$Res>
+    implements $SearchableElementCopyWith<$Res> {
+  factory _$SearchableElementCopyWith(
+          _SearchableElement value, $Res Function(_SearchableElement) then) =
+      __$SearchableElementCopyWithImpl<$Res>;
+  @override
+  $Res call(
+      {SearchableType type,
+      SearchableHitType hitType,
+      Searchable searchable,
+      String text});
+}
+
+/// @nodoc
+class __$SearchableElementCopyWithImpl<$Res>
+    extends _$SearchableElementCopyWithImpl<$Res>
+    implements _$SearchableElementCopyWith<$Res> {
+  __$SearchableElementCopyWithImpl(
+      _SearchableElement _value, $Res Function(_SearchableElement) _then)
+      : super(_value, (v) => _then(v as _SearchableElement));
+
+  @override
+  _SearchableElement get _value => super._value as _SearchableElement;
+
+  @override
+  $Res call({
+    Object? type = freezed,
+    Object? hitType = freezed,
+    Object? searchable = freezed,
+    Object? text = freezed,
+  }) {
+    return _then(_SearchableElement(
+      type: type == freezed
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as SearchableType,
+      hitType: hitType == freezed
+          ? _value.hitType
+          : hitType // ignore: cast_nullable_to_non_nullable
+              as SearchableHitType,
+      searchable: searchable == freezed
+          ? _value.searchable
+          : searchable // ignore: cast_nullable_to_non_nullable
+              as Searchable,
+      text: text == freezed
+          ? _value.text
+          : text // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_SearchableElement extends _SearchableElement {
+  const _$_SearchableElement(
+      {required this.type,
+      required this.hitType,
+      required this.searchable,
+      required this.text})
+      : super._();
+
+  @override
+  final SearchableType type;
+  @override
+  final SearchableHitType hitType;
+  @override
+  final Searchable searchable;
+  @override
+  final String text;
+
+  @override
+  String toString() {
+    return 'SearchableElement(type: $type, hitType: $hitType, searchable: $searchable, text: $text)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _SearchableElement &&
+            const DeepCollectionEquality().equals(other.type, type) &&
+            const DeepCollectionEquality().equals(other.hitType, hitType) &&
+            const DeepCollectionEquality()
+                .equals(other.searchable, searchable) &&
+            const DeepCollectionEquality().equals(other.text, text));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(type),
+      const DeepCollectionEquality().hash(hitType),
+      const DeepCollectionEquality().hash(searchable),
+      const DeepCollectionEquality().hash(text));
+
+  @JsonKey(ignore: true)
+  @override
+  _$SearchableElementCopyWith<_SearchableElement> get copyWith =>
+      __$SearchableElementCopyWithImpl<_SearchableElement>(this, _$identity);
+}
+
+abstract class _SearchableElement extends SearchableElement {
+  const factory _SearchableElement(
+      {required SearchableType type,
+      required SearchableHitType hitType,
+      required Searchable searchable,
+      required String text}) = _$_SearchableElement;
+  const _SearchableElement._() : super._();
+
+  @override
+  SearchableType get type;
+  @override
+  SearchableHitType get hitType;
+  @override
+  Searchable get searchable;
+  @override
+  String get text;
+  @override
+  @JsonKey(ignore: true)
+  _$SearchableElementCopyWith<_SearchableElement> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
 SearchResultItem _$SearchResultItemFromJson(Map<String, dynamic> json) {
   return _SearchResultItem.fromJson(json);
 }

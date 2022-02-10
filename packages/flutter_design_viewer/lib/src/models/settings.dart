@@ -20,8 +20,11 @@ class ViewerState with _$ViewerState {
   const factory ViewerState({
     required ViewMode viewMode,
     required String targetDeviceId,
+    required List<String> targetDeviceIds,
     required String targetThemeId,
-    required String targetLocaleCode,
+    required List<String> targetThemeIds,
+    required String targetLocaleId,
+    required List<String> targetLocaleIds,
     @Default(ThemeMode.system) ThemeMode themeMode,
     String? catalogId,
   }) = _ViewerState;

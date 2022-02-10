@@ -10,8 +10,17 @@ _$_ViewerState _$$_ViewerStateFromJson(Map<String, dynamic> json) =>
     _$_ViewerState(
       viewMode: $enumDecode(_$ViewModeEnumMap, json['viewMode']),
       targetDeviceId: json['targetDeviceId'] as String,
+      targetDeviceIds: (json['targetDeviceIds'] as List<dynamic>)
+          .map((e) => e as String)
+          .toList(),
       targetThemeId: json['targetThemeId'] as String,
-      targetLocaleCode: json['targetLocaleCode'] as String,
+      targetThemeIds: (json['targetThemeIds'] as List<dynamic>)
+          .map((e) => e as String)
+          .toList(),
+      targetLocaleId: json['targetLocaleId'] as String,
+      targetLocaleIds: (json['targetLocaleIds'] as List<dynamic>)
+          .map((e) => e as String)
+          .toList(),
       themeMode: $enumDecodeNullable(_$ThemeModeEnumMap, json['themeMode']) ??
           ThemeMode.system,
       catalogId: json['catalogId'] as String?,
@@ -21,8 +30,11 @@ Map<String, dynamic> _$$_ViewerStateToJson(_$_ViewerState instance) =>
     <String, dynamic>{
       'viewMode': _$ViewModeEnumMap[instance.viewMode],
       'targetDeviceId': instance.targetDeviceId,
+      'targetDeviceIds': instance.targetDeviceIds,
       'targetThemeId': instance.targetThemeId,
-      'targetLocaleCode': instance.targetLocaleCode,
+      'targetThemeIds': instance.targetThemeIds,
+      'targetLocaleId': instance.targetLocaleId,
+      'targetLocaleIds': instance.targetLocaleIds,
       'themeMode': _$ThemeModeEnumMap[instance.themeMode],
       'catalogId': instance.catalogId,
     };

@@ -20,7 +20,6 @@ class ExplorerDrawer extends HookConsumerWidget {
     final theme = Theme.of(context);
     final branding = ref.watch(brandingProvider);
     final rootPages = ref.watch(pageGroupsProvider);
-    final scrollController = useScrollController();
     return Container(
       padding: SpacingDesign.paddingVertical16,
       decoration: BoxDecoration(
@@ -32,7 +31,8 @@ class ExplorerDrawer extends HookConsumerWidget {
       ),
       width: 300,
       child: ListView(
-        controller: scrollController,
+        key: const PageStorageKey<String>('ExplorerListView'),
+        controller: useScrollController(),
         children: [
           GestureDetector(
             onTap: () {
@@ -91,6 +91,7 @@ class PageGroupNode extends HookConsumerWidget {
     final router = VRouter.of(context);
     final isTopLevel = viewerPage.namespace.length <= 1;
     final rootScaffoldKey = ref.watch(rootScaffoldKeyProvider);
+    final isSelected = router.path == viewerPage.uri;
     final label = SizedBox(
       width: double.infinity,
       child: Padding(
@@ -103,7 +104,7 @@ class PageGroupNode extends HookConsumerWidget {
           viewerPage.title,
           style: theme.textTheme.subtitle1!.copyWith(
             fontWeight: isTopLevel ? FontWeight.w400 : FontWeight.w300,
-            color: router.path == viewerPage.uri ? theme.highlightColor : null,
+            color: isSelected ? theme.highlightColor : null,
           ),
         ),
       ),

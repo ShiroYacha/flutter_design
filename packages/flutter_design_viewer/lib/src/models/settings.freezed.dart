@@ -25,15 +25,21 @@ class _$ViewerStateTearOff {
   _ViewerState call(
       {required ViewMode viewMode,
       required String targetDeviceId,
+      required List<String> targetDeviceIds,
       required String targetThemeId,
-      required String targetLocaleCode,
+      required List<String> targetThemeIds,
+      required String targetLocaleId,
+      required List<String> targetLocaleIds,
       ThemeMode themeMode = ThemeMode.system,
       String? catalogId}) {
     return _ViewerState(
       viewMode: viewMode,
       targetDeviceId: targetDeviceId,
+      targetDeviceIds: targetDeviceIds,
       targetThemeId: targetThemeId,
-      targetLocaleCode: targetLocaleCode,
+      targetThemeIds: targetThemeIds,
+      targetLocaleId: targetLocaleId,
+      targetLocaleIds: targetLocaleIds,
       themeMode: themeMode,
       catalogId: catalogId,
     );
@@ -51,8 +57,11 @@ const $ViewerState = _$ViewerStateTearOff();
 mixin _$ViewerState {
   ViewMode get viewMode => throw _privateConstructorUsedError;
   String get targetDeviceId => throw _privateConstructorUsedError;
+  List<String> get targetDeviceIds => throw _privateConstructorUsedError;
   String get targetThemeId => throw _privateConstructorUsedError;
-  String get targetLocaleCode => throw _privateConstructorUsedError;
+  List<String> get targetThemeIds => throw _privateConstructorUsedError;
+  String get targetLocaleId => throw _privateConstructorUsedError;
+  List<String> get targetLocaleIds => throw _privateConstructorUsedError;
   ThemeMode get themeMode => throw _privateConstructorUsedError;
   String? get catalogId => throw _privateConstructorUsedError;
 
@@ -70,8 +79,11 @@ abstract class $ViewerStateCopyWith<$Res> {
   $Res call(
       {ViewMode viewMode,
       String targetDeviceId,
+      List<String> targetDeviceIds,
       String targetThemeId,
-      String targetLocaleCode,
+      List<String> targetThemeIds,
+      String targetLocaleId,
+      List<String> targetLocaleIds,
       ThemeMode themeMode,
       String? catalogId});
 }
@@ -88,8 +100,11 @@ class _$ViewerStateCopyWithImpl<$Res> implements $ViewerStateCopyWith<$Res> {
   $Res call({
     Object? viewMode = freezed,
     Object? targetDeviceId = freezed,
+    Object? targetDeviceIds = freezed,
     Object? targetThemeId = freezed,
-    Object? targetLocaleCode = freezed,
+    Object? targetThemeIds = freezed,
+    Object? targetLocaleId = freezed,
+    Object? targetLocaleIds = freezed,
     Object? themeMode = freezed,
     Object? catalogId = freezed,
   }) {
@@ -102,14 +117,26 @@ class _$ViewerStateCopyWithImpl<$Res> implements $ViewerStateCopyWith<$Res> {
           ? _value.targetDeviceId
           : targetDeviceId // ignore: cast_nullable_to_non_nullable
               as String,
+      targetDeviceIds: targetDeviceIds == freezed
+          ? _value.targetDeviceIds
+          : targetDeviceIds // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       targetThemeId: targetThemeId == freezed
           ? _value.targetThemeId
           : targetThemeId // ignore: cast_nullable_to_non_nullable
               as String,
-      targetLocaleCode: targetLocaleCode == freezed
-          ? _value.targetLocaleCode
-          : targetLocaleCode // ignore: cast_nullable_to_non_nullable
+      targetThemeIds: targetThemeIds == freezed
+          ? _value.targetThemeIds
+          : targetThemeIds // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      targetLocaleId: targetLocaleId == freezed
+          ? _value.targetLocaleId
+          : targetLocaleId // ignore: cast_nullable_to_non_nullable
               as String,
+      targetLocaleIds: targetLocaleIds == freezed
+          ? _value.targetLocaleIds
+          : targetLocaleIds // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       themeMode: themeMode == freezed
           ? _value.themeMode
           : themeMode // ignore: cast_nullable_to_non_nullable
@@ -132,8 +159,11 @@ abstract class _$ViewerStateCopyWith<$Res>
   $Res call(
       {ViewMode viewMode,
       String targetDeviceId,
+      List<String> targetDeviceIds,
       String targetThemeId,
-      String targetLocaleCode,
+      List<String> targetThemeIds,
+      String targetLocaleId,
+      List<String> targetLocaleIds,
       ThemeMode themeMode,
       String? catalogId});
 }
@@ -152,8 +182,11 @@ class __$ViewerStateCopyWithImpl<$Res> extends _$ViewerStateCopyWithImpl<$Res>
   $Res call({
     Object? viewMode = freezed,
     Object? targetDeviceId = freezed,
+    Object? targetDeviceIds = freezed,
     Object? targetThemeId = freezed,
-    Object? targetLocaleCode = freezed,
+    Object? targetThemeIds = freezed,
+    Object? targetLocaleId = freezed,
+    Object? targetLocaleIds = freezed,
     Object? themeMode = freezed,
     Object? catalogId = freezed,
   }) {
@@ -166,14 +199,26 @@ class __$ViewerStateCopyWithImpl<$Res> extends _$ViewerStateCopyWithImpl<$Res>
           ? _value.targetDeviceId
           : targetDeviceId // ignore: cast_nullable_to_non_nullable
               as String,
+      targetDeviceIds: targetDeviceIds == freezed
+          ? _value.targetDeviceIds
+          : targetDeviceIds // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       targetThemeId: targetThemeId == freezed
           ? _value.targetThemeId
           : targetThemeId // ignore: cast_nullable_to_non_nullable
               as String,
-      targetLocaleCode: targetLocaleCode == freezed
-          ? _value.targetLocaleCode
-          : targetLocaleCode // ignore: cast_nullable_to_non_nullable
+      targetThemeIds: targetThemeIds == freezed
+          ? _value.targetThemeIds
+          : targetThemeIds // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      targetLocaleId: targetLocaleId == freezed
+          ? _value.targetLocaleId
+          : targetLocaleId // ignore: cast_nullable_to_non_nullable
               as String,
+      targetLocaleIds: targetLocaleIds == freezed
+          ? _value.targetLocaleIds
+          : targetLocaleIds // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       themeMode: themeMode == freezed
           ? _value.themeMode
           : themeMode // ignore: cast_nullable_to_non_nullable
@@ -192,8 +237,11 @@ class _$_ViewerState extends _ViewerState {
   const _$_ViewerState(
       {required this.viewMode,
       required this.targetDeviceId,
+      required this.targetDeviceIds,
       required this.targetThemeId,
-      required this.targetLocaleCode,
+      required this.targetThemeIds,
+      required this.targetLocaleId,
+      required this.targetLocaleIds,
       this.themeMode = ThemeMode.system,
       this.catalogId})
       : super._();
@@ -206,9 +254,15 @@ class _$_ViewerState extends _ViewerState {
   @override
   final String targetDeviceId;
   @override
+  final List<String> targetDeviceIds;
+  @override
   final String targetThemeId;
   @override
-  final String targetLocaleCode;
+  final List<String> targetThemeIds;
+  @override
+  final String targetLocaleId;
+  @override
+  final List<String> targetLocaleIds;
   @JsonKey()
   @override
   final ThemeMode themeMode;
@@ -217,7 +271,7 @@ class _$_ViewerState extends _ViewerState {
 
   @override
   String toString() {
-    return 'ViewerState(viewMode: $viewMode, targetDeviceId: $targetDeviceId, targetThemeId: $targetThemeId, targetLocaleCode: $targetLocaleCode, themeMode: $themeMode, catalogId: $catalogId)';
+    return 'ViewerState(viewMode: $viewMode, targetDeviceId: $targetDeviceId, targetDeviceIds: $targetDeviceIds, targetThemeId: $targetThemeId, targetThemeIds: $targetThemeIds, targetLocaleId: $targetLocaleId, targetLocaleIds: $targetLocaleIds, themeMode: $themeMode, catalogId: $catalogId)';
   }
 
   @override
@@ -229,9 +283,15 @@ class _$_ViewerState extends _ViewerState {
             const DeepCollectionEquality()
                 .equals(other.targetDeviceId, targetDeviceId) &&
             const DeepCollectionEquality()
+                .equals(other.targetDeviceIds, targetDeviceIds) &&
+            const DeepCollectionEquality()
                 .equals(other.targetThemeId, targetThemeId) &&
             const DeepCollectionEquality()
-                .equals(other.targetLocaleCode, targetLocaleCode) &&
+                .equals(other.targetThemeIds, targetThemeIds) &&
+            const DeepCollectionEquality()
+                .equals(other.targetLocaleId, targetLocaleId) &&
+            const DeepCollectionEquality()
+                .equals(other.targetLocaleIds, targetLocaleIds) &&
             const DeepCollectionEquality().equals(other.themeMode, themeMode) &&
             const DeepCollectionEquality().equals(other.catalogId, catalogId));
   }
@@ -241,8 +301,11 @@ class _$_ViewerState extends _ViewerState {
       runtimeType,
       const DeepCollectionEquality().hash(viewMode),
       const DeepCollectionEquality().hash(targetDeviceId),
+      const DeepCollectionEquality().hash(targetDeviceIds),
       const DeepCollectionEquality().hash(targetThemeId),
-      const DeepCollectionEquality().hash(targetLocaleCode),
+      const DeepCollectionEquality().hash(targetThemeIds),
+      const DeepCollectionEquality().hash(targetLocaleId),
+      const DeepCollectionEquality().hash(targetLocaleIds),
       const DeepCollectionEquality().hash(themeMode),
       const DeepCollectionEquality().hash(catalogId));
 
@@ -261,8 +324,11 @@ abstract class _ViewerState extends ViewerState {
   const factory _ViewerState(
       {required ViewMode viewMode,
       required String targetDeviceId,
+      required List<String> targetDeviceIds,
       required String targetThemeId,
-      required String targetLocaleCode,
+      required List<String> targetThemeIds,
+      required String targetLocaleId,
+      required List<String> targetLocaleIds,
       ThemeMode themeMode,
       String? catalogId}) = _$_ViewerState;
   const _ViewerState._() : super._();
@@ -275,9 +341,15 @@ abstract class _ViewerState extends ViewerState {
   @override
   String get targetDeviceId;
   @override
+  List<String> get targetDeviceIds;
+  @override
   String get targetThemeId;
   @override
-  String get targetLocaleCode;
+  List<String> get targetThemeIds;
+  @override
+  String get targetLocaleId;
+  @override
+  List<String> get targetLocaleIds;
   @override
   ThemeMode get themeMode;
   @override

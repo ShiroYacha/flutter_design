@@ -4,6 +4,7 @@ import 'package:flutter_design/flutter_design.dart';
 import 'package:flutter_design_viewer/src/commands.dart';
 import 'package:flutter_design_viewer/src/measures.dart';
 import 'package:flutter_design_viewer/src/utils.dart';
+import 'package:flutter_design_viewer/src/widgets/dialogs/settings_dialog.dart';
 import 'package:flutter_design_viewer/src/widgets/scaffolds/root_scaffold.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -20,6 +21,83 @@ extension WidgetMouseExtension on Widget {
       );
 }
 
+typedef DataWidgetBuilder<T, U> = Widget Function(BuildContext, T, [U]);
+typedef DataSelectionChanged<T> = void Function(T);
+
+class SelectableGlyphGroup<T> extends HookConsumerWidget {
+  final Iterable<T> items;
+  final DataWidgetBuilder builder;
+  final T? selectedItem;
+  final DataSelectionChanged<T> selectionChanged;
+  const SelectableGlyphGroup({
+    required this.items,
+    required this.builder,
+    this.selectedItem,
+    required this.selectionChanged,
+    Key? key,
+  }) : super(key: key);
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final theme = Theme.of(context);
+    return Container(
+      decoration: BoxDecoration(
+        color: theme.backgroundColor,
+        borderRadius: BorderRadius.circular(16),
+      ),
+      padding: SpacingDesign.paddingAll10,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: items.fold<List<Widget>>(
+          [],
+          (pv, e) => [
+            ...pv,
+            Spacers.h10,
+            MouseRegion(
+              cursor: SystemMouseCursors.click,
+              child: GestureDetector(
+                onTap: () {
+                  selectionChanged(e);
+                },
+                child: builder(context, e, selectedItem == e),
+              ),
+            ),
+            Spacers.h10,
+            if (items.last != e)
+              Container(color: theme.dividerColor, width: 1, height: 10),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class ConfigButton extends HookConsumerWidget {
+  const ConfigButton({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: GlyphButton(
+        tooltip: 'Global settings',
+        glyph: const ViewerGlyphUnion.icon(
+          icon: Ionicons.settings_outline,
+        ),
+        onTap: () async {
+          final theme = Theme.of(context);
+          await showDialog(
+            context: context,
+            barrierDismissible: true,
+            barrierColor: theme.dialogBackgroundColor.withOpacity(0.5),
+            builder: (context) {
+              return const SettingsDialog();
+            },
+          );
+        },
+      ),
+    );
+  }
+}
+
 class SearchButton extends HookConsumerWidget {
   const SearchButton({Key? key}) : super(key: key);
 
@@ -30,6 +108,7 @@ class SearchButton extends HookConsumerWidget {
     final hover = useState(false);
     final screenBreakpoint = ref.watch(screenBreakpointProvider);
     return MouseRegion(
+      cursor: SystemMouseCursors.click,
       onHover: (e) {
         hover.value = true;
       },

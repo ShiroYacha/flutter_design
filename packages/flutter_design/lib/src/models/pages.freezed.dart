@@ -1543,23 +1543,31 @@ class _$ViewerSectionUnionTearOff {
     );
   }
 
-  ViewerPrimaryComponentSection primaryComponent(
+  ViewerComponentSection component(
       {required String id,
       required String title,
       String? description,
       required WidgetBuilder builder,
-      required ViewerSourceCode sourceCode,
-      List<ViewerExampleUnion> examples = const [],
-      List<ViewerSecondaryComponentSubSection> secondaryComponents =
-          const []}) {
-    return ViewerPrimaryComponentSection(
+      required ViewerSourceCode sourceCode}) {
+    return ViewerComponentSection(
       id: id,
       title: title,
       description: description,
       builder: builder,
       sourceCode: sourceCode,
+    );
+  }
+
+  ViewerExamplesSection examples(
+      {required String id,
+      required String title,
+      String? description,
+      List<ViewerExampleUnion> examples = const []}) {
+    return ViewerExamplesSection(
+      id: id,
+      title: title,
+      description: description,
       examples: examples,
-      secondaryComponents: secondaryComponents,
     );
   }
 
@@ -1591,15 +1599,12 @@ mixin _$ViewerSectionUnion {
     required TResult Function(String id, String title, String? description,
             List<List<ViewerCollectionItemUnion>> contents)
         paragraph,
-    required TResult Function(
-            String id,
-            String title,
-            String? description,
-            WidgetBuilder builder,
-            ViewerSourceCode sourceCode,
-            List<ViewerExampleUnion> examples,
-            List<ViewerSecondaryComponentSubSection> secondaryComponents)
-        primaryComponent,
+    required TResult Function(String id, String title, String? description,
+            WidgetBuilder builder, ViewerSourceCode sourceCode)
+        component,
+    required TResult Function(String id, String title, String? description,
+            List<ViewerExampleUnion> examples)
+        examples,
     required TResult Function(String id, String title, String? description,
             List<ClassMemberElement> items)
         apiDocs,
@@ -1610,15 +1615,12 @@ mixin _$ViewerSectionUnion {
     TResult Function(String id, String title, String? description,
             List<List<ViewerCollectionItemUnion>> contents)?
         paragraph,
-    TResult Function(
-            String id,
-            String title,
-            String? description,
-            WidgetBuilder builder,
-            ViewerSourceCode sourceCode,
-            List<ViewerExampleUnion> examples,
-            List<ViewerSecondaryComponentSubSection> secondaryComponents)?
-        primaryComponent,
+    TResult Function(String id, String title, String? description,
+            WidgetBuilder builder, ViewerSourceCode sourceCode)?
+        component,
+    TResult Function(String id, String title, String? description,
+            List<ViewerExampleUnion> examples)?
+        examples,
     TResult Function(String id, String title, String? description,
             List<ClassMemberElement> items)?
         apiDocs,
@@ -1629,15 +1631,12 @@ mixin _$ViewerSectionUnion {
     TResult Function(String id, String title, String? description,
             List<List<ViewerCollectionItemUnion>> contents)?
         paragraph,
-    TResult Function(
-            String id,
-            String title,
-            String? description,
-            WidgetBuilder builder,
-            ViewerSourceCode sourceCode,
-            List<ViewerExampleUnion> examples,
-            List<ViewerSecondaryComponentSubSection> secondaryComponents)?
-        primaryComponent,
+    TResult Function(String id, String title, String? description,
+            WidgetBuilder builder, ViewerSourceCode sourceCode)?
+        component,
+    TResult Function(String id, String title, String? description,
+            List<ViewerExampleUnion> examples)?
+        examples,
     TResult Function(String id, String title, String? description,
             List<ClassMemberElement> items)?
         apiDocs,
@@ -1647,22 +1646,24 @@ mixin _$ViewerSectionUnion {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(ViewerParagraphSection value) paragraph,
-    required TResult Function(ViewerPrimaryComponentSection value)
-        primaryComponent,
+    required TResult Function(ViewerComponentSection value) component,
+    required TResult Function(ViewerExamplesSection value) examples,
     required TResult Function(ViewerApiDocsSection value) apiDocs,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(ViewerParagraphSection value)? paragraph,
-    TResult Function(ViewerPrimaryComponentSection value)? primaryComponent,
+    TResult Function(ViewerComponentSection value)? component,
+    TResult Function(ViewerExamplesSection value)? examples,
     TResult Function(ViewerApiDocsSection value)? apiDocs,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ViewerParagraphSection value)? paragraph,
-    TResult Function(ViewerPrimaryComponentSection value)? primaryComponent,
+    TResult Function(ViewerComponentSection value)? component,
+    TResult Function(ViewerExamplesSection value)? examples,
     TResult Function(ViewerApiDocsSection value)? apiDocs,
     required TResult orElse(),
   }) =>
@@ -1768,14 +1769,14 @@ class _$ViewerParagraphSectionCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ViewerParagraphSection
-    with DiagnosticableTreeMixin
-    implements ViewerParagraphSection {
+class _$ViewerParagraphSection extends ViewerParagraphSection
+    with DiagnosticableTreeMixin {
   const _$ViewerParagraphSection(
       {required this.id,
       required this.title,
       this.description,
-      this.contents = const []});
+      this.contents = const []})
+      : super._();
 
   @override
   final String id;
@@ -1835,15 +1836,12 @@ class _$ViewerParagraphSection
     required TResult Function(String id, String title, String? description,
             List<List<ViewerCollectionItemUnion>> contents)
         paragraph,
-    required TResult Function(
-            String id,
-            String title,
-            String? description,
-            WidgetBuilder builder,
-            ViewerSourceCode sourceCode,
-            List<ViewerExampleUnion> examples,
-            List<ViewerSecondaryComponentSubSection> secondaryComponents)
-        primaryComponent,
+    required TResult Function(String id, String title, String? description,
+            WidgetBuilder builder, ViewerSourceCode sourceCode)
+        component,
+    required TResult Function(String id, String title, String? description,
+            List<ViewerExampleUnion> examples)
+        examples,
     required TResult Function(String id, String title, String? description,
             List<ClassMemberElement> items)
         apiDocs,
@@ -1857,15 +1855,12 @@ class _$ViewerParagraphSection
     TResult Function(String id, String title, String? description,
             List<List<ViewerCollectionItemUnion>> contents)?
         paragraph,
-    TResult Function(
-            String id,
-            String title,
-            String? description,
-            WidgetBuilder builder,
-            ViewerSourceCode sourceCode,
-            List<ViewerExampleUnion> examples,
-            List<ViewerSecondaryComponentSubSection> secondaryComponents)?
-        primaryComponent,
+    TResult Function(String id, String title, String? description,
+            WidgetBuilder builder, ViewerSourceCode sourceCode)?
+        component,
+    TResult Function(String id, String title, String? description,
+            List<ViewerExampleUnion> examples)?
+        examples,
     TResult Function(String id, String title, String? description,
             List<ClassMemberElement> items)?
         apiDocs,
@@ -1879,15 +1874,12 @@ class _$ViewerParagraphSection
     TResult Function(String id, String title, String? description,
             List<List<ViewerCollectionItemUnion>> contents)?
         paragraph,
-    TResult Function(
-            String id,
-            String title,
-            String? description,
-            WidgetBuilder builder,
-            ViewerSourceCode sourceCode,
-            List<ViewerExampleUnion> examples,
-            List<ViewerSecondaryComponentSubSection> secondaryComponents)?
-        primaryComponent,
+    TResult Function(String id, String title, String? description,
+            WidgetBuilder builder, ViewerSourceCode sourceCode)?
+        component,
+    TResult Function(String id, String title, String? description,
+            List<ViewerExampleUnion> examples)?
+        examples,
     TResult Function(String id, String title, String? description,
             List<ClassMemberElement> items)?
         apiDocs,
@@ -1903,8 +1895,8 @@ class _$ViewerParagraphSection
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(ViewerParagraphSection value) paragraph,
-    required TResult Function(ViewerPrimaryComponentSection value)
-        primaryComponent,
+    required TResult Function(ViewerComponentSection value) component,
+    required TResult Function(ViewerExamplesSection value) examples,
     required TResult Function(ViewerApiDocsSection value) apiDocs,
   }) {
     return paragraph(this);
@@ -1914,7 +1906,8 @@ class _$ViewerParagraphSection
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(ViewerParagraphSection value)? paragraph,
-    TResult Function(ViewerPrimaryComponentSection value)? primaryComponent,
+    TResult Function(ViewerComponentSection value)? component,
+    TResult Function(ViewerExamplesSection value)? examples,
     TResult Function(ViewerApiDocsSection value)? apiDocs,
   }) {
     return paragraph?.call(this);
@@ -1924,7 +1917,8 @@ class _$ViewerParagraphSection
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ViewerParagraphSection value)? paragraph,
-    TResult Function(ViewerPrimaryComponentSection value)? primaryComponent,
+    TResult Function(ViewerComponentSection value)? component,
+    TResult Function(ViewerExamplesSection value)? examples,
     TResult Function(ViewerApiDocsSection value)? apiDocs,
     required TResult orElse(),
   }) {
@@ -1935,13 +1929,14 @@ class _$ViewerParagraphSection
   }
 }
 
-abstract class ViewerParagraphSection implements ViewerSectionUnion {
+abstract class ViewerParagraphSection extends ViewerSectionUnion {
   const factory ViewerParagraphSection(
           {required String id,
           required String title,
           String? description,
           List<List<ViewerCollectionItemUnion>> contents}) =
       _$ViewerParagraphSection;
+  const ViewerParagraphSection._() : super._();
 
   @override
   String get id;
@@ -1957,37 +1952,32 @@ abstract class ViewerParagraphSection implements ViewerSectionUnion {
 }
 
 /// @nodoc
-abstract class $ViewerPrimaryComponentSectionCopyWith<$Res>
+abstract class $ViewerComponentSectionCopyWith<$Res>
     implements $ViewerSectionUnionCopyWith<$Res> {
-  factory $ViewerPrimaryComponentSectionCopyWith(
-          ViewerPrimaryComponentSection value,
-          $Res Function(ViewerPrimaryComponentSection) then) =
-      _$ViewerPrimaryComponentSectionCopyWithImpl<$Res>;
+  factory $ViewerComponentSectionCopyWith(ViewerComponentSection value,
+          $Res Function(ViewerComponentSection) then) =
+      _$ViewerComponentSectionCopyWithImpl<$Res>;
   @override
   $Res call(
       {String id,
       String title,
       String? description,
       WidgetBuilder builder,
-      ViewerSourceCode sourceCode,
-      List<ViewerExampleUnion> examples,
-      List<ViewerSecondaryComponentSubSection> secondaryComponents});
+      ViewerSourceCode sourceCode});
 
   $ViewerSourceCodeCopyWith<$Res> get sourceCode;
 }
 
 /// @nodoc
-class _$ViewerPrimaryComponentSectionCopyWithImpl<$Res>
+class _$ViewerComponentSectionCopyWithImpl<$Res>
     extends _$ViewerSectionUnionCopyWithImpl<$Res>
-    implements $ViewerPrimaryComponentSectionCopyWith<$Res> {
-  _$ViewerPrimaryComponentSectionCopyWithImpl(
-      ViewerPrimaryComponentSection _value,
-      $Res Function(ViewerPrimaryComponentSection) _then)
-      : super(_value, (v) => _then(v as ViewerPrimaryComponentSection));
+    implements $ViewerComponentSectionCopyWith<$Res> {
+  _$ViewerComponentSectionCopyWithImpl(ViewerComponentSection _value,
+      $Res Function(ViewerComponentSection) _then)
+      : super(_value, (v) => _then(v as ViewerComponentSection));
 
   @override
-  ViewerPrimaryComponentSection get _value =>
-      super._value as ViewerPrimaryComponentSection;
+  ViewerComponentSection get _value => super._value as ViewerComponentSection;
 
   @override
   $Res call({
@@ -1996,10 +1986,8 @@ class _$ViewerPrimaryComponentSectionCopyWithImpl<$Res>
     Object? description = freezed,
     Object? builder = freezed,
     Object? sourceCode = freezed,
-    Object? examples = freezed,
-    Object? secondaryComponents = freezed,
   }) {
-    return _then(ViewerPrimaryComponentSection(
+    return _then(ViewerComponentSection(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -2020,14 +2008,6 @@ class _$ViewerPrimaryComponentSectionCopyWithImpl<$Res>
           ? _value.sourceCode
           : sourceCode // ignore: cast_nullable_to_non_nullable
               as ViewerSourceCode,
-      examples: examples == freezed
-          ? _value.examples
-          : examples // ignore: cast_nullable_to_non_nullable
-              as List<ViewerExampleUnion>,
-      secondaryComponents: secondaryComponents == freezed
-          ? _value.secondaryComponents
-          : secondaryComponents // ignore: cast_nullable_to_non_nullable
-              as List<ViewerSecondaryComponentSubSection>,
     ));
   }
 
@@ -2041,17 +2021,15 @@ class _$ViewerPrimaryComponentSectionCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ViewerPrimaryComponentSection
-    with DiagnosticableTreeMixin
-    implements ViewerPrimaryComponentSection {
-  const _$ViewerPrimaryComponentSection(
+class _$ViewerComponentSection extends ViewerComponentSection
+    with DiagnosticableTreeMixin {
+  const _$ViewerComponentSection(
       {required this.id,
       required this.title,
       this.description,
       required this.builder,
-      required this.sourceCode,
-      this.examples = const [],
-      this.secondaryComponents = const []});
+      required this.sourceCode})
+      : super._();
 
   @override
   final String id;
@@ -2063,47 +2041,36 @@ class _$ViewerPrimaryComponentSection
   final WidgetBuilder builder;
   @override
   final ViewerSourceCode sourceCode;
-  @JsonKey()
-  @override
-  final List<ViewerExampleUnion> examples;
-  @JsonKey()
-  @override
-  final List<ViewerSecondaryComponentSubSection> secondaryComponents;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ViewerSectionUnion.primaryComponent(id: $id, title: $title, description: $description, builder: $builder, sourceCode: $sourceCode, examples: $examples, secondaryComponents: $secondaryComponents)';
+    return 'ViewerSectionUnion.component(id: $id, title: $title, description: $description, builder: $builder, sourceCode: $sourceCode)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'ViewerSectionUnion.primaryComponent'))
+      ..add(DiagnosticsProperty('type', 'ViewerSectionUnion.component'))
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('title', title))
       ..add(DiagnosticsProperty('description', description))
       ..add(DiagnosticsProperty('builder', builder))
-      ..add(DiagnosticsProperty('sourceCode', sourceCode))
-      ..add(DiagnosticsProperty('examples', examples))
-      ..add(DiagnosticsProperty('secondaryComponents', secondaryComponents));
+      ..add(DiagnosticsProperty('sourceCode', sourceCode));
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is ViewerPrimaryComponentSection &&
+            other is ViewerComponentSection &&
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.title, title) &&
             const DeepCollectionEquality()
                 .equals(other.description, description) &&
             (identical(other.builder, builder) || other.builder == builder) &&
             const DeepCollectionEquality()
-                .equals(other.sourceCode, sourceCode) &&
-            const DeepCollectionEquality().equals(other.examples, examples) &&
-            const DeepCollectionEquality()
-                .equals(other.secondaryComponents, secondaryComponents));
+                .equals(other.sourceCode, sourceCode));
   }
 
   @override
@@ -2113,15 +2080,13 @@ class _$ViewerPrimaryComponentSection
       const DeepCollectionEquality().hash(title),
       const DeepCollectionEquality().hash(description),
       builder,
-      const DeepCollectionEquality().hash(sourceCode),
-      const DeepCollectionEquality().hash(examples),
-      const DeepCollectionEquality().hash(secondaryComponents));
+      const DeepCollectionEquality().hash(sourceCode));
 
   @JsonKey(ignore: true)
   @override
-  $ViewerPrimaryComponentSectionCopyWith<ViewerPrimaryComponentSection>
-      get copyWith => _$ViewerPrimaryComponentSectionCopyWithImpl<
-          ViewerPrimaryComponentSection>(this, _$identity);
+  $ViewerComponentSectionCopyWith<ViewerComponentSection> get copyWith =>
+      _$ViewerComponentSectionCopyWithImpl<ViewerComponentSection>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -2129,21 +2094,17 @@ class _$ViewerPrimaryComponentSection
     required TResult Function(String id, String title, String? description,
             List<List<ViewerCollectionItemUnion>> contents)
         paragraph,
-    required TResult Function(
-            String id,
-            String title,
-            String? description,
-            WidgetBuilder builder,
-            ViewerSourceCode sourceCode,
-            List<ViewerExampleUnion> examples,
-            List<ViewerSecondaryComponentSubSection> secondaryComponents)
-        primaryComponent,
+    required TResult Function(String id, String title, String? description,
+            WidgetBuilder builder, ViewerSourceCode sourceCode)
+        component,
+    required TResult Function(String id, String title, String? description,
+            List<ViewerExampleUnion> examples)
+        examples,
     required TResult Function(String id, String title, String? description,
             List<ClassMemberElement> items)
         apiDocs,
   }) {
-    return primaryComponent(id, title, description, builder, sourceCode,
-        examples, secondaryComponents);
+    return component(id, title, description, builder, sourceCode);
   }
 
   @override
@@ -2152,21 +2113,17 @@ class _$ViewerPrimaryComponentSection
     TResult Function(String id, String title, String? description,
             List<List<ViewerCollectionItemUnion>> contents)?
         paragraph,
-    TResult Function(
-            String id,
-            String title,
-            String? description,
-            WidgetBuilder builder,
-            ViewerSourceCode sourceCode,
-            List<ViewerExampleUnion> examples,
-            List<ViewerSecondaryComponentSubSection> secondaryComponents)?
-        primaryComponent,
+    TResult Function(String id, String title, String? description,
+            WidgetBuilder builder, ViewerSourceCode sourceCode)?
+        component,
+    TResult Function(String id, String title, String? description,
+            List<ViewerExampleUnion> examples)?
+        examples,
     TResult Function(String id, String title, String? description,
             List<ClassMemberElement> items)?
         apiDocs,
   }) {
-    return primaryComponent?.call(id, title, description, builder, sourceCode,
-        examples, secondaryComponents);
+    return component?.call(id, title, description, builder, sourceCode);
   }
 
   @override
@@ -2175,23 +2132,19 @@ class _$ViewerPrimaryComponentSection
     TResult Function(String id, String title, String? description,
             List<List<ViewerCollectionItemUnion>> contents)?
         paragraph,
-    TResult Function(
-            String id,
-            String title,
-            String? description,
-            WidgetBuilder builder,
-            ViewerSourceCode sourceCode,
-            List<ViewerExampleUnion> examples,
-            List<ViewerSecondaryComponentSubSection> secondaryComponents)?
-        primaryComponent,
+    TResult Function(String id, String title, String? description,
+            WidgetBuilder builder, ViewerSourceCode sourceCode)?
+        component,
+    TResult Function(String id, String title, String? description,
+            List<ViewerExampleUnion> examples)?
+        examples,
     TResult Function(String id, String title, String? description,
             List<ClassMemberElement> items)?
         apiDocs,
     required TResult orElse(),
   }) {
-    if (primaryComponent != null) {
-      return primaryComponent(id, title, description, builder, sourceCode,
-          examples, secondaryComponents);
+    if (component != null) {
+      return component(id, title, description, builder, sourceCode);
     }
     return orElse();
   }
@@ -2200,48 +2153,48 @@ class _$ViewerPrimaryComponentSection
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(ViewerParagraphSection value) paragraph,
-    required TResult Function(ViewerPrimaryComponentSection value)
-        primaryComponent,
+    required TResult Function(ViewerComponentSection value) component,
+    required TResult Function(ViewerExamplesSection value) examples,
     required TResult Function(ViewerApiDocsSection value) apiDocs,
   }) {
-    return primaryComponent(this);
+    return component(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(ViewerParagraphSection value)? paragraph,
-    TResult Function(ViewerPrimaryComponentSection value)? primaryComponent,
+    TResult Function(ViewerComponentSection value)? component,
+    TResult Function(ViewerExamplesSection value)? examples,
     TResult Function(ViewerApiDocsSection value)? apiDocs,
   }) {
-    return primaryComponent?.call(this);
+    return component?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ViewerParagraphSection value)? paragraph,
-    TResult Function(ViewerPrimaryComponentSection value)? primaryComponent,
+    TResult Function(ViewerComponentSection value)? component,
+    TResult Function(ViewerExamplesSection value)? examples,
     TResult Function(ViewerApiDocsSection value)? apiDocs,
     required TResult orElse(),
   }) {
-    if (primaryComponent != null) {
-      return primaryComponent(this);
+    if (component != null) {
+      return component(this);
     }
     return orElse();
   }
 }
 
-abstract class ViewerPrimaryComponentSection implements ViewerSectionUnion {
-  const factory ViewerPrimaryComponentSection(
-          {required String id,
-          required String title,
-          String? description,
-          required WidgetBuilder builder,
-          required ViewerSourceCode sourceCode,
-          List<ViewerExampleUnion> examples,
-          List<ViewerSecondaryComponentSubSection> secondaryComponents}) =
-      _$ViewerPrimaryComponentSection;
+abstract class ViewerComponentSection extends ViewerSectionUnion {
+  const factory ViewerComponentSection(
+      {required String id,
+      required String title,
+      String? description,
+      required WidgetBuilder builder,
+      required ViewerSourceCode sourceCode}) = _$ViewerComponentSection;
+  const ViewerComponentSection._() : super._();
 
   @override
   String get id;
@@ -2251,12 +2204,246 @@ abstract class ViewerPrimaryComponentSection implements ViewerSectionUnion {
   String? get description;
   WidgetBuilder get builder;
   ViewerSourceCode get sourceCode;
-  List<ViewerExampleUnion> get examples;
-  List<ViewerSecondaryComponentSubSection> get secondaryComponents;
   @override
   @JsonKey(ignore: true)
-  $ViewerPrimaryComponentSectionCopyWith<ViewerPrimaryComponentSection>
-      get copyWith => throw _privateConstructorUsedError;
+  $ViewerComponentSectionCopyWith<ViewerComponentSection> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ViewerExamplesSectionCopyWith<$Res>
+    implements $ViewerSectionUnionCopyWith<$Res> {
+  factory $ViewerExamplesSectionCopyWith(ViewerExamplesSection value,
+          $Res Function(ViewerExamplesSection) then) =
+      _$ViewerExamplesSectionCopyWithImpl<$Res>;
+  @override
+  $Res call(
+      {String id,
+      String title,
+      String? description,
+      List<ViewerExampleUnion> examples});
+}
+
+/// @nodoc
+class _$ViewerExamplesSectionCopyWithImpl<$Res>
+    extends _$ViewerSectionUnionCopyWithImpl<$Res>
+    implements $ViewerExamplesSectionCopyWith<$Res> {
+  _$ViewerExamplesSectionCopyWithImpl(
+      ViewerExamplesSection _value, $Res Function(ViewerExamplesSection) _then)
+      : super(_value, (v) => _then(v as ViewerExamplesSection));
+
+  @override
+  ViewerExamplesSection get _value => super._value as ViewerExamplesSection;
+
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? title = freezed,
+    Object? description = freezed,
+    Object? examples = freezed,
+  }) {
+    return _then(ViewerExamplesSection(
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      title: title == freezed
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      description: description == freezed
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      examples: examples == freezed
+          ? _value.examples
+          : examples // ignore: cast_nullable_to_non_nullable
+              as List<ViewerExampleUnion>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ViewerExamplesSection extends ViewerExamplesSection
+    with DiagnosticableTreeMixin {
+  const _$ViewerExamplesSection(
+      {required this.id,
+      required this.title,
+      this.description,
+      this.examples = const []})
+      : super._();
+
+  @override
+  final String id;
+  @override
+  final String title;
+  @override
+  final String? description;
+  @JsonKey()
+  @override
+  final List<ViewerExampleUnion> examples;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'ViewerSectionUnion.examples(id: $id, title: $title, description: $description, examples: $examples)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'ViewerSectionUnion.examples'))
+      ..add(DiagnosticsProperty('id', id))
+      ..add(DiagnosticsProperty('title', title))
+      ..add(DiagnosticsProperty('description', description))
+      ..add(DiagnosticsProperty('examples', examples));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is ViewerExamplesSection &&
+            const DeepCollectionEquality().equals(other.id, id) &&
+            const DeepCollectionEquality().equals(other.title, title) &&
+            const DeepCollectionEquality()
+                .equals(other.description, description) &&
+            const DeepCollectionEquality().equals(other.examples, examples));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(id),
+      const DeepCollectionEquality().hash(title),
+      const DeepCollectionEquality().hash(description),
+      const DeepCollectionEquality().hash(examples));
+
+  @JsonKey(ignore: true)
+  @override
+  $ViewerExamplesSectionCopyWith<ViewerExamplesSection> get copyWith =>
+      _$ViewerExamplesSectionCopyWithImpl<ViewerExamplesSection>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String id, String title, String? description,
+            List<List<ViewerCollectionItemUnion>> contents)
+        paragraph,
+    required TResult Function(String id, String title, String? description,
+            WidgetBuilder builder, ViewerSourceCode sourceCode)
+        component,
+    required TResult Function(String id, String title, String? description,
+            List<ViewerExampleUnion> examples)
+        examples,
+    required TResult Function(String id, String title, String? description,
+            List<ClassMemberElement> items)
+        apiDocs,
+  }) {
+    return examples(id, title, description, this.examples);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(String id, String title, String? description,
+            List<List<ViewerCollectionItemUnion>> contents)?
+        paragraph,
+    TResult Function(String id, String title, String? description,
+            WidgetBuilder builder, ViewerSourceCode sourceCode)?
+        component,
+    TResult Function(String id, String title, String? description,
+            List<ViewerExampleUnion> examples)?
+        examples,
+    TResult Function(String id, String title, String? description,
+            List<ClassMemberElement> items)?
+        apiDocs,
+  }) {
+    return examples?.call(id, title, description, this.examples);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String id, String title, String? description,
+            List<List<ViewerCollectionItemUnion>> contents)?
+        paragraph,
+    TResult Function(String id, String title, String? description,
+            WidgetBuilder builder, ViewerSourceCode sourceCode)?
+        component,
+    TResult Function(String id, String title, String? description,
+            List<ViewerExampleUnion> examples)?
+        examples,
+    TResult Function(String id, String title, String? description,
+            List<ClassMemberElement> items)?
+        apiDocs,
+    required TResult orElse(),
+  }) {
+    if (examples != null) {
+      return examples(id, title, description, this.examples);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(ViewerParagraphSection value) paragraph,
+    required TResult Function(ViewerComponentSection value) component,
+    required TResult Function(ViewerExamplesSection value) examples,
+    required TResult Function(ViewerApiDocsSection value) apiDocs,
+  }) {
+    return examples(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(ViewerParagraphSection value)? paragraph,
+    TResult Function(ViewerComponentSection value)? component,
+    TResult Function(ViewerExamplesSection value)? examples,
+    TResult Function(ViewerApiDocsSection value)? apiDocs,
+  }) {
+    return examples?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(ViewerParagraphSection value)? paragraph,
+    TResult Function(ViewerComponentSection value)? component,
+    TResult Function(ViewerExamplesSection value)? examples,
+    TResult Function(ViewerApiDocsSection value)? apiDocs,
+    required TResult orElse(),
+  }) {
+    if (examples != null) {
+      return examples(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ViewerExamplesSection extends ViewerSectionUnion {
+  const factory ViewerExamplesSection(
+      {required String id,
+      required String title,
+      String? description,
+      List<ViewerExampleUnion> examples}) = _$ViewerExamplesSection;
+  const ViewerExamplesSection._() : super._();
+
+  @override
+  String get id;
+  @override
+  String get title;
+  @override
+  String? get description;
+  List<ViewerExampleUnion> get examples;
+  @override
+  @JsonKey(ignore: true)
+  $ViewerExamplesSectionCopyWith<ViewerExamplesSection> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -2314,14 +2501,14 @@ class _$ViewerApiDocsSectionCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ViewerApiDocsSection
-    with DiagnosticableTreeMixin
-    implements ViewerApiDocsSection {
+class _$ViewerApiDocsSection extends ViewerApiDocsSection
+    with DiagnosticableTreeMixin {
   const _$ViewerApiDocsSection(
       {required this.id,
       required this.title,
       this.description,
-      required this.items});
+      required this.items})
+      : super._();
 
   @override
   final String id;
@@ -2380,15 +2567,12 @@ class _$ViewerApiDocsSection
     required TResult Function(String id, String title, String? description,
             List<List<ViewerCollectionItemUnion>> contents)
         paragraph,
-    required TResult Function(
-            String id,
-            String title,
-            String? description,
-            WidgetBuilder builder,
-            ViewerSourceCode sourceCode,
-            List<ViewerExampleUnion> examples,
-            List<ViewerSecondaryComponentSubSection> secondaryComponents)
-        primaryComponent,
+    required TResult Function(String id, String title, String? description,
+            WidgetBuilder builder, ViewerSourceCode sourceCode)
+        component,
+    required TResult Function(String id, String title, String? description,
+            List<ViewerExampleUnion> examples)
+        examples,
     required TResult Function(String id, String title, String? description,
             List<ClassMemberElement> items)
         apiDocs,
@@ -2402,15 +2586,12 @@ class _$ViewerApiDocsSection
     TResult Function(String id, String title, String? description,
             List<List<ViewerCollectionItemUnion>> contents)?
         paragraph,
-    TResult Function(
-            String id,
-            String title,
-            String? description,
-            WidgetBuilder builder,
-            ViewerSourceCode sourceCode,
-            List<ViewerExampleUnion> examples,
-            List<ViewerSecondaryComponentSubSection> secondaryComponents)?
-        primaryComponent,
+    TResult Function(String id, String title, String? description,
+            WidgetBuilder builder, ViewerSourceCode sourceCode)?
+        component,
+    TResult Function(String id, String title, String? description,
+            List<ViewerExampleUnion> examples)?
+        examples,
     TResult Function(String id, String title, String? description,
             List<ClassMemberElement> items)?
         apiDocs,
@@ -2424,15 +2605,12 @@ class _$ViewerApiDocsSection
     TResult Function(String id, String title, String? description,
             List<List<ViewerCollectionItemUnion>> contents)?
         paragraph,
-    TResult Function(
-            String id,
-            String title,
-            String? description,
-            WidgetBuilder builder,
-            ViewerSourceCode sourceCode,
-            List<ViewerExampleUnion> examples,
-            List<ViewerSecondaryComponentSubSection> secondaryComponents)?
-        primaryComponent,
+    TResult Function(String id, String title, String? description,
+            WidgetBuilder builder, ViewerSourceCode sourceCode)?
+        component,
+    TResult Function(String id, String title, String? description,
+            List<ViewerExampleUnion> examples)?
+        examples,
     TResult Function(String id, String title, String? description,
             List<ClassMemberElement> items)?
         apiDocs,
@@ -2448,8 +2626,8 @@ class _$ViewerApiDocsSection
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(ViewerParagraphSection value) paragraph,
-    required TResult Function(ViewerPrimaryComponentSection value)
-        primaryComponent,
+    required TResult Function(ViewerComponentSection value) component,
+    required TResult Function(ViewerExamplesSection value) examples,
     required TResult Function(ViewerApiDocsSection value) apiDocs,
   }) {
     return apiDocs(this);
@@ -2459,7 +2637,8 @@ class _$ViewerApiDocsSection
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(ViewerParagraphSection value)? paragraph,
-    TResult Function(ViewerPrimaryComponentSection value)? primaryComponent,
+    TResult Function(ViewerComponentSection value)? component,
+    TResult Function(ViewerExamplesSection value)? examples,
     TResult Function(ViewerApiDocsSection value)? apiDocs,
   }) {
     return apiDocs?.call(this);
@@ -2469,7 +2648,8 @@ class _$ViewerApiDocsSection
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ViewerParagraphSection value)? paragraph,
-    TResult Function(ViewerPrimaryComponentSection value)? primaryComponent,
+    TResult Function(ViewerComponentSection value)? component,
+    TResult Function(ViewerExamplesSection value)? examples,
     TResult Function(ViewerApiDocsSection value)? apiDocs,
     required TResult orElse(),
   }) {
@@ -2480,12 +2660,13 @@ class _$ViewerApiDocsSection
   }
 }
 
-abstract class ViewerApiDocsSection implements ViewerSectionUnion {
+abstract class ViewerApiDocsSection extends ViewerSectionUnion {
   const factory ViewerApiDocsSection(
       {required String id,
       required String title,
       String? description,
       required List<ClassMemberElement> items}) = _$ViewerApiDocsSection;
+  const ViewerApiDocsSection._() : super._();
 
   @override
   String get id;
@@ -2498,387 +2679,6 @@ abstract class ViewerApiDocsSection implements ViewerSectionUnion {
   @JsonKey(ignore: true)
   $ViewerApiDocsSectionCopyWith<ViewerApiDocsSection> get copyWith =>
       throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-class _$ViewerSubSectionTearOff {
-  const _$ViewerSubSectionTearOff();
-
-  ViewerSecondaryComponentSubSection secondaryComponent(
-      {required String title,
-      String? description,
-      required WidgetBuilder builder,
-      required ViewerSourceCode sourceCode,
-      List<ViewerExampleUnion> examples = const []}) {
-    return ViewerSecondaryComponentSubSection(
-      title: title,
-      description: description,
-      builder: builder,
-      sourceCode: sourceCode,
-      examples: examples,
-    );
-  }
-}
-
-/// @nodoc
-const $ViewerSubSection = _$ViewerSubSectionTearOff();
-
-/// @nodoc
-mixin _$ViewerSubSection {
-  String get title => throw _privateConstructorUsedError;
-  String? get description => throw _privateConstructorUsedError;
-  WidgetBuilder get builder => throw _privateConstructorUsedError;
-  ViewerSourceCode get sourceCode => throw _privateConstructorUsedError;
-  List<ViewerExampleUnion> get examples => throw _privateConstructorUsedError;
-
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(
-            String title,
-            String? description,
-            WidgetBuilder builder,
-            ViewerSourceCode sourceCode,
-            List<ViewerExampleUnion> examples)
-        secondaryComponent,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String title, String? description, WidgetBuilder builder,
-            ViewerSourceCode sourceCode, List<ViewerExampleUnion> examples)?
-        secondaryComponent,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String title, String? description, WidgetBuilder builder,
-            ViewerSourceCode sourceCode, List<ViewerExampleUnion> examples)?
-        secondaryComponent,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(ViewerSecondaryComponentSubSection value)
-        secondaryComponent,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(ViewerSecondaryComponentSubSection value)?
-        secondaryComponent,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(ViewerSecondaryComponentSubSection value)?
-        secondaryComponent,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $ViewerSubSectionCopyWith<ViewerSubSection> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $ViewerSubSectionCopyWith<$Res> {
-  factory $ViewerSubSectionCopyWith(
-          ViewerSubSection value, $Res Function(ViewerSubSection) then) =
-      _$ViewerSubSectionCopyWithImpl<$Res>;
-  $Res call(
-      {String title,
-      String? description,
-      WidgetBuilder builder,
-      ViewerSourceCode sourceCode,
-      List<ViewerExampleUnion> examples});
-
-  $ViewerSourceCodeCopyWith<$Res> get sourceCode;
-}
-
-/// @nodoc
-class _$ViewerSubSectionCopyWithImpl<$Res>
-    implements $ViewerSubSectionCopyWith<$Res> {
-  _$ViewerSubSectionCopyWithImpl(this._value, this._then);
-
-  final ViewerSubSection _value;
-  // ignore: unused_field
-  final $Res Function(ViewerSubSection) _then;
-
-  @override
-  $Res call({
-    Object? title = freezed,
-    Object? description = freezed,
-    Object? builder = freezed,
-    Object? sourceCode = freezed,
-    Object? examples = freezed,
-  }) {
-    return _then(_value.copyWith(
-      title: title == freezed
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String,
-      description: description == freezed
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String?,
-      builder: builder == freezed
-          ? _value.builder
-          : builder // ignore: cast_nullable_to_non_nullable
-              as WidgetBuilder,
-      sourceCode: sourceCode == freezed
-          ? _value.sourceCode
-          : sourceCode // ignore: cast_nullable_to_non_nullable
-              as ViewerSourceCode,
-      examples: examples == freezed
-          ? _value.examples
-          : examples // ignore: cast_nullable_to_non_nullable
-              as List<ViewerExampleUnion>,
-    ));
-  }
-
-  @override
-  $ViewerSourceCodeCopyWith<$Res> get sourceCode {
-    return $ViewerSourceCodeCopyWith<$Res>(_value.sourceCode, (value) {
-      return _then(_value.copyWith(sourceCode: value));
-    });
-  }
-}
-
-/// @nodoc
-abstract class $ViewerSecondaryComponentSubSectionCopyWith<$Res>
-    implements $ViewerSubSectionCopyWith<$Res> {
-  factory $ViewerSecondaryComponentSubSectionCopyWith(
-          ViewerSecondaryComponentSubSection value,
-          $Res Function(ViewerSecondaryComponentSubSection) then) =
-      _$ViewerSecondaryComponentSubSectionCopyWithImpl<$Res>;
-  @override
-  $Res call(
-      {String title,
-      String? description,
-      WidgetBuilder builder,
-      ViewerSourceCode sourceCode,
-      List<ViewerExampleUnion> examples});
-
-  @override
-  $ViewerSourceCodeCopyWith<$Res> get sourceCode;
-}
-
-/// @nodoc
-class _$ViewerSecondaryComponentSubSectionCopyWithImpl<$Res>
-    extends _$ViewerSubSectionCopyWithImpl<$Res>
-    implements $ViewerSecondaryComponentSubSectionCopyWith<$Res> {
-  _$ViewerSecondaryComponentSubSectionCopyWithImpl(
-      ViewerSecondaryComponentSubSection _value,
-      $Res Function(ViewerSecondaryComponentSubSection) _then)
-      : super(_value, (v) => _then(v as ViewerSecondaryComponentSubSection));
-
-  @override
-  ViewerSecondaryComponentSubSection get _value =>
-      super._value as ViewerSecondaryComponentSubSection;
-
-  @override
-  $Res call({
-    Object? title = freezed,
-    Object? description = freezed,
-    Object? builder = freezed,
-    Object? sourceCode = freezed,
-    Object? examples = freezed,
-  }) {
-    return _then(ViewerSecondaryComponentSubSection(
-      title: title == freezed
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String,
-      description: description == freezed
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String?,
-      builder: builder == freezed
-          ? _value.builder
-          : builder // ignore: cast_nullable_to_non_nullable
-              as WidgetBuilder,
-      sourceCode: sourceCode == freezed
-          ? _value.sourceCode
-          : sourceCode // ignore: cast_nullable_to_non_nullable
-              as ViewerSourceCode,
-      examples: examples == freezed
-          ? _value.examples
-          : examples // ignore: cast_nullable_to_non_nullable
-              as List<ViewerExampleUnion>,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$ViewerSecondaryComponentSubSection
-    with DiagnosticableTreeMixin
-    implements ViewerSecondaryComponentSubSection {
-  const _$ViewerSecondaryComponentSubSection(
-      {required this.title,
-      this.description,
-      required this.builder,
-      required this.sourceCode,
-      this.examples = const []});
-
-  @override
-  final String title;
-  @override
-  final String? description;
-  @override
-  final WidgetBuilder builder;
-  @override
-  final ViewerSourceCode sourceCode;
-  @JsonKey()
-  @override
-  final List<ViewerExampleUnion> examples;
-
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ViewerSubSection.secondaryComponent(title: $title, description: $description, builder: $builder, sourceCode: $sourceCode, examples: $examples)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'ViewerSubSection.secondaryComponent'))
-      ..add(DiagnosticsProperty('title', title))
-      ..add(DiagnosticsProperty('description', description))
-      ..add(DiagnosticsProperty('builder', builder))
-      ..add(DiagnosticsProperty('sourceCode', sourceCode))
-      ..add(DiagnosticsProperty('examples', examples));
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is ViewerSecondaryComponentSubSection &&
-            const DeepCollectionEquality().equals(other.title, title) &&
-            const DeepCollectionEquality()
-                .equals(other.description, description) &&
-            (identical(other.builder, builder) || other.builder == builder) &&
-            const DeepCollectionEquality()
-                .equals(other.sourceCode, sourceCode) &&
-            const DeepCollectionEquality().equals(other.examples, examples));
-  }
-
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(title),
-      const DeepCollectionEquality().hash(description),
-      builder,
-      const DeepCollectionEquality().hash(sourceCode),
-      const DeepCollectionEquality().hash(examples));
-
-  @JsonKey(ignore: true)
-  @override
-  $ViewerSecondaryComponentSubSectionCopyWith<
-          ViewerSecondaryComponentSubSection>
-      get copyWith => _$ViewerSecondaryComponentSubSectionCopyWithImpl<
-          ViewerSecondaryComponentSubSection>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(
-            String title,
-            String? description,
-            WidgetBuilder builder,
-            ViewerSourceCode sourceCode,
-            List<ViewerExampleUnion> examples)
-        secondaryComponent,
-  }) {
-    return secondaryComponent(
-        title, description, builder, sourceCode, examples);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String title, String? description, WidgetBuilder builder,
-            ViewerSourceCode sourceCode, List<ViewerExampleUnion> examples)?
-        secondaryComponent,
-  }) {
-    return secondaryComponent?.call(
-        title, description, builder, sourceCode, examples);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String title, String? description, WidgetBuilder builder,
-            ViewerSourceCode sourceCode, List<ViewerExampleUnion> examples)?
-        secondaryComponent,
-    required TResult orElse(),
-  }) {
-    if (secondaryComponent != null) {
-      return secondaryComponent(
-          title, description, builder, sourceCode, examples);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(ViewerSecondaryComponentSubSection value)
-        secondaryComponent,
-  }) {
-    return secondaryComponent(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(ViewerSecondaryComponentSubSection value)?
-        secondaryComponent,
-  }) {
-    return secondaryComponent?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(ViewerSecondaryComponentSubSection value)?
-        secondaryComponent,
-    required TResult orElse(),
-  }) {
-    if (secondaryComponent != null) {
-      return secondaryComponent(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class ViewerSecondaryComponentSubSection implements ViewerSubSection {
-  const factory ViewerSecondaryComponentSubSection(
-          {required String title,
-          String? description,
-          required WidgetBuilder builder,
-          required ViewerSourceCode sourceCode,
-          List<ViewerExampleUnion> examples}) =
-      _$ViewerSecondaryComponentSubSection;
-
-  @override
-  String get title;
-  @override
-  String? get description;
-  @override
-  WidgetBuilder get builder;
-  @override
-  ViewerSourceCode get sourceCode;
-  @override
-  List<ViewerExampleUnion> get examples;
-  @override
-  @JsonKey(ignore: true)
-  $ViewerSecondaryComponentSubSectionCopyWith<
-          ViewerSecondaryComponentSubSection>
-      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -2908,11 +2708,19 @@ class _$ViewerCollectionItemUnionTearOff {
   }
 
   ViewerImageCollectionItem image(
-      {required String url, String? title, String? description}) {
+      {required ViewerImageCollectionItemStyle style,
+      required String url,
+      String? title,
+      String? description,
+      double? width,
+      double? height}) {
     return ViewerImageCollectionItem(
+      style: style,
       url: url,
       title: title,
       description: description,
+      width: width,
+      height: height,
     );
   }
 
@@ -2933,7 +2741,8 @@ mixin _$ViewerCollectionItemUnion {
     required TResult Function(String? title, String? description) text,
     required TResult Function(ViewerGlyphUnion glyph, String title) glyph,
     required TResult Function(String title, String url) link,
-    required TResult Function(String url, String? title, String? description)
+    required TResult Function(ViewerImageCollectionItemStyle style, String url,
+            String? title, String? description, double? width, double? height)
         image,
     required TResult Function(Widget widget) widget,
   }) =>
@@ -2943,7 +2752,9 @@ mixin _$ViewerCollectionItemUnion {
     TResult Function(String? title, String? description)? text,
     TResult Function(ViewerGlyphUnion glyph, String title)? glyph,
     TResult Function(String title, String url)? link,
-    TResult Function(String url, String? title, String? description)? image,
+    TResult Function(ViewerImageCollectionItemStyle style, String url,
+            String? title, String? description, double? width, double? height)?
+        image,
     TResult Function(Widget widget)? widget,
   }) =>
       throw _privateConstructorUsedError;
@@ -2952,7 +2763,9 @@ mixin _$ViewerCollectionItemUnion {
     TResult Function(String? title, String? description)? text,
     TResult Function(ViewerGlyphUnion glyph, String title)? glyph,
     TResult Function(String title, String url)? link,
-    TResult Function(String url, String? title, String? description)? image,
+    TResult Function(ViewerImageCollectionItemStyle style, String url,
+            String? title, String? description, double? width, double? height)?
+        image,
     TResult Function(Widget widget)? widget,
     required TResult orElse(),
   }) =>
@@ -3044,10 +2857,9 @@ class _$ViewerTextCollectionItemCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ViewerTextCollectionItem
-    with DiagnosticableTreeMixin
-    implements ViewerTextCollectionItem {
-  const _$ViewerTextCollectionItem({this.title, this.description});
+class _$ViewerTextCollectionItem extends ViewerTextCollectionItem
+    with DiagnosticableTreeMixin {
+  const _$ViewerTextCollectionItem({this.title, this.description}) : super._();
 
   @override
   final String? title;
@@ -3096,7 +2908,8 @@ class _$ViewerTextCollectionItem
     required TResult Function(String? title, String? description) text,
     required TResult Function(ViewerGlyphUnion glyph, String title) glyph,
     required TResult Function(String title, String url) link,
-    required TResult Function(String url, String? title, String? description)
+    required TResult Function(ViewerImageCollectionItemStyle style, String url,
+            String? title, String? description, double? width, double? height)
         image,
     required TResult Function(Widget widget) widget,
   }) {
@@ -3109,7 +2922,9 @@ class _$ViewerTextCollectionItem
     TResult Function(String? title, String? description)? text,
     TResult Function(ViewerGlyphUnion glyph, String title)? glyph,
     TResult Function(String title, String url)? link,
-    TResult Function(String url, String? title, String? description)? image,
+    TResult Function(ViewerImageCollectionItemStyle style, String url,
+            String? title, String? description, double? width, double? height)?
+        image,
     TResult Function(Widget widget)? widget,
   }) {
     return text?.call(title, description);
@@ -3121,7 +2936,9 @@ class _$ViewerTextCollectionItem
     TResult Function(String? title, String? description)? text,
     TResult Function(ViewerGlyphUnion glyph, String title)? glyph,
     TResult Function(String title, String url)? link,
-    TResult Function(String url, String? title, String? description)? image,
+    TResult Function(ViewerImageCollectionItemStyle style, String url,
+            String? title, String? description, double? width, double? height)?
+        image,
     TResult Function(Widget widget)? widget,
     required TResult orElse(),
   }) {
@@ -3172,9 +2989,10 @@ class _$ViewerTextCollectionItem
   }
 }
 
-abstract class ViewerTextCollectionItem implements ViewerCollectionItemUnion {
+abstract class ViewerTextCollectionItem extends ViewerCollectionItemUnion {
   const factory ViewerTextCollectionItem({String? title, String? description}) =
       _$ViewerTextCollectionItem;
+  const ViewerTextCollectionItem._() : super._();
 
   String? get title;
   String? get description;
@@ -3232,10 +3050,10 @@ class _$ViewerGlyphCollectionItemCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ViewerGlyphCollectionItem
-    with DiagnosticableTreeMixin
-    implements ViewerGlyphCollectionItem {
-  const _$ViewerGlyphCollectionItem({required this.glyph, required this.title});
+class _$ViewerGlyphCollectionItem extends ViewerGlyphCollectionItem
+    with DiagnosticableTreeMixin {
+  const _$ViewerGlyphCollectionItem({required this.glyph, required this.title})
+      : super._();
 
   @override
   final ViewerGlyphUnion glyph;
@@ -3283,7 +3101,8 @@ class _$ViewerGlyphCollectionItem
     required TResult Function(String? title, String? description) text,
     required TResult Function(ViewerGlyphUnion glyph, String title) glyph,
     required TResult Function(String title, String url) link,
-    required TResult Function(String url, String? title, String? description)
+    required TResult Function(ViewerImageCollectionItemStyle style, String url,
+            String? title, String? description, double? width, double? height)
         image,
     required TResult Function(Widget widget) widget,
   }) {
@@ -3296,7 +3115,9 @@ class _$ViewerGlyphCollectionItem
     TResult Function(String? title, String? description)? text,
     TResult Function(ViewerGlyphUnion glyph, String title)? glyph,
     TResult Function(String title, String url)? link,
-    TResult Function(String url, String? title, String? description)? image,
+    TResult Function(ViewerImageCollectionItemStyle style, String url,
+            String? title, String? description, double? width, double? height)?
+        image,
     TResult Function(Widget widget)? widget,
   }) {
     return glyph?.call(this.glyph, title);
@@ -3308,7 +3129,9 @@ class _$ViewerGlyphCollectionItem
     TResult Function(String? title, String? description)? text,
     TResult Function(ViewerGlyphUnion glyph, String title)? glyph,
     TResult Function(String title, String url)? link,
-    TResult Function(String url, String? title, String? description)? image,
+    TResult Function(ViewerImageCollectionItemStyle style, String url,
+            String? title, String? description, double? width, double? height)?
+        image,
     TResult Function(Widget widget)? widget,
     required TResult orElse(),
   }) {
@@ -3359,10 +3182,11 @@ class _$ViewerGlyphCollectionItem
   }
 }
 
-abstract class ViewerGlyphCollectionItem implements ViewerCollectionItemUnion {
+abstract class ViewerGlyphCollectionItem extends ViewerCollectionItemUnion {
   const factory ViewerGlyphCollectionItem(
       {required ViewerGlyphUnion glyph,
       required String title}) = _$ViewerGlyphCollectionItem;
+  const ViewerGlyphCollectionItem._() : super._();
 
   ViewerGlyphUnion get glyph;
   String get title;
@@ -3411,10 +3235,10 @@ class _$ViewerLinkCollectionItemCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ViewerLinkCollectionItem
-    with DiagnosticableTreeMixin
-    implements ViewerLinkCollectionItem {
-  const _$ViewerLinkCollectionItem({required this.title, required this.url});
+class _$ViewerLinkCollectionItem extends ViewerLinkCollectionItem
+    with DiagnosticableTreeMixin {
+  const _$ViewerLinkCollectionItem({required this.title, required this.url})
+      : super._();
 
   @override
   final String title;
@@ -3462,7 +3286,8 @@ class _$ViewerLinkCollectionItem
     required TResult Function(String? title, String? description) text,
     required TResult Function(ViewerGlyphUnion glyph, String title) glyph,
     required TResult Function(String title, String url) link,
-    required TResult Function(String url, String? title, String? description)
+    required TResult Function(ViewerImageCollectionItemStyle style, String url,
+            String? title, String? description, double? width, double? height)
         image,
     required TResult Function(Widget widget) widget,
   }) {
@@ -3475,7 +3300,9 @@ class _$ViewerLinkCollectionItem
     TResult Function(String? title, String? description)? text,
     TResult Function(ViewerGlyphUnion glyph, String title)? glyph,
     TResult Function(String title, String url)? link,
-    TResult Function(String url, String? title, String? description)? image,
+    TResult Function(ViewerImageCollectionItemStyle style, String url,
+            String? title, String? description, double? width, double? height)?
+        image,
     TResult Function(Widget widget)? widget,
   }) {
     return link?.call(title, url);
@@ -3487,7 +3314,9 @@ class _$ViewerLinkCollectionItem
     TResult Function(String? title, String? description)? text,
     TResult Function(ViewerGlyphUnion glyph, String title)? glyph,
     TResult Function(String title, String url)? link,
-    TResult Function(String url, String? title, String? description)? image,
+    TResult Function(ViewerImageCollectionItemStyle style, String url,
+            String? title, String? description, double? width, double? height)?
+        image,
     TResult Function(Widget widget)? widget,
     required TResult orElse(),
   }) {
@@ -3538,10 +3367,11 @@ class _$ViewerLinkCollectionItem
   }
 }
 
-abstract class ViewerLinkCollectionItem implements ViewerCollectionItemUnion {
+abstract class ViewerLinkCollectionItem extends ViewerCollectionItemUnion {
   const factory ViewerLinkCollectionItem(
       {required String title,
       required String url}) = _$ViewerLinkCollectionItem;
+  const ViewerLinkCollectionItem._() : super._();
 
   String get title;
   String get url;
@@ -3555,7 +3385,13 @@ abstract class $ViewerImageCollectionItemCopyWith<$Res> {
   factory $ViewerImageCollectionItemCopyWith(ViewerImageCollectionItem value,
           $Res Function(ViewerImageCollectionItem) then) =
       _$ViewerImageCollectionItemCopyWithImpl<$Res>;
-  $Res call({String url, String? title, String? description});
+  $Res call(
+      {ViewerImageCollectionItemStyle style,
+      String url,
+      String? title,
+      String? description,
+      double? width,
+      double? height});
 }
 
 /// @nodoc
@@ -3572,11 +3408,18 @@ class _$ViewerImageCollectionItemCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? style = freezed,
     Object? url = freezed,
     Object? title = freezed,
     Object? description = freezed,
+    Object? width = freezed,
+    Object? height = freezed,
   }) {
     return _then(ViewerImageCollectionItem(
+      style: style == freezed
+          ? _value.style
+          : style // ignore: cast_nullable_to_non_nullable
+              as ViewerImageCollectionItemStyle,
       url: url == freezed
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
@@ -3589,28 +3432,47 @@ class _$ViewerImageCollectionItemCopyWithImpl<$Res>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
+      width: width == freezed
+          ? _value.width
+          : width // ignore: cast_nullable_to_non_nullable
+              as double?,
+      height: height == freezed
+          ? _value.height
+          : height // ignore: cast_nullable_to_non_nullable
+              as double?,
     ));
   }
 }
 
 /// @nodoc
 
-class _$ViewerImageCollectionItem
-    with DiagnosticableTreeMixin
-    implements ViewerImageCollectionItem {
+class _$ViewerImageCollectionItem extends ViewerImageCollectionItem
+    with DiagnosticableTreeMixin {
   const _$ViewerImageCollectionItem(
-      {required this.url, this.title, this.description});
+      {required this.style,
+      required this.url,
+      this.title,
+      this.description,
+      this.width,
+      this.height})
+      : super._();
 
+  @override
+  final ViewerImageCollectionItemStyle style;
   @override
   final String url;
   @override
   final String? title;
   @override
   final String? description;
+  @override
+  final double? width;
+  @override
+  final double? height;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ViewerCollectionItemUnion.image(url: $url, title: $title, description: $description)';
+    return 'ViewerCollectionItemUnion.image(style: $style, url: $url, title: $title, description: $description, width: $width, height: $height)';
   }
 
   @override
@@ -3618,9 +3480,12 @@ class _$ViewerImageCollectionItem
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'ViewerCollectionItemUnion.image'))
+      ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('url', url))
       ..add(DiagnosticsProperty('title', title))
-      ..add(DiagnosticsProperty('description', description));
+      ..add(DiagnosticsProperty('description', description))
+      ..add(DiagnosticsProperty('width', width))
+      ..add(DiagnosticsProperty('height', height));
   }
 
   @override
@@ -3628,18 +3493,24 @@ class _$ViewerImageCollectionItem
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is ViewerImageCollectionItem &&
+            const DeepCollectionEquality().equals(other.style, style) &&
             const DeepCollectionEquality().equals(other.url, url) &&
             const DeepCollectionEquality().equals(other.title, title) &&
             const DeepCollectionEquality()
-                .equals(other.description, description));
+                .equals(other.description, description) &&
+            const DeepCollectionEquality().equals(other.width, width) &&
+            const DeepCollectionEquality().equals(other.height, height));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      const DeepCollectionEquality().hash(style),
       const DeepCollectionEquality().hash(url),
       const DeepCollectionEquality().hash(title),
-      const DeepCollectionEquality().hash(description));
+      const DeepCollectionEquality().hash(description),
+      const DeepCollectionEquality().hash(width),
+      const DeepCollectionEquality().hash(height));
 
   @JsonKey(ignore: true)
   @override
@@ -3653,11 +3524,12 @@ class _$ViewerImageCollectionItem
     required TResult Function(String? title, String? description) text,
     required TResult Function(ViewerGlyphUnion glyph, String title) glyph,
     required TResult Function(String title, String url) link,
-    required TResult Function(String url, String? title, String? description)
+    required TResult Function(ViewerImageCollectionItemStyle style, String url,
+            String? title, String? description, double? width, double? height)
         image,
     required TResult Function(Widget widget) widget,
   }) {
-    return image(url, title, description);
+    return image(style, url, title, description, width, height);
   }
 
   @override
@@ -3666,10 +3538,12 @@ class _$ViewerImageCollectionItem
     TResult Function(String? title, String? description)? text,
     TResult Function(ViewerGlyphUnion glyph, String title)? glyph,
     TResult Function(String title, String url)? link,
-    TResult Function(String url, String? title, String? description)? image,
+    TResult Function(ViewerImageCollectionItemStyle style, String url,
+            String? title, String? description, double? width, double? height)?
+        image,
     TResult Function(Widget widget)? widget,
   }) {
-    return image?.call(url, title, description);
+    return image?.call(style, url, title, description, width, height);
   }
 
   @override
@@ -3678,12 +3552,14 @@ class _$ViewerImageCollectionItem
     TResult Function(String? title, String? description)? text,
     TResult Function(ViewerGlyphUnion glyph, String title)? glyph,
     TResult Function(String title, String url)? link,
-    TResult Function(String url, String? title, String? description)? image,
+    TResult Function(ViewerImageCollectionItemStyle style, String url,
+            String? title, String? description, double? width, double? height)?
+        image,
     TResult Function(Widget widget)? widget,
     required TResult orElse(),
   }) {
     if (image != null) {
-      return image(url, title, description);
+      return image(style, url, title, description, width, height);
     }
     return orElse();
   }
@@ -3729,15 +3605,22 @@ class _$ViewerImageCollectionItem
   }
 }
 
-abstract class ViewerImageCollectionItem implements ViewerCollectionItemUnion {
+abstract class ViewerImageCollectionItem extends ViewerCollectionItemUnion {
   const factory ViewerImageCollectionItem(
-      {required String url,
+      {required ViewerImageCollectionItemStyle style,
+      required String url,
       String? title,
-      String? description}) = _$ViewerImageCollectionItem;
+      String? description,
+      double? width,
+      double? height}) = _$ViewerImageCollectionItem;
+  const ViewerImageCollectionItem._() : super._();
 
+  ViewerImageCollectionItemStyle get style;
   String get url;
   String? get title;
   String? get description;
+  double? get width;
+  double? get height;
   @JsonKey(ignore: true)
   $ViewerImageCollectionItemCopyWith<ViewerImageCollectionItem> get copyWith =>
       throw _privateConstructorUsedError;
@@ -3778,10 +3661,9 @@ class _$ViewerWidgetCollectionItemCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ViewerWidgetCollectionItem
-    with DiagnosticableTreeMixin
-    implements ViewerWidgetCollectionItem {
-  const _$ViewerWidgetCollectionItem({required this.widget});
+class _$ViewerWidgetCollectionItem extends ViewerWidgetCollectionItem
+    with DiagnosticableTreeMixin {
+  const _$ViewerWidgetCollectionItem({required this.widget}) : super._();
 
   @override
   final Widget widget;
@@ -3824,7 +3706,8 @@ class _$ViewerWidgetCollectionItem
     required TResult Function(String? title, String? description) text,
     required TResult Function(ViewerGlyphUnion glyph, String title) glyph,
     required TResult Function(String title, String url) link,
-    required TResult Function(String url, String? title, String? description)
+    required TResult Function(ViewerImageCollectionItemStyle style, String url,
+            String? title, String? description, double? width, double? height)
         image,
     required TResult Function(Widget widget) widget,
   }) {
@@ -3837,7 +3720,9 @@ class _$ViewerWidgetCollectionItem
     TResult Function(String? title, String? description)? text,
     TResult Function(ViewerGlyphUnion glyph, String title)? glyph,
     TResult Function(String title, String url)? link,
-    TResult Function(String url, String? title, String? description)? image,
+    TResult Function(ViewerImageCollectionItemStyle style, String url,
+            String? title, String? description, double? width, double? height)?
+        image,
     TResult Function(Widget widget)? widget,
   }) {
     return widget?.call(this.widget);
@@ -3849,7 +3734,9 @@ class _$ViewerWidgetCollectionItem
     TResult Function(String? title, String? description)? text,
     TResult Function(ViewerGlyphUnion glyph, String title)? glyph,
     TResult Function(String title, String url)? link,
-    TResult Function(String url, String? title, String? description)? image,
+    TResult Function(ViewerImageCollectionItemStyle style, String url,
+            String? title, String? description, double? width, double? height)?
+        image,
     TResult Function(Widget widget)? widget,
     required TResult orElse(),
   }) {
@@ -3900,9 +3787,10 @@ class _$ViewerWidgetCollectionItem
   }
 }
 
-abstract class ViewerWidgetCollectionItem implements ViewerCollectionItemUnion {
+abstract class ViewerWidgetCollectionItem extends ViewerCollectionItemUnion {
   const factory ViewerWidgetCollectionItem({required Widget widget}) =
       _$ViewerWidgetCollectionItem;
+  const ViewerWidgetCollectionItem._() : super._();
 
   Widget get widget;
   @JsonKey(ignore: true)
@@ -4011,10 +3899,10 @@ class __$ViewerCatalogLinkCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ViewerCatalogLink
-    with DiagnosticableTreeMixin
-    implements _ViewerCatalogLink {
-  const _$_ViewerCatalogLink({required this.title, required this.url});
+class _$_ViewerCatalogLink extends _ViewerCatalogLink
+    with DiagnosticableTreeMixin {
+  const _$_ViewerCatalogLink({required this.title, required this.url})
+      : super._();
 
   @override
   final String title;
@@ -4056,9 +3944,10 @@ class _$_ViewerCatalogLink
       __$ViewerCatalogLinkCopyWithImpl<_ViewerCatalogLink>(this, _$identity);
 }
 
-abstract class _ViewerCatalogLink implements ViewerCatalogLink {
+abstract class _ViewerCatalogLink extends ViewerCatalogLink {
   const factory _ViewerCatalogLink(
       {required String title, required String url}) = _$_ViewerCatalogLink;
+  const _ViewerCatalogLink._() : super._();
 
   @override
   String get title;

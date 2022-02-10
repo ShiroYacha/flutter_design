@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_design_viewer/src/viewer_app.dart';
 import 'package:flutter_design_viewer/src/widgets/bars/top_app_bar.dart';
 import 'package:flutter_design_viewer/src/widgets/drawers/explorer_drawer.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:ionicons/ionicons.dart';
 
@@ -30,8 +29,6 @@ class RootScaffold extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final viewerSettings = ref.watch(viewerSettingsProvider);
-
-    final scrollController = useScrollController();
     return LayoutBuilder(
       builder: (context, constraints) {
         final isDesktop =
@@ -70,12 +67,7 @@ class RootScaffold extends HookConsumerWidget {
                     children: [
                       const TopAppBar(),
                       Expanded(
-                        child: SingleChildScrollView(
-                          controller: scrollController,
-                          child: Paddings.all40(
-                            child: child,
-                          ),
-                        ),
+                        child: child,
                       ),
                     ],
                   ),

@@ -24,6 +24,7 @@ class TopAppBar extends HookConsumerWidget {
       ),
       child: Row(
         children: [
+          const ConfigButton(),
           const Expanded(child: SizedBox.shrink()),
           const SearchButton(),
           Spacers.h20,

@@ -52,3 +52,32 @@ class KeyContainer extends StatelessWidget {
     );
   }
 }
+
+class TitleWidgetPair extends StatelessWidget {
+  final String title;
+  final String? description;
+  final Widget widget;
+  const TitleWidgetPair({
+    required this.title,
+    this.description,
+    required this.widget,
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(title, style: theme.textTheme.subtitle1),
+        Spacers.v10,
+        if (description != null) ...[
+          Text(description!, style: theme.textTheme.caption),
+          Spacers.v10,
+        ],
+        widget,
+      ],
+    );
+  }
+}

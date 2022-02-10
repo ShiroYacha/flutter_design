@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:recase/recase.dart';
 
+import 'searches.dart';
+
 part 'pages.freezed.dart';
 
 @freezed
@@ -18,7 +20,7 @@ class ViewerPageGroup with _$ViewerPageGroup {
 }
 
 @freezed
-class ViewerPageUnion with _$ViewerPageUnion {
+class ViewerPageUnion with _$ViewerPageUnion implements Searchable {
   const ViewerPageUnion._();
   const factory ViewerPageUnion.group({
     required String id,
@@ -37,7 +39,41 @@ class ViewerPageUnion with _$ViewerPageUnion {
   }) = ViewerDocumentPage;
 
   List<String> get segments => [...namespace, id];
+
+  @override
   String get uri => '/${segments.join('/')}';
+
+  @override
+  List<SearchableElement> get searchableElements => [
+        SearchableElement(
+          type: SearchableType.page,
+          hitType: SearchableHitType.title,
+          searchable: this,
+          text: title,
+        ),
+        // TODO: impl. search
+        if (this is ViewerDocumentPage) ...[
+          SearchableElement(
+            type: SearchableType.page,
+            hitType: SearchableHitType.tags,
+            searchable: this,
+            text: (this as ViewerDocumentPage).tags.join(','),
+          ),
+          ...(this as ViewerDocumentPage)
+              .sections
+              .fold<List<SearchableElement>>(
+            [],
+            (pe, e) => [
+              ...pe,
+              ...e.searchableElements.map(
+                (e) => e.copyWith(
+                  searchable: this,
+                ),
+              )
+            ],
+          ),
+        ],
+      ];
 }
 
 @Freezed(unionKey: 'type')
@@ -64,67 +100,89 @@ class ViewerSourceCode with _$ViewerSourceCode {
 }
 
 @freezed
-class ViewerSectionUnion with _$ViewerSectionUnion {
+class ViewerSectionUnion with _$ViewerSectionUnion implements Searchable {
+  const ViewerSectionUnion._();
+
   const factory ViewerSectionUnion.paragraph({
     required String id,
     required String title,
     String? description,
     @Default([]) List<List<ViewerCollectionItemUnion>> contents,
   }) = ViewerParagraphSection;
-  const factory ViewerSectionUnion.primaryComponent({
+
+  const factory ViewerSectionUnion.component({
     required String id,
     required String title,
     String? description,
     required WidgetBuilder builder,
     required ViewerSourceCode sourceCode,
+  }) = ViewerComponentSection;
+
+  const factory ViewerSectionUnion.examples({
+    required String id,
+    required String title,
+    String? description,
     @Default([]) List<ViewerExampleUnion> examples,
-    @Default([]) List<ViewerSecondaryComponentSubSection> secondaryComponents,
-  }) = ViewerPrimaryComponentSection;
+  }) = ViewerExamplesSection;
+
   const factory ViewerSectionUnion.apiDocs({
     required String id,
     required String title,
     String? description,
     required List<ClassMemberElement> items,
   }) = ViewerApiDocsSection;
+
+  @override
+  List<SearchableElement> get searchableElements => [];
+
+  @override
+  String get uri => throw UnimplementedError();
+}
+
+enum ViewerImageCollectionItemStyle {
+  imageOnLeft,
 }
 
 @freezed
-class ViewerSubSection with _$ViewerSubSection {
-  const factory ViewerSubSection.secondaryComponent({
-    required String title,
-    String? description,
-    required WidgetBuilder builder,
-    required ViewerSourceCode sourceCode,
-    @Default([]) List<ViewerExampleUnion> examples,
-  }) = ViewerSecondaryComponentSubSection;
-}
-
-@freezed
-class ViewerCollectionItemUnion with _$ViewerCollectionItemUnion {
+class ViewerCollectionItemUnion
+    with _$ViewerCollectionItemUnion
+    implements Searchable {
+  const ViewerCollectionItemUnion._();
   const factory ViewerCollectionItemUnion.text({
     String? title,
     String? description,
   }) = ViewerTextCollectionItem;
+
   const factory ViewerCollectionItemUnion.glyph({
     required ViewerGlyphUnion glyph,
     required String title,
   }) = ViewerGlyphCollectionItem;
+
   const factory ViewerCollectionItemUnion.link({
     required String title,
     required String url,
   }) = ViewerLinkCollectionItem;
+
   const factory ViewerCollectionItemUnion.image({
+    required ViewerImageCollectionItemStyle style,
     required String url,
     String? title,
     String? description,
+    double? width,
+    double? height,
   }) = ViewerImageCollectionItem;
   const factory ViewerCollectionItemUnion.widget({
     required Widget widget,
   }) = ViewerWidgetCollectionItem;
+
+  @override
+  List<SearchableElement> get searchableElements => [];
 }
 
 @freezed
 class ViewerCatalogLink with _$ViewerCatalogLink {
+  const ViewerCatalogLink._();
+
   const factory ViewerCatalogLink({
     required String title,
     required String url,
@@ -154,20 +212,25 @@ class ViewerDataGeneratorFactory with _$ViewerDataGeneratorFactory {
 }
 
 @freezed
-class ViewerExampleUnion<T> with _$ViewerExampleUnion<T> {
+class ViewerExampleUnion<T> with _$ViewerExampleUnion<T> implements Searchable {
   const ViewerExampleUnion._();
+
   const factory ViewerExampleUnion.static({
     required String name,
     String? description,
     required WidgetBuilder builder,
     required ViewerSourceCode sourceCode,
   }) = ViewerStaticExample<T>;
+
   const factory ViewerExampleUnion.dynamic({
     required String name,
     String? description,
     required DynamicWidgetBuilder<T> builder,
     required ViewerSourceCode sourceCode,
   }) = ViewerDynamicExample<T>;
+
+  @override
+  List<SearchableElement> get searchableElements => [];
 }
 
 abstract class ViewerDataGenerator<T> {

@@ -5,11 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_design/flutter_design.dart';
 import 'package:flutter_design_viewer/src/measures.dart';
-import 'package:flutter_design_viewer/src/models/searches.dart';
+import 'package:flutter_design_viewer/src/services/search_service.dart';
 import 'package:flutter_design_viewer/src/widgets/items/buttons.dart';
 import 'package:flutter_design_viewer/src/widgets/items/containers.dart';
 import 'package:flutter_design_viewer/src/widgets/items/images.dart';
 import 'package:flutter_design_viewer/src/widgets/scaffolds/root_scaffold.dart';
+import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
@@ -42,45 +43,18 @@ class SearchDialog extends HookConsumerWidget {
         query.value = textEditingController.text;
       });
     }, []);
-
     // Handle search
-    final items = [
-      const SearchResultItem(
-        context: SearchResultContext.recent,
-        type: SearchResultItemType.section,
-        pageType: SearchResultItemPageType.document,
-        prefix: null,
-        score: 99,
-        title: 'Example',
-        subtitle: 'Button',
-        labelHighlightStart: 0,
-        labelHighlightEnd: 5,
-        uri: '/components/button',
-      ),
-      const SearchResultItem(
-        context: SearchResultContext.recent,
-        type: SearchResultItemType.recent,
-        pageType: SearchResultItemPageType.document,
-        prefix: null,
-        score: 99,
-        title: 'Intro',
-        labelHighlightStart: 0,
-        labelHighlightEnd: 5,
-        uri: '/get_started/intro',
-      ),
-      const SearchResultItem(
-        context: SearchResultContext.favorite,
-        type: SearchResultItemType.favorite,
-        pageType: SearchResultItemPageType.document,
-        prefix: null,
-        score: 99,
-        title: 'Intro',
-        labelHighlightStart: 0,
-        labelHighlightEnd: 5,
-        uri: '/get_started/intro',
-      ),
-    ]..sortByCompare<SearchResultContext>(
-        (e) => e.context, (a, b) => a.index.compareTo(b.index));
+    final searchResults = ref.watch(searchProvider(query.value));
+    final items = searchResults
+      ..sortByCompare<SearchResultItem>((e) => e, (a, b) {
+        // Context is always fixed
+        final context = a.context.index.compareTo(b.context.index);
+        if (context != 0) return context;
+        // Sort by score
+        return b.score.compareTo(a.score);
+      })
+      // Take top 10 results
+      ..take(10);
     final contextIndexMap = {
       for (final context in SearchResultContext.values)
         context: items.indexWhere((i) => i.context == context)
@@ -273,7 +247,14 @@ class SearchResultEntry extends HookConsumerWidget {
             children: [
               ThemableGlyph(
                 glyph: ViewerGlyphUnion.icon(
-                  icon: item.typeIcon,
+                  icon: {
+                        SearchResultItemType.page: Ionicons.document_outline,
+                        SearchResultItemType.section: FeatherIcons.hash,
+                        SearchResultItemType.content: Ionicons.menu_outline,
+                        SearchResultItemType.recent: Ionicons.time_outline,
+                        SearchResultItemType.favorite: Ionicons.star_outline,
+                      }[item.type] ??
+                      FeatherIcons.box,
                   size: 24,
                   color: foreground,
                 ),

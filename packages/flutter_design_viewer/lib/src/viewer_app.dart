@@ -13,7 +13,7 @@ import 'package:vrouter/vrouter.dart';
 import 'commands.dart';
 import 'models/settings.dart';
 import 'widgets/items/brandings.dart';
-import 'widgets/screens/home_screen.dart';
+import 'widgets/scaffolds/root_scaffold.dart';
 import 'widgets/screens/page_screen.dart';
 
 final pageGroupsProvider = Provider<List<ViewerPageGroup>>((ref) => []);
@@ -24,8 +24,11 @@ final viewerStateProvider = StateProvider<ViewerState>(
   (ref) => ViewerState(
     viewMode: ViewMode.themes,
     targetDeviceId: Devices.ios.iPhone12.identifier.toString(),
-    targetLocaleCode: '',
+    targetDeviceIds: [],
+    targetLocaleId: '',
+    targetLocaleIds: [],
     targetThemeId: '',
+    targetThemeIds: [],
   ),
 );
 
@@ -68,10 +71,16 @@ class DesignSystemViewerRouter extends HookConsumerWidget {
         final cache = await ViewerState.getFromStorage();
         viewerStateNotifier.state = cache ??
             ViewerState(
-              viewMode: ViewMode.themes,
+              viewMode: ViewMode.canvas,
               targetDeviceId: Devices.ios.iPhone12.identifier.toString(),
-              targetLocaleCode: viewerSettings.enabledLocales.keys.first,
+              targetDeviceIds: [
+                Devices.ios.iPhone12.identifier.toString(),
+                Devices.android.samsungGalaxyS20.identifier.toString(),
+              ],
+              targetLocaleId: viewerSettings.enabledLocales.keys.first,
+              targetLocaleIds: viewerSettings.enabledLocales.keys.toList(),
               targetThemeId: viewerSettings.enabledThemes.keys.first,
+              targetThemeIds: viewerSettings.enabledThemes.keys.toList(),
             );
       } finally {}
     }, []);
@@ -81,16 +90,25 @@ class DesignSystemViewerRouter extends HookConsumerWidget {
         await next.saveToStorage();
       }
     });
-    final botToastInit = BotToastInit();
     return VRouter(
       debugShowCheckedModeBanner: false,
       navigatorKey: WidgetKeys.navKey,
       theme: defaultLightTheme,
       darkTheme: defaultDarkTheme,
       themeMode: viewerState.themeMode,
-      builder: (context, widget) => botToastInit(
-          context,
-          Shortcuts(
+      builder: BotToastInit(),
+      navigatorObservers: [BotToastNavigatorObserver()],
+      initialUrl:
+          '/components/button', //TODO:  pageGroups.first.children.first.uri,
+      buildTransition: (animation1, _, child) => FadeTransition(
+        opacity: animation1,
+        child: child,
+      ),
+      transitionDuration: const Duration(milliseconds: 100),
+      routes: [
+        VNester(
+          path: '/',
+          widgetBuilder: (child) => Shortcuts(
             shortcuts: const <SingleActivator, Intent>{
               SingleActivator(LogicalKeyboardKey.keyK, meta: true):
                   SearchIntent()
@@ -99,26 +117,18 @@ class DesignSystemViewerRouter extends HookConsumerWidget {
               actions: <Type, Action<Intent>>{
                 SearchIntent: SearchAction(),
               },
-              child: Material(
-                child: widget,
+              child: RootScaffold(
+                child: child,
               ),
             ),
-          )),
-      navigatorObservers: [BotToastNavigatorObserver()],
-      initialUrl: '/',
-      buildTransition: (animation1, _, child) => FadeTransition(
-        opacity: animation1,
-        child: child,
-      ),
-      transitionDuration: const Duration(milliseconds: 250),
-      routes: [
-        VWidget(path: '/', widget: const HomeScreen()),
-        ...pageGroups.fold(
-          [],
-          (previousValue, element) => [
-            ...previousValue,
-            ..._buildRoutes(element.children),
-          ],
+          ),
+          nestedRoutes: pageGroups.fold(
+            [],
+            (previousValue, element) => [
+              ...previousValue,
+              ..._buildRoutes(element.children),
+            ],
+          ),
         ),
       ],
     );
