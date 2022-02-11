@@ -10,7 +10,18 @@ import 'package:localstorage/localstorage.dart';
 part 'settings.freezed.dart';
 part 'settings.g.dart';
 
-enum ViewMode { canvas, devices, themes, locales }
+enum ViewMode {
+  canvas,
+  devices,
+  themes,
+  locales,
+}
+
+enum DisplayMode {
+  widgetOnly,
+  codeOnly,
+  widgetCodeSideBySide,
+}
 
 @freezed
 class ViewerState with _$ViewerState {
@@ -19,14 +30,15 @@ class ViewerState with _$ViewerState {
   const ViewerState._();
   const factory ViewerState({
     required ViewMode viewMode,
+    required DisplayMode displayMode,
+    required ThemeMode themeMode,
     required String targetDeviceId,
     required List<String> targetDeviceIds,
     required String targetThemeId,
     required List<String> targetThemeIds,
     required String targetLocaleId,
     required List<String> targetLocaleIds,
-    @Default(ThemeMode.system) ThemeMode themeMode,
-    String? catalogId,
+    String? uri,
   }) = _ViewerState;
 
   factory ViewerState.fromJson(Map<String, dynamic> json) =>

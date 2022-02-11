@@ -23,6 +23,8 @@ final viewerSettingsProvider =
 final viewerStateProvider = StateProvider<ViewerState>(
   (ref) => ViewerState(
     viewMode: ViewMode.themes,
+    themeMode: ThemeMode.dark,
+    displayMode: DisplayMode.widgetCodeSideBySide,
     targetDeviceId: Devices.ios.iPhone12.identifier.toString(),
     targetDeviceIds: [],
     targetLocaleId: '',
@@ -72,6 +74,8 @@ class DesignSystemViewerRouter extends HookConsumerWidget {
         viewerStateNotifier.state = cache ??
             ViewerState(
               viewMode: ViewMode.canvas,
+              displayMode: DisplayMode.widgetCodeSideBySide,
+              themeMode: ThemeMode.system,
               targetDeviceId: Devices.ios.iPhone12.identifier.toString(),
               targetDeviceIds: [
                 Devices.ios.iPhone12.identifier.toString(),

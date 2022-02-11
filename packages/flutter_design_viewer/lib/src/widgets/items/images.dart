@@ -1,18 +1,23 @@
+import 'dart:math';
+
 import 'package:flag/flag.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_design/flutter_design.dart';
 import 'package:flutter_design_viewer/src/measures.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:patterns_canvas/patterns_canvas.dart';
 
-class PatternedBackground extends StatelessWidget {
+class PatternedBackground extends HookConsumerWidget {
   const PatternedBackground({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return CustomPaint(
       size: const Size(double.infinity, double.infinity),
-      painter: _PatternPainter(Theme.of(context)),
+      painter: _PatternPainter(
+        theme: Theme.of(context),
+      ),
     );
   }
 }
@@ -20,7 +25,9 @@ class PatternedBackground extends StatelessWidget {
 class _PatternPainter extends CustomPainter {
   final ThemeData theme;
 
-  _PatternPainter(this.theme);
+  _PatternPainter({
+    required this.theme,
+  });
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -28,7 +35,7 @@ class _PatternPainter extends CustomPainter {
     Dots(
       bgColor: theme.scaffoldBackgroundColor,
       fgColor: theme.disabledColor,
-      featuresCount: 200,
+      featuresCount: min((size.width * 0.5).floor(), 400),
     ).paintOnRect(
       canvas,
       size,

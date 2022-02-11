@@ -9,6 +9,8 @@ part of 'settings.dart';
 _$_ViewerState _$$_ViewerStateFromJson(Map<String, dynamic> json) =>
     _$_ViewerState(
       viewMode: $enumDecode(_$ViewModeEnumMap, json['viewMode']),
+      displayMode: $enumDecode(_$DisplayModeEnumMap, json['displayMode']),
+      themeMode: $enumDecode(_$ThemeModeEnumMap, json['themeMode']),
       targetDeviceId: json['targetDeviceId'] as String,
       targetDeviceIds: (json['targetDeviceIds'] as List<dynamic>)
           .map((e) => e as String)
@@ -21,22 +23,21 @@ _$_ViewerState _$$_ViewerStateFromJson(Map<String, dynamic> json) =>
       targetLocaleIds: (json['targetLocaleIds'] as List<dynamic>)
           .map((e) => e as String)
           .toList(),
-      themeMode: $enumDecodeNullable(_$ThemeModeEnumMap, json['themeMode']) ??
-          ThemeMode.system,
-      catalogId: json['catalogId'] as String?,
+      uri: json['uri'] as String?,
     );
 
 Map<String, dynamic> _$$_ViewerStateToJson(_$_ViewerState instance) =>
     <String, dynamic>{
       'viewMode': _$ViewModeEnumMap[instance.viewMode],
+      'displayMode': _$DisplayModeEnumMap[instance.displayMode],
+      'themeMode': _$ThemeModeEnumMap[instance.themeMode],
       'targetDeviceId': instance.targetDeviceId,
       'targetDeviceIds': instance.targetDeviceIds,
       'targetThemeId': instance.targetThemeId,
       'targetThemeIds': instance.targetThemeIds,
       'targetLocaleId': instance.targetLocaleId,
       'targetLocaleIds': instance.targetLocaleIds,
-      'themeMode': _$ThemeModeEnumMap[instance.themeMode],
-      'catalogId': instance.catalogId,
+      'uri': instance.uri,
     };
 
 const _$ViewModeEnumMap = {
@@ -44,6 +45,12 @@ const _$ViewModeEnumMap = {
   ViewMode.devices: 'devices',
   ViewMode.themes: 'themes',
   ViewMode.locales: 'locales',
+};
+
+const _$DisplayModeEnumMap = {
+  DisplayMode.widgetOnly: 'widgetOnly',
+  DisplayMode.codeOnly: 'codeOnly',
+  DisplayMode.widgetCodeSideBySide: 'widgetCodeSideBySide',
 };
 
 const _$ThemeModeEnumMap = {

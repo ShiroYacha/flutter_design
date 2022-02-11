@@ -24,9 +24,30 @@ extension WidgetMouseExtension on Widget {
 typedef DataWidgetBuilder<T, U> = Widget Function(BuildContext, T, [U]);
 typedef DataSelectionChanged<T> = void Function(T);
 
+class SelectableContainer extends StatelessWidget {
+  final Widget child;
+  const SelectableContainer({
+    required this.child,
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Container(
+      decoration: BoxDecoration(
+        color: theme.backgroundColor,
+        borderRadius: BorderRadius.circular(16),
+      ),
+      padding: SpacingDesign.paddingAll10,
+      child: child,
+    );
+  }
+}
+
 class SelectableGlyphGroup<T> extends HookConsumerWidget {
   final Iterable<T> items;
-  final DataWidgetBuilder builder;
+  final DataWidgetBuilder<T, bool> builder;
   final T? selectedItem;
   final DataSelectionChanged<T> selectionChanged;
   const SelectableGlyphGroup({
@@ -39,19 +60,15 @@ class SelectableGlyphGroup<T> extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
-    return Container(
-      decoration: BoxDecoration(
-        color: theme.backgroundColor,
-        borderRadius: BorderRadius.circular(16),
-      ),
-      padding: SpacingDesign.paddingAll10,
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
+    return SelectableContainer(
+      child: Wrap(
+        crossAxisAlignment: WrapCrossAlignment.center,
+        spacing: 10,
+        runSpacing: 10,
         children: items.fold<List<Widget>>(
           [],
           (pv, e) => [
             ...pv,
-            Spacers.h10,
             MouseRegion(
               cursor: SystemMouseCursors.click,
               child: GestureDetector(
@@ -61,7 +78,54 @@ class SelectableGlyphGroup<T> extends HookConsumerWidget {
                 child: builder(context, e, selectedItem == e),
               ),
             ),
-            Spacers.h10,
+            if (items.last != e)
+              Container(color: theme.dividerColor, width: 1, height: 10),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class MultiSelectableGlyphGroup<T> extends HookConsumerWidget {
+  final Iterable<T> items;
+  final DataWidgetBuilder<T, bool> builder;
+  final Iterable<T> selectedItems;
+  final DataSelectionChanged<Iterable<T>> selectionChanged;
+  const MultiSelectableGlyphGroup({
+    required this.items,
+    required this.builder,
+    this.selectedItems = const [],
+    required this.selectionChanged,
+    Key? key,
+  }) : super(key: key);
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final theme = Theme.of(context);
+    return SelectableContainer(
+      child: Wrap(
+        crossAxisAlignment: WrapCrossAlignment.center,
+        spacing: 10,
+        runSpacing: 10,
+        children: items.fold<List<Widget>>(
+          [],
+          (pv, e) => [
+            ...pv,
+            MouseRegion(
+              cursor: SystemMouseCursors.click,
+              child: GestureDetector(
+                onTap: () {
+                  final selection = List.of(selectedItems);
+                  if (selection.contains(e)) {
+                    selection.remove(e);
+                  } else {
+                    selection.add(e);
+                  }
+                  selectionChanged(selection);
+                },
+                child: builder(context, e, selectedItems.contains(e)),
+              ),
+            ),
             if (items.last != e)
               Container(color: theme.dividerColor, width: 1, height: 10),
           ],

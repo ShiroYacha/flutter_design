@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_design/flutter_design.dart';
-import 'package:flutter_design_viewer/flutter_design_viewer.dart';
 import 'package:flutter_design_viewer/src/measures.dart';
 import 'package:flutter_design_viewer/src/widgets/items/text.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
@@ -146,6 +145,7 @@ class ComponentSection extends HookConsumerWidget {
           ProviderScope(
             overrides: [
               widgetBuilderProvider.overrideWithValue(component.builder),
+              sourceCodeProvider.overrideWithValue(component.sourceCode),
             ],
             child: const ComponentFramePanel(),
           ),

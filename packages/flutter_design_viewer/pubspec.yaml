@@ -34,6 +34,10 @@ dependencies:
   flutter_zoom_drawer: ^2.3.0
   flutter_markdown: ^0.6.9
   patterns_canvas: ^0.3.5
+  flutter_highlight:
+    git:
+      url: https://github.com/shreyas1599/highlight.dart.git
+      path: flutter_highlight
   # media
   flutter_svg: ^1.0.3
   flutter_feather_icons: ^2.0.0+1

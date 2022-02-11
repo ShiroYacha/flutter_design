@@ -24,24 +24,26 @@ class _$ViewerStateTearOff {
 
   _ViewerState call(
       {required ViewMode viewMode,
+      required DisplayMode displayMode,
+      required ThemeMode themeMode,
       required String targetDeviceId,
       required List<String> targetDeviceIds,
       required String targetThemeId,
       required List<String> targetThemeIds,
       required String targetLocaleId,
       required List<String> targetLocaleIds,
-      ThemeMode themeMode = ThemeMode.system,
-      String? catalogId}) {
+      String? uri}) {
     return _ViewerState(
       viewMode: viewMode,
+      displayMode: displayMode,
+      themeMode: themeMode,
       targetDeviceId: targetDeviceId,
       targetDeviceIds: targetDeviceIds,
       targetThemeId: targetThemeId,
       targetThemeIds: targetThemeIds,
       targetLocaleId: targetLocaleId,
       targetLocaleIds: targetLocaleIds,
-      themeMode: themeMode,
-      catalogId: catalogId,
+      uri: uri,
     );
   }
 
@@ -56,14 +58,15 @@ const $ViewerState = _$ViewerStateTearOff();
 /// @nodoc
 mixin _$ViewerState {
   ViewMode get viewMode => throw _privateConstructorUsedError;
+  DisplayMode get displayMode => throw _privateConstructorUsedError;
+  ThemeMode get themeMode => throw _privateConstructorUsedError;
   String get targetDeviceId => throw _privateConstructorUsedError;
   List<String> get targetDeviceIds => throw _privateConstructorUsedError;
   String get targetThemeId => throw _privateConstructorUsedError;
   List<String> get targetThemeIds => throw _privateConstructorUsedError;
   String get targetLocaleId => throw _privateConstructorUsedError;
   List<String> get targetLocaleIds => throw _privateConstructorUsedError;
-  ThemeMode get themeMode => throw _privateConstructorUsedError;
-  String? get catalogId => throw _privateConstructorUsedError;
+  String? get uri => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -78,14 +81,15 @@ abstract class $ViewerStateCopyWith<$Res> {
       _$ViewerStateCopyWithImpl<$Res>;
   $Res call(
       {ViewMode viewMode,
+      DisplayMode displayMode,
+      ThemeMode themeMode,
       String targetDeviceId,
       List<String> targetDeviceIds,
       String targetThemeId,
       List<String> targetThemeIds,
       String targetLocaleId,
       List<String> targetLocaleIds,
-      ThemeMode themeMode,
-      String? catalogId});
+      String? uri});
 }
 
 /// @nodoc
@@ -99,20 +103,29 @@ class _$ViewerStateCopyWithImpl<$Res> implements $ViewerStateCopyWith<$Res> {
   @override
   $Res call({
     Object? viewMode = freezed,
+    Object? displayMode = freezed,
+    Object? themeMode = freezed,
     Object? targetDeviceId = freezed,
     Object? targetDeviceIds = freezed,
     Object? targetThemeId = freezed,
     Object? targetThemeIds = freezed,
     Object? targetLocaleId = freezed,
     Object? targetLocaleIds = freezed,
-    Object? themeMode = freezed,
-    Object? catalogId = freezed,
+    Object? uri = freezed,
   }) {
     return _then(_value.copyWith(
       viewMode: viewMode == freezed
           ? _value.viewMode
           : viewMode // ignore: cast_nullable_to_non_nullable
               as ViewMode,
+      displayMode: displayMode == freezed
+          ? _value.displayMode
+          : displayMode // ignore: cast_nullable_to_non_nullable
+              as DisplayMode,
+      themeMode: themeMode == freezed
+          ? _value.themeMode
+          : themeMode // ignore: cast_nullable_to_non_nullable
+              as ThemeMode,
       targetDeviceId: targetDeviceId == freezed
           ? _value.targetDeviceId
           : targetDeviceId // ignore: cast_nullable_to_non_nullable
@@ -137,13 +150,9 @@ class _$ViewerStateCopyWithImpl<$Res> implements $ViewerStateCopyWith<$Res> {
           ? _value.targetLocaleIds
           : targetLocaleIds // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      themeMode: themeMode == freezed
-          ? _value.themeMode
-          : themeMode // ignore: cast_nullable_to_non_nullable
-              as ThemeMode,
-      catalogId: catalogId == freezed
-          ? _value.catalogId
-          : catalogId // ignore: cast_nullable_to_non_nullable
+      uri: uri == freezed
+          ? _value.uri
+          : uri // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -158,14 +167,15 @@ abstract class _$ViewerStateCopyWith<$Res>
   @override
   $Res call(
       {ViewMode viewMode,
+      DisplayMode displayMode,
+      ThemeMode themeMode,
       String targetDeviceId,
       List<String> targetDeviceIds,
       String targetThemeId,
       List<String> targetThemeIds,
       String targetLocaleId,
       List<String> targetLocaleIds,
-      ThemeMode themeMode,
-      String? catalogId});
+      String? uri});
 }
 
 /// @nodoc
@@ -181,20 +191,29 @@ class __$ViewerStateCopyWithImpl<$Res> extends _$ViewerStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? viewMode = freezed,
+    Object? displayMode = freezed,
+    Object? themeMode = freezed,
     Object? targetDeviceId = freezed,
     Object? targetDeviceIds = freezed,
     Object? targetThemeId = freezed,
     Object? targetThemeIds = freezed,
     Object? targetLocaleId = freezed,
     Object? targetLocaleIds = freezed,
-    Object? themeMode = freezed,
-    Object? catalogId = freezed,
+    Object? uri = freezed,
   }) {
     return _then(_ViewerState(
       viewMode: viewMode == freezed
           ? _value.viewMode
           : viewMode // ignore: cast_nullable_to_non_nullable
               as ViewMode,
+      displayMode: displayMode == freezed
+          ? _value.displayMode
+          : displayMode // ignore: cast_nullable_to_non_nullable
+              as DisplayMode,
+      themeMode: themeMode == freezed
+          ? _value.themeMode
+          : themeMode // ignore: cast_nullable_to_non_nullable
+              as ThemeMode,
       targetDeviceId: targetDeviceId == freezed
           ? _value.targetDeviceId
           : targetDeviceId // ignore: cast_nullable_to_non_nullable
@@ -219,13 +238,9 @@ class __$ViewerStateCopyWithImpl<$Res> extends _$ViewerStateCopyWithImpl<$Res>
           ? _value.targetLocaleIds
           : targetLocaleIds // ignore: cast_nullable_to_non_nullable
               as List<String>,
-      themeMode: themeMode == freezed
-          ? _value.themeMode
-          : themeMode // ignore: cast_nullable_to_non_nullable
-              as ThemeMode,
-      catalogId: catalogId == freezed
-          ? _value.catalogId
-          : catalogId // ignore: cast_nullable_to_non_nullable
+      uri: uri == freezed
+          ? _value.uri
+          : uri // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -236,14 +251,15 @@ class __$ViewerStateCopyWithImpl<$Res> extends _$ViewerStateCopyWithImpl<$Res>
 class _$_ViewerState extends _ViewerState {
   const _$_ViewerState(
       {required this.viewMode,
+      required this.displayMode,
+      required this.themeMode,
       required this.targetDeviceId,
       required this.targetDeviceIds,
       required this.targetThemeId,
       required this.targetThemeIds,
       required this.targetLocaleId,
       required this.targetLocaleIds,
-      this.themeMode = ThemeMode.system,
-      this.catalogId})
+      this.uri})
       : super._();
 
   factory _$_ViewerState.fromJson(Map<String, dynamic> json) =>
@@ -251,6 +267,10 @@ class _$_ViewerState extends _ViewerState {
 
   @override
   final ViewMode viewMode;
+  @override
+  final DisplayMode displayMode;
+  @override
+  final ThemeMode themeMode;
   @override
   final String targetDeviceId;
   @override
@@ -263,15 +283,12 @@ class _$_ViewerState extends _ViewerState {
   final String targetLocaleId;
   @override
   final List<String> targetLocaleIds;
-  @JsonKey()
   @override
-  final ThemeMode themeMode;
-  @override
-  final String? catalogId;
+  final String? uri;
 
   @override
   String toString() {
-    return 'ViewerState(viewMode: $viewMode, targetDeviceId: $targetDeviceId, targetDeviceIds: $targetDeviceIds, targetThemeId: $targetThemeId, targetThemeIds: $targetThemeIds, targetLocaleId: $targetLocaleId, targetLocaleIds: $targetLocaleIds, themeMode: $themeMode, catalogId: $catalogId)';
+    return 'ViewerState(viewMode: $viewMode, displayMode: $displayMode, themeMode: $themeMode, targetDeviceId: $targetDeviceId, targetDeviceIds: $targetDeviceIds, targetThemeId: $targetThemeId, targetThemeIds: $targetThemeIds, targetLocaleId: $targetLocaleId, targetLocaleIds: $targetLocaleIds, uri: $uri)';
   }
 
   @override
@@ -280,6 +297,9 @@ class _$_ViewerState extends _ViewerState {
         (other.runtimeType == runtimeType &&
             other is _ViewerState &&
             const DeepCollectionEquality().equals(other.viewMode, viewMode) &&
+            const DeepCollectionEquality()
+                .equals(other.displayMode, displayMode) &&
+            const DeepCollectionEquality().equals(other.themeMode, themeMode) &&
             const DeepCollectionEquality()
                 .equals(other.targetDeviceId, targetDeviceId) &&
             const DeepCollectionEquality()
@@ -292,22 +312,22 @@ class _$_ViewerState extends _ViewerState {
                 .equals(other.targetLocaleId, targetLocaleId) &&
             const DeepCollectionEquality()
                 .equals(other.targetLocaleIds, targetLocaleIds) &&
-            const DeepCollectionEquality().equals(other.themeMode, themeMode) &&
-            const DeepCollectionEquality().equals(other.catalogId, catalogId));
+            const DeepCollectionEquality().equals(other.uri, uri));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(viewMode),
+      const DeepCollectionEquality().hash(displayMode),
+      const DeepCollectionEquality().hash(themeMode),
       const DeepCollectionEquality().hash(targetDeviceId),
       const DeepCollectionEquality().hash(targetDeviceIds),
       const DeepCollectionEquality().hash(targetThemeId),
       const DeepCollectionEquality().hash(targetThemeIds),
       const DeepCollectionEquality().hash(targetLocaleId),
       const DeepCollectionEquality().hash(targetLocaleIds),
-      const DeepCollectionEquality().hash(themeMode),
-      const DeepCollectionEquality().hash(catalogId));
+      const DeepCollectionEquality().hash(uri));
 
   @JsonKey(ignore: true)
   @override
@@ -323,14 +343,15 @@ class _$_ViewerState extends _ViewerState {
 abstract class _ViewerState extends ViewerState {
   const factory _ViewerState(
       {required ViewMode viewMode,
+      required DisplayMode displayMode,
+      required ThemeMode themeMode,
       required String targetDeviceId,
       required List<String> targetDeviceIds,
       required String targetThemeId,
       required List<String> targetThemeIds,
       required String targetLocaleId,
       required List<String> targetLocaleIds,
-      ThemeMode themeMode,
-      String? catalogId}) = _$_ViewerState;
+      String? uri}) = _$_ViewerState;
   const _ViewerState._() : super._();
 
   factory _ViewerState.fromJson(Map<String, dynamic> json) =
@@ -338,6 +359,10 @@ abstract class _ViewerState extends ViewerState {
 
   @override
   ViewMode get viewMode;
+  @override
+  DisplayMode get displayMode;
+  @override
+  ThemeMode get themeMode;
   @override
   String get targetDeviceId;
   @override
@@ -351,9 +376,7 @@ abstract class _ViewerState extends ViewerState {
   @override
   List<String> get targetLocaleIds;
   @override
-  ThemeMode get themeMode;
-  @override
-  String? get catalogId;
+  String? get uri;
   @override
   @JsonKey(ignore: true)
   _$ViewerStateCopyWith<_ViewerState> get copyWith =>

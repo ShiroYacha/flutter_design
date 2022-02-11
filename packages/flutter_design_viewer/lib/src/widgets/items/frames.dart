@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:math';
 
+import 'package:bot_toast/bot_toast.dart';
+import 'package:clipboard/clipboard.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -8,30 +10,40 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_design/flutter_design.dart';
 import 'package:flutter_design_viewer/flutter_design_viewer.dart';
 import 'package:flutter_design_viewer/src/measures.dart';
+import 'package:flutter_design_viewer/src/widgets/items/buttons.dart';
 import 'package:flutter_design_viewer/src/widgets/screens/page_screen.dart';
-import 'package:flutter_feather_icons/flutter_feather_icons.dart';
+import 'package:flutter_highlight/flutter_highlight.dart';
+import 'package:flutter_highlight/themes/atom-one-dark.dart';
+import 'package:flutter_highlight/themes/atom-one-light.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:ionicons/ionicons.dart';
 
 import '../../utils.dart';
-import 'buttons.dart';
+import 'controls.dart';
 import 'images.dart';
+import 'splitter.dart';
 
 class ComponentFramePanel extends HookConsumerWidget {
   const ComponentFramePanel({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    const widgetDisplayHeight = 600.0; //TODO: configurable?
     final viewerState = ref.watch(viewerStateProvider);
     final selectedViewMode = useState(viewerState.viewMode);
+    final selectedDisplayMode = useState(viewerState.displayMode);
     final targetDeviceId = useState(viewerState.targetDeviceId);
+    final targetDeviceIds = useState(viewerState.targetDeviceIds);
     final targetLocaleId = useState(viewerState.targetLocaleId);
     final targetThemeId = useState(viewerState.targetThemeId);
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         ComponentFrameToolbar(
           viewModeNotifier: selectedViewMode,
+          displayModeNotifier: selectedDisplayMode,
           targetDeviceIdNotifier: targetDeviceId,
+          targetDeviceIdsNotifier: targetDeviceIds,
           targetLocaleIdNotifier: targetLocaleId,
           targetThemeIdNotifier: targetThemeId,
         ),
@@ -42,6 +54,7 @@ class ComponentFramePanel extends HookConsumerWidget {
               StateController(
                 viewerState.copyWith(
                   viewMode: selectedViewMode.value,
+                  displayMode: selectedDisplayMode.value,
                   targetDeviceId: targetDeviceId.value,
                   targetLocaleId: targetLocaleId.value.isNotEmpty
                       ? targetLocaleId.value
@@ -53,145 +66,172 @@ class ComponentFramePanel extends HookConsumerWidget {
               ),
             )
           ],
-          child: Consumer(builder: (context, ref, _) {
-            final localViewerState = ref.watch(viewerStateProvider);
-            return buildIf(
-                  {
-                    () => localViewerState.viewMode == ViewMode.locales: () =>
-                        const SizedBox(
-                          child: LocalesDevicesFrameContainer(),
-                          height: 800,
+          child: Consumer(
+            builder: (context, ref, widget) {
+              final theme = Theme.of(context);
+              final localViewerState = ref.watch(viewerStateProvider);
+              if (localViewerState.displayMode == DisplayMode.widgetOnly) {
+                return const SizedBox(
+                    height: widgetDisplayHeight,
+                    child: ComponentFrameWidgetDisplay());
+              } else if (localViewerState.displayMode == DisplayMode.codeOnly) {
+                return const CompontentFrameCodeDisplay();
+              }
+              return SizedBox(
+                height: widgetDisplayHeight,
+                child: Split(
+                  axis: Axis.horizontal,
+                  initialFractions: const [0.5, 0.5],
+                  splitters: [
+                    SizedBox(
+                      width: 6,
+                      child: MouseRegion(
+                        child: DecoratedBox(
+                          decoration: BoxDecoration(
+                            color: theme.dividerColor,
+                          ),
                         ),
-                    () => localViewerState.viewMode == ViewMode.devices: () =>
-                        const SizedBox(
-                          child: DevicesFrameContainer(),
-                          height: 800,
-                        ),
-                    () => localViewerState.viewMode == ViewMode.themes: () =>
-                        const SizedBox(
-                          child: ThemeDevicesFrameContainer(),
-                          height: 800,
-                        ),
-                  },
-                ) ??
-                const SizedBox(
-                  child: CanvasFrameContainer(),
-                  height: 500,
-                );
-          }),
+                      ),
+                    ),
+                  ],
+                  children: const [
+                    ComponentFrameWidgetDisplay(),
+                    CompontentFrameCodeDisplay(),
+                  ],
+                ),
+              );
+            },
+          ),
         ),
       ],
     );
   }
 }
 
+class CompontentFrameCodeDisplay extends HookConsumerWidget {
+  const CompontentFrameCodeDisplay({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final sourceCode = ref.watch(sourceCodeProvider);
+    final theme = Theme.of(context).brightness == Brightness.light
+        ? atomOneLightTheme
+        : atomOneDarkTheme;
+    final backgroundColor = theme['root']!.backgroundColor;
+    return Container(
+      color: backgroundColor,
+      child: Stack(
+        children: [
+          Align(
+            alignment: Alignment.topRight,
+            child: GlyphButton(
+              glyph: const ViewerGlyphUnion.icon(
+                icon: Ionicons.copy_outline,
+                size: 20,
+              ),
+              padding: SpacingDesign.paddingAll10,
+              onTap: () {
+                FlutterClipboard.copy(sourceCode.code)
+                    .then((value) => BotToast.showText(text: 'Copied!'));
+              },
+            ),
+          ),
+          HighlightView(
+            sourceCode.code,
+            language: 'dart',
+            theme: {
+              ...theme,
+              'root': TextStyle(
+                color: theme['root']!.color,
+                backgroundColor: Colors.transparent,
+              ),
+            },
+            padding: const EdgeInsets.all(12),
+            textStyle: const TextStyle(
+              fontFamily: 'My awesome monospace font',
+              fontSize: 16,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class ComponentFrameWidgetDisplay extends HookConsumerWidget {
+  const ComponentFrameWidgetDisplay({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final localViewerState = ref.watch(viewerStateProvider);
+    return buildIf(
+          {
+            () => localViewerState.viewMode == ViewMode.locales: () =>
+                const LocalesDevicesFrameContainer(),
+            () => localViewerState.viewMode == ViewMode.devices: () =>
+                const DevicesFrameContainer(),
+            () => localViewerState.viewMode == ViewMode.themes: () =>
+                const ThemeDevicesFrameContainer(),
+          },
+        ) ??
+        const CanvasFrameContainer();
+  }
+}
+
 class ComponentFrameToolbar extends HookConsumerWidget {
   final ValueNotifier<ViewMode> viewModeNotifier;
+  final ValueNotifier<DisplayMode> displayModeNotifier;
   final ValueNotifier<String> targetDeviceIdNotifier;
+  final ValueNotifier<List<String>> targetDeviceIdsNotifier;
   final ValueNotifier<String> targetThemeIdNotifier;
   final ValueNotifier<String> targetLocaleIdNotifier;
   const ComponentFrameToolbar({
     required this.viewModeNotifier,
+    required this.displayModeNotifier,
     required this.targetDeviceIdNotifier,
+    required this.targetDeviceIdsNotifier,
     required this.targetThemeIdNotifier,
     required this.targetLocaleIdNotifier,
     Key? key,
   }) : super(key: key);
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Row(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SelectableViewModeGroup(
-          value: viewModeNotifier.value,
-          valueChanged: (v) => viewModeNotifier.value = v,
+        Wrap(
+          alignment: WrapAlignment.start,
+          crossAxisAlignment: WrapCrossAlignment.start,
+          runAlignment: WrapAlignment.start,
+          direction: Axis.horizontal,
+          runSpacing: 10,
+          spacing: 10,
+          children: [
+            SelectableViewModeGroup(
+              value: viewModeNotifier.value,
+              valueChanged: (v) => viewModeNotifier.value = v,
+            ),
+            if (viewModeNotifier.value != ViewMode.themes)
+              SelectableThemeGroup(
+                value: targetThemeIdNotifier.value,
+                valueChanged: (v) => targetThemeIdNotifier.value = v,
+              ),
+            SelectableDisplayModeGroup(
+              value: displayModeNotifier.value,
+              valueChanged: (v) => displayModeNotifier.value = v,
+            ),
+          ],
         ),
-        Spacers.h40,
-        if (viewModeNotifier.value != ViewMode.themes)
-          SelectableThemeGroup(
-            value: targetThemeIdNotifier.value,
-            valueChanged: (v) => targetThemeIdNotifier.value = v,
+        Spacers.v20,
+        if (viewModeNotifier.value == ViewMode.devices)
+          SelectableDevicesGroup(
+            value: targetDeviceIdsNotifier.value,
+            valueChanged: (v) => targetDeviceIdsNotifier.value = v,
+          )
+        else if (viewModeNotifier.value != ViewMode.canvas)
+          SelectableDeviceGroup(
+            value: targetDeviceIdNotifier.value,
+            valueChanged: (v) => targetDeviceIdNotifier.value = v,
           ),
       ],
-    );
-  }
-}
-
-class SelectableThemeGroup extends HookConsumerWidget {
-  final String value;
-  final void Function(String) valueChanged;
-  const SelectableThemeGroup({
-    required this.value,
-    required this.valueChanged,
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final theme = Theme.of(context);
-    final viewerSettings = ref.watch(viewerSettingsProvider);
-    return SelectableGlyphGroup<String>(
-      items: viewerSettings.enabledThemes.keys,
-      selectedItem: value,
-      selectionChanged: (e) => valueChanged(e),
-      builder: (context, e, [selected]) {
-        final color = selected ? theme.primaryColor : null;
-        return CircleAvatar(
-          backgroundColor: color,
-          radius: 10,
-          child: CircleAvatar(
-            backgroundColor:
-                viewerSettings.enabledThemes[e]?.scaffoldBackgroundColor,
-            radius: 8,
-          ),
-        );
-      },
-    );
-  }
-}
-
-class SelectableViewModeGroup extends StatelessWidget {
-  final ViewMode value;
-  final void Function(ViewMode) valueChanged;
-  const SelectableViewModeGroup({
-    Key? key,
-    required this.value,
-    required this.valueChanged,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    return SelectableGlyphGroup<ViewMode>(
-      items: ViewMode.values,
-      selectedItem: value,
-      selectionChanged: (e) => valueChanged(e),
-      builder: (context, e, [selected]) {
-        final color = selected ? theme.primaryColor : null;
-        return ThemableGlyph(
-          glyph: {
-                ViewMode.canvas: ViewerGlyphUnion.icon(
-                  icon: Ionicons.easel_outline,
-                  color: color,
-                ),
-                ViewMode.devices: ViewerGlyphUnion.icon(
-                  icon: Ionicons.phone_portrait_outline,
-                  color: color,
-                ),
-                ViewMode.themes: ViewerGlyphUnion.icon(
-                  icon: Ionicons.partly_sunny_outline,
-                  color: color,
-                ),
-                ViewMode.locales: ViewerGlyphUnion.icon(
-                  icon: Ionicons.language,
-                  color: color,
-                ),
-              }[e] ??
-              ViewerGlyphUnion.icon(
-                icon: FeatherIcons.alertCircle,
-                color: color,
-              ),
-        );
-      },
     );
   }
 }
@@ -239,23 +279,27 @@ class DevicesFrameContainer extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final viewerState = ref.watch(viewerStateProvider);
     final scrollController = useScrollController();
-    return ListView(
+    return Scrollbar(
       controller: scrollController,
-      scrollDirection: Axis.horizontal,
-      children: viewerState.targetDeviceIds
-          .map(
-            (id) => Padding(
-              padding: const EdgeInsets.only(right: 10),
-              child: wrapInDeviceFrameTheme(
-                DeviceFrame(
-                  device: _locateDeviceById(id),
-                  isFrameVisible: true,
-                  screen: ContentApp(key: UniqueKey()),
+      isAlwaysShown: true,
+      child: ListView(
+        controller: scrollController,
+        scrollDirection: Axis.horizontal,
+        children: viewerState.targetDeviceIds
+            .map(
+              (id) => Padding(
+                padding: const EdgeInsets.only(right: 10),
+                child: wrapInDeviceFrameTheme(
+                  DeviceFrame(
+                    device: _locateDeviceById(id),
+                    isFrameVisible: true,
+                    screen: ContentApp(key: UniqueKey()),
+                  ),
                 ),
               ),
-            ),
-          )
-          .toList(),
+            )
+            .toList(),
+      ),
     );
   }
 }
@@ -335,8 +379,7 @@ class ScrollableFrame extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final scrollController =
-        useScrollController(); //useLinkedScrollController();
+    final scrollController = useScrollController();
     return SingleChildScrollView(
       controller: scrollController,
       child: child,
@@ -353,6 +396,9 @@ final randomSeedProvider = StateProvider<int>((ref) => 0);
 
 final widgetBuilderProvider =
     Provider<WidgetBuilder>((ref) => throw UnimplementedError());
+
+final sourceCodeProvider =
+    Provider<ViewerSourceCode>((ref) => throw UnimplementedError());
 
 class MyCustomScrollBehavior extends MaterialScrollBehavior {
   // Override behavior methods and getters like dragDevices

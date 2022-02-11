@@ -4,7 +4,7 @@ import 'package:flutter_design_viewer/flutter_design_viewer.dart';
 import 'package:flutter_design_viewer/src/measures.dart';
 import 'package:flutter_design_viewer/src/widgets/items/buttons.dart';
 import 'package:flutter_design_viewer/src/widgets/items/containers.dart';
-import 'package:flutter_design_viewer/src/widgets/items/frames.dart';
+import 'package:flutter_design_viewer/src/widgets/items/controls.dart';
 import 'package:flutter_design_viewer/src/widgets/items/images.dart';
 import 'package:flutter_design_viewer/src/widgets/scaffolds/root_scaffold.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -29,65 +29,103 @@ class SettingsDialog extends HookConsumerWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(showFullscreen ? 0 : 16.0),
       ),
-      content: Container(
-        padding: SpacingDesign.paddingAll20,
+      content: SizedBox(
         width: 600,
         height: showFullscreen
             ? mediaQuery.size.height
             : mediaQuery.size.height * 0.8,
         child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  const ThemableGlyph(
-                    glyph: ViewerGlyphUnion.icon(
-                      icon: Ionicons.settings_outline,
-                      size: 24,
-                    ),
-                  ),
-                  Spacers.h10,
-                  Text(
-                    'Global settings',
-                    style: theme.textTheme.headline5,
-                  ),
-                  const Expanded(child: SizedBox.shrink()),
-                  if (showFullscreen)
-                    GlyphButton(
-                      glyph: const ViewerGlyphUnion.icon(
-                        icon: Ionicons.close,
+          child: Padding(
+            padding: SpacingDesign.paddingAll20,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    const ThemableGlyph(
+                      glyph: ViewerGlyphUnion.icon(
+                        icon: Ionicons.settings_outline,
                         size: 24,
                       ),
-                      onTap: Navigator.of(context).pop,
-                    )
-                ],
-              ),
-              Spacers.v20,
-              TitleWidgetPair(
-                title: 'Default view mode',
-                description:
-                    'Change the default view mode of all widget viewers globally.',
-                widget: SelectableViewModeGroup(
-                  value: viewerState.viewMode,
-                  valueChanged: (v) => viewerStateNotifier.update(
-                    (state) => state.copyWith(viewMode: v),
+                    ),
+                    Spacers.h10,
+                    Text(
+                      'Global settings',
+                      style: theme.textTheme.headline5,
+                    ),
+                    const Expanded(child: SizedBox.shrink()),
+                    if (showFullscreen)
+                      GlyphButton(
+                        glyph: const ViewerGlyphUnion.icon(
+                          icon: Ionicons.close,
+                          size: 24,
+                        ),
+                        onTap: Navigator.of(context).pop,
+                      )
+                  ],
+                ),
+                Spacers.v20,
+                TitleWidgetPair(
+                  title: 'Default view mode',
+                  description:
+                      'Change the default view mode of all widget viewers globally.',
+                  widget: SelectableViewModeGroup(
+                    value: viewerState.viewMode,
+                    valueChanged: (v) => viewerStateNotifier.update(
+                      (state) => state.copyWith(viewMode: v),
+                    ),
                   ),
                 ),
-              ),
-              Spacers.v20,
-              TitleWidgetPair(
-                title: 'Default theme',
-                description:
-                    'Change the default theme of all widget viewers globally.',
-                widget: SelectableThemeGroup(
-                  value: viewerState.targetThemeId,
-                  valueChanged: (v) => viewerStateNotifier.update(
-                    (state) => state.copyWith(targetThemeId: v),
+                Spacers.v20,
+                TitleWidgetPair(
+                  title: 'Default display mode',
+                  description:
+                      'Change the default display mode of all widget viewers globally.',
+                  widget: SelectableDisplayModeGroup(
+                    value: viewerState.displayMode,
+                    valueChanged: (v) => viewerStateNotifier.update(
+                      (state) => state.copyWith(displayMode: v),
+                    ),
                   ),
                 ),
-              ),
-            ],
+                Spacers.v20,
+                TitleWidgetPair(
+                  title: 'Default theme',
+                  description:
+                      'Change the default theme of all widget viewers globally, excl. "Theme" view mode.',
+                  widget: SelectableThemeGroup(
+                    value: viewerState.targetThemeId,
+                    valueChanged: (v) => viewerStateNotifier.update(
+                      (state) => state.copyWith(targetThemeId: v),
+                    ),
+                  ),
+                ),
+                Spacers.v20,
+                TitleWidgetPair(
+                  title: 'Default device',
+                  description:
+                      'Change the default device of all widget viewers globally, excl. "Device" view mode.',
+                  widget: SelectableDeviceGroup(
+                    value: viewerState.targetDeviceId,
+                    valueChanged: (v) => viewerStateNotifier.update(
+                      (state) => state.copyWith(targetDeviceId: v),
+                    ),
+                  ),
+                ),
+                Spacers.v20,
+                TitleWidgetPair(
+                  title: 'Default devices',
+                  description:
+                      'Change the default devices of all widget viewers globally in "Device" view mode.',
+                  widget: SelectableDevicesGroup(
+                    value: viewerState.targetDeviceIds,
+                    valueChanged: (v) => viewerStateNotifier.update(
+                      (state) => state.copyWith(targetDeviceIds: v),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
