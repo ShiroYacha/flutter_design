@@ -71,6 +71,7 @@ class DataTemplateWidgetPlaceholderDesigner extends HookConsumerWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final theme = Theme.of(context);
     final controller = useMemoized(() => ExpandableController(), []);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -99,8 +100,9 @@ class DataTemplateWidgetPlaceholderDesigner extends HookConsumerWidget {
                       alignment: Alignment.topCenter,
                     ),
                   ),
-                  const TextSpan(
+                  TextSpan(
                     text: ' Tap to change color',
+                    style: TextStyle(color: theme.colorScheme.onBackground),
                   ),
                 ],
               ),
@@ -120,7 +122,7 @@ class DataTemplateWidgetPlaceholderDesigner extends HookConsumerWidget {
         ),
         Spacers.v10,
         SizerControl(
-          height: 200,
+          height: 250,
           value: builder.size,
           color: builder.color,
           valueChanged: (v) => updateBuilder(builder..size = v),

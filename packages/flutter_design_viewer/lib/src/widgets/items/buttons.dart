@@ -27,9 +27,11 @@ typedef DataSelectionChanged<T> = void Function(T);
 class SelectableContainer extends StatelessWidget {
   final Widget child;
   final EdgeInsets padding;
+  final Color? color;
   const SelectableContainer({
     required this.child,
     this.padding = SpacingDesign.paddingAll10,
+    this.color,
     Key? key,
   }) : super(key: key);
 
@@ -38,8 +40,8 @@ class SelectableContainer extends StatelessWidget {
     final theme = Theme.of(context);
     return Container(
       decoration: BoxDecoration(
-        color: theme.backgroundColor,
-        borderRadius: BorderRadius.circular(16),
+        color: color ?? theme.backgroundColor,
+        borderRadius: BorderRadius.circular(8),
       ),
       padding: padding,
       child: child,

@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:clipboard/clipboard.dart';
 import 'package:device_preview/device_preview.dart';
+import 'package:expandable/expandable.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -232,6 +233,7 @@ class CompontentFrameDataDisplay extends HookConsumerWidget {
         ref.watch(viewerComponentSectionProvider.select((v) => v.builder));
     return Container(
       padding: SpacingDesign.paddingAll10,
+      color: theme.backgroundColor,
       child: viewerWidgetBuilder.fieldMetaDataset.isEmpty
           ? const Center(
               child: Text('No data found'),
@@ -241,26 +243,45 @@ class CompontentFrameDataDisplay extends HookConsumerWidget {
                   <Widget>[],
                   (pe, v) => [
                         ...pe,
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SelectableText.rich(TextSpan(children: [
-                              TextSpan(
-                                  text:
-                                      '${v.type.toString()}${v.isOptional ? '?' : ''}',
-                                  style: theme.textTheme.subtitle1
-                                      ?.copyWith(color: theme.primaryColor)),
-                              const WidgetSpan(child: Spacers.h6),
-                              TextSpan(
-                                  text: v.name,
-                                  style: theme.textTheme.subtitle1)
-                            ])),
-                            const Divider(),
-                            DataBuilderPanel(
+                        SelectableContainer(
+                          color: theme.dialogBackgroundColor,
+                          child: ExpandablePanel(
+                            theme: ExpandableThemeData(
+                              iconPadding: EdgeInsets.zero,
+                              iconColor: theme.colorScheme.onBackground,
+                              useInkWell: false,
+                            ),
+                            header: MouseRegion(
+                              cursor: SystemMouseCursors.click,
+                              child: Text.rich(
+                                TextSpan(
+                                  children: [
+                                    const WidgetSpan(
+                                        child: ThemableGlyph(
+                                      glyph: ViewerGlyphUnion.icon(
+                                          icon: Ionicons.cube_outline),
+                                    )),
+                                    const WidgetSpan(child: Spacers.h6),
+                                    TextSpan(
+                                        text:
+                                            '${v.type.toString()}${v.isOptional ? '?' : ''}',
+                                        style: theme.textTheme.subtitle1
+                                            ?.copyWith(
+                                                color: theme.primaryColor)),
+                                    const WidgetSpan(child: Spacers.h6),
+                                    TextSpan(
+                                        text: v.name,
+                                        style: theme.textTheme.subtitle1)
+                                  ],
+                                ),
+                              ),
+                            ),
+                            collapsed: const SizedBox.shrink(),
+                            expanded: DataBuilderPanel(
                               fieldMetaData: v,
                               dataBuildersNotifier: dataBuildersNotifier,
                             ),
-                          ],
+                          ),
                         ),
                         Spacers.v20,
                       ]).toList(),

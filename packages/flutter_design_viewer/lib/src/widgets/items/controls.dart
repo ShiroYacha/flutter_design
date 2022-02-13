@@ -104,27 +104,26 @@ class DataBuilderPanel extends HookConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
+        Divider(color: theme.disabledColor),
         DecoratedBox(
           decoration: ShapeDecoration(
-            color: theme.backgroundColor,
+            color: theme.scaffoldBackgroundColor,
             shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(16)),
+              borderRadius: BorderRadius.all(Radius.circular(8)),
             ),
           ),
-          child: Paddings.horizontal16(
-            child: DropdownButton<DataBuilder>(
-              items: dataBuilderOptions[fieldMetaData.name]!
-                  .map((e) => DropdownMenuItem(
-                        key: ValueKey(e.name),
-                        child: Text(e.name),
-                        value: e,
-                      ))
-                  .toList(),
-              onChanged: _updateBuilder,
-              underline: const SizedBox.shrink(),
-              value: dataBuilder,
-              isExpanded: true,
-            ),
+          child: DropdownButton<DataBuilder>(
+            items: dataBuilderOptions[fieldMetaData.name]!
+                .map((e) => DropdownMenuItem(
+                      key: ValueKey(e.name),
+                      child: Paddings.all10(child: Text(e.name)),
+                      value: e,
+                    ))
+                .toList(),
+            onChanged: _updateBuilder,
+            underline: const SizedBox.shrink(),
+            value: dataBuilder,
+            isExpanded: true,
           ),
         ),
         dataBuilder.buildDesigner(context, _updateBuilder),
@@ -158,7 +157,7 @@ class SelectableThemeGroup extends HookConsumerWidget {
       selectedItem: value,
       selectionChanged: (e) => valueChanged(e),
       builder: (context, e, [selected = false]) {
-        final color = selected ? theme.primaryColor : null;
+        final color = selected ? theme.primaryColor : theme.disabledColor;
         return CircleAvatar(
           backgroundColor: color,
           radius: 10,
