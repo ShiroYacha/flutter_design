@@ -95,7 +95,7 @@ class TextDescription extends StatelessWidget {
   final String? description;
   const TextDescription({
     required this.style,
-    required this.title,
+    this.title,
     this.description,
     Key? key,
   }) : super(key: key);
@@ -144,10 +144,11 @@ class ComponentSection extends HookConsumerWidget {
           ),
           ProviderScope(
             overrides: [
-              widgetBuilderProvider.overrideWithValue(component.builder),
-              sourceCodeProvider.overrideWithValue(component.sourceCode),
+              viewerComponentSectionProvider.overrideWithValue(component),
             ],
-            child: const ComponentFramePanel(),
+            child: const ComponentFramePanel(
+              widgetDisplayHeight: 500.0,
+            ), //TODO: configurable
           ),
         ],
       ),

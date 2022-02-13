@@ -1,9 +1,7 @@
 import 'package:analyzer/dart/element/element.dart';
-import 'package:faker/faker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:recase/recase.dart';
 
 import 'searches.dart';
 
@@ -33,6 +31,7 @@ class ViewerPageUnion with _$ViewerPageUnion implements Searchable {
     required String id,
     required List<String> namespace,
     required String title,
+    String? subtitle,
     String? description,
     @Default([]) List<String> tags,
     @Default([]) List<ViewerSectionUnion> sections,
@@ -40,8 +39,12 @@ class ViewerPageUnion with _$ViewerPageUnion implements Searchable {
 
   List<String> get segments => [...namespace, id];
 
-  @override
   String get uri => '/${segments.join('/')}';
+
+  String get firstDocumentUri => map(
+        group: (group) => group.children.map((e) => e.firstDocumentUri).first,
+        document: (document) => document.uri,
+      );
 
   @override
   List<SearchableElement> get searchableElements => [
@@ -114,16 +117,9 @@ class ViewerSectionUnion with _$ViewerSectionUnion implements Searchable {
     required String id,
     required String title,
     String? description,
-    required WidgetBuilder builder,
+    required ViewerWidgetBuilder builder,
     required ViewerSourceCode sourceCode,
   }) = ViewerComponentSection;
-
-  const factory ViewerSectionUnion.examples({
-    required String id,
-    required String title,
-    String? description,
-    @Default([]) List<ViewerExampleUnion> examples,
-  }) = ViewerExamplesSection;
 
   const factory ViewerSectionUnion.apiDocs({
     required String id,
@@ -134,9 +130,28 @@ class ViewerSectionUnion with _$ViewerSectionUnion implements Searchable {
 
   @override
   List<SearchableElement> get searchableElements => [];
+}
 
-  @override
-  String get uri => throw UnimplementedError();
+typedef WidgetDynamicBuilder = Widget Function(
+    BuildContext context, DataBuilderFactory data);
+
+@freezed
+class ViewerWidgetBuilder with _$ViewerWidgetBuilder {
+  const ViewerWidgetBuilder._();
+
+  const factory ViewerWidgetBuilder({
+    required WidgetDynamicBuilder build,
+    @Default([]) List<FieldMetaData> fieldMetaDataset,
+  }) = _ViewerWidgetBuilder;
+}
+
+@freezed
+class FieldMetaData with _$FieldMetaData {
+  const factory FieldMetaData({
+    required String name,
+    required Type type,
+    dynamic defaultValue,
+  }) = _FieldMetaData;
 }
 
 enum ViewerImageCollectionItemStyle {
@@ -189,78 +204,18 @@ class ViewerCatalogLink with _$ViewerCatalogLink {
   }) = _ViewerCatalogLink;
 }
 
-typedef DynamicWidgetBuilder<T> = Widget Function(
-  BuildContext context,
-  ViewerDataGeneratorFactory dataGeneratorFactory,
-);
-
-@freezed
-class ViewerDataGeneratorFactory with _$ViewerDataGeneratorFactory {
-  const ViewerDataGeneratorFactory._();
-  const factory ViewerDataGeneratorFactory(
-          {required List<ViewerDataGenerator> dataGenerators}) =
-      _ViewerDataGeneratorFactory;
-
-  ViewerDataGenerator findFirst(String dataKey) =>
-      dataGenerators.firstWhere((e) => e.dataKey == dataKey);
-
-  dynamic generateFirst(
-    BuildContext context, {
-    required String dataKey,
-  }) =>
-      findFirst(dataKey).build(context);
+abstract class DataBuilderFactory {
+  const DataBuilderFactory();
+  T build<T>(BuildContext context, String field);
 }
 
-@freezed
-class ViewerExampleUnion<T> with _$ViewerExampleUnion<T> implements Searchable {
-  const ViewerExampleUnion._();
+typedef UpdateDataBuilder<T> = void Function(DataBuilder<T> builder);
 
-  const factory ViewerExampleUnion.static({
-    required String name,
-    String? description,
-    required WidgetBuilder builder,
-    required ViewerSourceCode sourceCode,
-  }) = ViewerStaticExample<T>;
-
-  const factory ViewerExampleUnion.dynamic({
-    required String name,
-    String? description,
-    required DynamicWidgetBuilder<T> builder,
-    required ViewerSourceCode sourceCode,
-  }) = ViewerDynamicExample<T>;
-
-  @override
-  List<SearchableElement> get searchableElements => [];
-}
-
-abstract class ViewerDataGenerator<T> {
-  String get dataKey;
-  T build(BuildContext context);
-}
-
-typedef ViewerDataTemplateGeneratorBuilder<T> = Widget Function(
-  BuildContext context,
-  ViewerDataTemplateGeneratorUnion<T> generator,
-);
-
-@freezed
-class ViewerDataTemplateGeneratorUnion<T>
-    with _$ViewerDataTemplateGeneratorUnion<T> {
-  const ViewerDataTemplateGeneratorUnion._();
-  @Implements<ViewerDataGenerator>()
-  const factory ViewerDataTemplateGeneratorUnion.lorem({
-    required String dataKey,
-    @Default('Number of words') String label,
-    @Default(10) int length,
-    @Default(0) double min,
-    @Default(100) double max,
-  }) = ViewerLoremGenerator;
-
-  T build(BuildContext context) {
-    return map(
-      lorem: (lorem) => ReCase(
-        Faker(seed: dataKey.hashCode).lorem.words(length).join(' '),
-      ).sentenceCase,
-    ) as T;
-  }
+abstract class DataBuilder<T> {
+  String get name;
+  T build(BuildContext context, T field);
+  Widget buildDesigner(
+    BuildContext context,
+    UpdateDataBuilder<T> updateBuilder,
+  );
 }

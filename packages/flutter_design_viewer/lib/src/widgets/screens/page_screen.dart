@@ -24,10 +24,16 @@ class PageScreen extends HookConsumerWidget {
           TextDescription(
             style: TextDescriptionStyle.page(context),
             title: currentPage.title,
-            description: currentPage.description,
+            description: currentPage.subtitle,
           ),
           Spacers.v20,
           TableOfContents(sections: currentPage.sections),
+          Spacers.v20,
+          TextDescription(
+            style: TextDescriptionStyle.paragraph(context),
+            description: currentPage.description,
+          ),
+          Spacers.v20,
           ...currentPage.sections.map(
             (e) => Container(
               key:
@@ -37,7 +43,6 @@ class PageScreen extends HookConsumerWidget {
                     ParagraphSection(paragraph: paragraph),
                 component: (component) =>
                     ComponentSection(component: component),
-                examples: (examples) => Container(),
                 apiDocs: (apiDocs) => Container(),
               ),
             ),

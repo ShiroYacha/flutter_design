@@ -25,8 +25,8 @@ class KeyContainer extends StatelessWidget {
         boxShadow: [
           BoxShadow(
             offset: const Offset(0, 3),
-            color: Colors.grey.withOpacity(0.3),
-            blurRadius: 4,
+            color: Colors.grey.withOpacity(0.2),
+            blurRadius: 5,
             spreadRadius: 0.5,
           )
         ],
@@ -57,10 +57,12 @@ class TitleWidgetPair extends StatelessWidget {
   final String title;
   final String? description;
   final Widget widget;
+  final bool showDivider;
   const TitleWidgetPair({
     required this.title,
     this.description,
     required this.widget,
+    this.showDivider = false,
     Key? key,
   }) : super(key: key);
 
@@ -71,7 +73,7 @@ class TitleWidgetPair extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(title, style: theme.textTheme.subtitle1),
-        Spacers.v10,
+        if (showDivider) const Divider() else Spacers.v10,
         if (description != null) ...[
           Text(description!, style: theme.textTheme.caption),
           Spacers.v10,

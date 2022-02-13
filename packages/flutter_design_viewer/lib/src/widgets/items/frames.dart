@@ -10,12 +10,16 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_design/flutter_design.dart';
 import 'package:flutter_design_viewer/flutter_design_viewer.dart';
 import 'package:flutter_design_viewer/src/measures.dart';
+import 'package:flutter_design_viewer/src/models/data.dart';
+import 'package:flutter_design_viewer/src/widgets/dialogs/widget_dialog.dart';
 import 'package:flutter_design_viewer/src/widgets/items/buttons.dart';
+import 'package:flutter_design_viewer/src/widgets/items/containers.dart';
 import 'package:flutter_design_viewer/src/widgets/screens/page_screen.dart';
 import 'package:flutter_highlight/flutter_highlight.dart';
 import 'package:flutter_highlight/themes/atom-one-dark.dart';
 import 'package:flutter_highlight/themes/atom-one-light.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:ionicons/ionicons.dart';
 
@@ -24,30 +28,55 @@ import 'controls.dart';
 import 'images.dart';
 import 'splitter.dart';
 
+final showDataBuilderProvider =
+    Provider<bool>((ref) => throw UnimplementedError());
+
 class ComponentFramePanel extends HookConsumerWidget {
-  const ComponentFramePanel({Key? key}) : super(key: key);
+  final double widgetDisplayHeight;
+  const ComponentFramePanel({
+    required this.widgetDisplayHeight,
+    Key? key,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    const widgetDisplayHeight = 600.0; //TODO: configurable?
     final viewerState = ref.watch(viewerStateProvider);
+    final viewerWidgetBuilder =
+        ref.watch(viewerComponentSectionProvider.select((v) => v.builder));
+    final dataBuilderRegistry = ref.watch(dataBuilderRegistryProvider);
     final selectedViewMode = useState(viewerState.viewMode);
     final selectedDisplayMode = useState(viewerState.displayMode);
     final targetDeviceId = useState(viewerState.targetDeviceId);
     final targetDeviceIds = useState(viewerState.targetDeviceIds);
     final targetLocaleId = useState(viewerState.targetLocaleId);
     final targetThemeId = useState(viewerState.targetThemeId);
+    // Assemble data builders
+    final showDataBuilder = useState(false);
+    final dataBuilderOptions = useMemoized(
+        () => dataBuilderRegistry.getAllOptionsFor(
+              {
+                for (var k in viewerWidgetBuilder.fieldMetaDataset)
+                  k.name: k.type
+              },
+            ),
+        [viewerWidgetBuilder]);
+    final dataBuilders = useState({
+      for (var k in viewerWidgetBuilder.fieldMetaDataset)
+        k.name: dataBuilderOptions[k.name]!.first
+    });
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         ComponentFrameToolbar(
+          key: const ValueKey('ComponentFrameToolbar'),
           viewModeNotifier: selectedViewMode,
           displayModeNotifier: selectedDisplayMode,
           targetDeviceIdNotifier: targetDeviceId,
           targetDeviceIdsNotifier: targetDeviceIds,
           targetLocaleIdNotifier: targetLocaleId,
           targetThemeIdNotifier: targetThemeId,
+          showDataBuilderNotifier: showDataBuilder,
         ),
-        Spacers.v20,
+        Spacers.v10,
         ProviderScope(
           overrides: [
             viewerStateProvider.overrideWithValue(
@@ -56,6 +85,7 @@ class ComponentFramePanel extends HookConsumerWidget {
                   viewMode: selectedViewMode.value,
                   displayMode: selectedDisplayMode.value,
                   targetDeviceId: targetDeviceId.value,
+                  targetDeviceIds: targetDeviceIds.value,
                   targetLocaleId: targetLocaleId.value.isNotEmpty
                       ? targetLocaleId.value
                       : viewerState.targetLocaleId,
@@ -64,39 +94,30 @@ class ComponentFramePanel extends HookConsumerWidget {
                       : viewerState.targetThemeId,
                 ),
               ),
-            )
+            ),
+            showDataBuilderProvider.overrideWithValue(showDataBuilder.value),
+            dataBuildersProvider.overrideWithValue(dataBuilders.value),
+            dataBuilderOptionsProvider.overrideWithValue(dataBuilderOptions),
           ],
           child: Consumer(
             builder: (context, ref, widget) {
-              final theme = Theme.of(context);
               final localViewerState = ref.watch(viewerStateProvider);
-              if (localViewerState.displayMode == DisplayMode.widgetOnly) {
-                return const SizedBox(
-                    height: widgetDisplayHeight,
-                    child: ComponentFrameWidgetDisplay());
-              } else if (localViewerState.displayMode == DisplayMode.codeOnly) {
-                return const CompontentFrameCodeDisplay();
+              final showDataBuilder = ref.watch(showDataBuilderProvider);
+              if (localViewerState.displayMode == DisplayMode.codeOnly) {
+                return const CompontentFrameCodeDisplay(expand: false);
               }
               return SizedBox(
                 height: widgetDisplayHeight,
-                child: Split(
-                  axis: Axis.horizontal,
-                  initialFractions: const [0.5, 0.5],
-                  splitters: [
-                    SizedBox(
-                      width: 6,
-                      child: MouseRegion(
-                        child: DecoratedBox(
-                          decoration: BoxDecoration(
-                            color: theme.dividerColor,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                  children: const [
-                    ComponentFrameWidgetDisplay(),
-                    CompontentFrameCodeDisplay(),
+                child: NSplitter(
+                  items: [
+                    const ComponentFrameWidgetDisplay(),
+                    if (showDataBuilder)
+                      CompontentFrameDataDisplay(
+                        dataBuildersNotifier: dataBuilders,
+                      )
+                    else if (localViewerState.displayMode ==
+                        DisplayMode.widgetCodeSideBySide)
+                      const CompontentFrameCodeDisplay(),
                   ],
                 ),
               );
@@ -108,19 +129,75 @@ class ComponentFramePanel extends HookConsumerWidget {
   }
 }
 
+class NSplitter extends StatelessWidget {
+  final List<Widget> items;
+  const NSplitter({
+    required this.items,
+    Key? key,
+  })  : assert(items.length != 0),
+        super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    if (items.length == 1) {
+      return items.first;
+    }
+    return Split(
+      axis: Axis.horizontal,
+      initialFractions: items.map((e) => 1.0 / items.length).toList(),
+      splitters: items
+          .skip(1)
+          .map((e) => SizedBox(
+                width: 6,
+                child: MouseRegion(
+                  child: DecoratedBox(
+                    decoration: BoxDecoration(
+                      color: theme.dividerColor,
+                    ),
+                  ),
+                ),
+              ))
+          .toList(),
+      children: items,
+    );
+  }
+}
+
 class CompontentFrameCodeDisplay extends HookConsumerWidget {
-  const CompontentFrameCodeDisplay({Key? key}) : super(key: key);
+  final bool expand;
+  const CompontentFrameCodeDisplay({
+    this.expand = false,
+    Key? key,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final sourceCode = ref.watch(sourceCodeProvider);
+    final sourceCode =
+        ref.watch(viewerComponentSectionProvider.select((v) => v.sourceCode));
     final theme = Theme.of(context).brightness == Brightness.light
         ? atomOneLightTheme
         : atomOneDarkTheme;
     final backgroundColor = theme['root']!.backgroundColor;
+    const padding = SpacingDesign.s10;
     return Container(
       color: backgroundColor,
       child: Stack(
+        fit: expand ? StackFit.expand : StackFit.passthrough,
         children: [
+          HighlightView(
+            sourceCode.code,
+            padding: const EdgeInsets.only(
+                left: padding, top: padding, bottom: padding),
+            language: 'dart',
+            theme: {
+              ...theme,
+              'root': TextStyle(
+                color: theme['root']!.color,
+                backgroundColor: Colors.transparent,
+              ),
+            },
+            textStyle: GoogleFonts.robotoMono(),
+          ),
           Align(
             alignment: Alignment.topRight,
             child: GlyphButton(
@@ -135,24 +212,47 @@ class CompontentFrameCodeDisplay extends HookConsumerWidget {
               },
             ),
           ),
-          HighlightView(
-            sourceCode.code,
-            language: 'dart',
-            theme: {
-              ...theme,
-              'root': TextStyle(
-                color: theme['root']!.color,
-                backgroundColor: Colors.transparent,
-              ),
-            },
-            padding: const EdgeInsets.all(12),
-            textStyle: const TextStyle(
-              fontFamily: 'My awesome monospace font',
-              fontSize: 16,
-            ),
-          ),
         ],
       ),
+    );
+  }
+}
+
+final dataBuildersProvider =
+    Provider<Map<String, DataBuilder>>((ref) => throw UnimplementedError());
+final dataBuilderOptionsProvider = Provider<Map<String, List<DataBuilder>>>(
+    (ref) => throw UnimplementedError());
+
+class CompontentFrameDataDisplay extends HookConsumerWidget {
+  final ValueNotifier<Map<String, DataBuilder>> dataBuildersNotifier;
+  const CompontentFrameDataDisplay({
+    required this.dataBuildersNotifier,
+    Key? key,
+  }) : super(key: key);
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final viewerWidgetBuilder =
+        ref.watch(viewerComponentSectionProvider.select((v) => v.builder));
+    return Container(
+      padding: SpacingDesign.paddingAll10,
+      child: viewerWidgetBuilder.fieldMetaDataset.isEmpty
+          ? const Center(
+              child: Text('No data found'),
+            )
+          : ListView(
+              children: viewerWidgetBuilder.fieldMetaDataset
+                  .map(
+                    (e) => TitleWidgetPair(
+                      title: '🎛  ${e.name} (${e.type})',
+                      showDivider: true,
+                      widget: DataBuilderPanel(
+                        fieldMetaData: e,
+                        dataBuildersNotifier: dataBuildersNotifier,
+                      ),
+                    ),
+                  )
+                  .toList(),
+            ),
     );
   }
 }
@@ -183,6 +283,7 @@ class ComponentFrameToolbar extends HookConsumerWidget {
   final ValueNotifier<List<String>> targetDeviceIdsNotifier;
   final ValueNotifier<String> targetThemeIdNotifier;
   final ValueNotifier<String> targetLocaleIdNotifier;
+  final ValueNotifier<bool> showDataBuilderNotifier;
   const ComponentFrameToolbar({
     required this.viewModeNotifier,
     required this.displayModeNotifier,
@@ -190,10 +291,12 @@ class ComponentFrameToolbar extends HookConsumerWidget {
     required this.targetDeviceIdsNotifier,
     required this.targetThemeIdNotifier,
     required this.targetLocaleIdNotifier,
+    required this.showDataBuilderNotifier,
     Key? key,
   }) : super(key: key);
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final fullscreenMode = ref.watch(fullscreenModeProvider);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -218,20 +321,78 @@ class ComponentFrameToolbar extends HookConsumerWidget {
               value: displayModeNotifier.value,
               valueChanged: (v) => displayModeNotifier.value = v,
             ),
+            if (displayModeNotifier.value != DisplayMode.codeOnly)
+              ShowDataBuilderToggle(
+                value: showDataBuilderNotifier.value,
+                valueChanged: (v) => showDataBuilderNotifier.value = v,
+              ),
+            FullScreenButton(fullscreenMode: fullscreenMode),
           ],
         ),
-        Spacers.v20,
-        if (viewModeNotifier.value == ViewMode.devices)
+        if (viewModeNotifier.value == ViewMode.devices) ...[
+          Spacers.v10,
           SelectableDevicesGroup(
             value: targetDeviceIdsNotifier.value,
             valueChanged: (v) => targetDeviceIdsNotifier.value = v,
-          )
-        else if (viewModeNotifier.value != ViewMode.canvas)
+          ),
+        ] else if (viewModeNotifier.value != ViewMode.canvas) ...[
+          Spacers.v10,
           SelectableDeviceGroup(
             value: targetDeviceIdNotifier.value,
             valueChanged: (v) => targetDeviceIdNotifier.value = v,
           ),
+        ],
       ],
+    );
+  }
+}
+
+final fullscreenModeProvider = Provider<bool>((ref) => false);
+
+class FullScreenButton extends HookConsumerWidget {
+  final bool fullscreenMode;
+  const FullScreenButton({
+    required this.fullscreenMode,
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final theme = Theme.of(context);
+    final viewerComponentSection = ref.watch(viewerComponentSectionProvider);
+    final currentPage = ref.watch(currentPageProvider);
+    return SelectableContainer(
+      child: Tooltip(
+        message: 'Fullscreen',
+        child: GestureDetector(
+          onTap: () {
+            if (fullscreenMode) {
+              Navigator.of(context).pop();
+            } else {
+              showDialog(
+                context: context,
+                builder: (context) => ProviderScope(
+                  overrides: [
+                    fullscreenModeProvider.overrideWithValue(true),
+                    currentPageProvider.overrideWithValue(currentPage),
+                    viewerComponentSectionProvider
+                        .overrideWithValue(viewerComponentSection)
+                  ],
+                  child: const WidgetDialog(),
+                ),
+              );
+            }
+          },
+          child: ThemableGlyph(
+            glyph: ViewerGlyphUnion.icon(
+              icon: fullscreenMode
+                  ? Ionicons.contract_outline
+                  : Ionicons.expand_outline,
+              color: theme.colorScheme.onBackground,
+            ),
+          ),
+        ).asMouseClickRegion,
+      ),
     );
   }
 }
@@ -394,11 +555,8 @@ final seededRandomProvider =
 
 final randomSeedProvider = StateProvider<int>((ref) => 0);
 
-final widgetBuilderProvider =
-    Provider<WidgetBuilder>((ref) => throw UnimplementedError());
-
-final sourceCodeProvider =
-    Provider<ViewerSourceCode>((ref) => throw UnimplementedError());
+final viewerComponentSectionProvider =
+    Provider<ViewerComponentSection>((ref) => throw UnimplementedError());
 
 class MyCustomScrollBehavior extends MaterialScrollBehavior {
   // Override behavior methods and getters like dragDevices
@@ -431,11 +589,13 @@ class ContentApp extends HookConsumerWidget {
         viewerSettings.enabledThemes[viewerState.targetThemeId];
     final randomSeed = ref.watch(randomSeedProvider);
     final keyboardVisible = ref.watch(keyboardVisibleProvider);
-    final widgetBuilder = ref.watch(widgetBuilderProvider);
+    final viewerWidgetBuilder =
+        ref.watch(viewerComponentSectionProvider.select((v) => v.builder));
     // final navigatorKey = useMemoized(() => GlobalKey<NavigatorState>(), [key]);
     // useAsyncEffect(() async {
     //   localNavigatorKeys.state[key] = navigatorKey;
     // }, [key]);
+    final dataBuilders = ref.watch(dataBuildersProvider);
     return VirtualKeyboard(
       isEnabled: keyboardVisible,
       transitionDuration: const Duration(milliseconds: 100),
@@ -452,8 +612,15 @@ class ContentApp extends HookConsumerWidget {
           // navigatorKey: navigatorKey,
           home: Builder(
             builder: (context) {
-              return Container(
-                child: widgetBuilder(context),
+              return Material(
+                child: Center(
+                  child: viewerWidgetBuilder.build(
+                    context,
+                    ManagedDataBuilderFactory(
+                      builders: dataBuilders,
+                    ),
+                  ),
+                ),
               );
             },
           ),

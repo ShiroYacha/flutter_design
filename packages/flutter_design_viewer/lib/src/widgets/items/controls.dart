@@ -4,12 +4,65 @@ import 'package:flutter/material.dart';
 import 'package:flutter_design/flutter_design.dart';
 import 'package:flutter_design_viewer/flutter_design_viewer.dart';
 import 'package:flutter_design_viewer/src/measures.dart';
+import 'package:flutter_design_viewer/src/widgets/items/frames.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:ionicons/ionicons.dart';
 
 import 'buttons.dart';
 import 'images.dart';
+
+class DataBuilderPanel extends HookConsumerWidget {
+  final FieldMetaData fieldMetaData;
+  final ValueNotifier<Map<String, DataBuilder>> dataBuildersNotifier;
+  const DataBuilderPanel({
+    required this.fieldMetaData,
+    required this.dataBuildersNotifier,
+    Key? key,
+  }) : super(key: key);
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final theme = Theme.of(context);
+    final dataBuilder = dataBuildersNotifier.value[fieldMetaData.name]!;
+    final dataBuilderOptions = ref.watch(dataBuilderOptionsProvider);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        DecoratedBox(
+          decoration: ShapeDecoration(
+            color: theme.backgroundColor,
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(16)),
+            ),
+          ),
+          child: Paddings.horizontal16(
+            child: DropdownButton<DataBuilder>(
+              items: dataBuilderOptions[fieldMetaData.name]!
+                  .map((e) => DropdownMenuItem(
+                        key: ValueKey(e.name),
+                        child: Text(e.name),
+                        value: e,
+                      ))
+                  .toList(),
+              onChanged: _updateBuilder,
+              underline: const SizedBox.shrink(),
+              value: dataBuilder,
+              isExpanded: true,
+            ),
+          ),
+        ),
+        dataBuilder.buildDesigner(context, _updateBuilder),
+      ],
+    );
+  }
+
+  void _updateBuilder(v) {
+    dataBuildersNotifier.value = {
+      ...dataBuildersNotifier.value,
+      fieldMetaData.name: v!,
+    };
+  }
+}
 
 class SelectableThemeGroup extends HookConsumerWidget {
   final String value;
@@ -168,6 +221,36 @@ class SelectableDevicesGroup extends HookConsumerWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class ShowDataBuilderToggle extends StatelessWidget {
+  final bool value;
+  final void Function(bool) valueChanged;
+  const ShowDataBuilderToggle({
+    Key? key,
+    required this.value,
+    required this.valueChanged,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return SelectableContainer(
+      child: Tooltip(
+        message: 'Show data builder',
+        child: GestureDetector(
+          onTap: () => valueChanged(!value),
+          child: ThemableGlyph(
+            glyph: ViewerGlyphUnion.icon(
+              icon: Ionicons.server_outline,
+              color:
+                  value ? theme.primaryColor : theme.colorScheme.onBackground,
+            ),
+          ),
+        ).asMouseClickRegion,
       ),
     );
   }

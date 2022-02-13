@@ -23,7 +23,7 @@ dependencies:
   json_annotation: ^4.4.0
   faker: ^2.0.0
   # font
-  google_fonts: ^2.1.0
+  google_fonts: 2.2.0
   # controls
   material_floating_search_bar: ^0.3.6
   linked_scroll_controller: ^0.2.0

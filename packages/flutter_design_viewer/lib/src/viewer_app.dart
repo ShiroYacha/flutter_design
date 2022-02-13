@@ -1,9 +1,12 @@
+import 'dart:async';
+
 import 'package:bot_toast/bot_toast.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_design/flutter_design.dart';
 import 'package:flutter_design_viewer/flutter_design_viewer.dart';
+import 'package:flutter_design_viewer/src/models/data.dart';
 import 'package:flutter_design_viewer/src/theme.dart';
 import 'package:flutter_design_viewer/src/utils.dart';
 import 'package:flutter_design_viewer/src/widget_keys.dart';
@@ -12,6 +15,7 @@ import 'package:vrouter/vrouter.dart';
 
 import 'commands.dart';
 import 'models/settings.dart';
+import 'navigator_observer.dart';
 import 'widgets/items/brandings.dart';
 import 'widgets/scaffolds/root_scaffold.dart';
 import 'widgets/screens/page_screen.dart';
@@ -24,7 +28,7 @@ final viewerStateProvider = StateProvider<ViewerState>(
   (ref) => ViewerState(
     viewMode: ViewMode.themes,
     themeMode: ThemeMode.dark,
-    displayMode: DisplayMode.widgetCodeSideBySide,
+    displayMode: DisplayMode.widgetOnly,
     targetDeviceId: Devices.ios.iPhone12.identifier.toString(),
     targetDeviceIds: [],
     targetLocaleId: '',
@@ -53,6 +57,16 @@ class DesignSystemViewerApp extends HookConsumerWidget {
         brandingProvider.overrideWithValue(branding ?? const DefaultBranding()),
         pageGroupsProvider.overrideWithValue(pageGroups),
         viewerSettingsProvider.overrideWithValue(settings),
+        dataBuilderRegistryProvider.overrideWithValue(
+          DataBuilderRegistry(
+            allBuilders: {
+              String: [
+                () => DataTemplateStringLoremBuilder(),
+                () => DataTemplateStringRawBuilder(),
+              ],
+            },
+          ),
+        )
       ],
       child: const DesignSystemViewerRouter(),
     );
@@ -70,12 +84,13 @@ class DesignSystemViewerRouter extends HookConsumerWidget {
     // Restore viewer state from cache
     useAsyncEffect(() async {
       try {
+        BotToast.showLoading();
         final cache = await ViewerState.getFromStorage();
         viewerStateNotifier.state = cache ??
             ViewerState(
               viewMode: ViewMode.canvas,
-              displayMode: DisplayMode.widgetCodeSideBySide,
-              themeMode: ThemeMode.system,
+              displayMode: DisplayMode.widgetOnly,
+              themeMode: ThemeMode.dark,
               targetDeviceId: Devices.ios.iPhone12.identifier.toString(),
               targetDeviceIds: [
                 Devices.ios.iPhone12.identifier.toString(),
@@ -86,12 +101,18 @@ class DesignSystemViewerRouter extends HookConsumerWidget {
               targetThemeId: viewerSettings.enabledThemes.keys.first,
               targetThemeIds: viewerSettings.enabledThemes.keys.toList(),
             );
-      } finally {}
+        if (cache?.uri != null && WidgetKeys.navKey.currentContext != null) {
+          // Restore cached URI
+          VRouter.of(WidgetKeys.navKey.currentContext!).to(cache!.uri!);
+        }
+      } finally {
+        BotToast.closeAllLoading();
+      }
     }, []);
     // Persists viewer state to cache upon changes
     ref.listen<ViewerState>(viewerStateProvider, (previous, next) async {
       if (previous != next) {
-        await next.saveToStorage();
+        unawaited(next.saveToStorage());
       }
     });
     return VRouter(
@@ -101,9 +122,12 @@ class DesignSystemViewerRouter extends HookConsumerWidget {
       darkTheme: defaultDarkTheme,
       themeMode: viewerState.themeMode,
       builder: BotToastInit(),
-      navigatorObservers: [BotToastNavigatorObserver()],
+      navigatorObservers: [
+        BotToastNavigatorObserver(),
+        TrackedNavigatorObserver(viewerStateNotifier: viewerStateNotifier),
+      ],
       initialUrl:
-          '/components/button', //TODO:  pageGroups.first.children.first.uri,
+          pageGroups.first.children.map((e) => e.firstDocumentUri).first,
       buildTransition: (animation1, _, child) => FadeTransition(
         opacity: animation1,
         child: child,

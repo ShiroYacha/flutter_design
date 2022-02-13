@@ -32,8 +32,6 @@ dependencies:
   # internal
   flutter_design:
     path: ../../flutter_design
-  flutter_design_codegen:
-    path: ../../flutter_design_codegen
   flutter_design_viewer:
     path: ../
   # icon
@@ -43,6 +41,9 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_design_codegen:
+    path: ../../flutter_design_codegen
+  build_runner: ^2.1.7
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
