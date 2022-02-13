@@ -6,7 +6,8 @@ final primaryColor = Colors.amber.shade600;
 final primaryDarkColor = Colors.amber.shade400;
 final secondaryColor = Colors.teal.shade600;
 final secondaryDarkColor = Colors.teal.shade400;
-const backgroundLight = Color(0xFFFAFAFA);
+const backgroundLightest = Color(0xFFFAFAFA);
+const backgroundLight = Color(0xFFF1F1F1);
 const backgroundDark = Color(0xFF1C1C1C);
 const backgroundDarkest = Color(0xFF0F0F0F);
 const dividerLight = Color(0xFF9A9A9A);
@@ -17,7 +18,7 @@ final defaultLightTheme = ThemeData(
   fontFamily: 'Poppins',
   brightness: Brightness.light,
   scaffoldBackgroundColor: backgroundLight,
-  backgroundColor: Colors.white,
+  backgroundColor: backgroundLightest,
   dividerColor: dividerLight,
   dividerTheme: const DividerThemeData(
     color: dividerLight,
