@@ -3,7 +3,9 @@ import 'package:flutter_design/flutter_design.dart';
 
 part 'buttons.design.dart';
 
-@Design(title: 'Button')
+@Design(
+  title: 'Button',
+)
 class Button extends StatelessWidget {
   final Widget child;
   final VoidCallback? onPressed;

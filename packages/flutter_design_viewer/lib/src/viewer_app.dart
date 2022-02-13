@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_design/flutter_design.dart';
 import 'package:flutter_design_viewer/flutter_design_viewer.dart';
-import 'package:flutter_design_viewer/src/models/data.dart';
+import 'package:flutter_design_viewer/src/models/data_factory.dart';
 import 'package:flutter_design_viewer/src/theme.dart';
 import 'package:flutter_design_viewer/src/utils.dart';
 import 'package:flutter_design_viewer/src/widget_keys.dart';
@@ -52,6 +52,7 @@ class DesignSystemViewerApp extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final theme = Theme.of(context);
     return ProviderScope(
       overrides: [
         brandingProvider.overrideWithValue(branding ?? const DefaultBranding()),
@@ -63,6 +64,12 @@ class DesignSystemViewerApp extends HookConsumerWidget {
               String: [
                 () => DataTemplateStringLoremBuilder(),
                 () => DataTemplateStringRawBuilder(),
+              ],
+              Widget: [
+                () => DataTemplateWidgetPlaceholderBuilder(),
+              ],
+              Function: [
+                () => DataTemplateStubFunctionBuilder(),
               ],
             },
           ),

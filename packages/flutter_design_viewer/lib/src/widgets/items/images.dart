@@ -9,33 +9,41 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:patterns_canvas/patterns_canvas.dart';
 
 class PatternedBackground extends HookConsumerWidget {
-  const PatternedBackground({Key? key}) : super(key: key);
+  const PatternedBackground({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return CustomPaint(
       size: const Size(double.infinity, double.infinity),
-      painter: _PatternPainter(
+      painter: PatternPainter(
         theme: Theme.of(context),
       ),
     );
   }
 }
 
-class _PatternPainter extends CustomPainter {
+class PatternPainter extends CustomPainter {
   final ThemeData theme;
+  final Color? backgroundColor;
+  final Color? foregroundColor;
+  final double featureCountsScale;
 
-  _PatternPainter({
+  PatternPainter({
     required this.theme,
+    this.backgroundColor,
+    this.foregroundColor,
+    this.featureCountsScale = 0.5,
   });
 
   @override
   void paint(Canvas canvas, Size size) {
     final Rect rect = Rect.fromLTWH(0, 0, size.width, size.height);
     Dots(
-      bgColor: theme.scaffoldBackgroundColor,
-      fgColor: theme.disabledColor,
-      featuresCount: min((size.width * 0.5).floor(), 400),
+      bgColor: backgroundColor ?? theme.scaffoldBackgroundColor,
+      fgColor: foregroundColor ?? theme.disabledColor,
+      featuresCount: min((size.width * featureCountsScale).floor(), 400),
     ).paintOnRect(
       canvas,
       size,

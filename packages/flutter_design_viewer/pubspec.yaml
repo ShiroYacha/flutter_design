@@ -38,6 +38,7 @@ dependencies:
     git:
       url: https://github.com/shreyas1599/highlight.dart.git
       path: flutter_highlight
+  flutter_colorpicker: ^1.0.3
   # media
   flutter_svg: ^1.0.3
   flutter_feather_icons: ^2.0.0+1

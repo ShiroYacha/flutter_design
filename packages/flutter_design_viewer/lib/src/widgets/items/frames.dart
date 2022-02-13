@@ -10,10 +10,9 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_design/flutter_design.dart';
 import 'package:flutter_design_viewer/flutter_design_viewer.dart';
 import 'package:flutter_design_viewer/src/measures.dart';
-import 'package:flutter_design_viewer/src/models/data.dart';
+import 'package:flutter_design_viewer/src/models/data_factory.dart';
 import 'package:flutter_design_viewer/src/widgets/dialogs/widget_dialog.dart';
 import 'package:flutter_design_viewer/src/widgets/items/buttons.dart';
-import 'package:flutter_design_viewer/src/widgets/items/containers.dart';
 import 'package:flutter_design_viewer/src/widgets/screens/page_screen.dart';
 import 'package:flutter_highlight/flutter_highlight.dart';
 import 'package:flutter_highlight/themes/atom-one-dark.dart';
@@ -53,10 +52,7 @@ class ComponentFramePanel extends HookConsumerWidget {
     final showDataBuilder = useState(false);
     final dataBuilderOptions = useMemoized(
         () => dataBuilderRegistry.getAllOptionsFor(
-              {
-                for (var k in viewerWidgetBuilder.fieldMetaDataset)
-                  k.name: k.type
-              },
+              {for (var k in viewerWidgetBuilder.fieldMetaDataset) k.name: k},
             ),
         [viewerWidgetBuilder]);
     final dataBuilders = useState({
@@ -231,6 +227,7 @@ class CompontentFrameDataDisplay extends HookConsumerWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final theme = Theme.of(context);
     final viewerWidgetBuilder =
         ref.watch(viewerComponentSectionProvider.select((v) => v.builder));
     return Container(
@@ -240,18 +237,33 @@ class CompontentFrameDataDisplay extends HookConsumerWidget {
               child: Text('No data found'),
             )
           : ListView(
-              children: viewerWidgetBuilder.fieldMetaDataset
-                  .map(
-                    (e) => TitleWidgetPair(
-                      title: '🎛  ${e.name} (${e.type})',
-                      showDivider: true,
-                      widget: DataBuilderPanel(
-                        fieldMetaData: e,
-                        dataBuildersNotifier: dataBuildersNotifier,
-                      ),
-                    ),
-                  )
-                  .toList(),
+              children: viewerWidgetBuilder.fieldMetaDataset.fold<List<Widget>>(
+                  <Widget>[],
+                  (pe, v) => [
+                        ...pe,
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SelectableText.rich(TextSpan(children: [
+                              TextSpan(
+                                  text:
+                                      '${v.type.toString()}${v.isOptional ? '?' : ''}',
+                                  style: theme.textTheme.subtitle1
+                                      ?.copyWith(color: theme.primaryColor)),
+                              const WidgetSpan(child: Spacers.h6),
+                              TextSpan(
+                                  text: v.name,
+                                  style: theme.textTheme.subtitle1)
+                            ])),
+                            const Divider(),
+                            DataBuilderPanel(
+                              fieldMetaData: v,
+                              dataBuildersNotifier: dataBuildersNotifier,
+                            ),
+                          ],
+                        ),
+                        Spacers.v20,
+                      ]).toList(),
             ),
     );
   }

@@ -2592,11 +2592,11 @@ class _$FieldMetaDataTearOff {
   const _$FieldMetaDataTearOff();
 
   _FieldMetaData call(
-      {required String name, required Type type, dynamic defaultValue}) {
+      {required String name, required Type type, required bool isOptional}) {
     return _FieldMetaData(
       name: name,
       type: type,
-      defaultValue: defaultValue,
+      isOptional: isOptional,
     );
   }
 }
@@ -2608,7 +2608,7 @@ const $FieldMetaData = _$FieldMetaDataTearOff();
 mixin _$FieldMetaData {
   String get name => throw _privateConstructorUsedError;
   Type get type => throw _privateConstructorUsedError;
-  dynamic get defaultValue => throw _privateConstructorUsedError;
+  bool get isOptional => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $FieldMetaDataCopyWith<FieldMetaData> get copyWith =>
@@ -2620,7 +2620,7 @@ abstract class $FieldMetaDataCopyWith<$Res> {
   factory $FieldMetaDataCopyWith(
           FieldMetaData value, $Res Function(FieldMetaData) then) =
       _$FieldMetaDataCopyWithImpl<$Res>;
-  $Res call({String name, Type type, dynamic defaultValue});
+  $Res call({String name, Type type, bool isOptional});
 }
 
 /// @nodoc
@@ -2636,7 +2636,7 @@ class _$FieldMetaDataCopyWithImpl<$Res>
   $Res call({
     Object? name = freezed,
     Object? type = freezed,
-    Object? defaultValue = freezed,
+    Object? isOptional = freezed,
   }) {
     return _then(_value.copyWith(
       name: name == freezed
@@ -2647,10 +2647,10 @@ class _$FieldMetaDataCopyWithImpl<$Res>
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as Type,
-      defaultValue: defaultValue == freezed
-          ? _value.defaultValue
-          : defaultValue // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+      isOptional: isOptional == freezed
+          ? _value.isOptional
+          : isOptional // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -2662,7 +2662,7 @@ abstract class _$FieldMetaDataCopyWith<$Res>
           _FieldMetaData value, $Res Function(_FieldMetaData) then) =
       __$FieldMetaDataCopyWithImpl<$Res>;
   @override
-  $Res call({String name, Type type, dynamic defaultValue});
+  $Res call({String name, Type type, bool isOptional});
 }
 
 /// @nodoc
@@ -2680,7 +2680,7 @@ class __$FieldMetaDataCopyWithImpl<$Res>
   $Res call({
     Object? name = freezed,
     Object? type = freezed,
-    Object? defaultValue = freezed,
+    Object? isOptional = freezed,
   }) {
     return _then(_FieldMetaData(
       name: name == freezed
@@ -2691,10 +2691,10 @@ class __$FieldMetaDataCopyWithImpl<$Res>
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as Type,
-      defaultValue: defaultValue == freezed
-          ? _value.defaultValue
-          : defaultValue // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+      isOptional: isOptional == freezed
+          ? _value.isOptional
+          : isOptional // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -2703,18 +2703,18 @@ class __$FieldMetaDataCopyWithImpl<$Res>
 
 class _$_FieldMetaData with DiagnosticableTreeMixin implements _FieldMetaData {
   const _$_FieldMetaData(
-      {required this.name, required this.type, this.defaultValue});
+      {required this.name, required this.type, required this.isOptional});
 
   @override
   final String name;
   @override
   final Type type;
   @override
-  final dynamic defaultValue;
+  final bool isOptional;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'FieldMetaData(name: $name, type: $type, defaultValue: $defaultValue)';
+    return 'FieldMetaData(name: $name, type: $type, isOptional: $isOptional)';
   }
 
   @override
@@ -2724,7 +2724,7 @@ class _$_FieldMetaData with DiagnosticableTreeMixin implements _FieldMetaData {
       ..add(DiagnosticsProperty('type', 'FieldMetaData'))
       ..add(DiagnosticsProperty('name', name))
       ..add(DiagnosticsProperty('type', type))
-      ..add(DiagnosticsProperty('defaultValue', defaultValue));
+      ..add(DiagnosticsProperty('isOptional', isOptional));
   }
 
   @override
@@ -2735,7 +2735,7 @@ class _$_FieldMetaData with DiagnosticableTreeMixin implements _FieldMetaData {
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality().equals(other.type, type) &&
             const DeepCollectionEquality()
-                .equals(other.defaultValue, defaultValue));
+                .equals(other.isOptional, isOptional));
   }
 
   @override
@@ -2743,7 +2743,7 @@ class _$_FieldMetaData with DiagnosticableTreeMixin implements _FieldMetaData {
       runtimeType,
       const DeepCollectionEquality().hash(name),
       const DeepCollectionEquality().hash(type),
-      const DeepCollectionEquality().hash(defaultValue));
+      const DeepCollectionEquality().hash(isOptional));
 
   @JsonKey(ignore: true)
   @override
@@ -2755,14 +2755,14 @@ abstract class _FieldMetaData implements FieldMetaData {
   const factory _FieldMetaData(
       {required String name,
       required Type type,
-      dynamic defaultValue}) = _$_FieldMetaData;
+      required bool isOptional}) = _$_FieldMetaData;
 
   @override
   String get name;
   @override
   Type get type;
   @override
-  dynamic get defaultValue;
+  bool get isOptional;
   @override
   @JsonKey(ignore: true)
   _$FieldMetaDataCopyWith<_FieldMetaData> get copyWith =>

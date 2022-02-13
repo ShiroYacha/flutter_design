@@ -18,7 +18,7 @@ void main() {
           },
         ),
         pageGroups: [
-          ...testPageGroups,
+          // ...testPageGroups,
           ViewerPageGroup(
             id: 'components',
             title: 'COMPONENTS',
@@ -239,7 +239,7 @@ Where possible, Wanda's components include abstractions to make labelling our co
                 FieldMetaData(
                   name: 'label',
                   type: String,
-                  defaultValue: 'Lorem ipsum',
+                  isOptional: false,
                 )
               ],
             ),
@@ -267,7 +267,7 @@ class SpecialButton extends StatelessWidget {
                 FieldMetaData(
                   name: 'label',
                   type: String,
-                  defaultValue: 'Lorem ipsum',
+                  isOptional: false,
                 )
               ],
             ),

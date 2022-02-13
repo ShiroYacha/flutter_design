@@ -17,10 +17,31 @@ final componentsActionsButtonsPage = ViewerDocumentPage(
       id: 'button',
       title: 'Anatomy',
       builder: ViewerWidgetBuilder(
-        build: (context, data) => Button(child: Text('test')),
+        build: (context, factory) => Button(
+          child: factory.build(context, 'child'),
+          onPressed: factory.build(context, 'onPressed'),
+        ),
+        fieldMetaDataset: const [
+          FieldMetaData(
+            name: 'child',
+            type: Widget,
+            isOptional: false,
+          ),
+          FieldMetaData(
+            name: 'onPressed',
+            type: Function,
+            isOptional: true,
+          ),
+        ],
       ),
       sourceCode: const ViewerSourceCode(
-          location: '', code: '''class Button extends StatelessWidget {
+          location: 'package:viewer_example/components/actions/buttons.dart',
+          code: '''
+/// Built from the following function 
+(context, factory) => Button(child: factory.build(context, 'child'),onPressed: factory.build(context, 'onPressed'),)
+
+/// Widget
+class Button extends StatelessWidget {
   final Widget child;
   final VoidCallback? onPressed;
   const Button({
@@ -48,6 +69,7 @@ final componentsActionsButtonsPage = ViewerDocumentPage(
     );
   }
 }
+
 '''),
     ),
   ],

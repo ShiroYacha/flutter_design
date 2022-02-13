@@ -1,6 +1,7 @@
 import 'package:analyzer/dart/element/element.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_design_annotation/flutter_design_annotation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'searches.dart';
@@ -147,10 +148,11 @@ class ViewerWidgetBuilder with _$ViewerWidgetBuilder {
 
 @freezed
 class FieldMetaData with _$FieldMetaData {
+  const FieldMetaData._();
   const factory FieldMetaData({
     required String name,
     required Type type,
-    dynamic defaultValue,
+    required bool isOptional,
   }) = _FieldMetaData;
 }
 
@@ -204,18 +206,8 @@ class ViewerCatalogLink with _$ViewerCatalogLink {
   }) = _ViewerCatalogLink;
 }
 
-abstract class DataBuilderFactory {
-  const DataBuilderFactory();
-  T build<T>(BuildContext context, String field);
-}
+typedef DataBuilderFactory = TDataBuilderFactory<BuildContext>;
 
-typedef UpdateDataBuilder<T> = void Function(DataBuilder<T> builder);
+typedef UpdateDataBuilder<T> = TUpdateDataBuilder<Widget, BuildContext, T>;
 
-abstract class DataBuilder<T> {
-  String get name;
-  T build(BuildContext context, T field);
-  Widget buildDesigner(
-    BuildContext context,
-    UpdateDataBuilder<T> updateBuilder,
-  );
-}
+typedef DataBuilder<T> = TDataBuilder<Widget, BuildContext, T>;

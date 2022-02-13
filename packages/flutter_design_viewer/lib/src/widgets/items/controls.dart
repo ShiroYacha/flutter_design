@@ -1,16 +1,92 @@
+import 'dart:math';
+
 import 'package:device_preview/device_preview.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_design/flutter_design.dart';
 import 'package:flutter_design_viewer/flutter_design_viewer.dart';
 import 'package:flutter_design_viewer/src/measures.dart';
+import 'package:flutter_design_viewer/src/models/data_factory.dart';
 import 'package:flutter_design_viewer/src/widgets/items/frames.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:patterns_canvas/patterns_canvas.dart';
 
 import 'buttons.dart';
 import 'images.dart';
+
+class SizerControl extends StatelessWidget {
+  final double height;
+  final Size value;
+  final Color color;
+  final void Function(Size) valueChanged;
+  const SizerControl({
+    required this.height,
+    required this.value,
+    required this.color,
+    required this.valueChanged,
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return SizedBox(
+      height: height,
+      width: double.infinity,
+      child: MouseRegion(
+        cursor: SystemMouseCursors.move,
+        child: GestureDetector(
+          onTapDown: (e) {
+            valueChanged(Size(e.localPosition.dx, e.localPosition.dy));
+          },
+          child: CustomPaint(
+            painter: _SizePainter(
+              theme: theme,
+              color: color,
+              value: value,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _SizePainter extends CustomPainter {
+  final ThemeData theme;
+  final Color color;
+  final Size value;
+  const _SizePainter({
+    required this.theme,
+    required this.color,
+    required this.value,
+  });
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final Rect rect = Rect.fromLTWH(0, 0, size.width, size.height);
+    Dots(
+      bgColor: theme.scaffoldBackgroundColor,
+      fgColor: theme.disabledColor,
+      featuresCount: min((size.width * 0.2).floor(), 400),
+    ).paintOnRect(
+      canvas,
+      size,
+      rect,
+      patternScaleBehavior: PatternScaleBehavior.customRect,
+      customRect: rect,
+    );
+    final foreground = Paint()
+      ..color = color.withOpacity(0.5)
+      ..style = PaintingStyle.fill;
+    canvas.drawRect(Rect.fromLTRB(0, 0, value.width, value.height), foreground);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
+}
 
 class DataBuilderPanel extends HookConsumerWidget {
   final FieldMetaData fieldMetaData;
