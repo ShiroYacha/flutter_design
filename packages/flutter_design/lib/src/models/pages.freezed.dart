@@ -15,240 +15,6 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-class _$ViewerPageGroupTearOff {
-  const _$ViewerPageGroupTearOff();
-
-  _ViewerPageGroup call(
-      {required String id,
-      required String title,
-      ViewerGlyphUnion? glyph,
-      List<ViewerPageUnion> children = const []}) {
-    return _ViewerPageGroup(
-      id: id,
-      title: title,
-      glyph: glyph,
-      children: children,
-    );
-  }
-}
-
-/// @nodoc
-const $ViewerPageGroup = _$ViewerPageGroupTearOff();
-
-/// @nodoc
-mixin _$ViewerPageGroup {
-  String get id => throw _privateConstructorUsedError;
-  String get title => throw _privateConstructorUsedError;
-  ViewerGlyphUnion? get glyph => throw _privateConstructorUsedError;
-  List<ViewerPageUnion> get children => throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $ViewerPageGroupCopyWith<ViewerPageGroup> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $ViewerPageGroupCopyWith<$Res> {
-  factory $ViewerPageGroupCopyWith(
-          ViewerPageGroup value, $Res Function(ViewerPageGroup) then) =
-      _$ViewerPageGroupCopyWithImpl<$Res>;
-  $Res call(
-      {String id,
-      String title,
-      ViewerGlyphUnion? glyph,
-      List<ViewerPageUnion> children});
-
-  $ViewerGlyphUnionCopyWith<$Res>? get glyph;
-}
-
-/// @nodoc
-class _$ViewerPageGroupCopyWithImpl<$Res>
-    implements $ViewerPageGroupCopyWith<$Res> {
-  _$ViewerPageGroupCopyWithImpl(this._value, this._then);
-
-  final ViewerPageGroup _value;
-  // ignore: unused_field
-  final $Res Function(ViewerPageGroup) _then;
-
-  @override
-  $Res call({
-    Object? id = freezed,
-    Object? title = freezed,
-    Object? glyph = freezed,
-    Object? children = freezed,
-  }) {
-    return _then(_value.copyWith(
-      id: id == freezed
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      title: title == freezed
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String,
-      glyph: glyph == freezed
-          ? _value.glyph
-          : glyph // ignore: cast_nullable_to_non_nullable
-              as ViewerGlyphUnion?,
-      children: children == freezed
-          ? _value.children
-          : children // ignore: cast_nullable_to_non_nullable
-              as List<ViewerPageUnion>,
-    ));
-  }
-
-  @override
-  $ViewerGlyphUnionCopyWith<$Res>? get glyph {
-    if (_value.glyph == null) {
-      return null;
-    }
-
-    return $ViewerGlyphUnionCopyWith<$Res>(_value.glyph!, (value) {
-      return _then(_value.copyWith(glyph: value));
-    });
-  }
-}
-
-/// @nodoc
-abstract class _$ViewerPageGroupCopyWith<$Res>
-    implements $ViewerPageGroupCopyWith<$Res> {
-  factory _$ViewerPageGroupCopyWith(
-          _ViewerPageGroup value, $Res Function(_ViewerPageGroup) then) =
-      __$ViewerPageGroupCopyWithImpl<$Res>;
-  @override
-  $Res call(
-      {String id,
-      String title,
-      ViewerGlyphUnion? glyph,
-      List<ViewerPageUnion> children});
-
-  @override
-  $ViewerGlyphUnionCopyWith<$Res>? get glyph;
-}
-
-/// @nodoc
-class __$ViewerPageGroupCopyWithImpl<$Res>
-    extends _$ViewerPageGroupCopyWithImpl<$Res>
-    implements _$ViewerPageGroupCopyWith<$Res> {
-  __$ViewerPageGroupCopyWithImpl(
-      _ViewerPageGroup _value, $Res Function(_ViewerPageGroup) _then)
-      : super(_value, (v) => _then(v as _ViewerPageGroup));
-
-  @override
-  _ViewerPageGroup get _value => super._value as _ViewerPageGroup;
-
-  @override
-  $Res call({
-    Object? id = freezed,
-    Object? title = freezed,
-    Object? glyph = freezed,
-    Object? children = freezed,
-  }) {
-    return _then(_ViewerPageGroup(
-      id: id == freezed
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      title: title == freezed
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String,
-      glyph: glyph == freezed
-          ? _value.glyph
-          : glyph // ignore: cast_nullable_to_non_nullable
-              as ViewerGlyphUnion?,
-      children: children == freezed
-          ? _value.children
-          : children // ignore: cast_nullable_to_non_nullable
-              as List<ViewerPageUnion>,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$_ViewerPageGroup
-    with DiagnosticableTreeMixin
-    implements _ViewerPageGroup {
-  const _$_ViewerPageGroup(
-      {required this.id,
-      required this.title,
-      this.glyph,
-      this.children = const []});
-
-  @override
-  final String id;
-  @override
-  final String title;
-  @override
-  final ViewerGlyphUnion? glyph;
-  @JsonKey()
-  @override
-  final List<ViewerPageUnion> children;
-
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ViewerPageGroup(id: $id, title: $title, glyph: $glyph, children: $children)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'ViewerPageGroup'))
-      ..add(DiagnosticsProperty('id', id))
-      ..add(DiagnosticsProperty('title', title))
-      ..add(DiagnosticsProperty('glyph', glyph))
-      ..add(DiagnosticsProperty('children', children));
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _ViewerPageGroup &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.title, title) &&
-            const DeepCollectionEquality().equals(other.glyph, glyph) &&
-            const DeepCollectionEquality().equals(other.children, children));
-  }
-
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(title),
-      const DeepCollectionEquality().hash(glyph),
-      const DeepCollectionEquality().hash(children));
-
-  @JsonKey(ignore: true)
-  @override
-  _$ViewerPageGroupCopyWith<_ViewerPageGroup> get copyWith =>
-      __$ViewerPageGroupCopyWithImpl<_ViewerPageGroup>(this, _$identity);
-}
-
-abstract class _ViewerPageGroup implements ViewerPageGroup {
-  const factory _ViewerPageGroup(
-      {required String id,
-      required String title,
-      ViewerGlyphUnion? glyph,
-      List<ViewerPageUnion> children}) = _$_ViewerPageGroup;
-
-  @override
-  String get id;
-  @override
-  String get title;
-  @override
-  ViewerGlyphUnion? get glyph;
-  @override
-  List<ViewerPageUnion> get children;
-  @override
-  @JsonKey(ignore: true)
-  _$ViewerPageGroupCopyWith<_ViewerPageGroup> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
 class _$ViewerPageUnionTearOff {
   const _$ViewerPageUnionTearOff();
 
@@ -2701,9 +2467,10 @@ class __$FieldMetaDataCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_FieldMetaData with DiagnosticableTreeMixin implements _FieldMetaData {
+class _$_FieldMetaData extends _FieldMetaData with DiagnosticableTreeMixin {
   const _$_FieldMetaData(
-      {required this.name, required this.type, required this.isOptional});
+      {required this.name, required this.type, required this.isOptional})
+      : super._();
 
   @override
   final String name;
@@ -2751,11 +2518,12 @@ class _$_FieldMetaData with DiagnosticableTreeMixin implements _FieldMetaData {
       __$FieldMetaDataCopyWithImpl<_FieldMetaData>(this, _$identity);
 }
 
-abstract class _FieldMetaData implements FieldMetaData {
+abstract class _FieldMetaData extends FieldMetaData {
   const factory _FieldMetaData(
       {required String name,
       required Type type,
       required bool isOptional}) = _$_FieldMetaData;
+  const _FieldMetaData._() : super._();
 
   @override
   String get name;

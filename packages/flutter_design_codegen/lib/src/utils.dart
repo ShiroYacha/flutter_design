@@ -1,19 +1,59 @@
 import 'package:analyzer/dart/constant/value.dart';
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
+import 'package:recase/recase.dart';
 import 'package:source_gen/source_gen.dart';
 
+import 'generators/design_generator.dart';
+
+bool hasAnnotation<T>(
+  List<ElementAnnotation> metadata,
+) {
+  return acceptAnnotationStringField(metadata, (v) => true) == true;
+}
+
 String? extractAnnotationStringField<T>(
-    List<ElementAnnotation> metadata, String field) {
+  List<ElementAnnotation> metadata,
+  String field,
+) {
+  return acceptAnnotationStringField(
+    metadata,
+    (v) => v.getField(field)!.toStringValue(),
+  );
+}
+
+TResult? acceptAnnotationStringField<TAnnotation, TResult>(
+  List<ElementAnnotation> metadata,
+  TResult? Function(DartObject) visitor,
+) {
   for (final md in metadata) {
     final value = md.computeConstantValue()!;
     if (value.isNull ||
-        value.type!.getDisplayString(withNullability: false) != T.toString()) {
+        value.type!.getDisplayString(withNullability: false) !=
+            TAnnotation.toString()) {
       continue;
     }
-    return value.getField(field)!.toStringValue();
+    return visitor(value);
   }
   return null;
+}
+
+String buildClassPageFieldName(ClassElement element) =>
+    '${ReCase(extractClassElementFolderNamespace(element).join('_')).camelCase}Page';
+
+List<String> extractClassElementFolderNamespace(ClassElement element) {
+  // Retrieve class meta data
+  final visitor = ModelVisitor();
+  element.visitChildren(visitor);
+  // Parse class meta data
+  final clazz = visitor.classType.element;
+  final libPath = clazz.source.fullName
+      .substring(clazz.source.fullName.indexOf('/lib/') + 5);
+  final folderPath = libPath.replaceAll('/${clazz.source.shortName}', '');
+  final namespace =
+      folderPath.contains('/') ? folderPath.split('/') : <String>[folderPath];
+  namespace.add(clazz.source.shortName.replaceAll('.dart', ''));
+  return namespace;
 }
 
 Never throwUnsupported(FieldElement element, String message) =>

@@ -1,22 +1,14 @@
 import 'package:analyzer/dart/element/element.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_design/flutter_design.dart';
 import 'package:flutter_design_annotation/flutter_design_annotation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:recase/recase.dart';
 
 import 'searches.dart';
 
 part 'pages.freezed.dart';
-
-@freezed
-class ViewerPageGroup with _$ViewerPageGroup {
-  const factory ViewerPageGroup({
-    required String id,
-    required String title,
-    ViewerGlyphUnion? glyph,
-    @Default([]) List<ViewerPageUnion> children,
-  }) = _ViewerPageGroup;
-}
 
 @freezed
 class ViewerPageUnion with _$ViewerPageUnion implements Searchable {

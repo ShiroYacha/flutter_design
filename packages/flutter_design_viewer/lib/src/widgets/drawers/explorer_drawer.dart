@@ -4,7 +4,6 @@ import 'package:flutter_design/flutter_design.dart';
 import 'package:flutter_design_viewer/flutter_design_viewer.dart';
 import 'package:flutter_design_viewer/src/measures.dart';
 import 'package:flutter_design_viewer/src/widgets/items/buttons.dart';
-import 'package:flutter_design_viewer/src/widgets/items/images.dart';
 import 'package:flutter_design_viewer/src/widgets/scaffolds/root_scaffold.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -47,7 +46,7 @@ class ExplorerDrawer extends HookConsumerWidget {
             [],
             (previousValue, element) => [
               ...previousValue,
-              PageGroup(pageGroup: element),
+              PageGroup(groupPage: element),
               const Divider(),
             ],
           ),
@@ -58,9 +57,9 @@ class ExplorerDrawer extends HookConsumerWidget {
 }
 
 class PageGroup extends HookConsumerWidget {
-  final ViewerPageGroup pageGroup;
+  final ViewerGroupPage groupPage;
   const PageGroup({
-    required this.pageGroup,
+    required this.groupPage,
     Key? key,
   }) : super(key: key);
   @override
@@ -69,9 +68,9 @@ class PageGroup extends HookConsumerWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          PageGroupHeader(pageGroup: pageGroup),
+          PageGroupHeader(groupPage: groupPage),
           Spacers.v10,
-          ...pageGroup.children.map((e) => PageGroupNode(viewerPage: e)),
+          ...groupPage.children.map((e) => PageGroupNode(viewerPage: e)),
           Spacers.v10,
         ],
       ),
@@ -153,26 +152,19 @@ class PageGroupNode extends HookConsumerWidget {
 class PageGroupHeader extends StatelessWidget {
   const PageGroupHeader({
     Key? key,
-    required this.pageGroup,
+    required this.groupPage,
   }) : super(key: key);
 
-  final ViewerPageGroup pageGroup;
+  final ViewerGroupPage groupPage;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Row(
-      children: [
-        if (pageGroup.glyph != null)
-          ThemableGlyph(
-            glyph: pageGroup.glyph!.copyWith(color: theme.hintColor),
-          ),
-        Spacers.h6,
-        Text(
-          pageGroup.title,
-          style: theme.textTheme.subtitle2?.copyWith(color: theme.hintColor),
-        ),
-      ],
+    return Text(
+      groupPage.namespace.isEmpty
+          ? groupPage.title.toUpperCase()
+          : groupPage.title,
+      style: theme.textTheme.subtitle2?.copyWith(color: theme.hintColor),
     );
   }
 }

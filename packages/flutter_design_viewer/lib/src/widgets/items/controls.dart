@@ -7,8 +7,10 @@ import 'package:flutter_design/flutter_design.dart';
 import 'package:flutter_design_viewer/flutter_design_viewer.dart';
 import 'package:flutter_design_viewer/src/measures.dart';
 import 'package:flutter_design_viewer/src/models/data_factory.dart';
+import 'package:flutter_design_viewer/src/utils.dart';
 import 'package:flutter_design_viewer/src/widgets/items/frames.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:patterns_canvas/patterns_canvas.dart';
@@ -66,6 +68,7 @@ class _SizePainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
+    // Draw size
     final Rect rect = Rect.fromLTWH(0, 0, size.width, size.height);
     Dots(
       bgColor: theme.scaffoldBackgroundColor,
@@ -82,6 +85,16 @@ class _SizePainter extends CustomPainter {
       ..color = color.withOpacity(0.5)
       ..style = PaintingStyle.fill;
     canvas.drawRect(Rect.fromLTRB(0, 0, value.width, value.height), foreground);
+    // Draw debug size text
+    final tp = TextPainter(
+      textDirection: TextDirection.ltr,
+      text: TextSpan(
+        text: '(${value.width.floor()}, ${value.height.floor()})',
+        style: theme.textTheme.caption,
+      ),
+    );
+    tp.layout();
+    tp.paint(canvas, Offset.zero);
   }
 
   @override

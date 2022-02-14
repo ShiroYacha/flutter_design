@@ -55,6 +55,16 @@ class ViewerState with _$ViewerState {
   ThemeMode get nextThemeMode => ThemeMode.values[
       (ThemeMode.values.indexOf(themeMode) + 1) % ThemeMode.values.length];
 
+  bool get isValid =>
+      targetDeviceId.isNotEmpty &&
+      targetLocaleId.isNotEmpty &&
+      targetLocaleIds.isNotEmpty &&
+      targetThemeIds.isNotEmpty &&
+      targetThemeId.isNotEmpty &&
+      uri?.isNotEmpty == true &&
+      uri != '/404' &&
+      uri != '/';
+
   static Future<ViewerState?> getFromStorage() async {
     final storage = LocalStorage(storageKey);
     try {

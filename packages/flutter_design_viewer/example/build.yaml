@@ -3,3 +3,5 @@ targets:
     builders:
       flutter_design_codegen|design_builder:
         enabled: true
+      flutter_design_codegen|page_factory_builder:
+        enabled: true

@@ -18,9 +18,10 @@ import 'models/settings.dart';
 import 'navigator_observer.dart';
 import 'widgets/items/brandings.dart';
 import 'widgets/scaffolds/root_scaffold.dart';
+import 'widgets/screens/error_screens.dart';
 import 'widgets/screens/page_screen.dart';
 
-final pageGroupsProvider = Provider<List<ViewerPageGroup>>((ref) => []);
+final pageGroupsProvider = Provider<List<ViewerGroupPage>>((ref) => []);
 final brandingProvider = Provider<Widget>((ref) => throw UnimplementedError());
 final viewerSettingsProvider =
     Provider<ViewerSettings>((ref) => throw UnimplementedError());
@@ -41,7 +42,7 @@ final viewerStateProvider = StateProvider<ViewerState>(
 class DesignSystemViewerApp extends HookConsumerWidget {
   final Widget? branding;
   final ViewerSettings settings;
-  final List<ViewerPageGroup> pageGroups;
+  final List<ViewerGroupPage> pageGroups;
 
   const DesignSystemViewerApp({
     required this.pageGroups,
@@ -52,7 +53,6 @@ class DesignSystemViewerApp extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final theme = Theme.of(context);
     return ProviderScope(
       overrides: [
         brandingProvider.overrideWithValue(branding ?? const DefaultBranding()),
@@ -93,21 +93,22 @@ class DesignSystemViewerRouter extends HookConsumerWidget {
       try {
         BotToast.showLoading();
         final cache = await ViewerState.getFromStorage();
-        viewerStateNotifier.state = cache ??
-            ViewerState(
-              viewMode: ViewMode.canvas,
-              displayMode: DisplayMode.widgetOnly,
-              themeMode: ThemeMode.dark,
-              targetDeviceId: Devices.ios.iPhone12.identifier.toString(),
-              targetDeviceIds: [
-                Devices.ios.iPhone12.identifier.toString(),
-                Devices.android.samsungGalaxyS20.identifier.toString(),
-              ],
-              targetLocaleId: viewerSettings.enabledLocales.keys.first,
-              targetLocaleIds: viewerSettings.enabledLocales.keys.toList(),
-              targetThemeId: viewerSettings.enabledThemes.keys.first,
-              targetThemeIds: viewerSettings.enabledThemes.keys.toList(),
-            );
+        viewerStateNotifier.state = cache?.isValid == true
+            ? cache!
+            : ViewerState(
+                viewMode: ViewMode.canvas,
+                displayMode: DisplayMode.widgetCodeSideBySide,
+                themeMode: ThemeMode.dark,
+                targetDeviceId: Devices.ios.iPhone12.identifier.toString(),
+                targetDeviceIds: [
+                  Devices.ios.iPhone12.identifier.toString(),
+                  Devices.android.samsungGalaxyS20.identifier.toString(),
+                ],
+                targetLocaleId: viewerSettings.enabledLocales.keys.first,
+                targetLocaleIds: viewerSettings.enabledLocales.keys.toList(),
+                targetThemeId: viewerSettings.enabledThemes.keys.first,
+                targetThemeIds: viewerSettings.enabledThemes.keys.toList(),
+              );
         if (cache?.uri != null && WidgetKeys.navKey.currentContext != null) {
           // Restore cached URI
           VRouter.of(WidgetKeys.navKey.currentContext!).to(cache!.uri!);
@@ -133,14 +134,16 @@ class DesignSystemViewerRouter extends HookConsumerWidget {
         BotToastNavigatorObserver(),
         TrackedNavigatorObserver(viewerStateNotifier: viewerStateNotifier),
       ],
-      initialUrl:
-          pageGroups.first.children.map((e) => e.firstDocumentUri).first,
+      initialUrl: pageGroups.isEmpty
+          ? '/404'
+          : pageGroups.first.children.map((e) => e.firstDocumentUri).first,
       buildTransition: (animation1, _, child) => FadeTransition(
         opacity: animation1,
         child: child,
       ),
       transitionDuration: const Duration(milliseconds: 100),
       routes: [
+        VWidget(path: '/404', widget: const Error404Screen()),
         VNester(
           path: '/',
           widgetBuilder: (child) => Shortcuts(

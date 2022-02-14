@@ -5,3 +5,9 @@ builders:
     build_extensions: { ".dart": [".design.dart"] }
     auto_apply: dependents
     build_to: source
+  page_factory_builder:
+    import: "package:flutter_design_codegen/builder.dart"
+    builder_factories: ["pageFactoryBuilder"]
+    build_extensions: { "$lib$": ["page_factory.design.dart"] }
+    auto_apply: dependents
+    build_to: source

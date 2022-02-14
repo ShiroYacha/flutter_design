@@ -82,7 +82,7 @@ class DataTemplateWidgetPlaceholderDesigner extends HookConsumerWidget {
             iconPadding: EdgeInsets.zero,
             hasIcon: false,
           ),
-          header: Paddings.vertical10(
+          header: Paddings.top10(
             child: RichText(
               textAlign: TextAlign.start,
               text: TextSpan(
@@ -101,7 +101,7 @@ class DataTemplateWidgetPlaceholderDesigner extends HookConsumerWidget {
                     ),
                   ),
                   TextSpan(
-                    text: ' Tap to change color',
+                    text: ' Tap to change color,',
                     style: TextStyle(color: theme.colorScheme.onBackground),
                   ),
                 ],

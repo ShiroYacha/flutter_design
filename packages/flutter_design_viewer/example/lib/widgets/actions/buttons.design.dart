@@ -6,12 +6,16 @@ part of 'buttons.dart';
 // DesignGenerator
 // **************************************************************************
 
-final componentsActionsButtonsPage = ViewerDocumentPage(
+final widgetsActionsButtonsPage = ViewerDocumentPage(
   id: 'button',
-  namespace: ['components', 'actions'],
+  namespace: ['widgets', 'actions', 'buttons'],
   title: 'Button',
-  subtitle: null,
-  description: null,
+  subtitle:
+      '''A button is a box area or text that communicates and triggers user actions when clicked.''',
+  description:
+      '''The current design encapsulates the [ElevatedButton](https://api.flutter.dev/flutter/material/ElevatedButton-class.html),
+      [OutlinedButton](https://api.flutter.dev/flutter/material/ElevatedButton-class.html) and [TextButton](https://api.flutter.dev/flutter/material/TextButton-class.html)
+      from Material design.''',
   sections: [
     ViewerSectionUnion.component(
       id: 'button',
@@ -35,7 +39,7 @@ final componentsActionsButtonsPage = ViewerDocumentPage(
         ],
       ),
       sourceCode: const ViewerSourceCode(
-          location: 'package:viewer_example/components/actions/buttons.dart',
+          location: 'package:viewer_example/widgets/actions/buttons.dart',
           code: '''
 /// Built from the following function 
 (context, factory) => Button(child: factory.build(context, 'child'),onPressed: factory.build(context, 'onPressed'),)
@@ -48,25 +52,16 @@ class Button extends StatelessWidget {
     required this.child,
     this.onPressed,
     Key? key,
-  }) : super(
-          key: key,
-        );
+  }) : super(key: key);
   factory Button.label({
     required String label,
     VoidCallback? onPressed,
     Key? key,
   }) =>
-      Button(
-        child: Text(label),
-        onPressed: onPressed,
-        key: key,
-      );
+      Button(child: Text(label), onPressed: onPressed, key: key);
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      child: child,
-      onPressed: onPressed,
-    );
+    return ElevatedButton(child: child, onPressed: onPressed);
   }
 }
 

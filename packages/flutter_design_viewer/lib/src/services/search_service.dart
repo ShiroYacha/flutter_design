@@ -9,10 +9,10 @@ final searchProvider =
     Provider.autoDispose.family<List<SearchResultItem>, String>(
   (ref, query) {
     final pageGroups = ref.watch(pageGroupsProvider);
-    return _searchPageGroups(pageGroups, query.toLowerCase());
+    return _searchGroupPages(pageGroups, query.toLowerCase());
     if (query.isNotEmpty) {
       // TODO
-      return _searchPageGroups(pageGroups, query);
+      return _searchGroupPages(pageGroups, query);
     } else {
       // TODO load recent/favorites
       return [
@@ -58,8 +58,8 @@ final searchProvider =
 /// Naive implementation by checking similarity between the query and
 /// each searchable element (e.g. title, section title, etc.) using the
 /// Dice coefficient using https://pub.dev/packages/string_similarity
-List<SearchResultItem> _searchPageGroups(
-  List<ViewerPageGroup> pageGroups,
+List<SearchResultItem> _searchGroupPages(
+  List<ViewerGroupPage> pageGroups,
   String query,
 ) {
   // Aggregate all searchable elements

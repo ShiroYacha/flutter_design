@@ -6,6 +6,7 @@ import 'package:analyzer/dart/element/visitor.dart';
 import 'package:build/build.dart';
 import 'package:dart_style/dart_style.dart';
 import 'package:flutter_design_annotation/flutter_design_annotation.dart';
+import 'package:flutter_design_codegen/src/utils.dart';
 import 'package:recase/recase.dart';
 import 'package:source_gen/source_gen.dart';
 
@@ -30,34 +31,28 @@ class DesignGenerator extends GeneratorForAnnotation<TDesign> {
     // Parse class meta data
     final clazz = visitor.classType.element;
     final className = clazz.name;
-    final libPath = clazz.source.fullName
-        .substring(clazz.source.fullName.indexOf('/lib/') + 5);
-    final fileName = clazz.source.shortName.replaceAll('.dart', '');
-    final folderPath = libPath.replaceAll('/${clazz.source.shortName}', '');
     final folderNamespaces =
-        folderPath.contains('/') ? folderPath.split('/') : [];
-    final namespace = annotation.read('namespace').isList
-        ? annotation.read('namespace').listValue
-        : folderNamespaces;
+        extractClassElementFolderNamespace(element as ClassElement);
+    final namespace = folderNamespaces;
     // Construct viewer widget builder source
-    final buildCodepair = await _buildBuildBuffer(
+    final buildCodepair = await _extractBuilderSourceCode(
       resolver: buildStep.resolver,
       visitor: visitor,
       annotation: annotation,
     );
-    final fieldMetaDatasetCode = _buildFieldMetaDatasetBuffer(
+    final fieldMetaDatasetCode = _extractFieldMetaDataset(
       resolver: buildStep.resolver,
-      visitor: visitor,
+      parameters: visitor.classType.element.constructors.first.parameters,
       annotation: annotation,
     );
     // Assemble source
     return '''
-final ${ReCase('${folderNamespaces.join('_')}_$fileName').camelCase}Page = ViewerDocumentPage(
+final ${buildClassPageFieldName(element)} = ViewerDocumentPage(
   id: '${className.camelCase}',
   namespace: [${namespace.map((e) => "'$e'").join(',')}],
-  title: '$className',
-  subtitle: ${_readNullableAnnotation(annotation, 'subtitle')},
-  description: ${_readNullableAnnotation(annotation, 'description')},
+  title: ${_readNullableAnnotation<String>(annotation, 'title') ?? "'$className'"},
+  subtitle: ${_readNullableAnnotation<String>(annotation, 'subtitle')},
+  description: ${_readNullableAnnotation<String>(annotation, 'description')},
   sections: [
     ViewerSectionUnion.component(
       id: '${className.camelCase}',
@@ -67,7 +62,7 @@ final ${ReCase('${folderNamespaces.join('_')}_$fileName').camelCase}Page = Viewe
         fieldMetaDataset: $fieldMetaDatasetCode,
       ),
       sourceCode: const ViewerSourceCode(
-        location: '${element.librarySource?.uri}',
+        location: '${element.librarySource.uri}',
         code: \'\'\'
 /// Built from the following function 
 ${buildCodepair[1]}
@@ -94,9 +89,15 @@ ${await _extractSourceFromElement(
       code
           // TODO: find a better approach, e.g. impl. visitor
           // Skip all annotations
-          .substring(element is ClassElement ? code.indexOf('class') : 0)
+          .substring(
+            element is ClassElement
+                ? code.contains('@design')
+                    ? code.indexOf('@design class') + 7
+                    : code.indexOf(') class') + 2
+                : 0,
+          )
           // Add commas to all probable places
-          .replaceAll(');', ',);')
+          .replaceAll('[^(]);', ',);')
           .replaceAll('})', ',})'),
     );
   }
@@ -105,28 +106,17 @@ ${await _extractSourceFromElement(
   dynamic _readNullableAnnotation<T>(ConstantReader annotation, String field) {
     final reader = annotation.read(field);
     if (reader.isNull) return null;
-    if (T is String) {
-      return reader.stringValue;
+    if (T == String) {
+      return "'''${reader.stringValue}'''";
     }
     return reader;
   }
 
-  Future<List<String>> _buildBuildBuffer({
+  Future<List<String>> _extractBuilderSourceCode({
     required Resolver resolver,
     required ModelVisitor visitor,
     required ConstantReader annotation,
   }) async {
-    final defaultBuilderField = annotation.read('defaultBuilder');
-    if (!defaultBuilderField.isNull) {
-      // Defer to the user defined builder
-      return [
-        defaultBuilderField.objectValue.toFunctionValue()!.name,
-        await _extractSourceFromElement(
-          resolver: resolver,
-          element: defaultBuilderField.objectValue.toFunctionValue()!,
-        ),
-      ];
-    }
     final clazz = visitor.classType.element;
     final params = visitor.classType.element.constructors.first.parameters;
     final sb = StringBuffer('(context, factory) => ${clazz.name}(');
@@ -141,16 +131,13 @@ ${await _extractSourceFromElement(
     return [sb.toString(), sb.toString()];
   }
 
-  String _buildFieldMetaDatasetBuffer({
+  String _extractFieldMetaDataset({
     required Resolver resolver,
-    required ModelVisitor visitor,
+    required List<ParameterElement> parameters,
     required ConstantReader annotation,
   }) {
     final sb = StringBuffer('const [');
-    // TODO: either disable the user defined defaultBuilder or expand
-    // this to include analysis of user provided function
-    for (final e in visitor.classType.element.constructors.first.parameters
-        .where((e) => e.name != 'key')) {
+    for (final e in parameters.where((e) => e.name != 'key')) {
       // TODO: figure out how to deal with function signature...
       sb.write(
         '''
