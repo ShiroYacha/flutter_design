@@ -1,3 +1,5 @@
+# Flutter design
+
 `flutter_design` contains packages to help you bootstrap your design system with a well defined framework and code generation/CLI toolchain. It also contains a powerful design system viewer to let you visualize and interact with your design system.
 
 Here are the key objectives of the project:
