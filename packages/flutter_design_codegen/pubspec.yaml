@@ -1,5 +1,6 @@
 name: flutter_design_codegen
 description: A new Flutter package project.
+version: 0.0.1
 homepage: https://github.com/ShiroYacha/flutter_design
 
 environment:
@@ -10,8 +11,7 @@ dependencies:
   build: ^2.2.1
   build_resolvers: ^2.0.0
   dart_style: ^2.2.1
-  flutter_design_annotation:
-    path: ../flutter_design_annotation
+  flutter_design_annotation: ^0.0.1
   glob: ^2.0.2
   path: ^1.8.1
   recase: ^4.0.0
