@@ -19,10 +19,11 @@ Here are the key objectives of the project:
 
 For more information, please check out the documentation at https://flutter-design.gitbook.io/design-docs/.
 
+The UX and design is inspired by [Wanda Design System](https://design.wonderflow.ai/).
+
 ## Demo
 
-Checkout the generated viewer app (inspired by https://design.wonderflow.ai/) https://flutter-design-7b479.web.app/ using the [example code](https://github.com/ShiroYacha/flutter_design/tree/main/packages/flutter_design_viewer/example).
-
+Checkout the generated viewer app  https://flutter-design-7b479.web.app/ using the [example code](https://github.com/ShiroYacha/flutter_design/tree/main/packages/flutter_design_viewer/example). 
 
 
 ## Basic integration
