@@ -25,20 +25,33 @@ final dataBuilderRegistryProvider =
     Provider<DataBuilderRegistry>((ref) => throw UnimplementedError());
 
 class DataBuilderRegistry {
-  final Map<Type, List<DataBuilder Function()>> allBuilders;
+  /// The default data must be positional optional because in case a
+  /// not nullable field is marked with [required] there is no default value
+  /// with it... So the data builders will have to default to the constructor's
+  /// default value
+  final Map<Type, List<DataBuilder Function([dynamic defaultData])>>
+      allBuilders;
   const DataBuilderRegistry({
     required this.allBuilders,
   });
 
-  List<DataBuilder> getOptionsFor(Type type) =>
-      allBuilders[type]!.map((e) => e.call()).toList();
+  List<DataBuilder> getOptionsFor(Type type, dynamic defaultData) =>
+      allBuilders[type]!.map((e) {
+        if (defaultData == null) {
+          return e.call();
+        }
+        return e.call(defaultData);
+      }).toList();
 
   Map<String, List<DataBuilder>> getAllOptionsFor(
           Map<String, FieldMetaData> idFieldMetaDataMap) =>
       {
         for (final kvp in idFieldMetaDataMap.entries)
           kvp.key: [
-            ...getOptionsFor(kvp.value.type),
+            ...getOptionsFor(
+              kvp.value.type,
+              kvp.value.viewerInitValue ?? kvp.value.defaultValue,
+            ),
             if (kvp.value.isOptional) DataTemplateNullBuilder(),
           ]
       };
@@ -182,4 +195,88 @@ class DataTemplateNullBuilder extends DataBuilder<void> {
 
   @override
   String get name => 'Null';
+}
+
+// TODO: can we make this immutable?
+class DataTemplateColorPickerBuilder extends DataBuilder<Color> {
+  Color color;
+
+  DataTemplateColorPickerBuilder({
+    this.color = Colors.amber,
+  });
+
+  @override
+  Color build(BuildContext context, String field) {
+    return color;
+  }
+
+  @override
+  Widget buildDesigner(
+    BuildContext context,
+    UpdateDataBuilder<Color> updateBuilder,
+  ) {
+    return DataTemplateColorPickerDesigner(
+      builder: this,
+      updateBuilder: updateBuilder,
+    );
+  }
+
+  @override
+  String get name => 'Color picker';
+}
+
+// TODO: can we make this immutable?
+class DataTemplateDoubleBuilder extends DataBuilder<double> {
+  double value;
+
+  DataTemplateDoubleBuilder({
+    this.value = 0,
+  });
+
+  @override
+  double build(BuildContext context, String field) {
+    return value;
+  }
+
+  @override
+  Widget buildDesigner(
+    BuildContext context,
+    UpdateDataBuilder<double> updateBuilder,
+  ) {
+    return DataTemplateDoubleDesigner(
+      builder: this,
+      updateBuilder: updateBuilder,
+    );
+  }
+
+  @override
+  String get name => 'Double picker';
+}
+
+// TODO: can we make this immutable?
+class DataTemplateIntBuilder extends DataBuilder<int> {
+  int value;
+
+  DataTemplateIntBuilder({
+    this.value = 0,
+  });
+
+  @override
+  int build(BuildContext context, String field) {
+    return value;
+  }
+
+  @override
+  Widget buildDesigner(
+    BuildContext context,
+    UpdateDataBuilder<int> updateBuilder,
+  ) {
+    return DataTemplateIntDesigner(
+      builder: this,
+      updateBuilder: updateBuilder,
+    );
+  }
+
+  @override
+  String get name => 'Integer picker';
 }

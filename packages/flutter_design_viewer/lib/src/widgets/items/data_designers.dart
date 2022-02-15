@@ -1,8 +1,11 @@
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:flutter_design/flutter_design.dart';
-import 'package:flutter_design_viewer/src/models/data_factory.dart';
+import 'package:flutter_design_viewer/src/models/data.dart';
+import 'package:flutter_design_viewer/src/widgets/items/buttons.dart';
+import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -40,10 +43,10 @@ class DataTemplateStringRawDesigner extends HookConsumerWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final initValue = useState(builder.raw);
     final textEditingController = useTextEditingController(
       text: builder.raw,
     );
-
     useEffect(() {
       textEditingController.selection = TextSelection(
         baseOffset: 0,
@@ -57,6 +60,14 @@ class DataTemplateStringRawDesigner extends HookConsumerWidget {
       autofocus: true,
       focusNode: useFocusNode(),
       controller: textEditingController,
+      showCursor: true,
+      decoration: InputDecoration(
+        hintText: 'Type something',
+        suffixIcon: GestureDetector(
+                onTap: () => textEditingController.text = initValue.value,
+                child: const Icon(FeatherIcons.rotateCcw, size: 16))
+            .asMouseClickRegion,
+      ),
     );
   }
 }
@@ -128,6 +139,160 @@ class DataTemplateWidgetPlaceholderDesigner extends HookConsumerWidget {
           valueChanged: (v) => updateBuilder(builder..size = v),
         ),
       ],
+    );
+  }
+}
+
+class DataTemplateColorPickerDesigner extends HookConsumerWidget {
+  final DataTemplateColorPickerBuilder builder;
+  final UpdateDataBuilder<Color> updateBuilder;
+  const DataTemplateColorPickerDesigner({
+    required this.builder,
+    required this.updateBuilder,
+    Key? key,
+  }) : super(key: key);
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final theme = Theme.of(context);
+    final controller = useMemoized(() => ExpandableController(), []);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        ExpandablePanel(
+          controller: controller,
+          theme: const ExpandableThemeData(
+            iconPadding: EdgeInsets.zero,
+            hasIcon: false,
+          ),
+          header: Paddings.top10(
+            child: RichText(
+              textAlign: TextAlign.start,
+              text: TextSpan(
+                children: [
+                  WidgetSpan(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: builder.color,
+                        borderRadius: BorderRadius.circular(
+                          6,
+                        ),
+                      ),
+                      width: 20,
+                      height: 20,
+                      alignment: Alignment.topCenter,
+                    ),
+                  ),
+                  TextSpan(
+                    text: ' Tap to change color,',
+                    style: TextStyle(color: theme.colorScheme.onBackground),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          collapsed: const SizedBox.shrink(),
+          expanded: BlockPicker(
+            pickerColor: builder.color,
+            onColorChanged: (v) {
+              updateBuilder(builder..color = v);
+              controller.toggle();
+            },
+            layoutBuilder: (context, colors, render) => Wrap(
+              children: [for (Color color in colors) render(color)],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class DataTemplateDoubleDesigner extends HookConsumerWidget {
+  final DataTemplateDoubleBuilder builder;
+  final UpdateDataBuilder<double> updateBuilder;
+  const DataTemplateDoubleDesigner({
+    required this.builder,
+    required this.updateBuilder,
+    Key? key,
+  }) : super(key: key);
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final initValue = useState(builder.value);
+    final textEditingController = useTextEditingController(
+      text: builder.value.toString(),
+    );
+    useEffect(() {
+      textEditingController.selection = TextSelection(
+        baseOffset: 0,
+        extentOffset: textEditingController.value.text.length,
+      );
+      textEditingController.addListener(() {
+        if (textEditingController.value.text.isEmpty) {
+          textEditingController.text = '0';
+        }
+        updateBuilder(builder
+          ..value = double.tryParse(textEditingController.value.text) ?? 0.0);
+      });
+    }, []);
+    return TextField(
+      autofocus: true,
+      focusNode: useFocusNode(),
+      controller: textEditingController,
+      showCursor: true,
+      inputFormatters: [
+        FilteringTextInputFormatter.allow(RegExp(r'(^-?\d*\.?\d*)'))
+      ],
+      decoration: InputDecoration(
+        suffixIcon: GestureDetector(
+                onTap: () =>
+                    textEditingController.text = initValue.value.toString(),
+                child: const Icon(FeatherIcons.rotateCcw, size: 16))
+            .asMouseClickRegion,
+      ),
+    );
+  }
+}
+
+class DataTemplateIntDesigner extends HookConsumerWidget {
+  final DataTemplateIntBuilder builder;
+  final UpdateDataBuilder<int> updateBuilder;
+  const DataTemplateIntDesigner({
+    required this.builder,
+    required this.updateBuilder,
+    Key? key,
+  }) : super(key: key);
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final initValue = useState(builder.value);
+    final textEditingController = useTextEditingController(
+      text: builder.value.toString(),
+    );
+    useEffect(() {
+      textEditingController.selection = TextSelection(
+        baseOffset: 0,
+        extentOffset: textEditingController.value.text.length,
+      );
+      textEditingController.addListener(() {
+        if (textEditingController.value.text.isEmpty) {
+          textEditingController.text = '0';
+        }
+        updateBuilder(builder
+          ..value = int.tryParse(textEditingController.value.text) ?? 0);
+      });
+    }, []);
+    return TextField(
+      autofocus: true,
+      focusNode: useFocusNode(),
+      controller: textEditingController,
+      showCursor: true,
+      inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'(^-?\d*)'))],
+      decoration: InputDecoration(
+        suffixIcon: GestureDetector(
+                onTap: () =>
+                    textEditingController.text = initValue.value.toString(),
+                child: const Icon(FeatherIcons.rotateCcw, size: 16))
+            .asMouseClickRegion,
+      ),
     );
   }
 }

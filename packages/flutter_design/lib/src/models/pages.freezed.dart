@@ -39,7 +39,6 @@ class _$ViewerPageUnionTearOff {
       required String title,
       String? subtitle,
       String? description,
-      List<String> tags = const [],
       List<ViewerSectionUnion> sections = const []}) {
     return ViewerDocumentPage(
       id: id,
@@ -47,7 +46,6 @@ class _$ViewerPageUnionTearOff {
       title: title,
       subtitle: subtitle,
       description: description,
-      tags: tags,
       sections: sections,
     );
   }
@@ -74,7 +72,6 @@ mixin _$ViewerPageUnion {
             String title,
             String? subtitle,
             String? description,
-            List<String> tags,
             List<ViewerSectionUnion> sections)
         document,
   }) =>
@@ -90,7 +87,6 @@ mixin _$ViewerPageUnion {
             String title,
             String? subtitle,
             String? description,
-            List<String> tags,
             List<ViewerSectionUnion> sections)?
         document,
   }) =>
@@ -106,7 +102,6 @@ mixin _$ViewerPageUnion {
             String title,
             String? subtitle,
             String? description,
-            List<String> tags,
             List<ViewerSectionUnion> sections)?
         document,
     required TResult orElse(),
@@ -321,7 +316,6 @@ class _$ViewerGroupPage extends ViewerGroupPage with DiagnosticableTreeMixin {
             String title,
             String? subtitle,
             String? description,
-            List<String> tags,
             List<ViewerSectionUnion> sections)
         document,
   }) {
@@ -340,7 +334,6 @@ class _$ViewerGroupPage extends ViewerGroupPage with DiagnosticableTreeMixin {
             String title,
             String? subtitle,
             String? description,
-            List<String> tags,
             List<ViewerSectionUnion> sections)?
         document,
   }) {
@@ -359,7 +352,6 @@ class _$ViewerGroupPage extends ViewerGroupPage with DiagnosticableTreeMixin {
             String title,
             String? subtitle,
             String? description,
-            List<String> tags,
             List<ViewerSectionUnion> sections)?
         document,
     required TResult orElse(),
@@ -439,7 +431,6 @@ abstract class $ViewerDocumentPageCopyWith<$Res>
       String title,
       String? subtitle,
       String? description,
-      List<String> tags,
       List<ViewerSectionUnion> sections});
 }
 
@@ -461,7 +452,6 @@ class _$ViewerDocumentPageCopyWithImpl<$Res>
     Object? title = freezed,
     Object? subtitle = freezed,
     Object? description = freezed,
-    Object? tags = freezed,
     Object? sections = freezed,
   }) {
     return _then(ViewerDocumentPage(
@@ -485,10 +475,6 @@ class _$ViewerDocumentPageCopyWithImpl<$Res>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
-      tags: tags == freezed
-          ? _value.tags
-          : tags // ignore: cast_nullable_to_non_nullable
-              as List<String>,
       sections: sections == freezed
           ? _value.sections
           : sections // ignore: cast_nullable_to_non_nullable
@@ -507,7 +493,6 @@ class _$ViewerDocumentPage extends ViewerDocumentPage
       required this.title,
       this.subtitle,
       this.description,
-      this.tags = const [],
       this.sections = const []})
       : super._();
 
@@ -523,14 +508,11 @@ class _$ViewerDocumentPage extends ViewerDocumentPage
   final String? description;
   @JsonKey()
   @override
-  final List<String> tags;
-  @JsonKey()
-  @override
   final List<ViewerSectionUnion> sections;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ViewerPageUnion.document(id: $id, namespace: $namespace, title: $title, subtitle: $subtitle, description: $description, tags: $tags, sections: $sections)';
+    return 'ViewerPageUnion.document(id: $id, namespace: $namespace, title: $title, subtitle: $subtitle, description: $description, sections: $sections)';
   }
 
   @override
@@ -543,7 +525,6 @@ class _$ViewerDocumentPage extends ViewerDocumentPage
       ..add(DiagnosticsProperty('title', title))
       ..add(DiagnosticsProperty('subtitle', subtitle))
       ..add(DiagnosticsProperty('description', description))
-      ..add(DiagnosticsProperty('tags', tags))
       ..add(DiagnosticsProperty('sections', sections));
   }
 
@@ -558,7 +539,6 @@ class _$ViewerDocumentPage extends ViewerDocumentPage
             const DeepCollectionEquality().equals(other.subtitle, subtitle) &&
             const DeepCollectionEquality()
                 .equals(other.description, description) &&
-            const DeepCollectionEquality().equals(other.tags, tags) &&
             const DeepCollectionEquality().equals(other.sections, sections));
   }
 
@@ -570,7 +550,6 @@ class _$ViewerDocumentPage extends ViewerDocumentPage
       const DeepCollectionEquality().hash(title),
       const DeepCollectionEquality().hash(subtitle),
       const DeepCollectionEquality().hash(description),
-      const DeepCollectionEquality().hash(tags),
       const DeepCollectionEquality().hash(sections));
 
   @JsonKey(ignore: true)
@@ -590,12 +569,10 @@ class _$ViewerDocumentPage extends ViewerDocumentPage
             String title,
             String? subtitle,
             String? description,
-            List<String> tags,
             List<ViewerSectionUnion> sections)
         document,
   }) {
-    return document(
-        id, namespace, title, subtitle, description, tags, sections);
+    return document(id, namespace, title, subtitle, description, sections);
   }
 
   @override
@@ -610,12 +587,11 @@ class _$ViewerDocumentPage extends ViewerDocumentPage
             String title,
             String? subtitle,
             String? description,
-            List<String> tags,
             List<ViewerSectionUnion> sections)?
         document,
   }) {
     return document?.call(
-        id, namespace, title, subtitle, description, tags, sections);
+        id, namespace, title, subtitle, description, sections);
   }
 
   @override
@@ -630,14 +606,12 @@ class _$ViewerDocumentPage extends ViewerDocumentPage
             String title,
             String? subtitle,
             String? description,
-            List<String> tags,
             List<ViewerSectionUnion> sections)?
         document,
     required TResult orElse(),
   }) {
     if (document != null) {
-      return document(
-          id, namespace, title, subtitle, description, tags, sections);
+      return document(id, namespace, title, subtitle, description, sections);
     }
     return orElse();
   }
@@ -681,7 +655,6 @@ abstract class ViewerDocumentPage extends ViewerPageUnion {
       required String title,
       String? subtitle,
       String? description,
-      List<String> tags,
       List<ViewerSectionUnion> sections}) = _$ViewerDocumentPage;
   const ViewerDocumentPage._() : super._();
 
@@ -694,7 +667,6 @@ abstract class ViewerDocumentPage extends ViewerPageUnion {
   String? get subtitle;
   @override
   String? get description;
-  List<String> get tags;
   List<ViewerSectionUnion> get sections;
   @override
   @JsonKey(ignore: true)
@@ -1340,28 +1312,28 @@ class _$ViewerSectionUnionTearOff {
   ViewerComponentSection component(
       {required String id,
       required String title,
+      required String ctorName,
       String? description,
+      String? designLink,
       required ViewerWidgetBuilder builder,
       required ViewerSourceCode sourceCode}) {
     return ViewerComponentSection(
       id: id,
       title: title,
+      ctorName: ctorName,
       description: description,
+      designLink: designLink,
       builder: builder,
       sourceCode: sourceCode,
     );
   }
 
   ViewerApiDocsSection apiDocs(
-      {required String id,
-      required String title,
-      String? description,
-      required List<ClassMemberElement> items}) {
+      {required String id, required String title, String? description}) {
     return ViewerApiDocsSection(
       id: id,
       title: title,
       description: description,
-      items: items,
     );
   }
 }
@@ -1380,11 +1352,16 @@ mixin _$ViewerSectionUnion {
     required TResult Function(String id, String title, String? description,
             List<List<ViewerCollectionItemUnion>> contents)
         paragraph,
-    required TResult Function(String id, String title, String? description,
-            ViewerWidgetBuilder builder, ViewerSourceCode sourceCode)
+    required TResult Function(
+            String id,
+            String title,
+            String ctorName,
+            String? description,
+            String? designLink,
+            ViewerWidgetBuilder builder,
+            ViewerSourceCode sourceCode)
         component,
-    required TResult Function(String id, String title, String? description,
-            List<ClassMemberElement> items)
+    required TResult Function(String id, String title, String? description)
         apiDocs,
   }) =>
       throw _privateConstructorUsedError;
@@ -1393,12 +1370,16 @@ mixin _$ViewerSectionUnion {
     TResult Function(String id, String title, String? description,
             List<List<ViewerCollectionItemUnion>> contents)?
         paragraph,
-    TResult Function(String id, String title, String? description,
-            ViewerWidgetBuilder builder, ViewerSourceCode sourceCode)?
+    TResult Function(
+            String id,
+            String title,
+            String ctorName,
+            String? description,
+            String? designLink,
+            ViewerWidgetBuilder builder,
+            ViewerSourceCode sourceCode)?
         component,
-    TResult Function(String id, String title, String? description,
-            List<ClassMemberElement> items)?
-        apiDocs,
+    TResult Function(String id, String title, String? description)? apiDocs,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -1406,12 +1387,16 @@ mixin _$ViewerSectionUnion {
     TResult Function(String id, String title, String? description,
             List<List<ViewerCollectionItemUnion>> contents)?
         paragraph,
-    TResult Function(String id, String title, String? description,
-            ViewerWidgetBuilder builder, ViewerSourceCode sourceCode)?
+    TResult Function(
+            String id,
+            String title,
+            String ctorName,
+            String? description,
+            String? designLink,
+            ViewerWidgetBuilder builder,
+            ViewerSourceCode sourceCode)?
         component,
-    TResult Function(String id, String title, String? description,
-            List<ClassMemberElement> items)?
-        apiDocs,
+    TResult Function(String id, String title, String? description)? apiDocs,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -1605,11 +1590,16 @@ class _$ViewerParagraphSection extends ViewerParagraphSection
     required TResult Function(String id, String title, String? description,
             List<List<ViewerCollectionItemUnion>> contents)
         paragraph,
-    required TResult Function(String id, String title, String? description,
-            ViewerWidgetBuilder builder, ViewerSourceCode sourceCode)
+    required TResult Function(
+            String id,
+            String title,
+            String ctorName,
+            String? description,
+            String? designLink,
+            ViewerWidgetBuilder builder,
+            ViewerSourceCode sourceCode)
         component,
-    required TResult Function(String id, String title, String? description,
-            List<ClassMemberElement> items)
+    required TResult Function(String id, String title, String? description)
         apiDocs,
   }) {
     return paragraph(id, title, description, contents);
@@ -1621,12 +1611,16 @@ class _$ViewerParagraphSection extends ViewerParagraphSection
     TResult Function(String id, String title, String? description,
             List<List<ViewerCollectionItemUnion>> contents)?
         paragraph,
-    TResult Function(String id, String title, String? description,
-            ViewerWidgetBuilder builder, ViewerSourceCode sourceCode)?
+    TResult Function(
+            String id,
+            String title,
+            String ctorName,
+            String? description,
+            String? designLink,
+            ViewerWidgetBuilder builder,
+            ViewerSourceCode sourceCode)?
         component,
-    TResult Function(String id, String title, String? description,
-            List<ClassMemberElement> items)?
-        apiDocs,
+    TResult Function(String id, String title, String? description)? apiDocs,
   }) {
     return paragraph?.call(id, title, description, contents);
   }
@@ -1637,12 +1631,16 @@ class _$ViewerParagraphSection extends ViewerParagraphSection
     TResult Function(String id, String title, String? description,
             List<List<ViewerCollectionItemUnion>> contents)?
         paragraph,
-    TResult Function(String id, String title, String? description,
-            ViewerWidgetBuilder builder, ViewerSourceCode sourceCode)?
+    TResult Function(
+            String id,
+            String title,
+            String ctorName,
+            String? description,
+            String? designLink,
+            ViewerWidgetBuilder builder,
+            ViewerSourceCode sourceCode)?
         component,
-    TResult Function(String id, String title, String? description,
-            List<ClassMemberElement> items)?
-        apiDocs,
+    TResult Function(String id, String title, String? description)? apiDocs,
     required TResult orElse(),
   }) {
     if (paragraph != null) {
@@ -1718,7 +1716,9 @@ abstract class $ViewerComponentSectionCopyWith<$Res>
   $Res call(
       {String id,
       String title,
+      String ctorName,
       String? description,
+      String? designLink,
       ViewerWidgetBuilder builder,
       ViewerSourceCode sourceCode});
 
@@ -1741,7 +1741,9 @@ class _$ViewerComponentSectionCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? title = freezed,
+    Object? ctorName = freezed,
     Object? description = freezed,
+    Object? designLink = freezed,
     Object? builder = freezed,
     Object? sourceCode = freezed,
   }) {
@@ -1754,9 +1756,17 @@ class _$ViewerComponentSectionCopyWithImpl<$Res>
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
+      ctorName: ctorName == freezed
+          ? _value.ctorName
+          : ctorName // ignore: cast_nullable_to_non_nullable
+              as String,
       description: description == freezed
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
+              as String?,
+      designLink: designLink == freezed
+          ? _value.designLink
+          : designLink // ignore: cast_nullable_to_non_nullable
               as String?,
       builder: builder == freezed
           ? _value.builder
@@ -1791,7 +1801,9 @@ class _$ViewerComponentSection extends ViewerComponentSection
   const _$ViewerComponentSection(
       {required this.id,
       required this.title,
+      required this.ctorName,
       this.description,
+      this.designLink,
       required this.builder,
       required this.sourceCode})
       : super._();
@@ -1801,7 +1813,11 @@ class _$ViewerComponentSection extends ViewerComponentSection
   @override
   final String title;
   @override
+  final String ctorName;
+  @override
   final String? description;
+  @override
+  final String? designLink;
   @override
   final ViewerWidgetBuilder builder;
   @override
@@ -1809,7 +1825,7 @@ class _$ViewerComponentSection extends ViewerComponentSection
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ViewerSectionUnion.component(id: $id, title: $title, description: $description, builder: $builder, sourceCode: $sourceCode)';
+    return 'ViewerSectionUnion.component(id: $id, title: $title, ctorName: $ctorName, description: $description, designLink: $designLink, builder: $builder, sourceCode: $sourceCode)';
   }
 
   @override
@@ -1819,7 +1835,9 @@ class _$ViewerComponentSection extends ViewerComponentSection
       ..add(DiagnosticsProperty('type', 'ViewerSectionUnion.component'))
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('title', title))
+      ..add(DiagnosticsProperty('ctorName', ctorName))
       ..add(DiagnosticsProperty('description', description))
+      ..add(DiagnosticsProperty('designLink', designLink))
       ..add(DiagnosticsProperty('builder', builder))
       ..add(DiagnosticsProperty('sourceCode', sourceCode));
   }
@@ -1831,8 +1849,11 @@ class _$ViewerComponentSection extends ViewerComponentSection
             other is ViewerComponentSection &&
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.title, title) &&
+            const DeepCollectionEquality().equals(other.ctorName, ctorName) &&
             const DeepCollectionEquality()
                 .equals(other.description, description) &&
+            const DeepCollectionEquality()
+                .equals(other.designLink, designLink) &&
             const DeepCollectionEquality().equals(other.builder, builder) &&
             const DeepCollectionEquality()
                 .equals(other.sourceCode, sourceCode));
@@ -1843,7 +1864,9 @@ class _$ViewerComponentSection extends ViewerComponentSection
       runtimeType,
       const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(title),
+      const DeepCollectionEquality().hash(ctorName),
       const DeepCollectionEquality().hash(description),
+      const DeepCollectionEquality().hash(designLink),
       const DeepCollectionEquality().hash(builder),
       const DeepCollectionEquality().hash(sourceCode));
 
@@ -1859,14 +1882,20 @@ class _$ViewerComponentSection extends ViewerComponentSection
     required TResult Function(String id, String title, String? description,
             List<List<ViewerCollectionItemUnion>> contents)
         paragraph,
-    required TResult Function(String id, String title, String? description,
-            ViewerWidgetBuilder builder, ViewerSourceCode sourceCode)
+    required TResult Function(
+            String id,
+            String title,
+            String ctorName,
+            String? description,
+            String? designLink,
+            ViewerWidgetBuilder builder,
+            ViewerSourceCode sourceCode)
         component,
-    required TResult Function(String id, String title, String? description,
-            List<ClassMemberElement> items)
+    required TResult Function(String id, String title, String? description)
         apiDocs,
   }) {
-    return component(id, title, description, builder, sourceCode);
+    return component(
+        id, title, ctorName, description, designLink, builder, sourceCode);
   }
 
   @override
@@ -1875,14 +1904,19 @@ class _$ViewerComponentSection extends ViewerComponentSection
     TResult Function(String id, String title, String? description,
             List<List<ViewerCollectionItemUnion>> contents)?
         paragraph,
-    TResult Function(String id, String title, String? description,
-            ViewerWidgetBuilder builder, ViewerSourceCode sourceCode)?
+    TResult Function(
+            String id,
+            String title,
+            String ctorName,
+            String? description,
+            String? designLink,
+            ViewerWidgetBuilder builder,
+            ViewerSourceCode sourceCode)?
         component,
-    TResult Function(String id, String title, String? description,
-            List<ClassMemberElement> items)?
-        apiDocs,
+    TResult Function(String id, String title, String? description)? apiDocs,
   }) {
-    return component?.call(id, title, description, builder, sourceCode);
+    return component?.call(
+        id, title, ctorName, description, designLink, builder, sourceCode);
   }
 
   @override
@@ -1891,16 +1925,21 @@ class _$ViewerComponentSection extends ViewerComponentSection
     TResult Function(String id, String title, String? description,
             List<List<ViewerCollectionItemUnion>> contents)?
         paragraph,
-    TResult Function(String id, String title, String? description,
-            ViewerWidgetBuilder builder, ViewerSourceCode sourceCode)?
+    TResult Function(
+            String id,
+            String title,
+            String ctorName,
+            String? description,
+            String? designLink,
+            ViewerWidgetBuilder builder,
+            ViewerSourceCode sourceCode)?
         component,
-    TResult Function(String id, String title, String? description,
-            List<ClassMemberElement> items)?
-        apiDocs,
+    TResult Function(String id, String title, String? description)? apiDocs,
     required TResult orElse(),
   }) {
     if (component != null) {
-      return component(id, title, description, builder, sourceCode);
+      return component(
+          id, title, ctorName, description, designLink, builder, sourceCode);
     }
     return orElse();
   }
@@ -1944,7 +1983,9 @@ abstract class ViewerComponentSection extends ViewerSectionUnion {
   const factory ViewerComponentSection(
       {required String id,
       required String title,
+      required String ctorName,
       String? description,
+      String? designLink,
       required ViewerWidgetBuilder builder,
       required ViewerSourceCode sourceCode}) = _$ViewerComponentSection;
   const ViewerComponentSection._() : super._();
@@ -1953,8 +1994,10 @@ abstract class ViewerComponentSection extends ViewerSectionUnion {
   String get id;
   @override
   String get title;
+  String get ctorName;
   @override
   String? get description;
+  String? get designLink;
   ViewerWidgetBuilder get builder;
   ViewerSourceCode get sourceCode;
   @override
@@ -1970,11 +2013,7 @@ abstract class $ViewerApiDocsSectionCopyWith<$Res>
           $Res Function(ViewerApiDocsSection) then) =
       _$ViewerApiDocsSectionCopyWithImpl<$Res>;
   @override
-  $Res call(
-      {String id,
-      String title,
-      String? description,
-      List<ClassMemberElement> items});
+  $Res call({String id, String title, String? description});
 }
 
 /// @nodoc
@@ -1993,7 +2032,6 @@ class _$ViewerApiDocsSectionCopyWithImpl<$Res>
     Object? id = freezed,
     Object? title = freezed,
     Object? description = freezed,
-    Object? items = freezed,
   }) {
     return _then(ViewerApiDocsSection(
       id: id == freezed
@@ -2008,10 +2046,6 @@ class _$ViewerApiDocsSectionCopyWithImpl<$Res>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
-      items: items == freezed
-          ? _value.items
-          : items // ignore: cast_nullable_to_non_nullable
-              as List<ClassMemberElement>,
     ));
   }
 }
@@ -2021,10 +2055,7 @@ class _$ViewerApiDocsSectionCopyWithImpl<$Res>
 class _$ViewerApiDocsSection extends ViewerApiDocsSection
     with DiagnosticableTreeMixin {
   const _$ViewerApiDocsSection(
-      {required this.id,
-      required this.title,
-      this.description,
-      required this.items})
+      {required this.id, required this.title, this.description})
       : super._();
 
   @override
@@ -2033,12 +2064,10 @@ class _$ViewerApiDocsSection extends ViewerApiDocsSection
   final String title;
   @override
   final String? description;
-  @override
-  final List<ClassMemberElement> items;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ViewerSectionUnion.apiDocs(id: $id, title: $title, description: $description, items: $items)';
+    return 'ViewerSectionUnion.apiDocs(id: $id, title: $title, description: $description)';
   }
 
   @override
@@ -2048,8 +2077,7 @@ class _$ViewerApiDocsSection extends ViewerApiDocsSection
       ..add(DiagnosticsProperty('type', 'ViewerSectionUnion.apiDocs'))
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('title', title))
-      ..add(DiagnosticsProperty('description', description))
-      ..add(DiagnosticsProperty('items', items));
+      ..add(DiagnosticsProperty('description', description));
   }
 
   @override
@@ -2060,8 +2088,7 @@ class _$ViewerApiDocsSection extends ViewerApiDocsSection
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.title, title) &&
             const DeepCollectionEquality()
-                .equals(other.description, description) &&
-            const DeepCollectionEquality().equals(other.items, items));
+                .equals(other.description, description));
   }
 
   @override
@@ -2069,8 +2096,7 @@ class _$ViewerApiDocsSection extends ViewerApiDocsSection
       runtimeType,
       const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(title),
-      const DeepCollectionEquality().hash(description),
-      const DeepCollectionEquality().hash(items));
+      const DeepCollectionEquality().hash(description));
 
   @JsonKey(ignore: true)
   @override
@@ -2084,14 +2110,19 @@ class _$ViewerApiDocsSection extends ViewerApiDocsSection
     required TResult Function(String id, String title, String? description,
             List<List<ViewerCollectionItemUnion>> contents)
         paragraph,
-    required TResult Function(String id, String title, String? description,
-            ViewerWidgetBuilder builder, ViewerSourceCode sourceCode)
+    required TResult Function(
+            String id,
+            String title,
+            String ctorName,
+            String? description,
+            String? designLink,
+            ViewerWidgetBuilder builder,
+            ViewerSourceCode sourceCode)
         component,
-    required TResult Function(String id, String title, String? description,
-            List<ClassMemberElement> items)
+    required TResult Function(String id, String title, String? description)
         apiDocs,
   }) {
-    return apiDocs(id, title, description, items);
+    return apiDocs(id, title, description);
   }
 
   @override
@@ -2100,14 +2131,18 @@ class _$ViewerApiDocsSection extends ViewerApiDocsSection
     TResult Function(String id, String title, String? description,
             List<List<ViewerCollectionItemUnion>> contents)?
         paragraph,
-    TResult Function(String id, String title, String? description,
-            ViewerWidgetBuilder builder, ViewerSourceCode sourceCode)?
+    TResult Function(
+            String id,
+            String title,
+            String ctorName,
+            String? description,
+            String? designLink,
+            ViewerWidgetBuilder builder,
+            ViewerSourceCode sourceCode)?
         component,
-    TResult Function(String id, String title, String? description,
-            List<ClassMemberElement> items)?
-        apiDocs,
+    TResult Function(String id, String title, String? description)? apiDocs,
   }) {
-    return apiDocs?.call(id, title, description, items);
+    return apiDocs?.call(id, title, description);
   }
 
   @override
@@ -2116,16 +2151,20 @@ class _$ViewerApiDocsSection extends ViewerApiDocsSection
     TResult Function(String id, String title, String? description,
             List<List<ViewerCollectionItemUnion>> contents)?
         paragraph,
-    TResult Function(String id, String title, String? description,
-            ViewerWidgetBuilder builder, ViewerSourceCode sourceCode)?
+    TResult Function(
+            String id,
+            String title,
+            String ctorName,
+            String? description,
+            String? designLink,
+            ViewerWidgetBuilder builder,
+            ViewerSourceCode sourceCode)?
         component,
-    TResult Function(String id, String title, String? description,
-            List<ClassMemberElement> items)?
-        apiDocs,
+    TResult Function(String id, String title, String? description)? apiDocs,
     required TResult orElse(),
   }) {
     if (apiDocs != null) {
-      return apiDocs(id, title, description, items);
+      return apiDocs(id, title, description);
     }
     return orElse();
   }
@@ -2169,8 +2208,7 @@ abstract class ViewerApiDocsSection extends ViewerSectionUnion {
   const factory ViewerApiDocsSection(
       {required String id,
       required String title,
-      String? description,
-      required List<ClassMemberElement> items}) = _$ViewerApiDocsSection;
+      String? description}) = _$ViewerApiDocsSection;
   const ViewerApiDocsSection._() : super._();
 
   @override
@@ -2179,7 +2217,6 @@ abstract class ViewerApiDocsSection extends ViewerSectionUnion {
   String get title;
   @override
   String? get description;
-  List<ClassMemberElement> get items;
   @override
   @JsonKey(ignore: true)
   $ViewerApiDocsSectionCopyWith<ViewerApiDocsSection> get copyWith =>
@@ -2358,11 +2395,23 @@ class _$FieldMetaDataTearOff {
   const _$FieldMetaDataTearOff();
 
   _FieldMetaData call(
-      {required String name, required Type type, required bool isOptional}) {
+      {required String name,
+      required Type type,
+      required String typeName,
+      required bool isOptional,
+      String? defaultValueCode,
+      dynamic defaultValue,
+      dynamic viewerInitValue,
+      String? documentation}) {
     return _FieldMetaData(
       name: name,
       type: type,
+      typeName: typeName,
       isOptional: isOptional,
+      defaultValueCode: defaultValueCode,
+      defaultValue: defaultValue,
+      viewerInitValue: viewerInitValue,
+      documentation: documentation,
     );
   }
 }
@@ -2374,7 +2423,12 @@ const $FieldMetaData = _$FieldMetaDataTearOff();
 mixin _$FieldMetaData {
   String get name => throw _privateConstructorUsedError;
   Type get type => throw _privateConstructorUsedError;
+  String get typeName => throw _privateConstructorUsedError;
   bool get isOptional => throw _privateConstructorUsedError;
+  String? get defaultValueCode => throw _privateConstructorUsedError;
+  dynamic get defaultValue => throw _privateConstructorUsedError;
+  dynamic get viewerInitValue => throw _privateConstructorUsedError;
+  String? get documentation => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $FieldMetaDataCopyWith<FieldMetaData> get copyWith =>
@@ -2386,7 +2440,15 @@ abstract class $FieldMetaDataCopyWith<$Res> {
   factory $FieldMetaDataCopyWith(
           FieldMetaData value, $Res Function(FieldMetaData) then) =
       _$FieldMetaDataCopyWithImpl<$Res>;
-  $Res call({String name, Type type, bool isOptional});
+  $Res call(
+      {String name,
+      Type type,
+      String typeName,
+      bool isOptional,
+      String? defaultValueCode,
+      dynamic defaultValue,
+      dynamic viewerInitValue,
+      String? documentation});
 }
 
 /// @nodoc
@@ -2402,7 +2464,12 @@ class _$FieldMetaDataCopyWithImpl<$Res>
   $Res call({
     Object? name = freezed,
     Object? type = freezed,
+    Object? typeName = freezed,
     Object? isOptional = freezed,
+    Object? defaultValueCode = freezed,
+    Object? defaultValue = freezed,
+    Object? viewerInitValue = freezed,
+    Object? documentation = freezed,
   }) {
     return _then(_value.copyWith(
       name: name == freezed
@@ -2413,10 +2480,30 @@ class _$FieldMetaDataCopyWithImpl<$Res>
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as Type,
+      typeName: typeName == freezed
+          ? _value.typeName
+          : typeName // ignore: cast_nullable_to_non_nullable
+              as String,
       isOptional: isOptional == freezed
           ? _value.isOptional
           : isOptional // ignore: cast_nullable_to_non_nullable
               as bool,
+      defaultValueCode: defaultValueCode == freezed
+          ? _value.defaultValueCode
+          : defaultValueCode // ignore: cast_nullable_to_non_nullable
+              as String?,
+      defaultValue: defaultValue == freezed
+          ? _value.defaultValue
+          : defaultValue // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      viewerInitValue: viewerInitValue == freezed
+          ? _value.viewerInitValue
+          : viewerInitValue // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      documentation: documentation == freezed
+          ? _value.documentation
+          : documentation // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -2428,7 +2515,15 @@ abstract class _$FieldMetaDataCopyWith<$Res>
           _FieldMetaData value, $Res Function(_FieldMetaData) then) =
       __$FieldMetaDataCopyWithImpl<$Res>;
   @override
-  $Res call({String name, Type type, bool isOptional});
+  $Res call(
+      {String name,
+      Type type,
+      String typeName,
+      bool isOptional,
+      String? defaultValueCode,
+      dynamic defaultValue,
+      dynamic viewerInitValue,
+      String? documentation});
 }
 
 /// @nodoc
@@ -2446,7 +2541,12 @@ class __$FieldMetaDataCopyWithImpl<$Res>
   $Res call({
     Object? name = freezed,
     Object? type = freezed,
+    Object? typeName = freezed,
     Object? isOptional = freezed,
+    Object? defaultValueCode = freezed,
+    Object? defaultValue = freezed,
+    Object? viewerInitValue = freezed,
+    Object? documentation = freezed,
   }) {
     return _then(_FieldMetaData(
       name: name == freezed
@@ -2457,10 +2557,30 @@ class __$FieldMetaDataCopyWithImpl<$Res>
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as Type,
+      typeName: typeName == freezed
+          ? _value.typeName
+          : typeName // ignore: cast_nullable_to_non_nullable
+              as String,
       isOptional: isOptional == freezed
           ? _value.isOptional
           : isOptional // ignore: cast_nullable_to_non_nullable
               as bool,
+      defaultValueCode: defaultValueCode == freezed
+          ? _value.defaultValueCode
+          : defaultValueCode // ignore: cast_nullable_to_non_nullable
+              as String?,
+      defaultValue: defaultValue == freezed
+          ? _value.defaultValue
+          : defaultValue // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      viewerInitValue: viewerInitValue == freezed
+          ? _value.viewerInitValue
+          : viewerInitValue // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      documentation: documentation == freezed
+          ? _value.documentation
+          : documentation // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -2469,7 +2589,14 @@ class __$FieldMetaDataCopyWithImpl<$Res>
 
 class _$_FieldMetaData extends _FieldMetaData with DiagnosticableTreeMixin {
   const _$_FieldMetaData(
-      {required this.name, required this.type, required this.isOptional})
+      {required this.name,
+      required this.type,
+      required this.typeName,
+      required this.isOptional,
+      this.defaultValueCode,
+      this.defaultValue,
+      this.viewerInitValue,
+      this.documentation})
       : super._();
 
   @override
@@ -2477,11 +2604,21 @@ class _$_FieldMetaData extends _FieldMetaData with DiagnosticableTreeMixin {
   @override
   final Type type;
   @override
+  final String typeName;
+  @override
   final bool isOptional;
+  @override
+  final String? defaultValueCode;
+  @override
+  final dynamic defaultValue;
+  @override
+  final dynamic viewerInitValue;
+  @override
+  final String? documentation;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'FieldMetaData(name: $name, type: $type, isOptional: $isOptional)';
+    return 'FieldMetaData(name: $name, type: $type, typeName: $typeName, isOptional: $isOptional, defaultValueCode: $defaultValueCode, defaultValue: $defaultValue, viewerInitValue: $viewerInitValue, documentation: $documentation)';
   }
 
   @override
@@ -2491,7 +2628,12 @@ class _$_FieldMetaData extends _FieldMetaData with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty('type', 'FieldMetaData'))
       ..add(DiagnosticsProperty('name', name))
       ..add(DiagnosticsProperty('type', type))
-      ..add(DiagnosticsProperty('isOptional', isOptional));
+      ..add(DiagnosticsProperty('typeName', typeName))
+      ..add(DiagnosticsProperty('isOptional', isOptional))
+      ..add(DiagnosticsProperty('defaultValueCode', defaultValueCode))
+      ..add(DiagnosticsProperty('defaultValue', defaultValue))
+      ..add(DiagnosticsProperty('viewerInitValue', viewerInitValue))
+      ..add(DiagnosticsProperty('documentation', documentation));
   }
 
   @override
@@ -2501,8 +2643,17 @@ class _$_FieldMetaData extends _FieldMetaData with DiagnosticableTreeMixin {
             other is _FieldMetaData &&
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality().equals(other.type, type) &&
+            const DeepCollectionEquality().equals(other.typeName, typeName) &&
             const DeepCollectionEquality()
-                .equals(other.isOptional, isOptional));
+                .equals(other.isOptional, isOptional) &&
+            const DeepCollectionEquality()
+                .equals(other.defaultValueCode, defaultValueCode) &&
+            const DeepCollectionEquality()
+                .equals(other.defaultValue, defaultValue) &&
+            const DeepCollectionEquality()
+                .equals(other.viewerInitValue, viewerInitValue) &&
+            const DeepCollectionEquality()
+                .equals(other.documentation, documentation));
   }
 
   @override
@@ -2510,7 +2661,12 @@ class _$_FieldMetaData extends _FieldMetaData with DiagnosticableTreeMixin {
       runtimeType,
       const DeepCollectionEquality().hash(name),
       const DeepCollectionEquality().hash(type),
-      const DeepCollectionEquality().hash(isOptional));
+      const DeepCollectionEquality().hash(typeName),
+      const DeepCollectionEquality().hash(isOptional),
+      const DeepCollectionEquality().hash(defaultValueCode),
+      const DeepCollectionEquality().hash(defaultValue),
+      const DeepCollectionEquality().hash(viewerInitValue),
+      const DeepCollectionEquality().hash(documentation));
 
   @JsonKey(ignore: true)
   @override
@@ -2522,7 +2678,12 @@ abstract class _FieldMetaData extends FieldMetaData {
   const factory _FieldMetaData(
       {required String name,
       required Type type,
-      required bool isOptional}) = _$_FieldMetaData;
+      required String typeName,
+      required bool isOptional,
+      String? defaultValueCode,
+      dynamic defaultValue,
+      dynamic viewerInitValue,
+      String? documentation}) = _$_FieldMetaData;
   const _FieldMetaData._() : super._();
 
   @override
@@ -2530,7 +2691,17 @@ abstract class _FieldMetaData extends FieldMetaData {
   @override
   Type get type;
   @override
+  String get typeName;
+  @override
   bool get isOptional;
+  @override
+  String? get defaultValueCode;
+  @override
+  dynamic get defaultValue;
+  @override
+  dynamic get viewerInitValue;
+  @override
+  String? get documentation;
   @override
   @JsonKey(ignore: true)
   _$FieldMetaDataCopyWith<_FieldMetaData> get copyWith =>

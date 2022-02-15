@@ -17,7 +17,6 @@ enum SearchableType {
 enum SearchableHitType {
   title,
   description,
-  tags,
 }
 
 @freezed
@@ -51,11 +50,6 @@ enum SearchResultItemPageType {
   prototype,
 }
 
-enum SearchResultItemPrefix {
-  sub,
-  subEnd,
-}
-
 @freezed
 class SearchResultItem with _$SearchResultItem {
   const SearchResultItem._();
@@ -63,7 +57,6 @@ class SearchResultItem with _$SearchResultItem {
     required SearchResultContext context,
     required SearchResultItemType type,
     required SearchResultItemPageType pageType,
-    SearchResultItemPrefix? prefix,
     required int score,
     required String title,
     String? subtitle,

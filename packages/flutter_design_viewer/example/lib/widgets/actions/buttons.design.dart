@@ -18,8 +18,10 @@ final widgetsActionsButtonsPage = ViewerDocumentPage(
       from Material design.''',
   sections: [
     ViewerSectionUnion.component(
-      id: 'button',
+      id: 'anatomy',
       title: 'Anatomy',
+      ctorName: 'Button',
+      designLink: null,
       builder: ViewerWidgetBuilder(
         build: (context, factory) => Button(
           child: factory.build(context, 'child'),
@@ -29,12 +31,22 @@ final widgetsActionsButtonsPage = ViewerDocumentPage(
           FieldMetaData(
             name: 'child',
             type: Widget,
+            typeName: 'Widget',
             isOptional: false,
+            defaultValue: null,
+            defaultValueCode: null,
+            viewerInitValue: null,
+            documentation: null,
           ),
           FieldMetaData(
             name: 'onPressed',
             type: Function,
+            typeName: 'Function',
             isOptional: true,
+            defaultValue: null,
+            defaultValueCode: null,
+            viewerInitValue: null,
+            documentation: null,
           ),
         ],
       ),
@@ -66,6 +78,10 @@ class Button extends StatelessWidget {
 }
 
 '''),
+    ),
+    const ViewerSectionUnion.apiDocs(
+      id: 'apiDocs',
+      title: 'API reference',
     ),
   ],
 );

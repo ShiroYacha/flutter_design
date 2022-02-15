@@ -244,3 +244,107 @@ class ViewerImageDisplay extends StatelessWidget {
     }
   }
 }
+
+class ApiDocsSection extends HookConsumerWidget {
+  final ViewerApiDocsSection apiDocs;
+  final List<ViewerComponentSection> components;
+  const ApiDocsSection({
+    required this.apiDocs,
+    required this.components,
+    Key? key,
+  }) : super(key: key);
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final theme = Theme.of(context);
+    _scrollIntoViewIfUrlEndsWithId(context, apiDocs.id);
+    final headerTextStyle = theme.textTheme.subtitle2;
+    return Paddings.vertical20(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          TextDescription(
+            style: TextDescriptionStyle.section(context),
+            title: apiDocs.title,
+            description: apiDocs.description,
+          ),
+          ...components.fold(
+            <Widget>[],
+            (pv, e) => [
+              ...pv,
+              TextDescription(
+                style: TextDescriptionStyle.paragraph(context),
+                title: e.ctorName,
+              ),
+              DataTable(
+                columns: [
+                  DataColumn(
+                    label: Text(
+                      'Name',
+                      style: headerTextStyle,
+                    ),
+                  ),
+                  DataColumn(
+                    label: Text(
+                      'Type',
+                      style: headerTextStyle,
+                    ),
+                  ),
+                  DataColumn(
+                    label: Text(
+                      'Default value',
+                      style: headerTextStyle,
+                    ),
+                  ),
+                  DataColumn(
+                    label: Text(
+                      'Documentation',
+                      style: headerTextStyle,
+                    ),
+                  ),
+                ],
+                rows: e.builder.fieldMetaDataset
+                    .map(
+                      (e) => DataRow(
+                        cells: <DataCell>[
+                          DataCell(
+                            Container(
+                              decoration: BoxDecoration(
+                                color: theme.dialogBackgroundColor,
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: SpacingDesign.s10,
+                                  vertical: SpacingDesign.s6),
+                              child: Text(e.name),
+                            ),
+                          ),
+                          DataCell(
+                            Text(
+                              '${e.typeName}${e.isOptional ? '?' : ''}',
+                              style: theme.textTheme.bodyText1?.copyWith(
+                                color: theme.primaryColor,
+                              ),
+                            ),
+                          ),
+                          DataCell(
+                            e.defaultValue != null
+                                ? Text(e.defaultValueCode!)
+                                : const SizedBox.shrink(),
+                          ),
+                          DataCell(
+                            e.documentation != null
+                                ? Text(e.documentation!)
+                                : const SizedBox.shrink(),
+                          ),
+                        ],
+                      ),
+                    )
+                    .toList(),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}

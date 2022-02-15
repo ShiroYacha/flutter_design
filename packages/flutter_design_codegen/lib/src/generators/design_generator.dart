@@ -55,8 +55,10 @@ final ${buildClassPageFieldName(element)} = ViewerDocumentPage(
   description: ${_readNullableAnnotation<String>(annotation, 'description')},
   sections: [
     ViewerSectionUnion.component(
-      id: '${className.camelCase}',
+      id: 'anatomy',
       title: 'Anatomy',
+      ctorName: '$className',
+      designLink: ${_readNullableAnnotation<String>(annotation, 'designLink')},
       builder: ViewerWidgetBuilder(
         build: ${buildCodepair[0]},
         fieldMetaDataset: $fieldMetaDatasetCode,
@@ -75,6 +77,12 @@ ${await _extractSourceFromElement(
 \'\'\'
       ),
     ),
+    ${annotation.read('showApiDocs').boolValue ? '''
+    const ViewerSectionUnion.apiDocs(
+      id: 'apiDocs',
+      title: 'API reference',
+    ),
+''' : ''}
   ],
 );
 ''';
@@ -112,6 +120,47 @@ ${await _extractSourceFromElement(
     return reader;
   }
 
+  dynamic _readNullableAnnotationMapValue(
+    ConstantReader annotation,
+    String field,
+    String key,
+    DartType type,
+  ) {
+    final reader = annotation.read(field);
+    if (reader.isNull || !reader.isMap) return null;
+    final map = reader.mapValue;
+    for (final e in map.entries) {
+      if (e.key?.toStringValue() == key) {
+        if (type.isDartCoreString) {
+          return "r'${e.value!.toStringValue()}'";
+        }
+        if (type.isDartCoreDouble) {
+          return e.value!.toDoubleValue();
+        }
+        if (type.isDartCoreInt) {
+          return e.value!.toIntValue();
+        }
+        if (type.isDartCoreBool) {
+          return e.value!.toBoolValue();
+        }
+        if (type.isDartCoreList) {
+          return e.value!.toListValue();
+        }
+        if (type.isDartCoreMap) {
+          return e.value!.toMapValue();
+        }
+        if (type.isDartCoreSet) {
+          return e.value!.toSetValue();
+        }
+        if (type.isDartCoreSymbol) {
+          return e.value!.toSymbolValue();
+        }
+        throw UnsupportedError('Dynamic type not supported!');
+      }
+    }
+    return null;
+  }
+
   Future<List<String>> _extractBuilderSourceCode({
     required Resolver resolver,
     required ModelVisitor visitor,
@@ -139,12 +188,22 @@ ${await _extractSourceFromElement(
     final sb = StringBuffer('const [');
     for (final e in parameters.where((e) => e.name != 'key')) {
       // TODO: figure out how to deal with function signature...
+
+      final type = e.type.element != null
+          ? e.type.getDisplayString(withNullability: false)
+          : 'Function';
+
       sb.write(
         '''
 FieldMetaData(
   name: '${e.name}',
-  type: ${e.type.element != null ? e.type.getDisplayString(withNullability: false) : 'Function'},
+  type: $type,
+  typeName: '$type',
   isOptional: ${e.isOptional},
+  defaultValue: ${e.defaultValueCode},
+  defaultValueCode: ${e.defaultValueCode != null ? "'${e.defaultValueCode}'" : null},
+  viewerInitValue: ${_readNullableAnnotationMapValue(annotation, 'viewerInitValueMap', e.name, e.type)},
+  documentation: ${e.documentationComment != null ? "'${e.documentationComment}'" : null},
 ),''',
       );
     }

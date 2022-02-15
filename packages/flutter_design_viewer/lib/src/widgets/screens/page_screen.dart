@@ -43,7 +43,12 @@ class PageScreen extends HookConsumerWidget {
                     ParagraphSection(paragraph: paragraph),
                 component: (component) =>
                     ComponentSection(component: component),
-                apiDocs: (apiDocs) => Container(),
+                apiDocs: (apiDocs) => ApiDocsSection(
+                  apiDocs: apiDocs,
+                  components: currentPage.sections
+                      .whereType<ViewerComponentSection>()
+                      .toList(),
+                ),
               ),
             ),
           ),

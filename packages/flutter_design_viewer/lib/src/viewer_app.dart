@@ -2,11 +2,12 @@ import 'dart:async';
 
 import 'package:bot_toast/bot_toast.dart';
 import 'package:device_preview/device_preview.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_design/flutter_design.dart';
 import 'package:flutter_design_viewer/flutter_design_viewer.dart';
-import 'package:flutter_design_viewer/src/models/data_factory.dart';
+import 'package:flutter_design_viewer/src/models/data.dart';
 import 'package:flutter_design_viewer/src/theme.dart';
 import 'package:flutter_design_viewer/src/utils.dart';
 import 'package:flutter_design_viewer/src/widget_keys.dart';
@@ -60,16 +61,34 @@ class DesignSystemViewerApp extends HookConsumerWidget {
         viewerSettingsProvider.overrideWithValue(settings),
         dataBuilderRegistryProvider.overrideWithValue(
           DataBuilderRegistry(
+            /// TODO: this boilerplate code could be generated
             allBuilders: {
               String: [
-                () => DataTemplateStringLoremBuilder(),
-                () => DataTemplateStringRawBuilder(),
+                ([d]) => d != null
+                    ? DataTemplateStringRawBuilder(raw: d)
+                    : DataTemplateStringRawBuilder(),
+                ([d]) => DataTemplateStringLoremBuilder(),
               ],
               Widget: [
-                () => DataTemplateWidgetPlaceholderBuilder(),
+                ([d]) => DataTemplateWidgetPlaceholderBuilder(),
               ],
               Function: [
-                () => DataTemplateStubFunctionBuilder(),
+                ([d]) => DataTemplateStubFunctionBuilder(),
+              ],
+              Color: [
+                ([d]) => d != null
+                    ? DataTemplateColorPickerBuilder(color: d)
+                    : DataTemplateColorPickerBuilder(),
+              ],
+              double: [
+                ([d]) => d != null
+                    ? DataTemplateDoubleBuilder(value: d)
+                    : DataTemplateDoubleBuilder(),
+              ],
+              int: [
+                ([d]) => d != null
+                    ? DataTemplateIntBuilder(value: d)
+                    : DataTemplateIntBuilder(),
               ],
             },
           ),
@@ -109,8 +128,11 @@ class DesignSystemViewerRouter extends HookConsumerWidget {
                 targetThemeId: viewerSettings.enabledThemes.keys.first,
                 targetThemeIds: viewerSettings.enabledThemes.keys.toList(),
               );
-        if (cache?.uri != null && WidgetKeys.navKey.currentContext != null) {
-          // Restore cached URI
+        // Restore cached URI if possible (not doing it in Web because the user can open
+        // multiple tabs).
+        if (!kIsWeb &&
+            cache?.uri != null &&
+            WidgetKeys.navKey.currentContext != null) {
           VRouter.of(WidgetKeys.navKey.currentContext!).to(cache!.uri!);
         }
       } finally {
@@ -124,6 +146,7 @@ class DesignSystemViewerRouter extends HookConsumerWidget {
       }
     });
     return VRouter(
+      mode: VRouterMode.history,
       debugShowCheckedModeBanner: false,
       navigatorKey: WidgetKeys.navKey,
       theme: defaultLightTheme,
@@ -137,15 +160,22 @@ class DesignSystemViewerRouter extends HookConsumerWidget {
       initialUrl: pageGroups.isEmpty
           ? '/404'
           : pageGroups.first.children.map((e) => e.firstDocumentUri).first,
+      onGenerateTitle: (context) {
+        return WidgetKeys.navKey.currentContext != null
+            ? VRouter.of(WidgetKeys.navKey.currentContext!).names.first
+            : '';
+      },
       buildTransition: (animation1, _, child) => FadeTransition(
         opacity: animation1,
         child: child,
       ),
-      transitionDuration: const Duration(milliseconds: 100),
+      transitionDuration: const Duration(milliseconds: 0),
       routes: [
-        VWidget(path: '/404', widget: const Error404Screen()),
+        VWidget(
+            path: '/404', name: 'Error 404', widget: const Error404Screen()),
         VNester(
           path: '/',
+          name: '',
           widgetBuilder: (child) => Shortcuts(
             shortcuts: const <SingleActivator, Intent>{
               SingleActivator(LogicalKeyboardKey.keyK, meta: true):
@@ -177,6 +207,7 @@ class DesignSystemViewerRouter extends HookConsumerWidget {
       ...pages.whereType<ViewerDocumentPage>().map(
             (e) => VWidget(
               path: e.uri,
+              name: e.title,
               widget: ProviderScope(
                 overrides: [
                   currentPageProvider.overrideWithValue(e),

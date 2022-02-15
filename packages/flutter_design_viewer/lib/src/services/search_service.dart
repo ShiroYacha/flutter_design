@@ -10,48 +10,45 @@ final searchProvider =
   (ref, query) {
     final pageGroups = ref.watch(pageGroupsProvider);
     return _searchGroupPages(pageGroups, query.toLowerCase());
-    if (query.isNotEmpty) {
-      // TODO
-      return _searchGroupPages(pageGroups, query);
-    } else {
-      // TODO load recent/favorites
-      return [
-        const SearchResultItem(
-          context: SearchResultContext.recent,
-          type: SearchResultItemType.section,
-          pageType: SearchResultItemPageType.document,
-          prefix: null,
-          score: 99,
-          title: 'Example',
-          subtitle: 'Button',
-          labelHighlightStart: 0,
-          labelHighlightEnd: 5,
-          uri: '/components/button',
-        ),
-        const SearchResultItem(
-          context: SearchResultContext.recent,
-          type: SearchResultItemType.recent,
-          pageType: SearchResultItemPageType.document,
-          prefix: null,
-          score: 99,
-          title: 'Intro',
-          labelHighlightStart: 0,
-          labelHighlightEnd: 5,
-          uri: '/get_started/intro',
-        ),
-        const SearchResultItem(
-          context: SearchResultContext.favorite,
-          type: SearchResultItemType.favorite,
-          pageType: SearchResultItemPageType.document,
-          prefix: null,
-          score: 99,
-          title: 'Intro',
-          labelHighlightStart: 0,
-          labelHighlightEnd: 5,
-          uri: '/get_started/intro',
-        ),
-      ];
-    }
+    // if (query.isNotEmpty) {
+    //   // TODO
+    //   return _searchGroupPages(pageGroups, query);
+    // } else {
+    //   // TODO load recent/favorites
+    //   return [
+    //     const SearchResultItem(
+    //       context: SearchResultContext.recent,
+    //       type: SearchResultItemType.section,
+    //       pageType: SearchResultItemPageType.document,
+    //       score: 99,
+    //       title: 'Example',
+    //       subtitle: 'Button',
+    //       labelHighlightStart: 0,
+    //       labelHighlightEnd: 5,
+    //       uri: '/components/button',
+    //     ),
+    //     const SearchResultItem(
+    //       context: SearchResultContext.recent,
+    //       type: SearchResultItemType.recent,
+    //       pageType: SearchResultItemPageType.document,
+    //       score: 99,
+    //       title: 'Intro',
+    //       labelHighlightStart: 0,
+    //       labelHighlightEnd: 5,
+    //       uri: '/get_started/intro',
+    //     ),
+    //     const SearchResultItem(
+    //       context: SearchResultContext.favorite,
+    //       type: SearchResultItemType.favorite,
+    //       pageType: SearchResultItemPageType.document,
+    //       score: 99,
+    //       title: 'Intro',
+    //       labelHighlightStart: 0,
+    //       labelHighlightEnd: 5,
+    //       uri: '/get_started/intro',
+    //     ),
+    //   ];
+    // }
   },
 );
 
@@ -88,9 +85,6 @@ List<SearchResultItem> _searchGroupPages(
               return t.similarityTo(query) * 100;
             }
             if (e.hitType == SearchableHitType.description) {
-              return t.similarityTo(query) * 100;
-            }
-            if (e.hitType == SearchableHitType.tags) {
               return t.similarityTo(query) * 100;
             }
             return t.similarityTo(query) * 0;

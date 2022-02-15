@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_design/flutter_design.dart';
 import 'package:flutter_design_annotation/flutter_design_annotation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:recase/recase.dart';
 
 import 'searches.dart';
 
@@ -26,7 +25,6 @@ class ViewerPageUnion with _$ViewerPageUnion implements Searchable {
     required String title,
     String? subtitle,
     String? description,
-    @Default([]) List<String> tags,
     @Default([]) List<ViewerSectionUnion> sections,
   }) = ViewerDocumentPage;
 
@@ -41,19 +39,15 @@ class ViewerPageUnion with _$ViewerPageUnion implements Searchable {
 
   @override
   List<SearchableElement> get searchableElements => [
-        SearchableElement(
-          type: SearchableType.page,
-          hitType: SearchableHitType.title,
-          searchable: this,
-          text: title,
-        ),
-        // TODO: impl. search
+        if (this is ViewerGroupPage)
+          ...(this as ViewerGroupPage).children.fold(<SearchableElement>[],
+              (pv, e) => [...pv, ...e.searchableElements]),
         if (this is ViewerDocumentPage) ...[
           SearchableElement(
             type: SearchableType.page,
-            hitType: SearchableHitType.tags,
+            hitType: SearchableHitType.title,
             searchable: this,
-            text: (this as ViewerDocumentPage).tags.join(','),
+            text: title,
           ),
           ...(this as ViewerDocumentPage)
               .sections
@@ -65,7 +59,7 @@ class ViewerPageUnion with _$ViewerPageUnion implements Searchable {
                 (e) => e.copyWith(
                   searchable: this,
                 ),
-              )
+              ),
             ],
           ),
         ],
@@ -109,7 +103,9 @@ class ViewerSectionUnion with _$ViewerSectionUnion implements Searchable {
   const factory ViewerSectionUnion.component({
     required String id,
     required String title,
+    required String ctorName,
     String? description,
+    String? designLink,
     required ViewerWidgetBuilder builder,
     required ViewerSourceCode sourceCode,
   }) = ViewerComponentSection;
@@ -118,7 +114,6 @@ class ViewerSectionUnion with _$ViewerSectionUnion implements Searchable {
     required String id,
     required String title,
     String? description,
-    required List<ClassMemberElement> items,
   }) = ViewerApiDocsSection;
 
   @override
@@ -144,7 +139,12 @@ class FieldMetaData with _$FieldMetaData {
   const factory FieldMetaData({
     required String name,
     required Type type,
+    required String typeName,
     required bool isOptional,
+    String? defaultValueCode,
+    dynamic defaultValue,
+    dynamic viewerInitValue,
+    String? documentation,
   }) = _FieldMetaData;
 }
 

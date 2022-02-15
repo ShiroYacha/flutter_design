@@ -233,7 +233,6 @@ class _$SearchResultItemTearOff {
       {required SearchResultContext context,
       required SearchResultItemType type,
       required SearchResultItemPageType pageType,
-      SearchResultItemPrefix? prefix,
       required int score,
       required String title,
       String? subtitle,
@@ -244,7 +243,6 @@ class _$SearchResultItemTearOff {
       context: context,
       type: type,
       pageType: pageType,
-      prefix: prefix,
       score: score,
       title: title,
       subtitle: subtitle,
@@ -267,7 +265,6 @@ mixin _$SearchResultItem {
   SearchResultContext get context => throw _privateConstructorUsedError;
   SearchResultItemType get type => throw _privateConstructorUsedError;
   SearchResultItemPageType get pageType => throw _privateConstructorUsedError;
-  SearchResultItemPrefix? get prefix => throw _privateConstructorUsedError;
   int get score => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String? get subtitle => throw _privateConstructorUsedError;
@@ -290,7 +287,6 @@ abstract class $SearchResultItemCopyWith<$Res> {
       {SearchResultContext context,
       SearchResultItemType type,
       SearchResultItemPageType pageType,
-      SearchResultItemPrefix? prefix,
       int score,
       String title,
       String? subtitle,
@@ -313,7 +309,6 @@ class _$SearchResultItemCopyWithImpl<$Res>
     Object? context = freezed,
     Object? type = freezed,
     Object? pageType = freezed,
-    Object? prefix = freezed,
     Object? score = freezed,
     Object? title = freezed,
     Object? subtitle = freezed,
@@ -334,10 +329,6 @@ class _$SearchResultItemCopyWithImpl<$Res>
           ? _value.pageType
           : pageType // ignore: cast_nullable_to_non_nullable
               as SearchResultItemPageType,
-      prefix: prefix == freezed
-          ? _value.prefix
-          : prefix // ignore: cast_nullable_to_non_nullable
-              as SearchResultItemPrefix?,
       score: score == freezed
           ? _value.score
           : score // ignore: cast_nullable_to_non_nullable
@@ -377,7 +368,6 @@ abstract class _$SearchResultItemCopyWith<$Res>
       {SearchResultContext context,
       SearchResultItemType type,
       SearchResultItemPageType pageType,
-      SearchResultItemPrefix? prefix,
       int score,
       String title,
       String? subtitle,
@@ -402,7 +392,6 @@ class __$SearchResultItemCopyWithImpl<$Res>
     Object? context = freezed,
     Object? type = freezed,
     Object? pageType = freezed,
-    Object? prefix = freezed,
     Object? score = freezed,
     Object? title = freezed,
     Object? subtitle = freezed,
@@ -423,10 +412,6 @@ class __$SearchResultItemCopyWithImpl<$Res>
           ? _value.pageType
           : pageType // ignore: cast_nullable_to_non_nullable
               as SearchResultItemPageType,
-      prefix: prefix == freezed
-          ? _value.prefix
-          : prefix // ignore: cast_nullable_to_non_nullable
-              as SearchResultItemPrefix?,
       score: score == freezed
           ? _value.score
           : score // ignore: cast_nullable_to_non_nullable
@@ -462,7 +447,6 @@ class _$_SearchResultItem extends _SearchResultItem {
       {required this.context,
       required this.type,
       required this.pageType,
-      this.prefix,
       required this.score,
       required this.title,
       this.subtitle,
@@ -481,8 +465,6 @@ class _$_SearchResultItem extends _SearchResultItem {
   @override
   final SearchResultItemPageType pageType;
   @override
-  final SearchResultItemPrefix? prefix;
-  @override
   final int score;
   @override
   final String title;
@@ -497,7 +479,7 @@ class _$_SearchResultItem extends _SearchResultItem {
 
   @override
   String toString() {
-    return 'SearchResultItem(context: $context, type: $type, pageType: $pageType, prefix: $prefix, score: $score, title: $title, subtitle: $subtitle, labelHighlightStart: $labelHighlightStart, labelHighlightEnd: $labelHighlightEnd, uri: $uri)';
+    return 'SearchResultItem(context: $context, type: $type, pageType: $pageType, score: $score, title: $title, subtitle: $subtitle, labelHighlightStart: $labelHighlightStart, labelHighlightEnd: $labelHighlightEnd, uri: $uri)';
   }
 
   @override
@@ -508,7 +490,6 @@ class _$_SearchResultItem extends _SearchResultItem {
             const DeepCollectionEquality().equals(other.context, context) &&
             const DeepCollectionEquality().equals(other.type, type) &&
             const DeepCollectionEquality().equals(other.pageType, pageType) &&
-            const DeepCollectionEquality().equals(other.prefix, prefix) &&
             const DeepCollectionEquality().equals(other.score, score) &&
             const DeepCollectionEquality().equals(other.title, title) &&
             const DeepCollectionEquality().equals(other.subtitle, subtitle) &&
@@ -525,7 +506,6 @@ class _$_SearchResultItem extends _SearchResultItem {
       const DeepCollectionEquality().hash(context),
       const DeepCollectionEquality().hash(type),
       const DeepCollectionEquality().hash(pageType),
-      const DeepCollectionEquality().hash(prefix),
       const DeepCollectionEquality().hash(score),
       const DeepCollectionEquality().hash(title),
       const DeepCollectionEquality().hash(subtitle),
@@ -549,7 +529,6 @@ abstract class _SearchResultItem extends SearchResultItem {
       {required SearchResultContext context,
       required SearchResultItemType type,
       required SearchResultItemPageType pageType,
-      SearchResultItemPrefix? prefix,
       required int score,
       required String title,
       String? subtitle,
@@ -567,8 +546,6 @@ abstract class _SearchResultItem extends SearchResultItem {
   SearchResultItemType get type;
   @override
   SearchResultItemPageType get pageType;
-  @override
-  SearchResultItemPrefix? get prefix;
   @override
   int get score;
   @override

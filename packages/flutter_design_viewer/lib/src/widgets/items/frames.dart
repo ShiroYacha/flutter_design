@@ -11,7 +11,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_design/flutter_design.dart';
 import 'package:flutter_design_viewer/flutter_design_viewer.dart';
 import 'package:flutter_design_viewer/src/measures.dart';
-import 'package:flutter_design_viewer/src/models/data_factory.dart';
+import 'package:flutter_design_viewer/src/models/data.dart';
 import 'package:flutter_design_viewer/src/widgets/dialogs/widget_dialog.dart';
 import 'package:flutter_design_viewer/src/widgets/items/buttons.dart';
 import 'package:flutter_design_viewer/src/widgets/screens/page_screen.dart';
@@ -22,6 +22,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../utils.dart';
 import 'controls.dart';
@@ -264,7 +265,7 @@ class CompontentFrameDataDisplay extends HookConsumerWidget {
                                     const WidgetSpan(child: Spacers.h6),
                                     TextSpan(
                                         text:
-                                            '${v.type.toString()}${v.isOptional ? '?' : ''}',
+                                            '${v.typeName}${v.isOptional ? '?' : ''}',
                                         style: theme.textTheme.subtitle1
                                             ?.copyWith(
                                                 color: theme.primaryColor)),
@@ -330,6 +331,8 @@ class ComponentFrameToolbar extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final fullscreenMode = ref.watch(fullscreenModeProvider);
+    final designLink = ref.watch(
+        viewerComponentSectionProvider.select((value) => value.designLink));
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -358,6 +361,23 @@ class ComponentFrameToolbar extends HookConsumerWidget {
               ShowDataBuilderToggle(
                 value: showDataBuilderNotifier.value,
                 valueChanged: (v) => showDataBuilderNotifier.value = v,
+              ),
+            if (designLink != null)
+              LinkableClickableContainer(
+                uri: Uri.tryParse(designLink),
+                tooltip: 'Design link',
+                onTap: () async {
+                  if (await canLaunch(designLink)) {
+                    launch(designLink);
+                  }
+                },
+                child: const SelectableContainer(
+                  child: ThemableGlyph(
+                    glyph: ViewerGlyphUnion.icon(
+                      icon: Ionicons.link,
+                    ),
+                  ),
+                ),
               ),
             FullScreenButton(fullscreenMode: fullscreenMode),
           ],
@@ -601,6 +621,49 @@ class MyCustomScrollBehavior extends MaterialScrollBehavior {
       };
 }
 
+class EmbeddedAppRouteInformationParser extends RouteInformationParser<Object> {
+  @override
+  Future<Object> parseRouteInformation(
+      RouteInformation routeInformation) async {
+    return 0;
+  }
+}
+
+class EmbeddedAppRouterDelegate extends RouterDelegate<Object>
+    with ChangeNotifier, PopNavigatorRouterDelegateMixin<Object> {
+  @override
+  Widget build(BuildContext context) {
+    return Builder(
+      builder: (context) {
+        return Consumer(
+          builder: (context, ref, widget) {
+            final viewerWidgetBuilder = ref
+                .watch(viewerComponentSectionProvider.select((v) => v.builder));
+            final dataBuilders = ref.watch(dataBuildersProvider);
+            return Material(
+              child: Center(
+                child: viewerWidgetBuilder.build(
+                  context,
+                  ManagedDataBuilderFactory(
+                    builders: dataBuilders,
+                  ),
+                ),
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
+  @override
+  // TODO: implement navigatorKey
+  GlobalKey<NavigatorState>? get navigatorKey => GlobalKey<NavigatorState>();
+
+  @override
+  Future<void> setNewRoutePath(Object configuration) async {}
+}
+
 class ContentApp extends HookConsumerWidget {
   final ThemeData? themeDataOverride;
   final Locale? localeOverride;
@@ -622,18 +685,17 @@ class ContentApp extends HookConsumerWidget {
         viewerSettings.enabledThemes[viewerState.targetThemeId];
     final randomSeed = ref.watch(randomSeedProvider);
     final keyboardVisible = ref.watch(keyboardVisibleProvider);
-    final viewerWidgetBuilder =
-        ref.watch(viewerComponentSectionProvider.select((v) => v.builder));
     // final navigatorKey = useMemoized(() => GlobalKey<NavigatorState>(), [key]);
     // useAsyncEffect(() async {
     //   localNavigatorKeys.state[key] = navigatorKey;
     // }, [key]);
-    final dataBuilders = ref.watch(dataBuildersProvider);
     return VirtualKeyboard(
       isEnabled: keyboardVisible,
       transitionDuration: const Duration(milliseconds: 100),
       child: FocusScope(
-        child: MaterialApp(
+        child: MaterialApp.router(
+          routeInformationParser: EmbeddedAppRouteInformationParser(),
+          routerDelegate: EmbeddedAppRouterDelegate(),
           scrollBehavior: MyCustomScrollBehavior(),
           useInheritedMediaQuery: true,
           debugShowCheckedModeBanner: false,
@@ -643,20 +705,6 @@ class ContentApp extends HookConsumerWidget {
             return currentPage.title;
           },
           // navigatorKey: navigatorKey,
-          home: Builder(
-            builder: (context) {
-              return Material(
-                child: Center(
-                  child: viewerWidgetBuilder.build(
-                    context,
-                    ManagedDataBuilderFactory(
-                      builders: dataBuilders,
-                    ),
-                  ),
-                ),
-              );
-            },
-          ),
           builder: (ctx, widget) {
             return ProviderScope(
               overrides: [
@@ -682,7 +730,7 @@ class ContentApp extends HookConsumerWidget {
                       padding: viewerState.viewMode == ViewMode.canvas
                           ? EdgeInsets.zero
                           : const EdgeInsets.all(8.0),
-                      child: LocaleTag(
+                      child: LocaleBadge(
                         name: locale.toLanguageTag(),
                         locale: locale,
                         textStyle: Theme.of(ctx)

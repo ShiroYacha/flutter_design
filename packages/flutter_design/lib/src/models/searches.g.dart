@@ -12,8 +12,6 @@ _$_SearchResultItem _$$_SearchResultItemFromJson(Map<String, dynamic> json) =>
       type: $enumDecode(_$SearchResultItemTypeEnumMap, json['type']),
       pageType:
           $enumDecode(_$SearchResultItemPageTypeEnumMap, json['pageType']),
-      prefix:
-          $enumDecodeNullable(_$SearchResultItemPrefixEnumMap, json['prefix']),
       score: json['score'] as int,
       title: json['title'] as String,
       subtitle: json['subtitle'] as String?,
@@ -27,7 +25,6 @@ Map<String, dynamic> _$$_SearchResultItemToJson(_$_SearchResultItem instance) =>
       'context': _$SearchResultContextEnumMap[instance.context],
       'type': _$SearchResultItemTypeEnumMap[instance.type],
       'pageType': _$SearchResultItemPageTypeEnumMap[instance.pageType],
-      'prefix': _$SearchResultItemPrefixEnumMap[instance.prefix],
       'score': instance.score,
       'title': instance.title,
       'subtitle': instance.subtitle,
@@ -54,9 +51,4 @@ const _$SearchResultItemPageTypeEnumMap = {
   SearchResultItemPageType.document: 'document',
   SearchResultItemPageType.component: 'component',
   SearchResultItemPageType.prototype: 'prototype',
-};
-
-const _$SearchResultItemPrefixEnumMap = {
-  SearchResultItemPrefix.sub: 'sub',
-  SearchResultItemPrefix.subEnd: 'subEnd',
 };

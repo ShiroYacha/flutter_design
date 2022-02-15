@@ -37,6 +37,8 @@ dependencies:
   # icon
   flutter_feather_icons: ^2.0.0+1
   ionicons: ^0.1.2
+  # system
+  url_strategy: ^0.2.0
 
 dev_dependencies:
   flutter_test:

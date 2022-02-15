@@ -134,11 +134,11 @@ class ThemableImage extends StatelessWidget {
   }
 }
 
-class LocaleTag extends StatelessWidget {
+class LocaleBadge extends StatelessWidget {
   final String name;
   final Locale locale;
   final TextStyle? textStyle;
-  const LocaleTag({
+  const LocaleBadge({
     Key? key,
     required this.name,
     required this.locale,
@@ -151,7 +151,7 @@ class LocaleTag extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: theme.scaffoldBackgroundColor,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(8),
       ),
       padding: SpacingDesign.paddingAll3,
       child: Row(

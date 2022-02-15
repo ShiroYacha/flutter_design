@@ -10,6 +10,7 @@ import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:url_launcher/link.dart';
 
 import 'containers.dart';
 import 'images.dart';
@@ -23,6 +24,36 @@ extension WidgetMouseExtension on Widget {
 
 typedef DataWidgetBuilder<T, U> = Widget Function(BuildContext, T, [U]);
 typedef DataSelectionChanged<T> = void Function(T);
+
+class LinkableClickableContainer extends StatelessWidget {
+  final Uri? uri;
+  final VoidCallback? onTap;
+  final Widget child;
+  final String? tooltip;
+  const LinkableClickableContainer({
+    required this.uri,
+    required this.onTap,
+    required this.child,
+    this.tooltip,
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final content = GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      child: child,
+      onTap: onTap,
+    ).asMouseClickRegion;
+    final widget = kIsWeb
+        ? Link(
+            uri: uri,
+            builder: (context, future) => content,
+          ).asMouseClickRegion
+        : content;
+    return tooltip != null ? Tooltip(message: tooltip, child: widget) : widget;
+  }
+}
 
 class SelectableContainer extends StatelessWidget {
   final Widget child;

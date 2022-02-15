@@ -5,13 +5,17 @@ class TDesign<TWidget, TBuildContext> {
   final String? title;
   final String? subtitle;
   final String? description;
-  final String? embeddedDesignLink;
+  final String? designLink;
+  final bool showApiDocs;
+  final Map<String, dynamic> viewerInitValueMap;
 
   const TDesign({
     this.title,
     this.subtitle,
     this.description,
     this.tags = const [],
-    this.embeddedDesignLink,
+    this.designLink,
+    this.showApiDocs = true,
+    this.viewerInitValueMap = const {},
   });
 }

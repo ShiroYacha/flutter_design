@@ -14,8 +14,10 @@ final screensHomeScreenPage = ViewerDocumentPage(
   description: null,
   sections: [
     ViewerSectionUnion.component(
-      id: 'homeScreen',
+      id: 'anatomy',
       title: 'Anatomy',
+      ctorName: 'HomeScreen',
+      designLink: null,
       builder: ViewerWidgetBuilder(
         build: (context, factory) => HomeScreen(
           body: factory.build(context, 'body'),
@@ -24,7 +26,12 @@ final screensHomeScreenPage = ViewerDocumentPage(
           FieldMetaData(
             name: 'body',
             type: Widget,
+            typeName: 'Widget',
             isOptional: false,
+            defaultValue: null,
+            defaultValueCode: null,
+            viewerInitValue: null,
+            documentation: null,
           ),
         ],
       ),
@@ -51,6 +58,10 @@ class HomeScreen extends StatelessWidget {
 }
 
 '''),
+    ),
+    const ViewerSectionUnion.apiDocs(
+      id: 'apiDocs',
+      title: 'API reference',
     ),
   ],
 );

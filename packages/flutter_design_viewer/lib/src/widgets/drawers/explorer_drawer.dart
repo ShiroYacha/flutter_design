@@ -109,43 +109,43 @@ class PageGroupNode extends HookConsumerWidget {
       ),
     );
     return viewerPage.maybeMap(
-      group: (group) => ExpandablePanel(
-        key: Key(group.id),
-        controller: ExpandableController(
-            initialExpanded:
-                group.segments.skip(1).any((s) => router.path.contains(s))),
-        theme: ExpandableThemeData(
-          hasIcon: group.children.isNotEmpty,
-          iconSize: 16,
-          iconColor: theme.colorScheme.onBackground,
-          iconPlacement: ExpandablePanelIconPlacement.right,
-          headerAlignment: ExpandablePanelHeaderAlignment.center,
-          expandIcon: Ionicons.chevron_forward_outline,
-          collapseIcon: Ionicons.chevron_down_outline,
-          tapBodyToCollapse: false,
-          tapHeaderToExpand: true,
-        ),
-        header: label,
-        collapsed: const SizedBox.shrink(),
-        expanded: Column(
-          children: group.children.fold(
-            [],
-            (previousValue, element) =>
-                [...previousValue, PageGroupNode(viewerPage: element)],
-          ),
-        ),
-      ),
-      orElse: () => GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        child: label,
-        onTap: () {
-          if (rootScaffoldKey.currentState?.isDrawerOpen == true) {
-            Navigator.of(rootScaffoldKey.currentContext!).pop();
-          }
-          router.toSegments(viewerPage.segments);
-        },
-      ).asMouseClickRegion,
-    );
+        group: (group) => ExpandablePanel(
+              key: Key(group.id),
+              controller: ExpandableController(
+                  initialExpanded: group.segments
+                      .skip(1)
+                      .any((s) => router.path.contains(s))),
+              theme: ExpandableThemeData(
+                hasIcon: group.children.isNotEmpty,
+                iconSize: 16,
+                iconColor: theme.colorScheme.onBackground,
+                iconPlacement: ExpandablePanelIconPlacement.right,
+                headerAlignment: ExpandablePanelHeaderAlignment.center,
+                expandIcon: Ionicons.chevron_forward_outline,
+                collapseIcon: Ionicons.chevron_down_outline,
+                tapBodyToCollapse: false,
+                tapHeaderToExpand: true,
+              ),
+              header: label,
+              collapsed: const SizedBox.shrink(),
+              expanded: Column(
+                children: group.children.fold(
+                  [],
+                  (previousValue, element) =>
+                      [...previousValue, PageGroupNode(viewerPage: element)],
+                ),
+              ),
+            ),
+        orElse: () => LinkableClickableContainer(
+              uri: Uri().resolve('#${viewerPage.uri}'),
+              onTap: () {
+                if (rootScaffoldKey.currentState?.isDrawerOpen == true) {
+                  Navigator.of(rootScaffoldKey.currentContext!).pop();
+                }
+                router.toSegments(viewerPage.segments);
+              },
+              child: label,
+            ));
   }
 }
 

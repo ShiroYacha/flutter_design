@@ -5,12 +5,16 @@ part 'toggles.design.dart';
 
 @design
 class ToggleButton extends StatelessWidget {
-  const ToggleButton({Key? key}) : super(key: key);
+  final Color color;
+  const ToggleButton({
+    this.color = Colors.red,
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.red,
+      color: color,
     );
   }
 }

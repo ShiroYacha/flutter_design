@@ -6,11 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_design/flutter_design.dart';
 import 'package:flutter_design_viewer/flutter_design_viewer.dart';
 import 'package:flutter_design_viewer/src/measures.dart';
-import 'package:flutter_design_viewer/src/models/data_factory.dart';
-import 'package:flutter_design_viewer/src/utils.dart';
 import 'package:flutter_design_viewer/src/widgets/items/frames.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:patterns_canvas/patterns_canvas.dart';
@@ -171,13 +168,16 @@ class SelectableThemeGroup extends HookConsumerWidget {
       selectionChanged: (e) => valueChanged(e),
       builder: (context, e, [selected = false]) {
         final color = selected ? theme.primaryColor : theme.disabledColor;
-        return CircleAvatar(
-          backgroundColor: color,
-          radius: 10,
+        return Tooltip(
+          message: e,
           child: CircleAvatar(
-            backgroundColor:
-                viewerSettings.enabledThemes[e]?.scaffoldBackgroundColor,
-            radius: 8,
+            backgroundColor: color,
+            radius: 10,
+            child: CircleAvatar(
+              backgroundColor:
+                  viewerSettings.enabledThemes[e]?.scaffoldBackgroundColor,
+              radius: 8,
+            ),
           ),
         );
       },
