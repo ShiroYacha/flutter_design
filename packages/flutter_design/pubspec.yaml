@@ -1,8 +1,7 @@
 name: flutter_design
 description: A new Flutter package project.
 version: 0.0.1
-publish_to: none
-# homepage:
+homepage: https://github.com/ShiroYacha/flutter_design
 
 environment:
   sdk: ">=2.15.1 <3.0.0"
