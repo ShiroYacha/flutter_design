@@ -2,6 +2,7 @@ name: flutter_design_viewer
 description: A new Flutter package project.
 version: 0.0.1
 homepage: https://github.com/ShiroYacha/flutter_design
+publish_to: none
 
 environment:
   sdk: ">=2.15.1 <3.0.0"
@@ -22,8 +23,11 @@ dependencies:
   freezed_annotation: ^1.1.0
   json_annotation: ^4.4.0
   faker: ^2.0.0
+  recase: ^4.0.0
+  intl: ^0.17.0
+  collection: ^1.15.0
   # font
-  google_fonts: 2.2.0
+  google_fonts: ^2.2.0
   # controls
   material_floating_search_bar: ^0.3.6
   linked_scroll_controller: ^0.2.0
