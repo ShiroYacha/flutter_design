@@ -64,3 +64,18 @@ final TextButtonThemeData _textButtonThemeData = TextButtonThemeData(
         (states) => Colors.transparent),
   ),
 );
+
+InputDecoration buildTextFieldDecoration(BuildContext context) {
+  final theme = Theme.of(context);
+  return InputDecoration(
+    border: OutlineInputBorder(
+      borderSide: const BorderSide(width: 1),
+      borderRadius: BorderRadius.circular(8),
+    ),
+    contentPadding: SpacingDesign.paddingAll6,
+    focusedBorder: OutlineInputBorder(
+      borderSide: BorderSide(width: 1, color: theme.primaryColor),
+      borderRadius: BorderRadius.circular(8),
+    ),
+  );
+}

@@ -58,7 +58,9 @@ class ComponentFramePanel extends HookConsumerWidget {
             ),
         [viewerWidgetBuilder]);
     final dataBuilders = useState({
-      for (var k in viewerWidgetBuilder.fieldMetaDataset)
+      for (var k in viewerWidgetBuilder.fieldMetaDataset.where((e) =>
+          dataBuilderOptions.containsKey(e.name) &&
+          dataBuilderOptions[e.name]!.isNotEmpty))
         k.name: dataBuilderOptions[k.name]!.first
     });
     return Column(
@@ -115,7 +117,7 @@ class ComponentFramePanel extends HookConsumerWidget {
                       )
                     else if (localViewerState.displayMode ==
                         DisplayMode.widgetCodeSideBySide)
-                      const CompontentFrameCodeDisplay(),
+                      const CompontentFrameCodeDisplay(expand: true),
                   ],
                 ),
               );
@@ -182,19 +184,23 @@ class CompontentFrameCodeDisplay extends HookConsumerWidget {
       child: Stack(
         fit: expand ? StackFit.expand : StackFit.passthrough,
         children: [
-          HighlightView(
-            sourceCode.code,
-            padding: const EdgeInsets.only(
-                left: padding, top: padding, bottom: padding),
-            language: 'dart',
-            theme: {
-              ...theme,
-              'root': TextStyle(
-                color: theme['root']!.color,
-                backgroundColor: Colors.transparent,
+          SingleChildScrollView(
+            child: Paddings.bottom40(
+              child: HighlightView(
+                sourceCode.code,
+                padding: const EdgeInsets.only(
+                    left: padding, top: padding, bottom: padding),
+                language: 'dart',
+                theme: {
+                  ...theme,
+                  'root': TextStyle(
+                    color: theme['root']!.color,
+                    backgroundColor: Colors.transparent,
+                  ),
+                },
+                textStyle: GoogleFonts.robotoMono(),
               ),
-            },
-            textStyle: GoogleFonts.robotoMono(),
+            ),
           ),
           Align(
             alignment: Alignment.topRight,
@@ -640,13 +646,11 @@ class EmbeddedAppRouterDelegate extends RouterDelegate<Object>
             final viewerWidgetBuilder = ref
                 .watch(viewerComponentSectionProvider.select((v) => v.builder));
             final dataBuilders = ref.watch(dataBuildersProvider);
-            return Material(
-              child: Center(
-                child: viewerWidgetBuilder.build(
-                  context,
-                  ManagedDataBuilderFactory(
-                    builders: dataBuilders,
-                  ),
+            return Center(
+              child: viewerWidgetBuilder.build(
+                context,
+                ManagedDataBuilderFactory(
+                  builders: dataBuilders,
                 ),
               ),
             );
@@ -657,7 +661,7 @@ class EmbeddedAppRouterDelegate extends RouterDelegate<Object>
   }
 
   @override
-  // TODO: implement navigatorKey
+  // TODO: implement proper navigatorKey
   GlobalKey<NavigatorState>? get navigatorKey => GlobalKey<NavigatorState>();
 
   @override

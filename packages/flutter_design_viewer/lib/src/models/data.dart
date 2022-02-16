@@ -36,12 +36,13 @@ class DataBuilderRegistry {
   });
 
   List<DataBuilder> getOptionsFor(Type type, dynamic defaultData) =>
-      allBuilders[type]!.map((e) {
+      allBuilders[type]?.map((e) {
         if (defaultData == null) {
           return e.call();
         }
         return e.call(defaultData);
-      }).toList();
+      }).toList() ??
+      [];
 
   Map<String, List<DataBuilder>> getAllOptionsFor(
           Map<String, FieldMetaData> idFieldMetaDataMap) =>

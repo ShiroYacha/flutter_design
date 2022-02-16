@@ -3,17 +3,87 @@ import 'dart:math';
 import 'package:device_preview/device_preview.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_design/flutter_design.dart';
 import 'package:flutter_design_viewer/flutter_design_viewer.dart';
 import 'package:flutter_design_viewer/src/measures.dart';
 import 'package:flutter_design_viewer/src/widgets/items/frames.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:patterns_canvas/patterns_canvas.dart';
 
+import '../../theme.dart';
 import 'buttons.dart';
 import 'images.dart';
+
+class RangeAdjustableSlider extends HookWidget {
+  final double max;
+  final double min;
+  final double value;
+  final void Function(double) onChanged;
+  final bool allowsDecimal;
+  const RangeAdjustableSlider({
+    required this.max,
+    required this.min,
+    required this.value,
+    required this.onChanged,
+    this.allowsDecimal = true,
+    Key? key,
+  }) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final minTc = useTextEditingController(
+      text: allowsDecimal ? min.toString() : min.toStringAsFixed(0),
+    );
+    final maxTc = useTextEditingController(
+      text: allowsDecimal ? max.toString() : max.toStringAsFixed(0),
+    );
+    return Row(
+      children: [
+        SizedBox(
+          width: 50,
+          child: TextField(
+            decoration: buildTextFieldDecoration(context).copyWith(
+              label: Text('min', style: theme.textTheme.caption),
+            ),
+            inputFormatters: [
+              FilteringTextInputFormatter.allow(
+                RegExp(
+                  allowsDecimal ? r'(^-?\d*\.?\d*)' : r'(^-?\d*)',
+                ),
+              )
+            ],
+            textAlign: TextAlign.center,
+            controller: minTc,
+          ),
+        ),
+        Expanded(
+            child: Slider(
+          max: double.tryParse(maxTc.text) ?? 0,
+          min: double.tryParse(minTc.text) ?? 0,
+          value: value,
+          onChanged: onChanged,
+        )),
+        SizedBox(
+          width: 50,
+          child: TextField(
+            decoration: buildTextFieldDecoration(context).copyWith(
+              label: Text('max', style: theme.textTheme.caption),
+            ),
+            inputFormatters: [
+              FilteringTextInputFormatter.allow(RegExp(r'(^-?\d*)'))
+            ],
+            textAlign: TextAlign.center,
+            controller: maxTc,
+          ),
+        ),
+      ],
+    );
+  }
+}
 
 class SizerControl extends StatelessWidget {
   final double height;
@@ -70,7 +140,7 @@ class _SizePainter extends CustomPainter {
     Dots(
       bgColor: theme.scaffoldBackgroundColor,
       fgColor: theme.disabledColor,
-      featuresCount: min((size.width * 0.2).floor(), 400),
+      featuresCount: min((size.width * 0.2).floor(), 250),
     ).paintOnRect(
       canvas,
       size,
@@ -136,6 +206,7 @@ class DataBuilderPanel extends HookConsumerWidget {
             isExpanded: true,
           ),
         ),
+        Spacers.v10,
         dataBuilder.buildDesigner(context, _updateBuilder),
       ],
     );

@@ -39,6 +39,10 @@ dependencies:
   ionicons: ^0.1.2
   # system
   url_strategy: ^0.2.0
+  # framework
+  flutter_hooks: ^0.18.2
+  # state management
+  hooks_riverpod: ^1.0.3
 
 dev_dependencies:
   flutter_test:

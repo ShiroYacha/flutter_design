@@ -6,10 +6,12 @@ import 'screens/home_screen.dart';
 import 'widgets/misc.dart';
 import 'widgets/actions/buttons.dart';
 import 'widgets/actions/toggles.dart';
+import 'widgets/meta.dart';
 
 final generatedComponentPages = <ViewerDocumentPage>[
   screensHomeScreenPage,
   widgetsMiscPage,
   widgetsActionsButtonsPage,
   widgetsActionsTogglesPage,
+  widgetsMetaPage,
 ];

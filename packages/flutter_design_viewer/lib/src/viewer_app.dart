@@ -40,6 +40,8 @@ final viewerStateProvider = StateProvider<ViewerState>(
   ),
 );
 
+const routePathNameSeparator = '||';
+
 class DesignSystemViewerApp extends HookConsumerWidget {
   final Widget? branding;
   final ViewerSettings settings;
@@ -162,7 +164,11 @@ class DesignSystemViewerRouter extends HookConsumerWidget {
           : pageGroups.first.children.map((e) => e.firstDocumentUri).first,
       onGenerateTitle: (context) {
         return WidgetKeys.navKey.currentContext != null
-            ? VRouter.of(WidgetKeys.navKey.currentContext!).names.first
+            ? VRouter.of(WidgetKeys.navKey.currentContext!)
+                .names
+                .first
+                .split(routePathNameSeparator)
+                .last
             : '';
       },
       buildTransition: (animation1, _, child) => FadeTransition(
@@ -207,7 +213,11 @@ class DesignSystemViewerRouter extends HookConsumerWidget {
       ...pages.whereType<ViewerDocumentPage>().map(
             (e) => VWidget(
               path: e.uri,
-              name: e.title,
+
+              /// TODO: find a better solution, currently both ID and name is needed
+              /// - id: to observe and save current path
+              /// - name: to show as tab name
+              name: '${e.uri}$routePathNameSeparator${e.title}',
               widget: ProviderScope(
                 overrides: [
                   currentPageProvider.overrideWithValue(e),

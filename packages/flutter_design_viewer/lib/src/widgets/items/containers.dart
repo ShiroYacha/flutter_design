@@ -2,6 +2,9 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_design_viewer/src/measures.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+import '../../viewer_app.dart';
 
 class KeyContainer extends StatelessWidget {
   final String? label;
@@ -81,5 +84,24 @@ class TitleWidgetPair extends StatelessWidget {
         widget,
       ],
     );
+  }
+}
+
+/// A responsive wrapping row that tries to fit as much widget
+/// evenly as possible based on the screen constraints.
+/// It will try to spread out its children to multiple row if necessary.
+class ResponsiveEvenRow extends HookConsumerWidget {
+  final List<Widget> children;
+  const ResponsiveEvenRow({
+    required this.children,
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final viewerSettings = ref.watch(viewerSettingsProvider);
+    return LayoutBuilder(builder: (context, constraints) {
+      return Container();
+    });
   }
 }

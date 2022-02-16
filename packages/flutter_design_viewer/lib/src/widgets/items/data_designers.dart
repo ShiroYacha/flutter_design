@@ -10,6 +10,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../measures.dart';
+import '../../theme.dart';
 import 'controls.dart';
 
 class DataTemplateStringLoremDesigner extends HookConsumerWidget {
@@ -207,6 +208,7 @@ class DataTemplateColorPickerDesigner extends HookConsumerWidget {
   }
 }
 
+/// TODO: Merge this with the int designer
 class DataTemplateDoubleDesigner extends HookConsumerWidget {
   final DataTemplateDoubleBuilder builder;
   final UpdateDataBuilder<double> updateBuilder;
@@ -227,28 +229,42 @@ class DataTemplateDoubleDesigner extends HookConsumerWidget {
         extentOffset: textEditingController.value.text.length,
       );
       textEditingController.addListener(() {
-        if (textEditingController.value.text.isEmpty) {
-          textEditingController.text = '0';
-        }
         updateBuilder(builder
           ..value = double.tryParse(textEditingController.value.text) ?? 0.0);
       });
     }, []);
-    return TextField(
-      autofocus: true,
-      focusNode: useFocusNode(),
-      controller: textEditingController,
-      showCursor: true,
-      inputFormatters: [
-        FilteringTextInputFormatter.allow(RegExp(r'(^-?\d*\.?\d*)'))
+    return Row(
+      children: [
+        Expanded(
+          child: TextField(
+            autofocus: true,
+            focusNode: useFocusNode(),
+            controller: textEditingController,
+            showCursor: true,
+            inputFormatters: [
+              FilteringTextInputFormatter.allow(RegExp(r'(^-?\d*\.?\d*)'))
+            ],
+            decoration: buildTextFieldDecoration(context).copyWith(
+              suffixIcon: GestureDetector(
+                      onTap: () => textEditingController.text =
+                          initValue.value.toString(),
+                      child: const Icon(FeatherIcons.rotateCcw, size: 16))
+                  .asMouseClickRegion,
+            ),
+          ),
+        ),
+        Spacers.h10,
+        Expanded(
+          child: RangeAdjustableSlider(
+            max: initValue.value * 10.0,
+            min: 0,
+            value: double.tryParse(textEditingController.text) ?? 0.0,
+            onChanged: (v) {
+              textEditingController.text = v.toString();
+            },
+          ),
+        ),
       ],
-      decoration: InputDecoration(
-        suffixIcon: GestureDetector(
-                onTap: () =>
-                    textEditingController.text = initValue.value.toString(),
-                child: const Icon(FeatherIcons.rotateCcw, size: 16))
-            .asMouseClickRegion,
-      ),
     );
   }
 }
@@ -273,26 +289,43 @@ class DataTemplateIntDesigner extends HookConsumerWidget {
         extentOffset: textEditingController.value.text.length,
       );
       textEditingController.addListener(() {
-        if (textEditingController.value.text.isEmpty) {
-          textEditingController.text = '0';
-        }
         updateBuilder(builder
           ..value = int.tryParse(textEditingController.value.text) ?? 0);
       });
     }, []);
-    return TextField(
-      autofocus: true,
-      focusNode: useFocusNode(),
-      controller: textEditingController,
-      showCursor: true,
-      inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'(^-?\d*)'))],
-      decoration: InputDecoration(
-        suffixIcon: GestureDetector(
-                onTap: () =>
-                    textEditingController.text = initValue.value.toString(),
-                child: const Icon(FeatherIcons.rotateCcw, size: 16))
-            .asMouseClickRegion,
-      ),
+    return Row(
+      children: [
+        Expanded(
+          child: TextField(
+            autofocus: true,
+            focusNode: useFocusNode(),
+            controller: textEditingController,
+            showCursor: true,
+            inputFormatters: [
+              FilteringTextInputFormatter.allow(RegExp(r'(^-?\d*)'))
+            ],
+            decoration: buildTextFieldDecoration(context).copyWith(
+              suffixIcon: GestureDetector(
+                      onTap: () => textEditingController.text =
+                          initValue.value.toString(),
+                      child: const Icon(FeatherIcons.rotateCcw, size: 16))
+                  .asMouseClickRegion,
+            ),
+          ),
+        ),
+        Spacers.h10,
+        Expanded(
+          child: RangeAdjustableSlider(
+            max: initValue.value * 10,
+            min: 0,
+            allowsDecimal: false,
+            value: double.tryParse(textEditingController.text) ?? 0.0,
+            onChanged: (v) {
+              textEditingController.text = v.floor().toString();
+            },
+          ),
+        ),
+      ],
     );
   }
 }

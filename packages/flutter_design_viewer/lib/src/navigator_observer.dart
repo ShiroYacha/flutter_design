@@ -29,10 +29,15 @@ class TrackedNavigatorObserver extends NavigatorObserver {
     _registerCurrentUrl(previousRoute?.settings.name);
   }
 
-  void _registerCurrentUrl(String? uri) {
-    if (uri != null) {
+  void _registerCurrentUrl(String? uriName) {
+    if (uriName != null) {
       WidgetsBinding.instance?.scheduleFrameCallback((timeStamp) {
-        viewerStateNotifier.update((state) => state.copyWith(uri: uri));
+        try {
+          viewerStateNotifier.update((state) =>
+              state.copyWith(uri: uriName.split(routePathNameSeparator).first));
+        } finally {
+          // Ignore in case of error
+        }
       });
     }
   }

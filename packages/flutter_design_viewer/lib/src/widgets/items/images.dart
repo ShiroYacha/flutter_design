@@ -34,16 +34,18 @@ class PatternPainter extends CustomPainter {
     required this.theme,
     this.backgroundColor,
     this.foregroundColor,
-    this.featureCountsScale = 0.5,
+    this.featureCountsScale = 0.25,
   });
 
   @override
   void paint(Canvas canvas, Size size) {
     final Rect rect = Rect.fromLTWH(0, 0, size.width, size.height);
+
+    /// TODO: implement our own fixed size dots ...
     Dots(
       bgColor: backgroundColor ?? theme.scaffoldBackgroundColor,
       fgColor: foregroundColor ?? theme.disabledColor,
-      featuresCount: min((size.width * featureCountsScale).floor(), 400),
+      featuresCount: min((size.width * featureCountsScale).floor(), 250),
     ).paintOnRect(
       canvas,
       size,
