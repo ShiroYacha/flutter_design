@@ -97,7 +97,7 @@ class ThemableImage extends StatelessWidget {
     this.height,
     this.fit = BoxFit.contain,
     this.color,
-    this.useTheme = true,
+    this.useTheme = false,
     Key? key,
   }) : super(key: key);
 

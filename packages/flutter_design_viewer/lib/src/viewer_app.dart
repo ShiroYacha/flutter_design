@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bot_toast/bot_toast.dart';
+import 'package:collection/collection.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -46,10 +47,12 @@ class DesignSystemViewerApp extends HookConsumerWidget {
   final Widget? branding;
   final ViewerSettings settings;
   final List<ViewerGroupPage> pageGroups;
+  final Map<Type, List<DataBuilderCreator>> dataBuilders;
 
   const DesignSystemViewerApp({
     required this.pageGroups,
     required this.settings,
+    this.dataBuilders = const {},
     this.branding,
     Key? key,
   }) : super(key: key);
@@ -63,41 +66,53 @@ class DesignSystemViewerApp extends HookConsumerWidget {
         viewerSettingsProvider.overrideWithValue(settings),
         dataBuilderRegistryProvider.overrideWithValue(
           DataBuilderRegistry(
-            /// TODO: this boilerplate code could be generated
-            allBuilders: {
-              String: [
-                ([d]) => d != null
-                    ? DataTemplateStringRawBuilder(raw: d)
-                    : DataTemplateStringRawBuilder(),
-                ([d]) => DataTemplateStringLoremBuilder(),
-              ],
-              Widget: [
-                ([d]) => DataTemplateWidgetPlaceholderBuilder(),
-              ],
-              Function: [
-                ([d]) => DataTemplateStubFunctionBuilder(),
-              ],
-              Color: [
-                ([d]) => d != null
-                    ? DataTemplateColorPickerBuilder(color: d)
-                    : DataTemplateColorPickerBuilder(),
-              ],
-              double: [
-                ([d]) => d != null
-                    ? DataTemplateDoubleBuilder(value: d)
-                    : DataTemplateDoubleBuilder(),
-              ],
-              int: [
-                ([d]) => d != null
-                    ? DataTemplateIntBuilder(value: d)
-                    : DataTemplateIntBuilder(),
-              ],
-            },
+            allBuilders: _mergeDataBuilders(dataBuilders),
           ),
         )
       ],
       child: const DesignSystemViewerRouter(),
     );
+  }
+
+  Map<Type, List<DataBuilderCreator>> _mergeDataBuilders(
+      Map<Type, List<DataBuilderCreator>> dataBuilders) {
+    /// TODO: this boilerplate code could be generated?
+    final defaultBuilders = <Type, List<DataBuilderCreator>>{
+      String: [
+        ([d]) => d != null
+            ? DataTemplateStringRawBuilder(raw: d)
+            : DataTemplateStringRawBuilder(),
+        ([d]) => DataTemplateStringLoremBuilder(),
+      ],
+      Widget: [
+        ([d]) => DataTemplateWidgetPlaceholderBuilder(),
+      ],
+      Function: [
+        ([d]) => DataTemplateStubFunctionBuilder(),
+      ],
+      Color: [
+        ([d]) => d != null
+            ? DataTemplateColorPickerBuilder(color: d)
+            : DataTemplateColorPickerBuilder(),
+      ],
+      double: [
+        ([d]) => d != null
+            ? DataTemplateDoubleBuilder(value: d)
+            : DataTemplateDoubleBuilder(),
+      ],
+      int: [
+        ([d]) => d != null
+            ? DataTemplateIntBuilder(value: d)
+            : DataTemplateIntBuilder(),
+      ],
+    };
+    return mergeMaps(defaultBuilders, dataBuilders, value: (e1, e2) {
+      // The user provided data builders will have priority
+      return [
+        ...e2,
+        ...e1,
+      ];
+    });
   }
 }
 

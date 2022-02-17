@@ -24,13 +24,14 @@ class ManagedDataBuilderFactory extends DataBuilderFactory {
 final dataBuilderRegistryProvider =
     Provider<DataBuilderRegistry>((ref) => throw UnimplementedError());
 
+typedef DataBuilderCreator = DataBuilder Function([dynamic defaultData]);
+
 class DataBuilderRegistry {
   /// The default data must be positional optional because in case a
   /// not nullable field is marked with [required] there is no default value
   /// with it... So the data builders will have to default to the constructor's
   /// default value
-  final Map<Type, List<DataBuilder Function([dynamic defaultData])>>
-      allBuilders;
+  final Map<Type, List<DataBuilderCreator>> allBuilders;
   const DataBuilderRegistry({
     required this.allBuilders,
   });

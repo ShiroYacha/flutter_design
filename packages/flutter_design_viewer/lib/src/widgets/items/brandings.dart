@@ -11,7 +11,11 @@ class DefaultBranding extends StatelessWidget {
     final theme = Theme.of(context);
     return Row(
       children: [
-        const ThemableImage(uri: 'assets/images/logo.png'),
+        const SizedBox(
+          width: 50,
+          height: 50,
+          child: ThemableImage(uri: 'assets/images/logo.png'),
+        ),
         Spacers.h10,
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
