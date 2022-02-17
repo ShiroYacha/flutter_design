@@ -1,3 +1,7 @@
+## 0.0.5
+
+* Fix readme images
+
 ## 0.0.4
 
 * Updated readme with images
