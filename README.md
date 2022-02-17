@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="200" height="200" src="/assets/branding/logo_readme.png">
+  <img width="200" src="/assets/branding/logo_readme.png">
   <br /><br />
   <span>Provide powerfull tools to help you build your design system.</span>
 </p>
@@ -23,7 +23,7 @@ There are mainly 3 packages you need to depend on:
 Checkout the generated viewer app  https://flutter-design-7b479.web.app/ using the [example code](https://github.com/ShiroYacha/flutter_design/tree/main/packages/flutter_design_viewer/example). 
 
 <p align="center">
-  <img src="/assets/branding/screenshot_readme.png">
+  <img src="/assets/branding/screenshot_readme.jpg">
 </p>
 
 ## Features
