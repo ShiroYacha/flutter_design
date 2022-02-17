@@ -1,4 +1,12 @@
-# Flutter design
+<p align="center">
+  <img width="200" src="../../assets/branding/logo_readme.png">
+  <br /><br />
+  <span>Provide powerfull tools to help you build your design system.</span>
+</p>
+
+---
+
+## About
 
 `flutter_design` contains packages to help you bootstrap your design system with a well defined framework and code generation/CLI toolchain. It also contains a powerful design system viewer to let you visualize and interact with your design system.
 
@@ -8,6 +16,20 @@ There are mainly 3 packages you need to depend on:
   - [flutter_design_codegen](https://pub.dev/packages/flutter_design_codegen): code generator used to generate design code.
 - Your design viewer app:
   - [flutter_design_viewer](https://pub.dev/packages/flutter_design_viewer): viewer ux and utilities to bootstrap your design viewer app.
+
+
+---
+
+## Demo
+
+Checkout the generated viewer app  https://flutter-design-7b479.web.app/ using the [example code](https://github.com/ShiroYacha/flutter_design/tree/main/packages/flutter_design_viewer/example). 
+
+<p align="center">
+  <img src="../../assets/branding/screenshot_readme.jpg">
+</p>
+
+
+---
 
 ## Features
 
@@ -30,10 +52,8 @@ For more information, please check out the documentation at https://flutter-desi
 
 The UX and design is inspired by [Wanda Design System](https://design.wonderflow.ai/).
 
-## Demo
 
-Checkout the generated viewer app  https://flutter-design-7b479.web.app/ using the [example code](https://github.com/ShiroYacha/flutter_design/tree/main/packages/flutter_design_viewer/example). 
-
+---
 
 ## Basic integration
 

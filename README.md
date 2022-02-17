@@ -18,6 +18,8 @@ There are mainly 3 packages you need to depend on:
   - [flutter_design_viewer](https://pub.dev/packages/flutter_design_viewer): viewer ux and utilities to bootstrap your design viewer app.
 
 
+---
+
 ## Demo
 
 Checkout the generated viewer app  https://flutter-design-7b479.web.app/ using the [example code](https://github.com/ShiroYacha/flutter_design/tree/main/packages/flutter_design_viewer/example). 
@@ -25,6 +27,9 @@ Checkout the generated viewer app  https://flutter-design-7b479.web.app/ using t
 <p align="center">
   <img src="/assets/branding/screenshot_readme.jpg">
 </p>
+
+
+---
 
 ## Features
 
@@ -47,6 +52,8 @@ For more information, please check out the documentation at https://flutter-desi
 
 The UX and design is inspired by [Wanda Design System](https://design.wonderflow.ai/).
 
+
+---
 
 ## Basic integration
 
