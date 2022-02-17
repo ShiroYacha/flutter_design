@@ -1,6 +1,6 @@
 name: flutter_design
 description: A new Flutter package project.
-version: 0.0.2
+version: 0.0.3
 homepage: https://github.com/ShiroYacha/flutter_design
 publish_to: none
 
@@ -17,10 +17,7 @@ dependencies:
   # data
   freezed_annotation: ^1.1.0
   json_annotation: ^4.4.0
-  faker: ^2.0.0
   recase: ^4.0.0
-  # meta
-  analyzer: ^3.2.0
 
 dev_dependencies:
   # testing
