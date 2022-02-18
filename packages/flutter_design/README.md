@@ -1,3 +1,7 @@
+[![pub package](https://img.shields.io/pub/v/flutter_design.svg)](https://pub.dartlang.org/packages/flutter_design)
+<!-- <a href="https://discord.gg/jqmBbSkKc3"><img src="https://img.shields.io/discord/944150215651381308.svg?logo=discord&color=blue" alt="Discord"></a> -->
+[![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
+
 <p align="center">
   <img width="200" src="https://github.com/ShiroYacha/flutter_design/blob/main/assets/branding/logo_readme.png?raw=true">
   <br /><br />
@@ -48,7 +52,7 @@ Here are the key objectives of the project:
     - Different locale frames
     - Runtime data configuration: you can easily "try-out" different data in runtime, e.g. Color, Values, or even Widget! It is also possible to create your own data generator.
 
-For more information, please check out the documentation at https://flutter-design.gitbook.io/design-docs/.
+For more information, please check out the documentation at https://flutterdesign.io//.
 
 The UX and design is inspired by [Wanda Design System](https://design.wonderflow.ai/).
 
