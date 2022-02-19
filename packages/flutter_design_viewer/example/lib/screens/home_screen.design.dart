@@ -6,7 +6,7 @@ part of 'home_screen.dart';
 // DesignGenerator
 // **************************************************************************
 
-final screensHomeScreenPage = ViewerDocumentPage(
+final generatedScreensHomeScreenHomeScreenPage = ViewerDocumentPage(
   id: 'homeScreen',
   namespace: ['screens', 'home_screen'],
   title: 'HomeScreen',
@@ -55,11 +55,8 @@ final screensHomeScreenPage = ViewerDocumentPage(
 class HomeScreen extends StatelessWidget {
   final Widget body;
   final AppBar? appbar;
-  const HomeScreen({
-    required this.body,
-    this.appbar,
-    Key? key,
-  }) : super(key: key);
+  const HomeScreen({required this.body, this.appbar, Key? key})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(

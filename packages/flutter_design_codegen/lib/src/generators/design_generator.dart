@@ -106,7 +106,7 @@ ${await _extractSourceFromElement(
           )
           // Add commas to all probable places
           .replaceAll('[^(]);', ',);')
-          .replaceAll('})', ',})'),
+          .replaceAll('[^;]})', ',})'),
     );
   }
 

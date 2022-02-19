@@ -33,10 +33,11 @@ class TrackedNavigatorObserver extends NavigatorObserver {
     if (uriName != null) {
       WidgetsBinding.instance?.scheduleFrameCallback((timeStamp) {
         try {
-          viewerStateNotifier.update((state) =>
-              state.copyWith(uri: uriName.split(routePathNameSeparator).first));
-        } finally {
-          // Ignore in case of error
+          final uri = uriName.split(routePathNameSeparator).first;
+          viewerStateNotifier.update((state) => state.copyWith(uri: uri));
+        } catch (e) {
+          // ignore: avoid_print
+          print('Unable to save current uri (full name: $uriName) due to: $e');
         }
       });
     }

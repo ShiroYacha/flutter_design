@@ -32,6 +32,8 @@ final viewerStateProvider = StateProvider<ViewerState>(
     viewMode: ViewMode.themes,
     themeMode: ThemeMode.dark,
     displayMode: DisplayMode.widgetOnly,
+    showDataBuilderByDefault: true,
+    expandExplorerNodesByDefault: true,
     targetDeviceId: Devices.ios.iPhone12.identifier.toString(),
     targetDeviceIds: [],
     targetLocaleId: '',
@@ -87,6 +89,9 @@ class DesignSystemViewerApp extends HookConsumerWidget {
       Widget: [
         ([d]) => DataTemplateWidgetPlaceholderBuilder(),
       ],
+      List<Widget>: [
+        ([d]) => DataTemplateWidgetPlaceholderListBuilder(),
+      ],
       Function: [
         ([d]) => DataTemplateStubFunctionBuilder(),
       ],
@@ -135,6 +140,8 @@ class DesignSystemViewerRouter extends HookConsumerWidget {
                 viewMode: ViewMode.canvas,
                 displayMode: DisplayMode.widgetCodeSideBySide,
                 themeMode: ThemeMode.dark,
+                showDataBuilderByDefault: true,
+                expandExplorerNodesByDefault: true,
                 targetDeviceId: Devices.ios.iPhone12.identifier.toString(),
                 targetDeviceIds: [
                   Devices.ios.iPhone12.identifier.toString(),

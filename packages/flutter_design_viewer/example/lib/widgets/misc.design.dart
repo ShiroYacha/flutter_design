@@ -6,7 +6,7 @@ part of 'misc.dart';
 // DesignGenerator
 // **************************************************************************
 
-final widgetsMiscPage = ViewerDocumentPage(
+final generatedWidgetsMiscAvatarPage = ViewerDocumentPage(
   id: 'avatar',
   namespace: ['widgets', 'misc'],
   title: 'Avatar',
@@ -56,11 +56,8 @@ final widgetsMiscPage = ViewerDocumentPage(
 class Avatar extends StatelessWidget {
   final String uri;
   final double radius;
-  const Avatar({
-    required this.uri,
-    this.radius = 30.0,
-    Key? key,
-  }) : super(key: key);
+  const Avatar({required this.uri, this.radius = 30.0, Key? key})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);

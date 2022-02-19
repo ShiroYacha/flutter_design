@@ -1,15 +1,14 @@
 import 'package:analyzer/dart/constant/value.dart';
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
+import 'package:flutter_design_codegen/src/generators/design_generator.dart';
 import 'package:recase/recase.dart';
 import 'package:source_gen/source_gen.dart';
-
-import 'generators/design_generator.dart';
 
 bool hasAnnotation<T>(
   List<ElementAnnotation> metadata,
 ) {
-  return acceptAnnotationStringField(metadata, (v) => true) == true;
+  return acceptAnnotationStringField<T, bool>(metadata, (v) => true) == true;
 }
 
 String? extractAnnotationStringField<T>(
@@ -28,9 +27,12 @@ TResult? acceptAnnotationStringField<TAnnotation, TResult>(
 ) {
   for (final md in metadata) {
     final value = md.computeConstantValue()!;
+    if (!value.isNull && value.type?.element is ClassElement) {}
     if (value.isNull ||
-        value.type!.getDisplayString(withNullability: false) !=
-            TAnnotation.toString()) {
+        value.type?.element is! ClassElement ||
+        // TODO: find a better way to check super type
+        !TAnnotation.toString()
+            .startsWith((value.type!.element! as ClassElement).name)) {
       continue;
     }
     return visitor(value);
@@ -39,9 +41,9 @@ TResult? acceptAnnotationStringField<TAnnotation, TResult>(
 }
 
 String buildClassPageFieldName(ClassElement element) =>
-    '${ReCase(extractClassElementFolderNamespace(element).join('_')).camelCase}Page';
+    'generated${ReCase(extractClassElementFolderNamespace(element, includeClassName: true).join('_')).pascalCase}Page';
 
-List<String> extractClassElementFolderNamespace(ClassElement element) {
+List<String> extractClassElementFolderNamespace(ClassElement element, {bool includeClassName = false}) {
   // Retrieve class meta data
   final visitor = ModelVisitor();
   element.visitChildren(visitor);
@@ -53,6 +55,9 @@ List<String> extractClassElementFolderNamespace(ClassElement element) {
   final namespace =
       folderPath.contains('/') ? folderPath.split('/') : <String>[folderPath];
   namespace.add(clazz.source.shortName.replaceAll('.dart', ''));
+  if(includeClassName) {
+    namespace.add(clazz.displayName);
+  }
   return namespace;
 }
 

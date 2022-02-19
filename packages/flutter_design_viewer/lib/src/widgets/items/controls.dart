@@ -89,12 +89,12 @@ class SizerControl extends StatelessWidget {
   final double height;
   final Size value;
   final Color color;
-  final void Function(Size) valueChanged;
+  final void Function(Size) onValueChanged;
   const SizerControl({
     required this.height,
     required this.value,
     required this.color,
-    required this.valueChanged,
+    required this.onValueChanged,
     Key? key,
   }) : super(key: key);
 
@@ -108,7 +108,7 @@ class SizerControl extends StatelessWidget {
         cursor: SystemMouseCursors.move,
         child: GestureDetector(
           onTapDown: (e) {
-            valueChanged(Size(e.localPosition.dx, e.localPosition.dy));
+            onValueChanged(Size(e.localPosition.dx, e.localPosition.dy));
           },
           child: CustomPaint(
             painter: _SizePainter(
@@ -222,10 +222,10 @@ class DataBuilderPanel extends HookConsumerWidget {
 
 class SelectableThemeGroup extends HookConsumerWidget {
   final String value;
-  final void Function(String) valueChanged;
+  final void Function(String) onValueChanged;
   const SelectableThemeGroup({
     required this.value,
-    required this.valueChanged,
+    required this.onValueChanged,
     Key? key,
   }) : super(key: key);
 
@@ -236,7 +236,7 @@ class SelectableThemeGroup extends HookConsumerWidget {
     return SelectableGlyphGroup<String>(
       items: viewerSettings.enabledThemes.keys,
       selectedItem: value,
-      selectionChanged: (e) => valueChanged(e),
+      selectionChanged: (e) => onValueChanged(e),
       builder: (context, e, [selected = false]) {
         final color = selected ? theme.primaryColor : theme.disabledColor;
         return Tooltip(
@@ -258,10 +258,10 @@ class SelectableThemeGroup extends HookConsumerWidget {
 
 class SelectableDeviceGroup extends HookConsumerWidget {
   final String value;
-  final void Function(String) valueChanged;
+  final void Function(String) onValueChanged;
   const SelectableDeviceGroup({
     required this.value,
-    required this.valueChanged,
+    required this.onValueChanged,
     Key? key,
   }) : super(key: key);
 
@@ -305,7 +305,7 @@ class SelectableDeviceGroup extends HookConsumerWidget {
                     .firstWhere((e) => e.identifier.toString() == value),
                 selectionChanged: (e) {
                   controller.toggle();
-                  valueChanged(e.identifier.toString());
+                  onValueChanged(e.identifier.toString());
                 },
                 builder: (context, e, [selected = false]) {
                   final color = selected ? theme.primaryColor : null;
@@ -325,10 +325,10 @@ class SelectableDeviceGroup extends HookConsumerWidget {
 
 class SelectableDevicesGroup extends HookConsumerWidget {
   final List<String> value;
-  final void Function(List<String>) valueChanged;
+  final void Function(List<String>) onValueChanged;
   const SelectableDevicesGroup({
     required this.value,
-    required this.valueChanged,
+    required this.onValueChanged,
     Key? key,
   }) : super(key: key);
 
@@ -367,7 +367,7 @@ class SelectableDevicesGroup extends HookConsumerWidget {
                 items: Devices.all,
                 selectedItems: Devices.all
                     .where((e) => value.contains(e.identifier.toString())),
-                selectionChanged: (e) => valueChanged(
+                selectionChanged: (e) => onValueChanged(
                     e.map((e) => e.identifier.toString()).toList()),
                 builder: (context, e, [selected = false]) {
                   final color = selected ? theme.primaryColor : null;
@@ -387,11 +387,11 @@ class SelectableDevicesGroup extends HookConsumerWidget {
 
 class ShowDataBuilderToggle extends StatelessWidget {
   final bool value;
-  final void Function(bool) valueChanged;
+  final void Function(bool) onValueChanged;
   const ShowDataBuilderToggle({
     Key? key,
     required this.value,
-    required this.valueChanged,
+    required this.onValueChanged,
   }) : super(key: key);
 
   @override
@@ -401,7 +401,7 @@ class ShowDataBuilderToggle extends StatelessWidget {
       child: Tooltip(
         message: 'Show data builder',
         child: GestureDetector(
-          onTap: () => valueChanged(!value),
+          onTap: () => onValueChanged(!value),
           child: ThemableGlyph(
             glyph: ViewerGlyphUnion.icon(
               icon: Ionicons.server_outline,
@@ -417,11 +417,11 @@ class ShowDataBuilderToggle extends StatelessWidget {
 
 class SelectableDisplayModeGroup extends StatelessWidget {
   final DisplayMode value;
-  final void Function(DisplayMode) valueChanged;
+  final void Function(DisplayMode) onValueChanged;
   const SelectableDisplayModeGroup({
     Key? key,
     required this.value,
-    required this.valueChanged,
+    required this.onValueChanged,
   }) : super(key: key);
 
   @override
@@ -430,7 +430,7 @@ class SelectableDisplayModeGroup extends StatelessWidget {
     return SelectableGlyphGroup<DisplayMode>(
       items: DisplayMode.values,
       selectedItem: value,
-      selectionChanged: (e) => valueChanged(e),
+      selectionChanged: (e) => onValueChanged(e),
       builder: (context, e, [selected = false]) {
         final color = selected ? theme.primaryColor : null;
         return Tooltip(
@@ -462,11 +462,11 @@ class SelectableDisplayModeGroup extends StatelessWidget {
 
 class SelectableViewModeGroup extends StatelessWidget {
   final ViewMode value;
-  final void Function(ViewMode) valueChanged;
+  final void Function(ViewMode) onValueChanged;
   const SelectableViewModeGroup({
     Key? key,
     required this.value,
-    required this.valueChanged,
+    required this.onValueChanged,
   }) : super(key: key);
 
   @override
@@ -475,7 +475,7 @@ class SelectableViewModeGroup extends StatelessWidget {
     return SelectableGlyphGroup<ViewMode>(
       items: ViewMode.values,
       selectedItem: value,
-      selectionChanged: (e) => valueChanged(e),
+      selectionChanged: (e) => onValueChanged(e),
       builder: (context, e, [selected = false]) {
         final color = selected ? theme.primaryColor : null;
         return Tooltip(
@@ -506,6 +506,40 @@ class SelectableViewModeGroup extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+}
+
+class CheckableStatement extends StatelessWidget {
+  final bool value;
+  final String title;
+  final String? subtitle;
+  final void Function(bool) onValueChanged;
+  const CheckableStatement({
+    required this.value,
+    required this.title,
+    this.subtitle,
+    required this.onValueChanged,
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return ThemeWithoutRippleAndHighlight(
+      child: CheckboxListTile(
+        value: value,
+        contentPadding: EdgeInsets.zero,
+        title: Text(title),
+        activeColor: theme.primaryColor,
+        subtitle: subtitle != null
+            ? Text(
+                subtitle!,
+                style: theme.textTheme.caption,
+              )
+            : null,
+        onChanged: (v) => onValueChanged(v!),
+      ),
     );
   }
 }

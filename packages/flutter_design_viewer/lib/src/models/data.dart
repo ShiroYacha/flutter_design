@@ -158,6 +158,51 @@ class DataTemplateWidgetPlaceholderBuilder extends DataBuilder<Widget> {
 }
 
 // TODO: can we make this immutable?
+class DataTemplateWidgetPlaceholderListBuilder
+    extends DataBuilder<List<Widget>> {
+  Size size;
+  int count;
+  DataTemplateWidgetPlaceholderListBuilder({
+    this.size = const Size(100, 100),
+    this.count = 3,
+  });
+
+  @override
+  List<Widget> build(BuildContext context, String field) {
+    return List.generate(
+      count,
+      (index) {
+        final color = Colors.primaries[index % Colors.primaries.length];
+        return CustomPaint(
+          key: UniqueKey(),
+          size: size,
+          painter: PatternPainter(
+            theme: Theme.of(context),
+            backgroundColor: color.withOpacity(0.8),
+            foregroundColor: color,
+            featureCountsScale: 0.2,
+          ),
+        );
+      },
+    );
+  }
+
+  @override
+  Widget buildDesigner(
+    BuildContext context,
+    UpdateDataBuilder<List<Widget>> updateBuilder,
+  ) {
+    return DataTemplateWidgetPlaceholderListDesigner(
+      builder: this,
+      updateBuilder: updateBuilder,
+    );
+  }
+
+  @override
+  String get name => 'Widget placeholder list';
+}
+
+// TODO: can we make this immutable?
 class DataTemplateStubFunctionBuilder extends DataBuilder<Function> {
   DataTemplateStubFunctionBuilder();
 

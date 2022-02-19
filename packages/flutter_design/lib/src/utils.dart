@@ -33,9 +33,10 @@ List<ViewerGroupPage> buildGroupedPageTrees(
   final compressedDocumentPages = <ViewerDocumentPage>[];
   for (final page in documentPages) {
     if (page.namespace.isNotEmpty &&
-        documentPages.any((e) =>
+        !documentPages.any((e) =>
+            e.id != page.id &&
             e.namespace.isNotEmpty &&
-            e.namespace.last != page.namespace.last)) {
+            e.namespace.last == page.namespace.last)) {
       final parentId = page.namespace.last;
       compressedDocumentPages.add(
         page.copyWith(

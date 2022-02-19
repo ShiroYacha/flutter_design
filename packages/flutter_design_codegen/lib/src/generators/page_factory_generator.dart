@@ -35,7 +35,7 @@ class PageFactoryBuilder implements Builder {
       final library = await buildStep.resolver.libraryFor(input);
       final classesInLibrary = LibraryReader(library).classes;
       for (final clazz in classesInLibrary) {
-        if (hasAnnotation<TDesign>(clazz.metadata)) continue;
+        if (!hasAnnotation<TDesign>(clazz.metadata)) continue;
         fields.add(buildClassPageFieldName(clazz));
         // parse import info
         final packageUri = clazz.source.uri.path.substring(
@@ -46,11 +46,12 @@ class PageFactoryBuilder implements Builder {
         }
       }
     }
+    final dedupFields = Set.from(fields).toList();
 
     // generate code
-    if (importPackages.isNotEmpty) {
+    if (dedupFields.isNotEmpty) {
       final sb = StringBuffer();
-      for (final field in fields) {
+      for (final field in dedupFields) {
         sb.writeln('$field,');
       }
       await buildStep.writeAsString(

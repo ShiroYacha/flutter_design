@@ -26,6 +26,8 @@ class _$ViewerStateTearOff {
       {required ViewMode viewMode,
       required DisplayMode displayMode,
       required ThemeMode themeMode,
+      required bool showDataBuilderByDefault,
+      required bool expandExplorerNodesByDefault,
       required String targetDeviceId,
       required List<String> targetDeviceIds,
       required String targetThemeId,
@@ -37,6 +39,8 @@ class _$ViewerStateTearOff {
       viewMode: viewMode,
       displayMode: displayMode,
       themeMode: themeMode,
+      showDataBuilderByDefault: showDataBuilderByDefault,
+      expandExplorerNodesByDefault: expandExplorerNodesByDefault,
       targetDeviceId: targetDeviceId,
       targetDeviceIds: targetDeviceIds,
       targetThemeId: targetThemeId,
@@ -60,6 +64,8 @@ mixin _$ViewerState {
   ViewMode get viewMode => throw _privateConstructorUsedError;
   DisplayMode get displayMode => throw _privateConstructorUsedError;
   ThemeMode get themeMode => throw _privateConstructorUsedError;
+  bool get showDataBuilderByDefault => throw _privateConstructorUsedError;
+  bool get expandExplorerNodesByDefault => throw _privateConstructorUsedError;
   String get targetDeviceId => throw _privateConstructorUsedError;
   List<String> get targetDeviceIds => throw _privateConstructorUsedError;
   String get targetThemeId => throw _privateConstructorUsedError;
@@ -83,6 +89,8 @@ abstract class $ViewerStateCopyWith<$Res> {
       {ViewMode viewMode,
       DisplayMode displayMode,
       ThemeMode themeMode,
+      bool showDataBuilderByDefault,
+      bool expandExplorerNodesByDefault,
       String targetDeviceId,
       List<String> targetDeviceIds,
       String targetThemeId,
@@ -105,6 +113,8 @@ class _$ViewerStateCopyWithImpl<$Res> implements $ViewerStateCopyWith<$Res> {
     Object? viewMode = freezed,
     Object? displayMode = freezed,
     Object? themeMode = freezed,
+    Object? showDataBuilderByDefault = freezed,
+    Object? expandExplorerNodesByDefault = freezed,
     Object? targetDeviceId = freezed,
     Object? targetDeviceIds = freezed,
     Object? targetThemeId = freezed,
@@ -126,6 +136,14 @@ class _$ViewerStateCopyWithImpl<$Res> implements $ViewerStateCopyWith<$Res> {
           ? _value.themeMode
           : themeMode // ignore: cast_nullable_to_non_nullable
               as ThemeMode,
+      showDataBuilderByDefault: showDataBuilderByDefault == freezed
+          ? _value.showDataBuilderByDefault
+          : showDataBuilderByDefault // ignore: cast_nullable_to_non_nullable
+              as bool,
+      expandExplorerNodesByDefault: expandExplorerNodesByDefault == freezed
+          ? _value.expandExplorerNodesByDefault
+          : expandExplorerNodesByDefault // ignore: cast_nullable_to_non_nullable
+              as bool,
       targetDeviceId: targetDeviceId == freezed
           ? _value.targetDeviceId
           : targetDeviceId // ignore: cast_nullable_to_non_nullable
@@ -169,6 +187,8 @@ abstract class _$ViewerStateCopyWith<$Res>
       {ViewMode viewMode,
       DisplayMode displayMode,
       ThemeMode themeMode,
+      bool showDataBuilderByDefault,
+      bool expandExplorerNodesByDefault,
       String targetDeviceId,
       List<String> targetDeviceIds,
       String targetThemeId,
@@ -193,6 +213,8 @@ class __$ViewerStateCopyWithImpl<$Res> extends _$ViewerStateCopyWithImpl<$Res>
     Object? viewMode = freezed,
     Object? displayMode = freezed,
     Object? themeMode = freezed,
+    Object? showDataBuilderByDefault = freezed,
+    Object? expandExplorerNodesByDefault = freezed,
     Object? targetDeviceId = freezed,
     Object? targetDeviceIds = freezed,
     Object? targetThemeId = freezed,
@@ -214,6 +236,14 @@ class __$ViewerStateCopyWithImpl<$Res> extends _$ViewerStateCopyWithImpl<$Res>
           ? _value.themeMode
           : themeMode // ignore: cast_nullable_to_non_nullable
               as ThemeMode,
+      showDataBuilderByDefault: showDataBuilderByDefault == freezed
+          ? _value.showDataBuilderByDefault
+          : showDataBuilderByDefault // ignore: cast_nullable_to_non_nullable
+              as bool,
+      expandExplorerNodesByDefault: expandExplorerNodesByDefault == freezed
+          ? _value.expandExplorerNodesByDefault
+          : expandExplorerNodesByDefault // ignore: cast_nullable_to_non_nullable
+              as bool,
       targetDeviceId: targetDeviceId == freezed
           ? _value.targetDeviceId
           : targetDeviceId // ignore: cast_nullable_to_non_nullable
@@ -253,6 +283,8 @@ class _$_ViewerState extends _ViewerState {
       {required this.viewMode,
       required this.displayMode,
       required this.themeMode,
+      required this.showDataBuilderByDefault,
+      required this.expandExplorerNodesByDefault,
       required this.targetDeviceId,
       required this.targetDeviceIds,
       required this.targetThemeId,
@@ -272,6 +304,10 @@ class _$_ViewerState extends _ViewerState {
   @override
   final ThemeMode themeMode;
   @override
+  final bool showDataBuilderByDefault;
+  @override
+  final bool expandExplorerNodesByDefault;
+  @override
   final String targetDeviceId;
   @override
   final List<String> targetDeviceIds;
@@ -288,7 +324,7 @@ class _$_ViewerState extends _ViewerState {
 
   @override
   String toString() {
-    return 'ViewerState(viewMode: $viewMode, displayMode: $displayMode, themeMode: $themeMode, targetDeviceId: $targetDeviceId, targetDeviceIds: $targetDeviceIds, targetThemeId: $targetThemeId, targetThemeIds: $targetThemeIds, targetLocaleId: $targetLocaleId, targetLocaleIds: $targetLocaleIds, uri: $uri)';
+    return 'ViewerState(viewMode: $viewMode, displayMode: $displayMode, themeMode: $themeMode, showDataBuilderByDefault: $showDataBuilderByDefault, expandExplorerNodesByDefault: $expandExplorerNodesByDefault, targetDeviceId: $targetDeviceId, targetDeviceIds: $targetDeviceIds, targetThemeId: $targetThemeId, targetThemeIds: $targetThemeIds, targetLocaleId: $targetLocaleId, targetLocaleIds: $targetLocaleIds, uri: $uri)';
   }
 
   @override
@@ -300,6 +336,11 @@ class _$_ViewerState extends _ViewerState {
             const DeepCollectionEquality()
                 .equals(other.displayMode, displayMode) &&
             const DeepCollectionEquality().equals(other.themeMode, themeMode) &&
+            const DeepCollectionEquality().equals(
+                other.showDataBuilderByDefault, showDataBuilderByDefault) &&
+            const DeepCollectionEquality().equals(
+                other.expandExplorerNodesByDefault,
+                expandExplorerNodesByDefault) &&
             const DeepCollectionEquality()
                 .equals(other.targetDeviceId, targetDeviceId) &&
             const DeepCollectionEquality()
@@ -321,6 +362,8 @@ class _$_ViewerState extends _ViewerState {
       const DeepCollectionEquality().hash(viewMode),
       const DeepCollectionEquality().hash(displayMode),
       const DeepCollectionEquality().hash(themeMode),
+      const DeepCollectionEquality().hash(showDataBuilderByDefault),
+      const DeepCollectionEquality().hash(expandExplorerNodesByDefault),
       const DeepCollectionEquality().hash(targetDeviceId),
       const DeepCollectionEquality().hash(targetDeviceIds),
       const DeepCollectionEquality().hash(targetThemeId),
@@ -345,6 +388,8 @@ abstract class _ViewerState extends ViewerState {
       {required ViewMode viewMode,
       required DisplayMode displayMode,
       required ThemeMode themeMode,
+      required bool showDataBuilderByDefault,
+      required bool expandExplorerNodesByDefault,
       required String targetDeviceId,
       required List<String> targetDeviceIds,
       required String targetThemeId,
@@ -363,6 +408,10 @@ abstract class _ViewerState extends ViewerState {
   DisplayMode get displayMode;
   @override
   ThemeMode get themeMode;
+  @override
+  bool get showDataBuilderByDefault;
+  @override
+  bool get expandExplorerNodesByDefault;
   @override
   String get targetDeviceId;
   @override

@@ -51,7 +51,7 @@ class ComponentFramePanel extends HookConsumerWidget {
     final targetLocaleId = useState(viewerState.targetLocaleId);
     final targetThemeId = useState(viewerState.targetThemeId);
     // Assemble data builders
-    final showDataBuilder = useState(false);
+    final showDataBuilder = useState(viewerState.showDataBuilderByDefault);
     final dataBuilderOptions = useMemoized(
         () => dataBuilderRegistry.getAllOptionsFor(
               {for (var k in viewerWidgetBuilder.fieldMetaDataset) k.name: k},
@@ -352,21 +352,21 @@ class ComponentFrameToolbar extends HookConsumerWidget {
           children: [
             SelectableViewModeGroup(
               value: viewModeNotifier.value,
-              valueChanged: (v) => viewModeNotifier.value = v,
+              onValueChanged: (v) => viewModeNotifier.value = v,
             ),
             if (viewModeNotifier.value != ViewMode.themes)
               SelectableThemeGroup(
                 value: targetThemeIdNotifier.value,
-                valueChanged: (v) => targetThemeIdNotifier.value = v,
+                onValueChanged: (v) => targetThemeIdNotifier.value = v,
               ),
             SelectableDisplayModeGroup(
               value: displayModeNotifier.value,
-              valueChanged: (v) => displayModeNotifier.value = v,
+              onValueChanged: (v) => displayModeNotifier.value = v,
             ),
             if (displayModeNotifier.value != DisplayMode.codeOnly)
               ShowDataBuilderToggle(
                 value: showDataBuilderNotifier.value,
-                valueChanged: (v) => showDataBuilderNotifier.value = v,
+                onValueChanged: (v) => showDataBuilderNotifier.value = v,
               ),
             if (designLink != null)
               LinkableClickableContainer(
@@ -392,13 +392,13 @@ class ComponentFrameToolbar extends HookConsumerWidget {
           Spacers.v10,
           SelectableDevicesGroup(
             value: targetDeviceIdsNotifier.value,
-            valueChanged: (v) => targetDeviceIdsNotifier.value = v,
+            onValueChanged: (v) => targetDeviceIdsNotifier.value = v,
           ),
         ] else if (viewModeNotifier.value != ViewMode.canvas) ...[
           Spacers.v10,
           SelectableDeviceGroup(
             value: targetDeviceIdNotifier.value,
-            valueChanged: (v) => targetDeviceIdNotifier.value = v,
+            onValueChanged: (v) => targetDeviceIdNotifier.value = v,
           ),
         ],
       ],

@@ -6,7 +6,7 @@ part of 'toggles.dart';
 // DesignGenerator
 // **************************************************************************
 
-final widgetsActionsTogglesPage = ViewerDocumentPage(
+final generatedWidgetsActionsTogglesToggleButtonPage = ViewerDocumentPage(
   id: 'toggleButton',
   namespace: ['widgets', 'actions', 'toggles'],
   title: 'ToggleButton',
@@ -44,10 +44,7 @@ final widgetsActionsTogglesPage = ViewerDocumentPage(
 /// Widget
 class ToggleButton extends StatelessWidget {
   final Color color;
-  const ToggleButton({
-    this.color = Colors.red,
-    Key? key,
-  }) : super(key: key);
+  const ToggleButton({this.color = Colors.red, Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(color: color);

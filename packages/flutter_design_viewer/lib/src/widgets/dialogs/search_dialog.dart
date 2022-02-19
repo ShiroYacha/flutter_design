@@ -59,6 +59,15 @@ class SearchDialog extends HookConsumerWidget {
       for (final context in SearchResultContext.values)
         context: items.indexWhere((i) => i.context == context)
     };
+    // Constraint current search index
+    useEffect(() {
+      if (currentSearchResultItemIndexNotifier.state > items.length - 1) {
+        WidgetsBinding.instance?.scheduleFrameCallback((timeStamp) {
+          currentSearchResultItemIndexNotifier
+              .update((state) => items.length - 1);
+        });
+      }
+    }, [query.value]);
     return AlertDialog(
       insetPadding: EdgeInsets.zero,
       contentPadding: EdgeInsets.zero,

@@ -31,3 +31,12 @@ class Avatar extends StatelessWidget {
     );
   }
 }
+
+class AvatarModel {
+  final String? uri;
+  final String? name;
+  const AvatarModel({
+    this.uri,
+    this.name,
+  }) : assert(uri != null || name != null);
+}

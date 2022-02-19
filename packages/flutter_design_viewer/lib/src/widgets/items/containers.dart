@@ -1,10 +1,9 @@
+import 'dart:math';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_design_viewer/src/measures.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-import '../../viewer_app.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class KeyContainer extends StatelessWidget {
   final String? label;
@@ -90,18 +89,28 @@ class TitleWidgetPair extends StatelessWidget {
 /// A responsive wrapping row that tries to fit as much widget
 /// evenly as possible based on the screen constraints.
 /// It will try to spread out its children to multiple row if necessary.
-class ResponsiveEvenRow extends HookConsumerWidget {
+class ResponsiveEvenRow extends StatelessWidget {
+  final double widthThreshold;
+  final double crossAxisSpacing;
+  final double mainAxisSpacing;
   final List<Widget> children;
   const ResponsiveEvenRow({
     required this.children,
+    this.widthThreshold = 300,
+    this.crossAxisSpacing = 10,
+    this.mainAxisSpacing = 10,
     Key? key,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final viewerSettings = ref.watch(viewerSettingsProvider);
+  Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
-      return Container();
+      return StaggeredGrid.count(
+        crossAxisCount: max((constraints.maxWidth / widthThreshold).floor(), 1),
+        crossAxisSpacing: crossAxisSpacing,
+        mainAxisSpacing: mainAxisSpacing,
+        children: children,
+      );
     });
   }
 }

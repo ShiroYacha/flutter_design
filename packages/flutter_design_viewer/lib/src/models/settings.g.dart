@@ -11,6 +11,9 @@ _$_ViewerState _$$_ViewerStateFromJson(Map<String, dynamic> json) =>
       viewMode: $enumDecode(_$ViewModeEnumMap, json['viewMode']),
       displayMode: $enumDecode(_$DisplayModeEnumMap, json['displayMode']),
       themeMode: $enumDecode(_$ThemeModeEnumMap, json['themeMode']),
+      showDataBuilderByDefault: json['showDataBuilderByDefault'] as bool,
+      expandExplorerNodesByDefault:
+          json['expandExplorerNodesByDefault'] as bool,
       targetDeviceId: json['targetDeviceId'] as String,
       targetDeviceIds: (json['targetDeviceIds'] as List<dynamic>)
           .map((e) => e as String)
@@ -31,6 +34,8 @@ Map<String, dynamic> _$$_ViewerStateToJson(_$_ViewerState instance) =>
       'viewMode': _$ViewModeEnumMap[instance.viewMode],
       'displayMode': _$DisplayModeEnumMap[instance.displayMode],
       'themeMode': _$ThemeModeEnumMap[instance.themeMode],
+      'showDataBuilderByDefault': instance.showDataBuilderByDefault,
+      'expandExplorerNodesByDefault': instance.expandExplorerNodesByDefault,
       'targetDeviceId': instance.targetDeviceId,
       'targetDeviceIds': instance.targetDeviceIds,
       'targetThemeId': instance.targetThemeId,

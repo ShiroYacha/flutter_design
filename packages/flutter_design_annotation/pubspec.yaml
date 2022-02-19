@@ -1,10 +1,10 @@
 name: flutter_design_annotation
-description: A new Flutter package project.
-version: 0.0.1
+description: Annotation used by `flutter_design_codegen` to generate design system component catalog. Avoid using this package directly, you should use `flutter_design` instead.
+version: 0.0.10-pre
 homepage: https://flutterdesign.io/
 
 environment:
-  sdk: ">=2.15.1 <3.0.0"
+  sdk: ">=2.12.0 <3.0.0"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

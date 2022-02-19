@@ -71,7 +71,7 @@ class SettingsDialog extends HookConsumerWidget {
                       'Change the default view mode of all widget viewers globally.',
                   widget: SelectableViewModeGroup(
                     value: viewerState.viewMode,
-                    valueChanged: (v) => viewerStateNotifier.update(
+                    onValueChanged: (v) => viewerStateNotifier.update(
                       (state) => state.copyWith(viewMode: v),
                     ),
                   ),
@@ -83,7 +83,7 @@ class SettingsDialog extends HookConsumerWidget {
                       'Change the default display mode of all widget viewers globally.',
                   widget: SelectableDisplayModeGroup(
                     value: viewerState.displayMode,
-                    valueChanged: (v) => viewerStateNotifier.update(
+                    onValueChanged: (v) => viewerStateNotifier.update(
                       (state) => state.copyWith(displayMode: v),
                     ),
                   ),
@@ -95,7 +95,7 @@ class SettingsDialog extends HookConsumerWidget {
                       'Change the default theme of all widget viewers globally, excl. "Theme" view mode.',
                   widget: SelectableThemeGroup(
                     value: viewerState.targetThemeId,
-                    valueChanged: (v) => viewerStateNotifier.update(
+                    onValueChanged: (v) => viewerStateNotifier.update(
                       (state) => state.copyWith(targetThemeId: v),
                     ),
                   ),
@@ -107,7 +107,7 @@ class SettingsDialog extends HookConsumerWidget {
                       'Change the default device of all widget viewers globally, excl. "Device" view mode.',
                   widget: SelectableDeviceGroup(
                     value: viewerState.targetDeviceId,
-                    valueChanged: (v) => viewerStateNotifier.update(
+                    onValueChanged: (v) => viewerStateNotifier.update(
                       (state) => state.copyWith(targetDeviceId: v),
                     ),
                   ),
@@ -119,9 +119,29 @@ class SettingsDialog extends HookConsumerWidget {
                       'Change the default devices of all widget viewers globally in "Device" view mode.',
                   widget: SelectableDevicesGroup(
                     value: viewerState.targetDeviceIds,
-                    valueChanged: (v) => viewerStateNotifier.update(
+                    onValueChanged: (v) => viewerStateNotifier.update(
                       (state) => state.copyWith(targetDeviceIds: v),
                     ),
+                  ),
+                ),
+                Spacers.v10,
+                CheckableStatement(
+                  value: viewerState.showDataBuilderByDefault,
+                  title: 'Show data builder by default',
+                  subtitle:
+                      'If selected, the data builder will be shown by default and might hide the code viewer.',
+                  onValueChanged: (v) => viewerStateNotifier.update(
+                    (state) => state.copyWith(showDataBuilderByDefault: v),
+                  ),
+                ),
+                Spacers.v10,
+                CheckableStatement(
+                  value: viewerState.expandExplorerNodesByDefault,
+                  title: 'Expand explorer nodes by default',
+                  subtitle:
+                      'If selected, all nodes will be expanded initially unless you collapse them.',
+                  onValueChanged: (v) => viewerStateNotifier.update(
+                    (state) => state.copyWith(expandExplorerNodesByDefault: v),
                   ),
                 ),
               ],

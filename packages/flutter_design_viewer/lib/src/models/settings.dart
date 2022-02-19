@@ -32,6 +32,8 @@ class ViewerState with _$ViewerState {
     required ViewMode viewMode,
     required DisplayMode displayMode,
     required ThemeMode themeMode,
+    required bool showDataBuilderByDefault,
+    required bool expandExplorerNodesByDefault,
     required String targetDeviceId,
     required List<String> targetDeviceIds,
     required String targetThemeId,

@@ -11,6 +11,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../measures.dart';
 import '../../theme.dart';
+import 'containers.dart';
 import 'controls.dart';
 
 class DataTemplateStringLoremDesigner extends HookConsumerWidget {
@@ -137,7 +138,38 @@ class DataTemplateWidgetPlaceholderDesigner extends HookConsumerWidget {
           height: 250,
           value: builder.size,
           color: builder.color,
-          valueChanged: (v) => updateBuilder(builder..size = v),
+          onValueChanged: (v) => updateBuilder(builder..size = v),
+        ),
+      ],
+    );
+  }
+}
+
+class DataTemplateWidgetPlaceholderListDesigner extends HookConsumerWidget {
+  final DataTemplateWidgetPlaceholderListBuilder builder;
+  final UpdateDataBuilder<List<Widget>> updateBuilder;
+  const DataTemplateWidgetPlaceholderListDesigner({
+    required this.builder,
+    required this.updateBuilder,
+    Key? key,
+  }) : super(key: key);
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final theme = Theme.of(context);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        IntDesigner(
+            value: builder.count,
+            onValueChanged: (v) {
+              updateBuilder(builder..count = v);
+            }),
+        Spacers.v10,
+        SizerControl(
+          height: 250,
+          value: builder.size,
+          color: theme.primaryColor,
+          onValueChanged: (v) => updateBuilder(builder..size = v),
         ),
       ],
     );
@@ -208,7 +240,6 @@ class DataTemplateColorPickerDesigner extends HookConsumerWidget {
   }
 }
 
-/// TODO: Merge this with the int designer
 class DataTemplateDoubleDesigner extends HookConsumerWidget {
   final DataTemplateDoubleBuilder builder;
   final UpdateDataBuilder<double> updateBuilder;
@@ -219,52 +250,11 @@ class DataTemplateDoubleDesigner extends HookConsumerWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final initValue = useState(builder.value);
-    final textEditingController = useTextEditingController(
-      text: builder.value.toString(),
-    );
-    useEffect(() {
-      textEditingController.selection = TextSelection(
-        baseOffset: 0,
-        extentOffset: textEditingController.value.text.length,
-      );
-      textEditingController.addListener(() {
-        updateBuilder(builder
-          ..value = double.tryParse(textEditingController.value.text) ?? 0.0);
-      });
-    }, []);
-    return Row(
-      children: [
-        Expanded(
-          child: TextField(
-            autofocus: true,
-            focusNode: useFocusNode(),
-            controller: textEditingController,
-            showCursor: true,
-            inputFormatters: [
-              FilteringTextInputFormatter.allow(RegExp(r'(^-?\d*\.?\d*)'))
-            ],
-            decoration: buildTextFieldDecoration(context).copyWith(
-              suffixIcon: GestureDetector(
-                      onTap: () => textEditingController.text =
-                          initValue.value.toString(),
-                      child: const Icon(FeatherIcons.rotateCcw, size: 16))
-                  .asMouseClickRegion,
-            ),
-          ),
-        ),
-        Spacers.h10,
-        Expanded(
-          child: RangeAdjustableSlider(
-            max: initValue.value * 10.0,
-            min: 0,
-            value: double.tryParse(textEditingController.text) ?? 0.0,
-            onChanged: (v) {
-              textEditingController.text = v.toString();
-            },
-          ),
-        ),
-      ],
+    return DoubleDesigner(
+      value: builder.value,
+      onValueChanged: (v) {
+        updateBuilder(builder..value = v);
+      },
     );
   }
 }
@@ -279,9 +269,28 @@ class DataTemplateIntDesigner extends HookConsumerWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final initValue = useState(builder.value);
+    return IntDesigner(
+      value: builder.value,
+      onValueChanged: (v) {
+        updateBuilder(builder..value = v);
+      },
+    );
+  }
+}
+
+class IntDesigner extends HookWidget {
+  final int value;
+  final void Function(int) onValueChanged;
+  const IntDesigner({
+    required this.value,
+    required this.onValueChanged,
+    Key? key,
+  }) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    final initValue = useState(value);
     final textEditingController = useTextEditingController(
-      text: builder.value.toString(),
+      text: value.toString(),
     );
     useEffect(() {
       textEditingController.selection = TextSelection(
@@ -289,41 +298,91 @@ class DataTemplateIntDesigner extends HookConsumerWidget {
         extentOffset: textEditingController.value.text.length,
       );
       textEditingController.addListener(() {
-        updateBuilder(builder
-          ..value = int.tryParse(textEditingController.value.text) ?? 0);
+        onValueChanged(int.tryParse(textEditingController.value.text) ?? 0);
       });
     }, []);
-    return Row(
+    return ResponsiveEvenRow(
       children: [
-        Expanded(
-          child: TextField(
-            autofocus: true,
-            focusNode: useFocusNode(),
-            controller: textEditingController,
-            showCursor: true,
-            inputFormatters: [
-              FilteringTextInputFormatter.allow(RegExp(r'(^-?\d*)'))
-            ],
-            decoration: buildTextFieldDecoration(context).copyWith(
-              suffixIcon: GestureDetector(
-                      onTap: () => textEditingController.text =
-                          initValue.value.toString(),
-                      child: const Icon(FeatherIcons.rotateCcw, size: 16))
-                  .asMouseClickRegion,
-            ),
+        TextField(
+          autofocus: true,
+          focusNode: useFocusNode(),
+          controller: textEditingController,
+          showCursor: true,
+          inputFormatters: [
+            FilteringTextInputFormatter.allow(RegExp(r'(^-?\d*)'))
+          ],
+          decoration: buildTextFieldDecoration(context).copyWith(
+            suffixIcon: GestureDetector(
+                    onTap: () =>
+                        textEditingController.text = initValue.value.toString(),
+                    child: const Icon(FeatherIcons.rotateCcw, size: 16))
+                .asMouseClickRegion,
           ),
         ),
-        Spacers.h10,
-        Expanded(
-          child: RangeAdjustableSlider(
-            max: initValue.value * 10,
-            min: 0,
-            allowsDecimal: false,
-            value: double.tryParse(textEditingController.text) ?? 0.0,
-            onChanged: (v) {
-              textEditingController.text = v.floor().toString();
-            },
+        RangeAdjustableSlider(
+          max: initValue.value * 10,
+          min: 0,
+          allowsDecimal: false,
+          value: double.tryParse(textEditingController.text) ?? 0.0,
+          onChanged: (v) {
+            textEditingController.text = v.floor().toString();
+          },
+        ),
+      ],
+    );
+  }
+}
+
+class DoubleDesigner extends HookWidget {
+  final double value;
+  final void Function(double) onValueChanged;
+  const DoubleDesigner({
+    required this.value,
+    required this.onValueChanged,
+    Key? key,
+  }) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    final initValue = useState(value);
+    final textEditingController = useTextEditingController(
+      text: value.toString(),
+    );
+    useEffect(() {
+      textEditingController.selection = TextSelection(
+        baseOffset: 0,
+        extentOffset: textEditingController.value.text.length,
+      );
+      textEditingController.addListener(() {
+        onValueChanged(
+            double.tryParse(textEditingController.value.text) ?? 0.0);
+      });
+    }, []);
+    return ResponsiveEvenRow(
+      children: [
+        TextField(
+          autofocus: true,
+          focusNode: useFocusNode(),
+          controller: textEditingController,
+          showCursor: true,
+          inputFormatters: [
+            FilteringTextInputFormatter.allow(RegExp(r'(^-?\d*\.?\d*)'))
+          ],
+          decoration: buildTextFieldDecoration(context).copyWith(
+            suffixIcon: GestureDetector(
+                    onTap: () =>
+                        textEditingController.text = initValue.value.toString(),
+                    child: const Icon(FeatherIcons.rotateCcw, size: 16))
+                .asMouseClickRegion,
           ),
+        ),
+        RangeAdjustableSlider(
+          max: initValue.value * 10,
+          min: 0,
+          allowsDecimal: false,
+          value: double.tryParse(textEditingController.text) ?? 0.0,
+          onChanged: (v) {
+            textEditingController.text = v.toString();
+          },
         ),
       ],
     );

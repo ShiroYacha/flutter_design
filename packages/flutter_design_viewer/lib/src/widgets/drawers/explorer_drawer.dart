@@ -56,6 +56,8 @@ class ExplorerDrawer extends HookConsumerWidget {
   }
 }
 
+final collapsedGroupUrisProvider = StateProvider.autoDispose((ref) => []);
+
 class PageGroup extends HookConsumerWidget {
   final ViewerGroupPage groupPage;
   const PageGroup({
@@ -108,34 +110,50 @@ class PageGroupNode extends HookConsumerWidget {
         ),
       ),
     );
+    final expandExplorerNodesByDefault = ref.watch(viewerStateProvider
+        .select((value) => value.expandExplorerNodesByDefault));
+    final collapsedGroupUris = ref.watch(collapsedGroupUrisProvider);
+    final collapsedGroupUrisNotifier =
+        ref.watch(collapsedGroupUrisProvider.notifier);
     return viewerPage.maybeMap(
-        group: (group) => ExpandablePanel(
-              key: Key(group.id),
-              controller: ExpandableController(
-                  initialExpanded: group.segments
-                      .skip(1)
-                      .any((s) => router.path.contains(s))),
-              theme: ExpandableThemeData(
-                hasIcon: group.children.isNotEmpty,
-                iconSize: 16,
-                iconColor: theme.colorScheme.onBackground,
-                iconPlacement: ExpandablePanelIconPlacement.right,
-                headerAlignment: ExpandablePanelHeaderAlignment.center,
-                expandIcon: Ionicons.chevron_forward_outline,
-                collapseIcon: Ionicons.chevron_down_outline,
-                tapBodyToCollapse: false,
-                tapHeaderToExpand: true,
-              ),
-              header: label,
-              collapsed: const SizedBox.shrink(),
-              expanded: Column(
-                children: group.children.fold(
-                  [],
-                  (previousValue, element) =>
-                      [...previousValue, PageGroupNode(viewerPage: element)],
-                ),
+        group: (group) {
+          final controller = ExpandableController(
+            initialExpanded: (expandExplorerNodesByDefault &&
+                    !collapsedGroupUris.contains(group.uri)) ||
+                group.uri == router.path,
+          );
+          controller.addListener(() {
+            if (!controller.expanded) {
+              collapsedGroupUrisNotifier.state.add(group.uri);
+            } else {
+              collapsedGroupUrisNotifier.state.remove(group.uri);
+            }
+          });
+          return ExpandablePanel(
+            key: Key(group.id),
+            controller: controller,
+            theme: ExpandableThemeData(
+              hasIcon: group.children.isNotEmpty,
+              iconSize: 16,
+              iconColor: theme.colorScheme.onBackground,
+              iconPlacement: ExpandablePanelIconPlacement.right,
+              headerAlignment: ExpandablePanelHeaderAlignment.center,
+              expandIcon: Ionicons.chevron_forward_outline,
+              collapseIcon: Ionicons.chevron_down_outline,
+              tapBodyToCollapse: false,
+              tapHeaderToExpand: true,
+            ),
+            header: label,
+            collapsed: const SizedBox.shrink(),
+            expanded: Column(
+              children: group.children.fold(
+                [],
+                (previousValue, element) =>
+                    [...previousValue, PageGroupNode(viewerPage: element)],
               ),
             ),
+          );
+        },
         orElse: () => LinkableClickableContainer(
               uri: Uri().resolve('#${viewerPage.uri}'),
               onTap: () {

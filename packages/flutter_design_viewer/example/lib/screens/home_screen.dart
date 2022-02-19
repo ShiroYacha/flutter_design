@@ -10,7 +10,6 @@ class HomeScreen extends StatelessWidget {
   final AppBar? appbar;
   const HomeScreen({
     required this.body,
-    // required this.appbar,
     this.appbar,
     Key? key,
   }) : super(key: key);
