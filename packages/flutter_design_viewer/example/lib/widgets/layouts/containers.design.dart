@@ -94,6 +94,8 @@ final generatedWidgetsLayoutsContainersResponsiveEvenRowPage =
         build: (context, factory) => ResponsiveEvenRow(
           childrenCount: factory.build(context, 'childrenCount'),
           widthThreshold: factory.build(context, 'widthThreshold'),
+          mainAxisSpacing: factory.build(context, 'mainAxisSpacing'),
+          crossAxisSpacing: factory.build(context, 'crossAxisSpacing'),
         ),
         fieldMetaDataset: const [
           FieldMetaData(
@@ -116,32 +118,61 @@ final generatedWidgetsLayoutsContainersResponsiveEvenRowPage =
             viewerInitValue: null,
             documentation: null,
           ),
+          FieldMetaData(
+            name: 'mainAxisSpacing',
+            type: double,
+            typeName: 'double',
+            isOptional: true,
+            defaultValue: 10.0,
+            defaultValueCode: '10.0',
+            viewerInitValue: null,
+            documentation: null,
+          ),
+          FieldMetaData(
+            name: 'crossAxisSpacing',
+            type: double,
+            typeName: 'double',
+            isOptional: true,
+            defaultValue: 10.0,
+            defaultValueCode: '10.0',
+            viewerInitValue: null,
+            documentation: null,
+          ),
         ],
       ),
       sourceCode: const ViewerSourceCode(
           location: 'package:viewer_example/widgets/layouts/containers.dart',
           code: '''
 /// Built from the following function 
-(context, factory) => ResponsiveEvenRow(childrenCount: factory.build(context, 'childrenCount'),widthThreshold: factory.build(context, 'widthThreshold'),)
+(context, factory) => ResponsiveEvenRow(childrenCount: factory.build(context, 'childrenCount'),widthThreshold: factory.build(context, 'widthThreshold'),mainAxisSpacing: factory.build(context, 'mainAxisSpacing'),crossAxisSpacing: factory.build(context, 'crossAxisSpacing'),)
 
 /// Widget
 class ResponsiveEvenRow extends StatelessWidget {
   final double widthThreshold;
   final int childrenCount;
+  final double mainAxisSpacing;
+  final double crossAxisSpacing;
   const ResponsiveEvenRow(
-      {required this.childrenCount, this.widthThreshold = 300.0, Key? key})
+      {required this.childrenCount,
+      this.widthThreshold = 300.0,
+      this.mainAxisSpacing = 10.0,
+      this.crossAxisSpacing = 10.0,
+      Key? key})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
       return StaggeredGrid.count(
+          axisDirection: AxisDirection.down,
           crossAxisCount:
               max((constraints.maxWidth / widthThreshold).floor(), 1),
+          crossAxisSpacing: crossAxisSpacing,
+          mainAxisSpacing: mainAxisSpacing,
           children: List.generate(
               childrenCount,
               (index) => Container(
-                  height: 100,
-                  color: Colors.primaries[index % Colors.primaries.length])));
+                  color: Colors.primaries[index % Colors.primaries.length],
+                  height: 100)));
     });
   }
 }

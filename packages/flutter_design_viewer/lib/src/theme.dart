@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'measures.dart';
 
-final _primaryColor = Colors.amber.shade600;
-final _primaryDarkColor = Colors.amber.shade400;
+final _primaryColor = Colors.amber.shade700;
+final _primaryDarkColor = Colors.amber.shade600;
 final _secondaryColor = Colors.teal.shade600;
 final _secondaryDarkColor = Colors.teal.shade400;
 const _backgroundLightest = Color(0xFFFAFAFA);

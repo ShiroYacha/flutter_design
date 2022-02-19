@@ -41,9 +41,13 @@ class SpacedRow extends StatelessWidget {
 class ResponsiveEvenRow extends StatelessWidget {
   final double widthThreshold;
   final int childrenCount;
+  final double mainAxisSpacing;
+  final double crossAxisSpacing;
   const ResponsiveEvenRow({
     required this.childrenCount,
     this.widthThreshold = 300.0,
+    this.mainAxisSpacing = 10.0,
+    this.crossAxisSpacing = 10.0,
     Key? key,
   }) : super(key: key);
 
@@ -51,12 +55,15 @@ class ResponsiveEvenRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
       return StaggeredGrid.count(
+        axisDirection: AxisDirection.down,
         crossAxisCount: max((constraints.maxWidth / widthThreshold).floor(), 1),
+        crossAxisSpacing: crossAxisSpacing,
+        mainAxisSpacing: mainAxisSpacing,
         children: List.generate(
           childrenCount,
           (index) => Container(
-            height: 100,
             color: Colors.primaries[index % Colors.primaries.length],
+            height: 100,
           ),
         ),
       );
