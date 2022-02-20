@@ -2,7 +2,6 @@ name: flutter_design_viewer
 description: Interactive design system viewer that allows you to visualize, design, debug your design system and create a portfolio for your brand.
 version: 0.0.10-pre+1
 homepage: https://flutterdesign.io/
-# publish_to: none
 
 environment:
   sdk: ">=2.15.1 <3.0.0"
@@ -12,9 +11,9 @@ dependencies:
   flutter:
     sdk: flutter
   # internal
-  # flutter_design: ^0.0.10-pre+1
-  flutter_design:
-    path: ../flutter_design
+  flutter_design: ^0.0.10-pre+1
+  # flutter_design:
+  #   path: ../flutter_design
   # framework
   flutter_hooks: ^0.18.2
   vrouter: ^1.2.0+21
