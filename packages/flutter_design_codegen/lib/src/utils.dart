@@ -1,9 +1,8 @@
 import 'package:analyzer/dart/constant/value.dart';
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
-import 'package:flutter_design_codegen/src/generators/design_generator.dart';
+import 'package:analyzer/dart/element/visitor.dart';
 import 'package:recase/recase.dart';
-import 'package:source_gen/source_gen.dart';
 
 bool hasAnnotation<T>(
   List<ElementAnnotation> metadata,
@@ -43,7 +42,10 @@ TResult? acceptAnnotationStringField<TAnnotation, TResult>(
 String buildClassPageFieldName(ClassElement element) =>
     'generated${ReCase(extractClassElementFolderNamespace(element, includeClassName: true).join('_')).pascalCase}Page';
 
-List<String> extractClassElementFolderNamespace(ClassElement element, {bool includeClassName = false}) {
+List<String> extractClassElementFolderNamespace(
+  ClassElement element, {
+  bool includeClassName = false,
+}) {
   // Retrieve class meta data
   final visitor = ModelVisitor();
   element.visitChildren(visitor);
@@ -55,96 +57,29 @@ List<String> extractClassElementFolderNamespace(ClassElement element, {bool incl
   final namespace =
       folderPath.contains('/') ? folderPath.split('/') : <String>[folderPath];
   namespace.add(clazz.source.shortName.replaceAll('.dart', ''));
-  if(includeClassName) {
+  if (includeClassName) {
     namespace.add(clazz.displayName);
   }
   return namespace;
 }
 
-Never throwUnsupported(FieldElement element, String message) =>
-    throw InvalidGenerationSourceError(
-      'Error with `@JsonKey` on the `${element.name}` field. $message',
-      element: element,
-    );
+class ModelVisitor extends SimpleElementVisitor {
+  late InterfaceType classType;
+  Map<String, FieldElement> fields = {};
+  Map<String, MethodElement> methods = {};
 
-/// Returns a literal value for [dartObject] if possible, otherwise throws
-/// an [InvalidGenerationSourceError] using [typeInformation] to describe
-/// the unsupported type.
-Object? literalForObject(
-  FieldElement element,
-  String fieldName,
-  DartObject dartObject,
-  Iterable<String> typeInformation,
-) {
-  if (dartObject.isNull) {
-    return null;
+  @override
+  void visitConstructorElement(ConstructorElement element) {
+    classType = element.returnType;
   }
 
-  final reader = ConstantReader(dartObject);
-
-  String? badType;
-  if (reader.isSymbol) {
-    badType = 'Symbol';
-  } else if (reader.isType) {
-    badType = 'Type';
-  } else if (dartObject.type is FunctionType) {
-    // TODO: Support calling function for the default value?
-    badType = 'Function';
-  } else if (!reader.isLiteral) {
-    badType = dartObject.type!.element!.name;
+  @override
+  void visitMethodElement(MethodElement element) {
+    methods[element.name] = element;
   }
 
-  if (badType != null) {
-    badType = typeInformation.followedBy([badType]).join(' > ');
-    throwUnsupported(
-      element,
-      '`$fieldName` is `$badType`, it must be a literal.',
-    );
+  @override
+  void visitFieldElement(FieldElement element) {
+    fields[element.name] = element;
   }
-
-  if (reader.isDouble || reader.isInt || reader.isString || reader.isBool) {
-    return reader.literalValue;
-  }
-
-  if (reader.isList) {
-    return [
-      for (var e in reader.listValue)
-        literalForObject(element, fieldName, e, [
-          ...typeInformation,
-          'List',
-        ])
-    ];
-  }
-
-  if (reader.isSet) {
-    return {
-      for (var e in reader.setValue)
-        literalForObject(element, fieldName, e, [
-          ...typeInformation,
-          'Set',
-        ])
-    };
-  }
-
-  if (reader.isMap) {
-    final mapTypeInformation = [
-      ...typeInformation,
-      'Map',
-    ];
-    return reader.mapValue.map(
-      (k, v) => MapEntry(
-        literalForObject(element, fieldName, k!, mapTypeInformation),
-        literalForObject(element, fieldName, v!, mapTypeInformation),
-      ),
-    );
-  }
-
-  badType = typeInformation.followedBy(['$dartObject']).join(' > ');
-
-  throwUnsupported(
-    element,
-    'The provided value is not supported: $badType. '
-    'This may be an error in package:json_serializable. '
-    'Please rerun your build with `--verbose` and file an issue.',
-  );
 }

@@ -13,7 +13,7 @@
 
 `flutter_design` contains packages to help you bootstrap your design system with a well defined framework and code generation/CLI toolchain. It also contains a powerful design system viewer to let you visualize and interact with your design system.
 
-**:rocket: Please checkout the [Official website](https://flutterdesign.io) for more information. :rocket: ** 
+> Please checkout the [Official website](https://flutterdesign.io) for more information. :rocket:
 
 There are mainly 3 packages you need to depend on:
 - Your production/design package:
@@ -103,7 +103,7 @@ Then you need to basically setup the design system viewer in your app using the 
 You can also customize the pages by creating static or dynamic contents. For more information, please check the docs.
 
 ```dart
-setPathUrlStrategy(); // Recommended to make history browser work better in web
+setPathUrlStrategy(); // Recommended to make history browsing work better in web
 runApp(
     DesignSystemViewerApp(
       settings: ViewerSettings(

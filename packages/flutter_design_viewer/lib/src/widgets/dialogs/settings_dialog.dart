@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_design/flutter_design.dart';
-import 'package:flutter_design_viewer/flutter_design_viewer.dart';
-import 'package:flutter_design_viewer/src/measures.dart';
-import 'package:flutter_design_viewer/src/widgets/items/buttons.dart';
-import 'package:flutter_design_viewer/src/widgets/items/containers.dart';
-import 'package:flutter_design_viewer/src/widgets/items/controls.dart';
-import 'package:flutter_design_viewer/src/widgets/items/images.dart';
-import 'package:flutter_design_viewer/src/widgets/scaffolds/root_scaffold.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:ionicons/ionicons.dart';
+
+import '../../../flutter_design_viewer.dart';
+import '../../measures.dart';
+import '../items/buttons.dart';
+import '../items/containers.dart';
+import '../items/controls.dart';
+import '../items/images.dart';
+import '../scaffolds/root_scaffold.dart';
 
 class SettingsDialog extends HookConsumerWidget {
   const SettingsDialog({Key? key}) : super(key: key);
@@ -42,11 +42,9 @@ class SettingsDialog extends HookConsumerWidget {
               children: [
                 Row(
                   children: [
-                    const ThemableGlyph(
-                      glyph: ViewerGlyphUnion.icon(
-                        icon: Ionicons.settings_outline,
-                        size: 24,
-                      ),
+                    const ThemableIcon(
+                      icon: Ionicons.settings_outline,
+                      size: 24,
                     ),
                     Spacers.h10,
                     Text(
@@ -55,11 +53,9 @@ class SettingsDialog extends HookConsumerWidget {
                     ),
                     const Expanded(child: SizedBox.shrink()),
                     if (showFullscreen)
-                      GlyphButton(
-                        glyph: const ViewerGlyphUnion.icon(
-                          icon: Ionicons.close,
-                          size: 24,
-                        ),
+                      ThemableIconButton(
+                        icon: Ionicons.close,
+                        size: 24,
                         onTap: Navigator.of(context).pop,
                       )
                   ],

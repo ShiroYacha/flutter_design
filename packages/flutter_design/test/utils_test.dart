@@ -15,7 +15,6 @@ void main() {
         'a/b/c/p2',
         'a/d/e/p3',
       ]));
-      // TODO: impl better traverse tests
       expect(nodes.length, 2);
       expect(nodes[0].id, 'a');
       expect(nodes[0].children.length, 2);

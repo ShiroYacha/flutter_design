@@ -402,12 +402,9 @@ class ShowDataBuilderToggle extends StatelessWidget {
         message: 'Show data builder',
         child: GestureDetector(
           onTap: () => onValueChanged(!value),
-          child: ThemableGlyph(
-            glyph: ViewerGlyphUnion.icon(
-              icon: Ionicons.server_outline,
-              color:
-                  value ? theme.primaryColor : theme.colorScheme.onBackground,
-            ),
+          child: ThemableIcon(
+            icon: Ionicons.server_outline,
+            color: value ? theme.primaryColor : theme.colorScheme.onBackground,
           ),
         ).asMouseClickRegion,
       ),
@@ -435,25 +432,14 @@ class SelectableDisplayModeGroup extends StatelessWidget {
         final color = selected ? theme.primaryColor : null;
         return Tooltip(
             message: e.name,
-            child: ThemableGlyph(
-              glyph: {
-                    DisplayMode.widgetOnly: ViewerGlyphUnion.icon(
-                      icon: FeatherIcons.box,
-                      color: color,
-                    ),
-                    DisplayMode.codeOnly: ViewerGlyphUnion.icon(
-                      icon: Ionicons.code_slash,
-                      color: color,
-                    ),
-                    DisplayMode.widgetCodeSideBySide: ViewerGlyphUnion.icon(
-                      icon: FeatherIcons.sidebar,
-                      color: color,
-                    ),
+            child: ThemableIcon(
+              icon: {
+                    DisplayMode.widgetOnly: FeatherIcons.box,
+                    DisplayMode.codeOnly: Ionicons.code_slash,
+                    DisplayMode.widgetCodeSideBySide: FeatherIcons.sidebar,
                   }[e] ??
-                  ViewerGlyphUnion.icon(
-                    icon: Ionicons.help_outline,
-                    color: color,
-                  ),
+                  Ionicons.help_outline,
+              color: color,
             ));
       },
     );
@@ -480,29 +466,15 @@ class SelectableViewModeGroup extends StatelessWidget {
         final color = selected ? theme.primaryColor : null;
         return Tooltip(
           message: e.name,
-          child: ThemableGlyph(
-            glyph: {
-                  ViewMode.canvas: ViewerGlyphUnion.icon(
-                    icon: Ionicons.easel_outline,
-                    color: color,
-                  ),
-                  ViewMode.devices: ViewerGlyphUnion.icon(
-                    icon: Ionicons.phone_portrait_outline,
-                    color: color,
-                  ),
-                  ViewMode.themes: ViewerGlyphUnion.icon(
-                    icon: Ionicons.partly_sunny_outline,
-                    color: color,
-                  ),
-                  ViewMode.locales: ViewerGlyphUnion.icon(
-                    icon: Ionicons.language,
-                    color: color,
-                  ),
+          child: ThemableIcon(
+            icon: {
+                  ViewMode.canvas: Ionicons.easel_outline,
+                  ViewMode.devices: Ionicons.phone_portrait_outline,
+                  ViewMode.themes: Ionicons.partly_sunny_outline,
+                  ViewMode.locales: Ionicons.language,
                 }[e] ??
-                ViewerGlyphUnion.icon(
-                  icon: Ionicons.help_outline,
-                  color: color,
-                ),
+                Ionicons.help_outline,
+            color: color,
           ),
         );
       },

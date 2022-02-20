@@ -162,12 +162,11 @@ class ResponsiveEvenRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
-      return StaggeredGrid.count(
+      return StaggeredGrid.extent(
           axisDirection: AxisDirection.down,
-          crossAxisCount:
-              max((constraints.maxWidth / widthThreshold).floor(), 1),
-          crossAxisSpacing: crossAxisSpacing,
+          maxCrossAxisExtent: widthThreshold,
           mainAxisSpacing: mainAxisSpacing,
+          crossAxisSpacing: crossAxisSpacing,
           children: List.generate(
               childrenCount,
               (index) => Container(

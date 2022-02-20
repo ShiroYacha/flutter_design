@@ -2,15 +2,15 @@ import 'dart:async';
 
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
-import 'package:analyzer/dart/element/visitor.dart';
 import 'package:build/build.dart';
 import 'package:dart_style/dart_style.dart';
 import 'package:flutter_design_annotation/flutter_design_annotation.dart';
-import 'package:flutter_design_codegen/src/utils.dart';
 import 'package:recase/recase.dart';
 import 'package:source_gen/source_gen.dart';
 
-// TODO: refactor this properly
+import '../utils.dart';
+
+/// Generate [ViewerDocumentPage] from @TDesign annotated classes.
 class DesignGenerator extends GeneratorForAnnotation<TDesign> {
   @override
   FutureOr<String> generateForAnnotatedElement(
@@ -50,15 +50,15 @@ class DesignGenerator extends GeneratorForAnnotation<TDesign> {
 final ${buildClassPageFieldName(element)} = ViewerDocumentPage(
   id: '${className.camelCase}',
   namespace: [${namespace.map((e) => "'$e'").join(',')}],
-  title: ${_readNullableAnnotation<String>(annotation, 'title') ?? "'$className'"},
-  subtitle: ${_readNullableAnnotation<String>(annotation, 'subtitle')},
-  description: ${_readNullableAnnotation<String>(annotation, 'description')},
+  title: ${_readNullableAnnotationStringValue(annotation, 'title') ?? "'$className'"},
+  subtitle: ${_readNullableAnnotationStringValue(annotation, 'subtitle')},
+  description: ${_readNullableAnnotationStringValue(annotation, 'description')},
   sections: [
     ViewerSectionUnion.component(
       id: 'anatomy',
       title: 'Anatomy',
       ctorName: '$className',
-      designLink: ${_readNullableAnnotation<String>(annotation, 'designLink')},
+      designLink: ${_readNullableAnnotationStringValue(annotation, 'designLink')},
       builder: ViewerWidgetBuilder(
         build: ${buildCodepair[0]},
         fieldMetaDataset: $fieldMetaDatasetCode,
@@ -110,14 +110,13 @@ ${await _extractSourceFromElement(
     );
   }
 
-  // TODO: improve this..
-  dynamic _readNullableAnnotation<T>(ConstantReader annotation, String field) {
+  String? _readNullableAnnotationStringValue(
+    ConstantReader annotation,
+    String field,
+  ) {
     final reader = annotation.read(field);
     if (reader.isNull) return null;
-    if (T == String) {
-      return "'''${reader.stringValue}'''";
-    }
-    return reader;
+    return "'''${reader.stringValue}'''";
   }
 
   dynamic _readNullableAnnotationMapValue(
@@ -188,7 +187,6 @@ ${await _extractSourceFromElement(
     final sb = StringBuffer('const [');
     for (final e in parameters.where((e) => e.name != 'key')) {
       // TODO: figure out how to deal with function signature...
-
       final type = e.type.element != null
           ? e.type.getDisplayString(withNullability: false)
           : 'Function';
@@ -210,36 +208,4 @@ FieldMetaData(
     sb.write(']');
     return sb.toString();
   }
-}
-
-class ModelVisitor extends SimpleElementVisitor {
-  late InterfaceType classType;
-  Map<String, FieldElement> fields = {};
-  Map<String, MethodElement> methods = {};
-
-  @override
-  void visitConstructorElement(ConstructorElement element) {
-    classType = element.returnType;
-  }
-
-  @override
-  void visitMethodElement(MethodElement element) {
-    methods[element.name] = element;
-  }
-
-  @override
-  void visitFieldElement(FieldElement element) {
-    fields[element.name] = element;
-  }
-}
-
-extension StringParsingExtension on String {
-  String prependLineReturnOn(String replacer) => replaceAll(
-        replacer,
-        '\n$replacer',
-      );
-  String prependLineReturnOnAll(Iterable<String> replacers) => replacers.fold(
-        this,
-        (pe, e) => pe.prependLineReturnOn(e),
-      );
 }

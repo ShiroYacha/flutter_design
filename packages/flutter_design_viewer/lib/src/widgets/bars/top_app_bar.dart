@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_design/flutter_design.dart';
-import 'package:flutter_design_viewer/flutter_design_viewer.dart';
-import 'package:flutter_design_viewer/src/measures.dart';
-import 'package:flutter_design_viewer/src/widgets/items/buttons.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:ionicons/ionicons.dart';
+
+import '../../../flutter_design_viewer.dart';
+import '../../measures.dart';
+import '../items/buttons.dart';
 
 class TopAppBar extends HookConsumerWidget {
   const TopAppBar({Key? key}) : super(key: key);
@@ -28,17 +28,17 @@ class TopAppBar extends HookConsumerWidget {
           const Expanded(child: SizedBox.shrink()),
           const SearchButton(),
           Spacers.h20,
-          GlyphButton(
-            glyph: const ViewerGlyphUnion.icon(icon: Ionicons.logo_github),
+          ThemableIconButton(
+            icon: Ionicons.logo_github,
             onTap: () {},
           ),
           Spacers.h10,
-          GlyphButton(
+          ThemableIconButton(
             onTap: () {},
-            glyph: const ViewerGlyphUnion.icon(icon: Ionicons.logo_twitter),
+            icon: Ionicons.logo_github,
           ),
           Spacers.h10,
-          GlyphButton(
+          ThemableIconButton(
             onTap: () {
               viewerStateNotifier.update(
                 (state) => state.copyWith(
@@ -47,7 +47,7 @@ class TopAppBar extends HookConsumerWidget {
               );
             },
             tooltip: viewerState.themeModeTooltip,
-            glyph: ViewerGlyphUnion.icon(icon: viewerState.themeModeIcon),
+            icon: viewerState.themeModeIcon,
           ),
         ],
       ),

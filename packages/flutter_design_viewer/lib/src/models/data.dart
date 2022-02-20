@@ -59,7 +59,6 @@ class DataBuilderRegistry {
       };
 }
 
-// TODO: can we make this immutable?
 class DataTemplateStringRawBuilder extends DataBuilder<String> {
   String raw;
   DataTemplateStringRawBuilder({
@@ -86,7 +85,6 @@ class DataTemplateStringRawBuilder extends DataBuilder<String> {
   String get name => 'Raw text';
 }
 
-// TODO: can we make this immutable?
 class DataTemplateStringLoremBuilder extends DataBuilder<String> {
   int length;
   int min;
@@ -119,7 +117,6 @@ class DataTemplateStringLoremBuilder extends DataBuilder<String> {
   String get name => 'Lorem ipsum';
 }
 
-// TODO: can we make this immutable?
 class DataTemplateWidgetPlaceholderBuilder extends DataBuilder<Widget> {
   Color color;
   Size size;
@@ -137,7 +134,6 @@ class DataTemplateWidgetPlaceholderBuilder extends DataBuilder<Widget> {
         theme: Theme.of(context),
         backgroundColor: color.withOpacity(0.8),
         foregroundColor: color,
-        featureCountsScale: 0.2,
       ),
     );
   }
@@ -157,7 +153,6 @@ class DataTemplateWidgetPlaceholderBuilder extends DataBuilder<Widget> {
   String get name => 'Widget placeholder';
 }
 
-// TODO: can we make this immutable?
 class DataTemplateWidgetPlaceholderListBuilder
     extends DataBuilder<List<Widget>> {
   Size size;
@@ -180,7 +175,6 @@ class DataTemplateWidgetPlaceholderListBuilder
             theme: Theme.of(context),
             backgroundColor: color.withOpacity(0.8),
             foregroundColor: color,
-            featureCountsScale: 0.2,
           ),
         );
       },
@@ -202,7 +196,6 @@ class DataTemplateWidgetPlaceholderListBuilder
   String get name => 'Widget placeholder list';
 }
 
-// TODO: can we make this immutable?
 class DataTemplateStubFunctionBuilder extends DataBuilder<Function> {
   DataTemplateStubFunctionBuilder();
 
@@ -223,7 +216,6 @@ class DataTemplateStubFunctionBuilder extends DataBuilder<Function> {
   String get name => 'Stub function';
 }
 
-// TODO: can we make this immutable?
 class DataTemplateNullBuilder extends DataBuilder<void> {
   DataTemplateNullBuilder();
 
@@ -244,7 +236,6 @@ class DataTemplateNullBuilder extends DataBuilder<void> {
   String get name => 'Null';
 }
 
-// TODO: can we make this immutable?
 class DataTemplateColorPickerBuilder extends DataBuilder<Color> {
   Color color;
 
@@ -272,7 +263,6 @@ class DataTemplateColorPickerBuilder extends DataBuilder<Color> {
   String get name => 'Color picker';
 }
 
-// TODO: can we make this immutable?
 class DataTemplateDoubleBuilder extends DataBuilder<double> {
   double value;
 
@@ -300,7 +290,6 @@ class DataTemplateDoubleBuilder extends DataBuilder<double> {
   String get name => 'Double picker';
 }
 
-// TODO: can we make this immutable?
 class DataTemplateIntBuilder extends DataBuilder<int> {
   int value;
 

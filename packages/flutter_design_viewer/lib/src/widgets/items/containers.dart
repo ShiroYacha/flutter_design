@@ -1,9 +1,9 @@
-import 'dart:math';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_design_viewer/src/measures.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+
+import '../../measures.dart';
 
 class KeyContainer extends StatelessWidget {
   final String? label;

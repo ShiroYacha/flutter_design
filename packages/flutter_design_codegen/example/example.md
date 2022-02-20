@@ -1,0 +1,1 @@
+This package itself contains only codegen builders. Please refer to [Official website](https://flutterdesign.io) for documentation and examples.

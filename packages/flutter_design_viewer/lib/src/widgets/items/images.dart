@@ -1,12 +1,10 @@
-import 'dart:math';
-
 import 'package:flag/flag.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_design/flutter_design.dart';
-import 'package:flutter_design_viewer/src/measures.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:patterns_canvas/patterns_canvas.dart';
+
+import '../../measures.dart';
 
 class PatternedBackground extends HookConsumerWidget {
   const PatternedBackground({
@@ -28,24 +26,20 @@ class PatternPainter extends CustomPainter {
   final ThemeData theme;
   final Color? backgroundColor;
   final Color? foregroundColor;
-  final double featureCountsScale;
 
   PatternPainter({
     required this.theme,
     this.backgroundColor,
     this.foregroundColor,
-    this.featureCountsScale = 0.25,
   });
 
   @override
   void paint(Canvas canvas, Size size) {
     final Rect rect = Rect.fromLTWH(0, 0, size.width, size.height);
 
-    /// TODO: implement our own fixed size dots ...
-    Dots(
+    FixedSizeDots(
       bgColor: backgroundColor ?? theme.scaffoldBackgroundColor,
       fgColor: foregroundColor ?? theme.disabledColor,
-      featuresCount: min((size.width * featureCountsScale).floor(), 250),
     ).paintOnRect(
       canvas,
       size,
@@ -59,12 +53,63 @@ class PatternPainter extends CustomPainter {
   bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }
 
-class ThemableGlyph extends StatelessWidget {
-  final ViewerGlyphUnion glyph;
+class FixedSizeDots extends Pattern {
+  @override
+  String get description => "Dots";
+
+  const FixedSizeDots({
+    required Color bgColor,
+    required Color fgColor,
+  }) : super(
+          patternType: PatternType.dots,
+          bgColor: bgColor,
+          fgColor: fgColor,
+        );
+
+  @override
+  void paintWithPattern(
+      Canvas canvas, double x, double y, double width, double height) {
+    var rectSide = 5;
+    var horizontalSquaresCount = width / rectSide;
+    var verticalSquaresCount = height / rectSide;
+    final paint = Paint()
+      ..style = PaintingStyle.fill
+      ..color = bgColor;
+    canvas.drawRect(Rect.fromLTWH(x, y, width, height), paint);
+
+    var dx = 0.0, dy = 0.0;
+    final dotsPath = Path();
+    for (var j = 0; j < verticalSquaresCount; j++) {
+      for (var i = 0; i < horizontalSquaresCount; i++) {
+        paint
+          ..style = PaintingStyle.fill
+          ..color = fgColor;
+        Rect oval = Rect.fromCircle(
+            center: Offset(x + dx + rectSide / 2, y + dy + rectSide / 2),
+            radius: rectSide / 4);
+        dotsPath.addOval(oval);
+        dx += rectSide;
+      }
+      dy += rectSide;
+      dx = 0;
+    }
+    paint
+      ..style = PaintingStyle.fill
+      ..color = fgColor;
+    canvas.drawPath(dotsPath, paint);
+  }
+}
+
+class ThemableIcon extends StatelessWidget {
+  final IconData icon;
+  final double size;
+  final Color? color;
   final bool useTheme;
 
-  const ThemableGlyph({
-    required this.glyph,
+  const ThemableIcon({
+    required this.icon,
+    this.size = 16,
+    this.color,
     this.useTheme = true,
     Key? key,
   }) : super(key: key);
@@ -72,14 +117,10 @@ class ThemableGlyph extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return glyph.when(
-      icon: (icon, color, size) => Icon(
-        icon,
-        size: size,
-        color: color ?? (useTheme ? theme.colorScheme.onBackground : null),
-      ),
-      image: (image, color, size) => ThemableImage(
-          uri: image, width: size, height: size, useTheme: false, color: color),
+    return Icon(
+      icon,
+      size: size,
+      color: color ?? (useTheme ? theme.colorScheme.onBackground : null),
     );
   }
 }
@@ -103,7 +144,6 @@ class ThemableImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: add support to network images?
     if (uri.startsWith('http') || !uri.contains('.')) {
       throw UnimplementedError();
     }

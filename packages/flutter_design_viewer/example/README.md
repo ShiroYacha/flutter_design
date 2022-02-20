@@ -1,16 +1,7 @@
-# example
+Checkout the generated viewer app  https://flutter-design-7b479.web.app/ using the [example code](https://github.com/ShiroYacha/flutter_design/tree/main/packages/flutter_design_viewer/example). 
 
-A new Flutter project.
+<p align="center">
+  <img src="https://github.com/ShiroYacha/flutter_design/blob/main/assets/branding/screenshot_readme.jpg?raw=true">
+</p>
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+> Please refer to [Official website](https://flutterdesign.io) for documentation and examples.

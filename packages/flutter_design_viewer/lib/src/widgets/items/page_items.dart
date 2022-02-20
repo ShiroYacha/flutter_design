@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_design/flutter_design.dart';
+import 'package:flutter_design_viewer/flutter_design_viewer.dart';
 import 'package:flutter_design_viewer/src/measures.dart';
 import 'package:flutter_design_viewer/src/widgets/items/text.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
@@ -133,6 +134,8 @@ class ComponentSection extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     _scrollIntoViewIfUrlEndsWithId(context, component.id);
+    final widgetDisplayHeight =
+        ref.watch(viewerSettingsProvider.select((v) => v.widgetDisplayHeight));
     return Paddings.vertical20(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -146,9 +149,9 @@ class ComponentSection extends HookConsumerWidget {
             overrides: [
               viewerComponentSectionProvider.overrideWithValue(component),
             ],
-            child: const ComponentFramePanel(
-              widgetDisplayHeight: 500.0,
-            ), //TODO: configurable
+            child: ComponentFramePanel(
+              widgetDisplayHeight: widgetDisplayHeight,
+            ),
           ),
         ],
       ),
@@ -185,7 +188,6 @@ class ParagraphSection extends HookConsumerWidget {
                   ...p,
                   e.map(
                     text: (text) => const SizedBox.shrink(),
-                    glyph: (glyph) => const SizedBox.shrink(),
                     link: (link) => const SizedBox.shrink(),
                     image: (image) => ViewerImageDisplay(item: image),
                     widget: (widget) => const SizedBox.shrink(),

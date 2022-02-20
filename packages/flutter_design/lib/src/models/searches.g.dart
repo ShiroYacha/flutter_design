@@ -15,8 +15,6 @@ _$_SearchResultItem _$$_SearchResultItemFromJson(Map<String, dynamic> json) =>
       score: json['score'] as int,
       title: json['title'] as String,
       subtitle: json['subtitle'] as String?,
-      labelHighlightStart: json['labelHighlightStart'] as int,
-      labelHighlightEnd: json['labelHighlightEnd'] as int,
       uri: json['uri'] as String,
     );
 
@@ -28,8 +26,6 @@ Map<String, dynamic> _$$_SearchResultItemToJson(_$_SearchResultItem instance) =>
       'score': instance.score,
       'title': instance.title,
       'subtitle': instance.subtitle,
-      'labelHighlightStart': instance.labelHighlightStart,
-      'labelHighlightEnd': instance.labelHighlightEnd,
       'uri': instance.uri,
     };
 
@@ -50,5 +46,4 @@ const _$SearchResultItemTypeEnumMap = {
 const _$SearchResultItemPageTypeEnumMap = {
   SearchResultItemPageType.document: 'document',
   SearchResultItemPageType.component: 'component',
-  SearchResultItemPageType.prototype: 'prototype',
 };

@@ -17,6 +17,7 @@ void main() {
           'light': ThemeData.light(),
           'dark': ThemeData.dark(),
         },
+        widgetDisplayHeight: 500,
       ),
       pageGroups: [
         ...buildGroupedPageTrees(docPages),

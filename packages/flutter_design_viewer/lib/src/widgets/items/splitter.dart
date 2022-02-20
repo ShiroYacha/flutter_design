@@ -29,6 +29,7 @@ double degToRad(double deg) => deg * (math.pi / 180.0);
 ///
 /// [initialFractions] defines how much space to give each child when building
 /// this widget.
+// ignore: must_be_immutable
 class Split extends StatefulWidget {
   /// Builds a split oriented along [axis].
   Split({

@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_design/flutter_design.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -54,11 +52,11 @@ class ResponsiveEvenRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
-      return StaggeredGrid.count(
+      return StaggeredGrid.extent(
         axisDirection: AxisDirection.down,
-        crossAxisCount: max((constraints.maxWidth / widthThreshold).floor(), 1),
-        crossAxisSpacing: crossAxisSpacing,
+        maxCrossAxisExtent: widthThreshold,
         mainAxisSpacing: mainAxisSpacing,
+        crossAxisSpacing: crossAxisSpacing,
         children: List.generate(
           childrenCount,
           (index) => Container(

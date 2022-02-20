@@ -78,40 +78,7 @@ class DesignSystemViewerApp extends HookConsumerWidget {
 
   Map<Type, List<DataBuilderCreator>> _mergeDataBuilders(
       Map<Type, List<DataBuilderCreator>> dataBuilders) {
-    /// TODO: this boilerplate code could be generated?
-    final defaultBuilders = <Type, List<DataBuilderCreator>>{
-      String: [
-        ([d]) => d != null
-            ? DataTemplateStringRawBuilder(raw: d)
-            : DataTemplateStringRawBuilder(),
-        ([d]) => DataTemplateStringLoremBuilder(),
-      ],
-      Widget: [
-        ([d]) => DataTemplateWidgetPlaceholderBuilder(),
-      ],
-      List<Widget>: [
-        ([d]) => DataTemplateWidgetPlaceholderListBuilder(),
-      ],
-      Function: [
-        ([d]) => DataTemplateStubFunctionBuilder(),
-      ],
-      Color: [
-        ([d]) => d != null
-            ? DataTemplateColorPickerBuilder(color: d)
-            : DataTemplateColorPickerBuilder(),
-      ],
-      double: [
-        ([d]) => d != null
-            ? DataTemplateDoubleBuilder(value: d)
-            : DataTemplateDoubleBuilder(),
-      ],
-      int: [
-        ([d]) => d != null
-            ? DataTemplateIntBuilder(value: d)
-            : DataTemplateIntBuilder(),
-      ],
-    };
-    return mergeMaps(defaultBuilders, dataBuilders, value: (e1, e2) {
+    return mergeMaps(_defaultBuilders, dataBuilders, value: (e1, e2) {
       // The user provided data builders will have priority
       return [
         ...e2,
@@ -236,7 +203,7 @@ class DesignSystemViewerRouter extends HookConsumerWidget {
             (e) => VWidget(
               path: e.uri,
 
-              /// TODO: find a better solution, currently both ID and name is needed
+              /// Currently both ID and name is needed
               /// - id: to observe and save current path
               /// - name: to show as tab name
               name: '${e.uri}$routePathNameSeparator${e.title}',
@@ -258,3 +225,35 @@ class DesignSystemViewerRouter extends HookConsumerWidget {
     ];
   }
 }
+
+final _defaultBuilders = <Type, List<DataBuilderCreator>>{
+  String: [
+    ([d]) => d != null
+        ? DataTemplateStringRawBuilder(raw: d)
+        : DataTemplateStringRawBuilder(),
+    ([d]) => DataTemplateStringLoremBuilder(),
+  ],
+  Widget: [
+    ([d]) => DataTemplateWidgetPlaceholderBuilder(),
+  ],
+  List<Widget>: [
+    ([d]) => DataTemplateWidgetPlaceholderListBuilder(),
+  ],
+  Function: [
+    ([d]) => DataTemplateStubFunctionBuilder(),
+  ],
+  Color: [
+    ([d]) => d != null
+        ? DataTemplateColorPickerBuilder(color: d)
+        : DataTemplateColorPickerBuilder(),
+  ],
+  double: [
+    ([d]) => d != null
+        ? DataTemplateDoubleBuilder(value: d)
+        : DataTemplateDoubleBuilder(),
+  ],
+  int: [
+    ([d]) =>
+        d != null ? DataTemplateIntBuilder(value: d) : DataTemplateIntBuilder(),
+  ],
+};

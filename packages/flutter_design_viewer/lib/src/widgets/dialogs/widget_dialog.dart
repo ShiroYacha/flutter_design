@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_design_viewer/src/measures.dart';
 import 'package:flutter_design_viewer/src/widgets/items/frames.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+final componentFrameToolbarSizeProvider =
+    StateProvider<Size>((ref) => Size.zero);
 
 class WidgetDialog extends HookConsumerWidget {
   const WidgetDialog({Key? key}) : super(key: key);
@@ -9,8 +13,8 @@ class WidgetDialog extends HookConsumerWidget {
     final theme = Theme.of(context);
     final mediaQuery = MediaQuery.of(context);
     final fullHeight = mediaQuery.size.height;
-    // TODO: handle wrap size on smaller screens
-    const spacing = 120;
+    final componentFrameToolbarSize =
+        ref.watch(componentFrameToolbarSizeProvider);
     return AlertDialog(
       insetPadding: EdgeInsets.zero,
       contentPadding: EdgeInsets.zero,
@@ -20,10 +24,10 @@ class WidgetDialog extends HookConsumerWidget {
       ),
       content: SizedBox(
         width: mediaQuery.size.width,
-        height: fullHeight + spacing,
         child: ComponentFramePanel(
-          key: UniqueKey(),
-          widgetDisplayHeight: fullHeight - spacing,
+          widgetDisplayHeight: fullHeight -
+              componentFrameToolbarSize.height -
+              SpacingDesign.s10 * 2,
         ),
       ),
     );

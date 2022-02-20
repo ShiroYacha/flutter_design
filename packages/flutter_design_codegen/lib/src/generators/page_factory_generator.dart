@@ -2,9 +2,7 @@ import 'package:build/build.dart';
 import 'package:dart_style/dart_style.dart';
 import 'package:flutter_design_annotation/flutter_design_annotation.dart';
 import 'package:flutter_design_codegen/src/utils.dart';
-// ignore: depend_on_referenced_packages
 import 'package:glob/glob.dart';
-// ignore: depend_on_referenced_packages
 import 'package:path/path.dart' as p;
 import 'package:source_gen/source_gen.dart';
 
@@ -25,7 +23,7 @@ class PageFactoryBuilder implements Builder {
 
   @override
   Future<void> build(BuildStep buildStep) async {
-    // fetch meta data
+    // Fetch meta data
     final fields = <String>[];
     final importPackages = <String>[];
     await for (final input in buildStep.findAssets(Glob('lib/**/*.dart'))) {
@@ -37,7 +35,7 @@ class PageFactoryBuilder implements Builder {
       for (final clazz in classesInLibrary) {
         if (!hasAnnotation<TDesign>(clazz.metadata)) continue;
         fields.add(buildClassPageFieldName(clazz));
-        // parse import info
+        // Parse import info
         final packageUri = clazz.source.uri.path.substring(
           clazz.source.uri.path.indexOf('/') + 1,
         );
@@ -48,7 +46,7 @@ class PageFactoryBuilder implements Builder {
     }
     final dedupFields = Set.from(fields).toList();
 
-    // generate code
+    // Generate code
     if (dedupFields.isNotEmpty) {
       final sb = StringBuffer();
       for (final field in dedupFields) {

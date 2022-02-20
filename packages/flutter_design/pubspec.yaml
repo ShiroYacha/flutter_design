@@ -1,6 +1,6 @@
 name: flutter_design
-description: A complete framework with tools to help you bootstrap your design system. It also contains a powerful design system viewer to let you visualize and interact with your design system.
-version: 0.0.10-pre
+description: A complete framework with tools to help you bootstrap your design system.
+version: 0.0.10-pre+1
 homepage: https://flutterdesign.io/
 # publish_to: none
 
@@ -12,7 +12,7 @@ dependencies:
   flutter:
     sdk: flutter
   # internal
-  # flutter_design_annotation: ^0.0.10-pre
+  # flutter_design_annotation: ^0.0.10-pre+1
   flutter_design_annotation:
     path: ../flutter_design_annotation
   # data

@@ -439,11 +439,13 @@ class _$ViewerSettingsTearOff {
   _ViewerSettigns call(
       {required Map<String, Locale> enabledLocales,
       required Map<String, ThemeData> enabledThemes,
-      Breakpoints breakpoints = const Breakpoints()}) {
+      Breakpoints breakpoints = const Breakpoints(),
+      double widgetDisplayHeight = 500.0}) {
     return _ViewerSettigns(
       enabledLocales: enabledLocales,
       enabledThemes: enabledThemes,
       breakpoints: breakpoints,
+      widgetDisplayHeight: widgetDisplayHeight,
     );
   }
 }
@@ -457,6 +459,7 @@ mixin _$ViewerSettings {
   Map<String, ThemeData> get enabledThemes =>
       throw _privateConstructorUsedError;
   Breakpoints get breakpoints => throw _privateConstructorUsedError;
+  double get widgetDisplayHeight => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ViewerSettingsCopyWith<ViewerSettings> get copyWith =>
@@ -471,7 +474,8 @@ abstract class $ViewerSettingsCopyWith<$Res> {
   $Res call(
       {Map<String, Locale> enabledLocales,
       Map<String, ThemeData> enabledThemes,
-      Breakpoints breakpoints});
+      Breakpoints breakpoints,
+      double widgetDisplayHeight});
 
   $BreakpointsCopyWith<$Res> get breakpoints;
 }
@@ -490,6 +494,7 @@ class _$ViewerSettingsCopyWithImpl<$Res>
     Object? enabledLocales = freezed,
     Object? enabledThemes = freezed,
     Object? breakpoints = freezed,
+    Object? widgetDisplayHeight = freezed,
   }) {
     return _then(_value.copyWith(
       enabledLocales: enabledLocales == freezed
@@ -504,6 +509,10 @@ class _$ViewerSettingsCopyWithImpl<$Res>
           ? _value.breakpoints
           : breakpoints // ignore: cast_nullable_to_non_nullable
               as Breakpoints,
+      widgetDisplayHeight: widgetDisplayHeight == freezed
+          ? _value.widgetDisplayHeight
+          : widgetDisplayHeight // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 
@@ -525,7 +534,8 @@ abstract class _$ViewerSettignsCopyWith<$Res>
   $Res call(
       {Map<String, Locale> enabledLocales,
       Map<String, ThemeData> enabledThemes,
-      Breakpoints breakpoints});
+      Breakpoints breakpoints,
+      double widgetDisplayHeight});
 
   @override
   $BreakpointsCopyWith<$Res> get breakpoints;
@@ -547,6 +557,7 @@ class __$ViewerSettignsCopyWithImpl<$Res>
     Object? enabledLocales = freezed,
     Object? enabledThemes = freezed,
     Object? breakpoints = freezed,
+    Object? widgetDisplayHeight = freezed,
   }) {
     return _then(_ViewerSettigns(
       enabledLocales: enabledLocales == freezed
@@ -561,6 +572,10 @@ class __$ViewerSettignsCopyWithImpl<$Res>
           ? _value.breakpoints
           : breakpoints // ignore: cast_nullable_to_non_nullable
               as Breakpoints,
+      widgetDisplayHeight: widgetDisplayHeight == freezed
+          ? _value.widgetDisplayHeight
+          : widgetDisplayHeight // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
@@ -571,7 +586,8 @@ class _$_ViewerSettigns implements _ViewerSettigns {
   const _$_ViewerSettigns(
       {required this.enabledLocales,
       required this.enabledThemes,
-      this.breakpoints = const Breakpoints()});
+      this.breakpoints = const Breakpoints(),
+      this.widgetDisplayHeight = 500.0});
 
   @override
   final Map<String, Locale> enabledLocales;
@@ -580,10 +596,13 @@ class _$_ViewerSettigns implements _ViewerSettigns {
   @JsonKey()
   @override
   final Breakpoints breakpoints;
+  @JsonKey()
+  @override
+  final double widgetDisplayHeight;
 
   @override
   String toString() {
-    return 'ViewerSettings(enabledLocales: $enabledLocales, enabledThemes: $enabledThemes, breakpoints: $breakpoints)';
+    return 'ViewerSettings(enabledLocales: $enabledLocales, enabledThemes: $enabledThemes, breakpoints: $breakpoints, widgetDisplayHeight: $widgetDisplayHeight)';
   }
 
   @override
@@ -596,7 +615,9 @@ class _$_ViewerSettigns implements _ViewerSettigns {
             const DeepCollectionEquality()
                 .equals(other.enabledThemes, enabledThemes) &&
             const DeepCollectionEquality()
-                .equals(other.breakpoints, breakpoints));
+                .equals(other.breakpoints, breakpoints) &&
+            const DeepCollectionEquality()
+                .equals(other.widgetDisplayHeight, widgetDisplayHeight));
   }
 
   @override
@@ -604,7 +625,8 @@ class _$_ViewerSettigns implements _ViewerSettigns {
       runtimeType,
       const DeepCollectionEquality().hash(enabledLocales),
       const DeepCollectionEquality().hash(enabledThemes),
-      const DeepCollectionEquality().hash(breakpoints));
+      const DeepCollectionEquality().hash(breakpoints),
+      const DeepCollectionEquality().hash(widgetDisplayHeight));
 
   @JsonKey(ignore: true)
   @override
@@ -616,7 +638,8 @@ abstract class _ViewerSettigns implements ViewerSettings {
   const factory _ViewerSettigns(
       {required Map<String, Locale> enabledLocales,
       required Map<String, ThemeData> enabledThemes,
-      Breakpoints breakpoints}) = _$_ViewerSettigns;
+      Breakpoints breakpoints,
+      double widgetDisplayHeight}) = _$_ViewerSettigns;
 
   @override
   Map<String, Locale> get enabledLocales;
@@ -624,6 +647,8 @@ abstract class _ViewerSettigns implements ViewerSettings {
   Map<String, ThemeData> get enabledThemes;
   @override
   Breakpoints get breakpoints;
+  @override
+  double get widgetDisplayHeight;
   @override
   @JsonKey(ignore: true)
   _$ViewerSettignsCopyWith<_ViewerSettigns> get copyWith =>

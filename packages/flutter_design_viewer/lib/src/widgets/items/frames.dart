@@ -204,11 +204,9 @@ class CompontentFrameCodeDisplay extends HookConsumerWidget {
           ),
           Align(
             alignment: Alignment.topRight,
-            child: GlyphButton(
-              glyph: const ViewerGlyphUnion.icon(
-                icon: Ionicons.copy_outline,
-                size: 20,
-              ),
+            child: ThemableIconButton(
+              icon: Ionicons.copy_outline,
+              size: 20,
               padding: SpacingDesign.paddingAll10,
               onTap: () {
                 FlutterClipboard.copy(sourceCode.code)
@@ -264,10 +262,10 @@ class CompontentFrameDataDisplay extends HookConsumerWidget {
                                 TextSpan(
                                   children: [
                                     const WidgetSpan(
-                                        child: ThemableGlyph(
-                                      glyph: ViewerGlyphUnion.icon(
-                                          icon: Ionicons.cube_outline),
-                                    )),
+                                      child: ThemableIcon(
+                                        icon: Ionicons.cube_outline,
+                                      ),
+                                    ),
                                     const WidgetSpan(child: Spacers.h6),
                                     TextSpan(
                                         text:
@@ -290,7 +288,7 @@ class CompontentFrameDataDisplay extends HookConsumerWidget {
                             ),
                           ),
                         ),
-                        Spacers.v20,
+                        Spacers.v10,
                       ]).toList(),
             ),
     );
@@ -339,6 +337,28 @@ class ComponentFrameToolbar extends HookConsumerWidget {
     final fullscreenMode = ref.watch(fullscreenModeProvider);
     final designLink = ref.watch(
         viewerComponentSectionProvider.select((value) => value.designLink));
+
+    /// Measure size and notify dialog if in full screen mode
+    ///
+    /// Remark: it's okay to do this all the time as if the screensize changes,
+    /// the widget will need to be run build anyway (e.g. when resizing a window)
+    ///
+    if (fullscreenMode) {
+      final componentFrameToolbarSize =
+          ref.watch(componentFrameToolbarSizeProvider);
+      final componentFrameToolbarSizeNotifier =
+          ref.watch(componentFrameToolbarSizeProvider.notifier);
+      WidgetsBinding.instance?.addPostFrameCallback((timestamp) {
+        final size =
+            (context.findRenderObject() as RenderBox?)?.size ?? Size.zero;
+        Future.delayed(const Duration(milliseconds: 500), () {
+          if (componentFrameToolbarSize != size) {
+            componentFrameToolbarSizeNotifier.update((state) => size);
+          }
+        });
+      });
+    }
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -378,11 +398,7 @@ class ComponentFrameToolbar extends HookConsumerWidget {
                   }
                 },
                 child: const SelectableContainer(
-                  child: ThemableGlyph(
-                    glyph: ViewerGlyphUnion.icon(
-                      icon: Ionicons.link,
-                    ),
-                  ),
+                  child: ThemableIcon(icon: Ionicons.link),
                 ),
               ),
             FullScreenButton(fullscreenMode: fullscreenMode),
@@ -442,13 +458,11 @@ class FullScreenButton extends HookConsumerWidget {
               );
             }
           },
-          child: ThemableGlyph(
-            glyph: ViewerGlyphUnion.icon(
-              icon: fullscreenMode
-                  ? Ionicons.contract_outline
-                  : Ionicons.expand_outline,
-              color: theme.colorScheme.onBackground,
-            ),
+          child: ThemableIcon(
+            icon: fullscreenMode
+                ? Ionicons.contract_outline
+                : Ionicons.expand_outline,
+            color: theme.colorScheme.onBackground,
           ),
         ).asMouseClickRegion,
       ),
@@ -661,7 +675,6 @@ class EmbeddedAppRouterDelegate extends RouterDelegate<Object>
   }
 
   @override
-  // TODO: implement proper navigatorKey
   GlobalKey<NavigatorState>? get navigatorKey => GlobalKey<NavigatorState>();
 
   @override
@@ -865,7 +878,6 @@ class DeviceEventSyncContainer extends HookConsumerWidget {
           element,
         );
       } on Exception catch (e) {
-        // TODO
         // ignore: avoid_print
         print(e);
       }

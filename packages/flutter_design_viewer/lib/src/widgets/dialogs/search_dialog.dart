@@ -4,18 +4,19 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_design/flutter_design.dart';
-import 'package:flutter_design_viewer/src/measures.dart';
-import 'package:flutter_design_viewer/src/services/search_service.dart';
-import 'package:flutter_design_viewer/src/widgets/items/buttons.dart';
-import 'package:flutter_design_viewer/src/widgets/items/containers.dart';
-import 'package:flutter_design_viewer/src/widgets/items/images.dart';
-import 'package:flutter_design_viewer/src/widgets/scaffolds/root_scaffold.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:vrouter/vrouter.dart';
+
+import '../../measures.dart';
+import '../../services/search_service.dart';
+import '../items/buttons.dart';
+import '../items/containers.dart';
+import '../items/images.dart';
+import '../scaffolds/root_scaffold.dart';
 
 final currentSearchResultItemIndexProvider =
     StateProvider.autoDispose<int>((ref) => 0);
@@ -92,9 +93,7 @@ class SearchDialog extends HookConsumerWidget {
               Navigator.of(context).pop();
             }
             if (value.logicalKey == LogicalKeyboardKey.enter) {
-              Navigator.of(context).pop();
-              VRouter.of(context).to(
-                  items[ref.read(currentSearchResultItemIndexProvider)].uri);
+              _popAndNavigateToCurrentItem(context, items, ref);
             }
           }
         },
@@ -117,10 +116,8 @@ class SearchDialog extends HookConsumerWidget {
                         border: const OutlineInputBorder(),
                         hintText: 'Search for anything ...',
                         suffixIcon: query.value.isNotEmpty
-                            ? GlyphButton(
-                                glyph: const ViewerGlyphUnion.icon(
-                                  icon: Ionicons.close,
-                                ),
+                            ? ThemableIconButton(
+                                icon: Ionicons.close,
                                 iconOnly: true,
                                 onTap: () {
                                   textEditingController.clear();
@@ -129,6 +126,9 @@ class SearchDialog extends HookConsumerWidget {
                             : null,
                       ),
                       controller: textEditingController,
+                      onSubmitted: (text) {
+                        _popAndNavigateToCurrentItem(context, items, ref);
+                      },
                     ),
                   ),
                   if (showFullscreen) ...[
@@ -212,6 +212,16 @@ class SearchDialog extends HookConsumerWidget {
       ),
     );
   }
+
+  void _popAndNavigateToCurrentItem(
+    BuildContext context,
+    List<SearchResultItem> items,
+    WidgetRef ref,
+  ) {
+    Navigator.of(context).pop();
+    VRouter.of(context)
+        .to(items[ref.read(currentSearchResultItemIndexProvider)].uri);
+  }
 }
 
 class SearchResultEntry extends HookConsumerWidget {
@@ -254,19 +264,17 @@ class SearchResultEntry extends HookConsumerWidget {
               horizontal: SpacingDesign.s16, vertical: SpacingDesign.s10),
           child: Row(
             children: [
-              ThemableGlyph(
-                glyph: ViewerGlyphUnion.icon(
-                  icon: {
-                        SearchResultItemType.page: Ionicons.document_outline,
-                        SearchResultItemType.section: FeatherIcons.hash,
-                        SearchResultItemType.content: Ionicons.menu_outline,
-                        SearchResultItemType.recent: Ionicons.time_outline,
-                        SearchResultItemType.favorite: Ionicons.star_outline,
-                      }[item.type] ??
-                      FeatherIcons.box,
-                  size: 24,
-                  color: foreground,
-                ),
+              ThemableIcon(
+                icon: {
+                      SearchResultItemType.page: Ionicons.document_outline,
+                      SearchResultItemType.section: FeatherIcons.hash,
+                      SearchResultItemType.content: Ionicons.menu_outline,
+                      SearchResultItemType.recent: Ionicons.time_outline,
+                      SearchResultItemType.favorite: Ionicons.star_outline,
+                    }[item.type] ??
+                    FeatherIcons.box,
+                size: 24,
+                color: foreground,
               ),
               Spacers.h10,
               Expanded(
@@ -282,24 +290,22 @@ class SearchResultEntry extends HookConsumerWidget {
                       Text(
                         item.subtitle!,
                         style: theme.textTheme.caption
-                            ?.copyWith(color: foreground),
+                            ?.copyWith(color: foreground.withOpacity(0.8)),
                       ),
                   ],
                 ),
               ),
               const SizedBox(height: 40), // Fixed list minimum hight
               if (item.context == SearchResultContext.recent)
-                GlyphButton(
-                  glyph: ViewerGlyphUnion.icon(
-                    icon: Ionicons.star_outline,
-                    color: foreground,
-                  ),
+                ThemableIconButton(
+                  icon: Ionicons.star_outline,
+                  color: foreground,
                   onTap: () {},
                 ),
               Spacers.h3,
-              GlyphButton(
-                glyph: ViewerGlyphUnion.icon(
-                    icon: Ionicons.close, color: foreground),
+              ThemableIconButton(
+                icon: Ionicons.close,
+                color: foreground,
                 onTap: () {},
               ),
             ],

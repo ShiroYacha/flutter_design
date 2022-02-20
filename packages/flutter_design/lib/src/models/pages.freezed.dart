@@ -56,9 +56,17 @@ const $ViewerPageUnion = _$ViewerPageUnionTearOff();
 
 /// @nodoc
 mixin _$ViewerPageUnion {
+  /// Id of the page.
   String get id => throw _privateConstructorUsedError;
+
+  /// Namespace describing the hierarchical structure of the page.
+  /// It which consists of a list of `id`s from the root to the parent.
   List<String> get namespace => throw _privateConstructorUsedError;
+
+  /// Title of the page.
   String get title => throw _privateConstructorUsedError;
+
+  /// Description of the page.
   String? get description => throw _privateConstructorUsedError;
 
   @optionalTypeArgs
@@ -249,15 +257,26 @@ class _$ViewerGroupPage extends ViewerGroupPage with DiagnosticableTreeMixin {
       : super._();
 
   @override
+
+  /// Id of the page.
   final String id;
   @override
+
+  /// Namespace describing the hierarchical structure of the page.
+  /// It which consists of a list of `id`s from the root to the parent.
   final List<String> namespace;
   @override
+
+  /// Title of the page.
   final String title;
   @override
+
+  /// Description of the page.
   final String? description;
   @JsonKey()
   @override
+
+  /// List of children pages.
   final List<ViewerPageUnion> children;
 
   @override
@@ -404,13 +423,24 @@ abstract class ViewerGroupPage extends ViewerPageUnion {
   const ViewerGroupPage._() : super._();
 
   @override
+
+  /// Id of the page.
   String get id;
   @override
+
+  /// Namespace describing the hierarchical structure of the page.
+  /// It which consists of a list of `id`s from the root to the parent.
   List<String> get namespace;
   @override
+
+  /// Title of the page.
   String get title;
   @override
+
+  /// Description of the page.
   String? get description;
+
+  /// List of children pages.
   List<ViewerPageUnion> get children;
   @override
   @JsonKey(ignore: true)
@@ -497,17 +527,30 @@ class _$ViewerDocumentPage extends ViewerDocumentPage
       : super._();
 
   @override
+
+  /// Id of the page.
   final String id;
   @override
+
+  /// Namespace describing the hierarchical structure of the page.
+  /// It which consists of a list of `id`s from the root to the parent.
   final List<String> namespace;
   @override
+
+  /// Title of the page.
   final String title;
   @override
+
+  /// Subtitle of the page.
   final String? subtitle;
   @override
+
+  /// Description of the page.
   final String? description;
   @JsonKey()
   @override
+
+  /// List of children sections.
   final List<ViewerSectionUnion> sections;
 
   @override
@@ -659,476 +702,31 @@ abstract class ViewerDocumentPage extends ViewerPageUnion {
   const ViewerDocumentPage._() : super._();
 
   @override
+
+  /// Id of the page.
   String get id;
   @override
+
+  /// Namespace describing the hierarchical structure of the page.
+  /// It which consists of a list of `id`s from the root to the parent.
   List<String> get namespace;
   @override
+
+  /// Title of the page.
   String get title;
+
+  /// Subtitle of the page.
   String? get subtitle;
   @override
+
+  /// Description of the page.
   String? get description;
+
+  /// List of children sections.
   List<ViewerSectionUnion> get sections;
   @override
   @JsonKey(ignore: true)
   $ViewerDocumentPageCopyWith<ViewerDocumentPage> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-class _$ViewerGlyphUnionTearOff {
-  const _$ViewerGlyphUnionTearOff();
-
-  ViewerIconGlyph icon(
-      {required IconData icon, Color? color, double size = 18}) {
-    return ViewerIconGlyph(
-      icon: icon,
-      color: color,
-      size: size,
-    );
-  }
-
-  ViewerImageGlyph image(
-      {required String uri, Color? color, double size = 18}) {
-    return ViewerImageGlyph(
-      uri: uri,
-      color: color,
-      size: size,
-    );
-  }
-}
-
-/// @nodoc
-const $ViewerGlyphUnion = _$ViewerGlyphUnionTearOff();
-
-/// @nodoc
-mixin _$ViewerGlyphUnion {
-  Color? get color => throw _privateConstructorUsedError;
-  double get size => throw _privateConstructorUsedError;
-
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(IconData icon, Color? color, double size) icon,
-    required TResult Function(String uri, Color? color, double size) image,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(IconData icon, Color? color, double size)? icon,
-    TResult Function(String uri, Color? color, double size)? image,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(IconData icon, Color? color, double size)? icon,
-    TResult Function(String uri, Color? color, double size)? image,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(ViewerIconGlyph value) icon,
-    required TResult Function(ViewerImageGlyph value) image,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(ViewerIconGlyph value)? icon,
-    TResult Function(ViewerImageGlyph value)? image,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(ViewerIconGlyph value)? icon,
-    TResult Function(ViewerImageGlyph value)? image,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $ViewerGlyphUnionCopyWith<ViewerGlyphUnion> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $ViewerGlyphUnionCopyWith<$Res> {
-  factory $ViewerGlyphUnionCopyWith(
-          ViewerGlyphUnion value, $Res Function(ViewerGlyphUnion) then) =
-      _$ViewerGlyphUnionCopyWithImpl<$Res>;
-  $Res call({Color? color, double size});
-}
-
-/// @nodoc
-class _$ViewerGlyphUnionCopyWithImpl<$Res>
-    implements $ViewerGlyphUnionCopyWith<$Res> {
-  _$ViewerGlyphUnionCopyWithImpl(this._value, this._then);
-
-  final ViewerGlyphUnion _value;
-  // ignore: unused_field
-  final $Res Function(ViewerGlyphUnion) _then;
-
-  @override
-  $Res call({
-    Object? color = freezed,
-    Object? size = freezed,
-  }) {
-    return _then(_value.copyWith(
-      color: color == freezed
-          ? _value.color
-          : color // ignore: cast_nullable_to_non_nullable
-              as Color?,
-      size: size == freezed
-          ? _value.size
-          : size // ignore: cast_nullable_to_non_nullable
-              as double,
-    ));
-  }
-}
-
-/// @nodoc
-abstract class $ViewerIconGlyphCopyWith<$Res>
-    implements $ViewerGlyphUnionCopyWith<$Res> {
-  factory $ViewerIconGlyphCopyWith(
-          ViewerIconGlyph value, $Res Function(ViewerIconGlyph) then) =
-      _$ViewerIconGlyphCopyWithImpl<$Res>;
-  @override
-  $Res call({IconData icon, Color? color, double size});
-}
-
-/// @nodoc
-class _$ViewerIconGlyphCopyWithImpl<$Res>
-    extends _$ViewerGlyphUnionCopyWithImpl<$Res>
-    implements $ViewerIconGlyphCopyWith<$Res> {
-  _$ViewerIconGlyphCopyWithImpl(
-      ViewerIconGlyph _value, $Res Function(ViewerIconGlyph) _then)
-      : super(_value, (v) => _then(v as ViewerIconGlyph));
-
-  @override
-  ViewerIconGlyph get _value => super._value as ViewerIconGlyph;
-
-  @override
-  $Res call({
-    Object? icon = freezed,
-    Object? color = freezed,
-    Object? size = freezed,
-  }) {
-    return _then(ViewerIconGlyph(
-      icon: icon == freezed
-          ? _value.icon
-          : icon // ignore: cast_nullable_to_non_nullable
-              as IconData,
-      color: color == freezed
-          ? _value.color
-          : color // ignore: cast_nullable_to_non_nullable
-              as Color?,
-      size: size == freezed
-          ? _value.size
-          : size // ignore: cast_nullable_to_non_nullable
-              as double,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$ViewerIconGlyph extends ViewerIconGlyph with DiagnosticableTreeMixin {
-  const _$ViewerIconGlyph({required this.icon, this.color, this.size = 18})
-      : super._();
-
-  @override
-  final IconData icon;
-  @override
-  final Color? color;
-  @JsonKey()
-  @override
-  final double size;
-
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ViewerGlyphUnion.icon(icon: $icon, color: $color, size: $size)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'ViewerGlyphUnion.icon'))
-      ..add(DiagnosticsProperty('icon', icon))
-      ..add(DiagnosticsProperty('color', color))
-      ..add(DiagnosticsProperty('size', size));
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is ViewerIconGlyph &&
-            const DeepCollectionEquality().equals(other.icon, icon) &&
-            const DeepCollectionEquality().equals(other.color, color) &&
-            const DeepCollectionEquality().equals(other.size, size));
-  }
-
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(icon),
-      const DeepCollectionEquality().hash(color),
-      const DeepCollectionEquality().hash(size));
-
-  @JsonKey(ignore: true)
-  @override
-  $ViewerIconGlyphCopyWith<ViewerIconGlyph> get copyWith =>
-      _$ViewerIconGlyphCopyWithImpl<ViewerIconGlyph>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(IconData icon, Color? color, double size) icon,
-    required TResult Function(String uri, Color? color, double size) image,
-  }) {
-    return icon(this.icon, color, size);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(IconData icon, Color? color, double size)? icon,
-    TResult Function(String uri, Color? color, double size)? image,
-  }) {
-    return icon?.call(this.icon, color, size);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(IconData icon, Color? color, double size)? icon,
-    TResult Function(String uri, Color? color, double size)? image,
-    required TResult orElse(),
-  }) {
-    if (icon != null) {
-      return icon(this.icon, color, size);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(ViewerIconGlyph value) icon,
-    required TResult Function(ViewerImageGlyph value) image,
-  }) {
-    return icon(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(ViewerIconGlyph value)? icon,
-    TResult Function(ViewerImageGlyph value)? image,
-  }) {
-    return icon?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(ViewerIconGlyph value)? icon,
-    TResult Function(ViewerImageGlyph value)? image,
-    required TResult orElse(),
-  }) {
-    if (icon != null) {
-      return icon(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class ViewerIconGlyph extends ViewerGlyphUnion {
-  const factory ViewerIconGlyph(
-      {required IconData icon, Color? color, double size}) = _$ViewerIconGlyph;
-  const ViewerIconGlyph._() : super._();
-
-  IconData get icon;
-  @override
-  Color? get color;
-  @override
-  double get size;
-  @override
-  @JsonKey(ignore: true)
-  $ViewerIconGlyphCopyWith<ViewerIconGlyph> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $ViewerImageGlyphCopyWith<$Res>
-    implements $ViewerGlyphUnionCopyWith<$Res> {
-  factory $ViewerImageGlyphCopyWith(
-          ViewerImageGlyph value, $Res Function(ViewerImageGlyph) then) =
-      _$ViewerImageGlyphCopyWithImpl<$Res>;
-  @override
-  $Res call({String uri, Color? color, double size});
-}
-
-/// @nodoc
-class _$ViewerImageGlyphCopyWithImpl<$Res>
-    extends _$ViewerGlyphUnionCopyWithImpl<$Res>
-    implements $ViewerImageGlyphCopyWith<$Res> {
-  _$ViewerImageGlyphCopyWithImpl(
-      ViewerImageGlyph _value, $Res Function(ViewerImageGlyph) _then)
-      : super(_value, (v) => _then(v as ViewerImageGlyph));
-
-  @override
-  ViewerImageGlyph get _value => super._value as ViewerImageGlyph;
-
-  @override
-  $Res call({
-    Object? uri = freezed,
-    Object? color = freezed,
-    Object? size = freezed,
-  }) {
-    return _then(ViewerImageGlyph(
-      uri: uri == freezed
-          ? _value.uri
-          : uri // ignore: cast_nullable_to_non_nullable
-              as String,
-      color: color == freezed
-          ? _value.color
-          : color // ignore: cast_nullable_to_non_nullable
-              as Color?,
-      size: size == freezed
-          ? _value.size
-          : size // ignore: cast_nullable_to_non_nullable
-              as double,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$ViewerImageGlyph extends ViewerImageGlyph with DiagnosticableTreeMixin {
-  const _$ViewerImageGlyph({required this.uri, this.color, this.size = 18})
-      : super._();
-
-  @override
-  final String uri;
-  @override
-  final Color? color;
-  @JsonKey()
-  @override
-  final double size;
-
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ViewerGlyphUnion.image(uri: $uri, color: $color, size: $size)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'ViewerGlyphUnion.image'))
-      ..add(DiagnosticsProperty('uri', uri))
-      ..add(DiagnosticsProperty('color', color))
-      ..add(DiagnosticsProperty('size', size));
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is ViewerImageGlyph &&
-            const DeepCollectionEquality().equals(other.uri, uri) &&
-            const DeepCollectionEquality().equals(other.color, color) &&
-            const DeepCollectionEquality().equals(other.size, size));
-  }
-
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(uri),
-      const DeepCollectionEquality().hash(color),
-      const DeepCollectionEquality().hash(size));
-
-  @JsonKey(ignore: true)
-  @override
-  $ViewerImageGlyphCopyWith<ViewerImageGlyph> get copyWith =>
-      _$ViewerImageGlyphCopyWithImpl<ViewerImageGlyph>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(IconData icon, Color? color, double size) icon,
-    required TResult Function(String uri, Color? color, double size) image,
-  }) {
-    return image(uri, color, size);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(IconData icon, Color? color, double size)? icon,
-    TResult Function(String uri, Color? color, double size)? image,
-  }) {
-    return image?.call(uri, color, size);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(IconData icon, Color? color, double size)? icon,
-    TResult Function(String uri, Color? color, double size)? image,
-    required TResult orElse(),
-  }) {
-    if (image != null) {
-      return image(uri, color, size);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(ViewerIconGlyph value) icon,
-    required TResult Function(ViewerImageGlyph value) image,
-  }) {
-    return image(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(ViewerIconGlyph value)? icon,
-    TResult Function(ViewerImageGlyph value)? image,
-  }) {
-    return image?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(ViewerIconGlyph value)? icon,
-    TResult Function(ViewerImageGlyph value)? image,
-    required TResult orElse(),
-  }) {
-    if (image != null) {
-      return image(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class ViewerImageGlyph extends ViewerGlyphUnion {
-  const factory ViewerImageGlyph(
-      {required String uri, Color? color, double size}) = _$ViewerImageGlyph;
-  const ViewerImageGlyph._() : super._();
-
-  String get uri;
-  @override
-  Color? get color;
-  @override
-  double get size;
-  @override
-  @JsonKey(ignore: true)
-  $ViewerImageGlyphCopyWith<ViewerImageGlyph> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1149,7 +747,10 @@ const $ViewerSourceCode = _$ViewerSourceCodeTearOff();
 
 /// @nodoc
 mixin _$ViewerSourceCode {
+  /// Location of the source code.
   String get location => throw _privateConstructorUsedError;
+
+  /// Formatted source code.
   String get code => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -1239,8 +840,12 @@ class _$_ViewerSourceCode
   const _$_ViewerSourceCode({required this.location, required this.code});
 
   @override
+
+  /// Location of the source code.
   final String location;
   @override
+
+  /// Formatted source code.
   final String code;
 
   @override
@@ -1283,8 +888,12 @@ abstract class _ViewerSourceCode implements ViewerSourceCode {
       {required String location, required String code}) = _$_ViewerSourceCode;
 
   @override
+
+  /// Location of the source code.
   String get location;
   @override
+
+  /// Formatted source code.
   String get code;
   @override
   @JsonKey(ignore: true)
@@ -1312,16 +921,16 @@ class _$ViewerSectionUnionTearOff {
   ViewerComponentSection component(
       {required String id,
       required String title,
-      required String ctorName,
       String? description,
+      required String ctorName,
       String? designLink,
       required ViewerWidgetBuilder builder,
       required ViewerSourceCode sourceCode}) {
     return ViewerComponentSection(
       id: id,
       title: title,
-      ctorName: ctorName,
       description: description,
+      ctorName: ctorName,
       designLink: designLink,
       builder: builder,
       sourceCode: sourceCode,
@@ -1343,8 +952,13 @@ const $ViewerSectionUnion = _$ViewerSectionUnionTearOff();
 
 /// @nodoc
 mixin _$ViewerSectionUnion {
+  /// Id of the section.
   String get id => throw _privateConstructorUsedError;
+
+  /// Title of the section.
   String get title => throw _privateConstructorUsedError;
+
+  /// Description of the section.
   String? get description => throw _privateConstructorUsedError;
 
   @optionalTypeArgs
@@ -1355,8 +969,8 @@ mixin _$ViewerSectionUnion {
     required TResult Function(
             String id,
             String title,
-            String ctorName,
             String? description,
+            String ctorName,
             String? designLink,
             ViewerWidgetBuilder builder,
             ViewerSourceCode sourceCode)
@@ -1373,8 +987,8 @@ mixin _$ViewerSectionUnion {
     TResult Function(
             String id,
             String title,
-            String ctorName,
             String? description,
+            String ctorName,
             String? designLink,
             ViewerWidgetBuilder builder,
             ViewerSourceCode sourceCode)?
@@ -1390,8 +1004,8 @@ mixin _$ViewerSectionUnion {
     TResult Function(
             String id,
             String title,
-            String ctorName,
             String? description,
+            String ctorName,
             String? designLink,
             ViewerWidgetBuilder builder,
             ViewerSourceCode sourceCode)?
@@ -1533,10 +1147,16 @@ class _$ViewerParagraphSection extends ViewerParagraphSection
       : super._();
 
   @override
+
+  /// Id of the section.
   final String id;
   @override
+
+  /// Title of the section.
   final String title;
   @override
+
+  /// Description of the section.
   final String? description;
   @JsonKey()
   @override
@@ -1593,8 +1213,8 @@ class _$ViewerParagraphSection extends ViewerParagraphSection
     required TResult Function(
             String id,
             String title,
-            String ctorName,
             String? description,
+            String ctorName,
             String? designLink,
             ViewerWidgetBuilder builder,
             ViewerSourceCode sourceCode)
@@ -1614,8 +1234,8 @@ class _$ViewerParagraphSection extends ViewerParagraphSection
     TResult Function(
             String id,
             String title,
-            String ctorName,
             String? description,
+            String ctorName,
             String? designLink,
             ViewerWidgetBuilder builder,
             ViewerSourceCode sourceCode)?
@@ -1634,8 +1254,8 @@ class _$ViewerParagraphSection extends ViewerParagraphSection
     TResult Function(
             String id,
             String title,
-            String ctorName,
             String? description,
+            String ctorName,
             String? designLink,
             ViewerWidgetBuilder builder,
             ViewerSourceCode sourceCode)?
@@ -1694,10 +1314,16 @@ abstract class ViewerParagraphSection extends ViewerSectionUnion {
   const ViewerParagraphSection._() : super._();
 
   @override
+
+  /// Id of the section.
   String get id;
   @override
+
+  /// Title of the section.
   String get title;
   @override
+
+  /// Description of the section.
   String? get description;
   List<List<ViewerCollectionItemUnion>> get contents;
   @override
@@ -1716,8 +1342,8 @@ abstract class $ViewerComponentSectionCopyWith<$Res>
   $Res call(
       {String id,
       String title,
-      String ctorName,
       String? description,
+      String ctorName,
       String? designLink,
       ViewerWidgetBuilder builder,
       ViewerSourceCode sourceCode});
@@ -1741,8 +1367,8 @@ class _$ViewerComponentSectionCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? title = freezed,
-    Object? ctorName = freezed,
     Object? description = freezed,
+    Object? ctorName = freezed,
     Object? designLink = freezed,
     Object? builder = freezed,
     Object? sourceCode = freezed,
@@ -1756,14 +1382,14 @@ class _$ViewerComponentSectionCopyWithImpl<$Res>
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      ctorName: ctorName == freezed
-          ? _value.ctorName
-          : ctorName // ignore: cast_nullable_to_non_nullable
-              as String,
       description: description == freezed
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
+      ctorName: ctorName == freezed
+          ? _value.ctorName
+          : ctorName // ignore: cast_nullable_to_non_nullable
+              as String,
       designLink: designLink == freezed
           ? _value.designLink
           : designLink // ignore: cast_nullable_to_non_nullable
@@ -1801,31 +1427,45 @@ class _$ViewerComponentSection extends ViewerComponentSection
   const _$ViewerComponentSection(
       {required this.id,
       required this.title,
-      required this.ctorName,
       this.description,
+      required this.ctorName,
       this.designLink,
       required this.builder,
       required this.sourceCode})
       : super._();
 
   @override
+
+  /// Id of the section.
   final String id;
   @override
+
+  /// Title of the section.
   final String title;
   @override
-  final String ctorName;
-  @override
+
+  /// Description of the section.
   final String? description;
   @override
+
+  /// Name of the widget constructor.
+  final String ctorName;
+  @override
+
+  /// Link to a design file of the widget.
   final String? designLink;
   @override
+
+  /// Widget builder to construct the widget with available data builders.
   final ViewerWidgetBuilder builder;
   @override
+
+  /// Widget source code information.
   final ViewerSourceCode sourceCode;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ViewerSectionUnion.component(id: $id, title: $title, ctorName: $ctorName, description: $description, designLink: $designLink, builder: $builder, sourceCode: $sourceCode)';
+    return 'ViewerSectionUnion.component(id: $id, title: $title, description: $description, ctorName: $ctorName, designLink: $designLink, builder: $builder, sourceCode: $sourceCode)';
   }
 
   @override
@@ -1835,8 +1475,8 @@ class _$ViewerComponentSection extends ViewerComponentSection
       ..add(DiagnosticsProperty('type', 'ViewerSectionUnion.component'))
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('title', title))
-      ..add(DiagnosticsProperty('ctorName', ctorName))
       ..add(DiagnosticsProperty('description', description))
+      ..add(DiagnosticsProperty('ctorName', ctorName))
       ..add(DiagnosticsProperty('designLink', designLink))
       ..add(DiagnosticsProperty('builder', builder))
       ..add(DiagnosticsProperty('sourceCode', sourceCode));
@@ -1849,9 +1489,9 @@ class _$ViewerComponentSection extends ViewerComponentSection
             other is ViewerComponentSection &&
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.title, title) &&
-            const DeepCollectionEquality().equals(other.ctorName, ctorName) &&
             const DeepCollectionEquality()
                 .equals(other.description, description) &&
+            const DeepCollectionEquality().equals(other.ctorName, ctorName) &&
             const DeepCollectionEquality()
                 .equals(other.designLink, designLink) &&
             const DeepCollectionEquality().equals(other.builder, builder) &&
@@ -1864,8 +1504,8 @@ class _$ViewerComponentSection extends ViewerComponentSection
       runtimeType,
       const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(title),
-      const DeepCollectionEquality().hash(ctorName),
       const DeepCollectionEquality().hash(description),
+      const DeepCollectionEquality().hash(ctorName),
       const DeepCollectionEquality().hash(designLink),
       const DeepCollectionEquality().hash(builder),
       const DeepCollectionEquality().hash(sourceCode));
@@ -1885,8 +1525,8 @@ class _$ViewerComponentSection extends ViewerComponentSection
     required TResult Function(
             String id,
             String title,
-            String ctorName,
             String? description,
+            String ctorName,
             String? designLink,
             ViewerWidgetBuilder builder,
             ViewerSourceCode sourceCode)
@@ -1895,7 +1535,7 @@ class _$ViewerComponentSection extends ViewerComponentSection
         apiDocs,
   }) {
     return component(
-        id, title, ctorName, description, designLink, builder, sourceCode);
+        id, title, description, ctorName, designLink, builder, sourceCode);
   }
 
   @override
@@ -1907,8 +1547,8 @@ class _$ViewerComponentSection extends ViewerComponentSection
     TResult Function(
             String id,
             String title,
-            String ctorName,
             String? description,
+            String ctorName,
             String? designLink,
             ViewerWidgetBuilder builder,
             ViewerSourceCode sourceCode)?
@@ -1916,7 +1556,7 @@ class _$ViewerComponentSection extends ViewerComponentSection
     TResult Function(String id, String title, String? description)? apiDocs,
   }) {
     return component?.call(
-        id, title, ctorName, description, designLink, builder, sourceCode);
+        id, title, description, ctorName, designLink, builder, sourceCode);
   }
 
   @override
@@ -1928,8 +1568,8 @@ class _$ViewerComponentSection extends ViewerComponentSection
     TResult Function(
             String id,
             String title,
-            String ctorName,
             String? description,
+            String ctorName,
             String? designLink,
             ViewerWidgetBuilder builder,
             ViewerSourceCode sourceCode)?
@@ -1939,7 +1579,7 @@ class _$ViewerComponentSection extends ViewerComponentSection
   }) {
     if (component != null) {
       return component(
-          id, title, ctorName, description, designLink, builder, sourceCode);
+          id, title, description, ctorName, designLink, builder, sourceCode);
     }
     return orElse();
   }
@@ -1983,22 +1623,36 @@ abstract class ViewerComponentSection extends ViewerSectionUnion {
   const factory ViewerComponentSection(
       {required String id,
       required String title,
-      required String ctorName,
       String? description,
+      required String ctorName,
       String? designLink,
       required ViewerWidgetBuilder builder,
       required ViewerSourceCode sourceCode}) = _$ViewerComponentSection;
   const ViewerComponentSection._() : super._();
 
   @override
+
+  /// Id of the section.
   String get id;
   @override
+
+  /// Title of the section.
   String get title;
-  String get ctorName;
   @override
+
+  /// Description of the section.
   String? get description;
+
+  /// Name of the widget constructor.
+  String get ctorName;
+
+  /// Link to a design file of the widget.
   String? get designLink;
+
+  /// Widget builder to construct the widget with available data builders.
   ViewerWidgetBuilder get builder;
+
+  /// Widget source code information.
   ViewerSourceCode get sourceCode;
   @override
   @JsonKey(ignore: true)
@@ -2059,10 +1713,16 @@ class _$ViewerApiDocsSection extends ViewerApiDocsSection
       : super._();
 
   @override
+
+  /// Id of the section.
   final String id;
   @override
+
+  /// Title of the section.
   final String title;
   @override
+
+  /// Description of the section.
   final String? description;
 
   @override
@@ -2113,8 +1773,8 @@ class _$ViewerApiDocsSection extends ViewerApiDocsSection
     required TResult Function(
             String id,
             String title,
-            String ctorName,
             String? description,
+            String ctorName,
             String? designLink,
             ViewerWidgetBuilder builder,
             ViewerSourceCode sourceCode)
@@ -2134,8 +1794,8 @@ class _$ViewerApiDocsSection extends ViewerApiDocsSection
     TResult Function(
             String id,
             String title,
-            String ctorName,
             String? description,
+            String ctorName,
             String? designLink,
             ViewerWidgetBuilder builder,
             ViewerSourceCode sourceCode)?
@@ -2154,8 +1814,8 @@ class _$ViewerApiDocsSection extends ViewerApiDocsSection
     TResult Function(
             String id,
             String title,
-            String ctorName,
             String? description,
+            String ctorName,
             String? designLink,
             ViewerWidgetBuilder builder,
             ViewerSourceCode sourceCode)?
@@ -2212,10 +1872,16 @@ abstract class ViewerApiDocsSection extends ViewerSectionUnion {
   const ViewerApiDocsSection._() : super._();
 
   @override
+
+  /// Id of the section.
   String get id;
   @override
+
+  /// Title of the section.
   String get title;
   @override
+
+  /// Description of the section.
   String? get description;
   @override
   @JsonKey(ignore: true)
@@ -2242,7 +1908,10 @@ const $ViewerWidgetBuilder = _$ViewerWidgetBuilderTearOff();
 
 /// @nodoc
 mixin _$ViewerWidgetBuilder {
+  /// Widget builder function
   WidgetDynamicBuilder get build => throw _privateConstructorUsedError;
+
+  /// List of meta data of the widget's constructor used in the build process
   List<FieldMetaData> get fieldMetaDataset =>
       throw _privateConstructorUsedError;
 
@@ -2334,9 +2003,13 @@ class _$_ViewerWidgetBuilder extends _ViewerWidgetBuilder
       : super._();
 
   @override
+
+  /// Widget builder function
   final WidgetDynamicBuilder build;
   @JsonKey()
   @override
+
+  /// List of meta data of the widget's constructor used in the build process
   final List<FieldMetaData> fieldMetaDataset;
 
   @override
@@ -2381,8 +2054,12 @@ abstract class _ViewerWidgetBuilder extends ViewerWidgetBuilder {
   const _ViewerWidgetBuilder._() : super._();
 
   @override
+
+  /// Widget builder function
   WidgetDynamicBuilder get build;
   @override
+
+  /// List of meta data of the widget's constructor used in the build process
   List<FieldMetaData> get fieldMetaDataset;
   @override
   @JsonKey(ignore: true)
@@ -2421,13 +2098,31 @@ const $FieldMetaData = _$FieldMetaDataTearOff();
 
 /// @nodoc
 mixin _$FieldMetaData {
+  /// Name of the field
   String get name => throw _privateConstructorUsedError;
+
+  /// Type of the field
   Type get type => throw _privateConstructorUsedError;
+
+  /// Display type name of the field
   String get typeName => throw _privateConstructorUsedError;
+
+  /// Flag if the field is option
   bool get isOptional => throw _privateConstructorUsedError;
+
+  /// Default value in string format
   String? get defaultValueCode => throw _privateConstructorUsedError;
+
+  /// Default value
   dynamic get defaultValue => throw _privateConstructorUsedError;
+
+  /// Initial value to be used by the viewer. This is especially useful for
+  /// `required` fields that has no default value on the constructor. If both
+  /// the initial value and the default value is specified, the [viewerInitValue]
+  /// will be used.
   dynamic get viewerInitValue => throw _privateConstructorUsedError;
+
+  /// Documentation on the field
   String? get documentation => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -2600,20 +2295,39 @@ class _$_FieldMetaData extends _FieldMetaData with DiagnosticableTreeMixin {
       : super._();
 
   @override
+
+  /// Name of the field
   final String name;
   @override
+
+  /// Type of the field
   final Type type;
   @override
+
+  /// Display type name of the field
   final String typeName;
   @override
+
+  /// Flag if the field is option
   final bool isOptional;
   @override
+
+  /// Default value in string format
   final String? defaultValueCode;
   @override
+
+  /// Default value
   final dynamic defaultValue;
   @override
+
+  /// Initial value to be used by the viewer. This is especially useful for
+  /// `required` fields that has no default value on the constructor. If both
+  /// the initial value and the default value is specified, the [viewerInitValue]
+  /// will be used.
   final dynamic viewerInitValue;
   @override
+
+  /// Documentation on the field
   final String? documentation;
 
   @override
@@ -2687,20 +2401,39 @@ abstract class _FieldMetaData extends FieldMetaData {
   const _FieldMetaData._() : super._();
 
   @override
+
+  /// Name of the field
   String get name;
   @override
+
+  /// Type of the field
   Type get type;
   @override
+
+  /// Display type name of the field
   String get typeName;
   @override
+
+  /// Flag if the field is option
   bool get isOptional;
   @override
+
+  /// Default value in string format
   String? get defaultValueCode;
   @override
+
+  /// Default value
   dynamic get defaultValue;
   @override
+
+  /// Initial value to be used by the viewer. This is especially useful for
+  /// `required` fields that has no default value on the constructor. If both
+  /// the initial value and the default value is specified, the [viewerInitValue]
+  /// will be used.
   dynamic get viewerInitValue;
   @override
+
+  /// Documentation on the field
   String? get documentation;
   @override
   @JsonKey(ignore: true)
@@ -2716,14 +2449,6 @@ class _$ViewerCollectionItemUnionTearOff {
     return ViewerTextCollectionItem(
       title: title,
       description: description,
-    );
-  }
-
-  ViewerGlyphCollectionItem glyph(
-      {required ViewerGlyphUnion glyph, required String title}) {
-    return ViewerGlyphCollectionItem(
-      glyph: glyph,
-      title: title,
     );
   }
 
@@ -2766,7 +2491,6 @@ mixin _$ViewerCollectionItemUnion {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String? title, String? description) text,
-    required TResult Function(ViewerGlyphUnion glyph, String title) glyph,
     required TResult Function(String title, String url) link,
     required TResult Function(ViewerImageCollectionItemStyle style, String url,
             String? title, String? description, double? width, double? height)
@@ -2777,7 +2501,6 @@ mixin _$ViewerCollectionItemUnion {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String? title, String? description)? text,
-    TResult Function(ViewerGlyphUnion glyph, String title)? glyph,
     TResult Function(String title, String url)? link,
     TResult Function(ViewerImageCollectionItemStyle style, String url,
             String? title, String? description, double? width, double? height)?
@@ -2788,7 +2511,6 @@ mixin _$ViewerCollectionItemUnion {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String? title, String? description)? text,
-    TResult Function(ViewerGlyphUnion glyph, String title)? glyph,
     TResult Function(String title, String url)? link,
     TResult Function(ViewerImageCollectionItemStyle style, String url,
             String? title, String? description, double? width, double? height)?
@@ -2800,7 +2522,6 @@ mixin _$ViewerCollectionItemUnion {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(ViewerTextCollectionItem value) text,
-    required TResult Function(ViewerGlyphCollectionItem value) glyph,
     required TResult Function(ViewerLinkCollectionItem value) link,
     required TResult Function(ViewerImageCollectionItem value) image,
     required TResult Function(ViewerWidgetCollectionItem value) widget,
@@ -2809,7 +2530,6 @@ mixin _$ViewerCollectionItemUnion {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(ViewerTextCollectionItem value)? text,
-    TResult Function(ViewerGlyphCollectionItem value)? glyph,
     TResult Function(ViewerLinkCollectionItem value)? link,
     TResult Function(ViewerImageCollectionItem value)? image,
     TResult Function(ViewerWidgetCollectionItem value)? widget,
@@ -2818,7 +2538,6 @@ mixin _$ViewerCollectionItemUnion {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ViewerTextCollectionItem value)? text,
-    TResult Function(ViewerGlyphCollectionItem value)? glyph,
     TResult Function(ViewerLinkCollectionItem value)? link,
     TResult Function(ViewerImageCollectionItem value)? image,
     TResult Function(ViewerWidgetCollectionItem value)? widget,
@@ -2889,8 +2608,12 @@ class _$ViewerTextCollectionItem extends ViewerTextCollectionItem
   const _$ViewerTextCollectionItem({this.title, this.description}) : super._();
 
   @override
+
+  /// Title of the item
   final String? title;
   @override
+
+  /// Description of the item
   final String? description;
 
   @override
@@ -2933,7 +2656,6 @@ class _$ViewerTextCollectionItem extends ViewerTextCollectionItem
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String? title, String? description) text,
-    required TResult Function(ViewerGlyphUnion glyph, String title) glyph,
     required TResult Function(String title, String url) link,
     required TResult Function(ViewerImageCollectionItemStyle style, String url,
             String? title, String? description, double? width, double? height)
@@ -2947,7 +2669,6 @@ class _$ViewerTextCollectionItem extends ViewerTextCollectionItem
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String? title, String? description)? text,
-    TResult Function(ViewerGlyphUnion glyph, String title)? glyph,
     TResult Function(String title, String url)? link,
     TResult Function(ViewerImageCollectionItemStyle style, String url,
             String? title, String? description, double? width, double? height)?
@@ -2961,7 +2682,6 @@ class _$ViewerTextCollectionItem extends ViewerTextCollectionItem
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String? title, String? description)? text,
-    TResult Function(ViewerGlyphUnion glyph, String title)? glyph,
     TResult Function(String title, String url)? link,
     TResult Function(ViewerImageCollectionItemStyle style, String url,
             String? title, String? description, double? width, double? height)?
@@ -2979,7 +2699,6 @@ class _$ViewerTextCollectionItem extends ViewerTextCollectionItem
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(ViewerTextCollectionItem value) text,
-    required TResult Function(ViewerGlyphCollectionItem value) glyph,
     required TResult Function(ViewerLinkCollectionItem value) link,
     required TResult Function(ViewerImageCollectionItem value) image,
     required TResult Function(ViewerWidgetCollectionItem value) widget,
@@ -2991,7 +2710,6 @@ class _$ViewerTextCollectionItem extends ViewerTextCollectionItem
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(ViewerTextCollectionItem value)? text,
-    TResult Function(ViewerGlyphCollectionItem value)? glyph,
     TResult Function(ViewerLinkCollectionItem value)? link,
     TResult Function(ViewerImageCollectionItem value)? image,
     TResult Function(ViewerWidgetCollectionItem value)? widget,
@@ -3003,7 +2721,6 @@ class _$ViewerTextCollectionItem extends ViewerTextCollectionItem
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ViewerTextCollectionItem value)? text,
-    TResult Function(ViewerGlyphCollectionItem value)? glyph,
     TResult Function(ViewerLinkCollectionItem value)? link,
     TResult Function(ViewerImageCollectionItem value)? image,
     TResult Function(ViewerWidgetCollectionItem value)? widget,
@@ -3021,204 +2738,13 @@ abstract class ViewerTextCollectionItem extends ViewerCollectionItemUnion {
       _$ViewerTextCollectionItem;
   const ViewerTextCollectionItem._() : super._();
 
+  /// Title of the item
   String? get title;
+
+  /// Description of the item
   String? get description;
   @JsonKey(ignore: true)
   $ViewerTextCollectionItemCopyWith<ViewerTextCollectionItem> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $ViewerGlyphCollectionItemCopyWith<$Res> {
-  factory $ViewerGlyphCollectionItemCopyWith(ViewerGlyphCollectionItem value,
-          $Res Function(ViewerGlyphCollectionItem) then) =
-      _$ViewerGlyphCollectionItemCopyWithImpl<$Res>;
-  $Res call({ViewerGlyphUnion glyph, String title});
-
-  $ViewerGlyphUnionCopyWith<$Res> get glyph;
-}
-
-/// @nodoc
-class _$ViewerGlyphCollectionItemCopyWithImpl<$Res>
-    extends _$ViewerCollectionItemUnionCopyWithImpl<$Res>
-    implements $ViewerGlyphCollectionItemCopyWith<$Res> {
-  _$ViewerGlyphCollectionItemCopyWithImpl(ViewerGlyphCollectionItem _value,
-      $Res Function(ViewerGlyphCollectionItem) _then)
-      : super(_value, (v) => _then(v as ViewerGlyphCollectionItem));
-
-  @override
-  ViewerGlyphCollectionItem get _value =>
-      super._value as ViewerGlyphCollectionItem;
-
-  @override
-  $Res call({
-    Object? glyph = freezed,
-    Object? title = freezed,
-  }) {
-    return _then(ViewerGlyphCollectionItem(
-      glyph: glyph == freezed
-          ? _value.glyph
-          : glyph // ignore: cast_nullable_to_non_nullable
-              as ViewerGlyphUnion,
-      title: title == freezed
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-
-  @override
-  $ViewerGlyphUnionCopyWith<$Res> get glyph {
-    return $ViewerGlyphUnionCopyWith<$Res>(_value.glyph, (value) {
-      return _then(_value.copyWith(glyph: value));
-    });
-  }
-}
-
-/// @nodoc
-
-class _$ViewerGlyphCollectionItem extends ViewerGlyphCollectionItem
-    with DiagnosticableTreeMixin {
-  const _$ViewerGlyphCollectionItem({required this.glyph, required this.title})
-      : super._();
-
-  @override
-  final ViewerGlyphUnion glyph;
-  @override
-  final String title;
-
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ViewerCollectionItemUnion.glyph(glyph: $glyph, title: $title)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'ViewerCollectionItemUnion.glyph'))
-      ..add(DiagnosticsProperty('glyph', glyph))
-      ..add(DiagnosticsProperty('title', title));
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is ViewerGlyphCollectionItem &&
-            const DeepCollectionEquality().equals(other.glyph, glyph) &&
-            const DeepCollectionEquality().equals(other.title, title));
-  }
-
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(glyph),
-      const DeepCollectionEquality().hash(title));
-
-  @JsonKey(ignore: true)
-  @override
-  $ViewerGlyphCollectionItemCopyWith<ViewerGlyphCollectionItem> get copyWith =>
-      _$ViewerGlyphCollectionItemCopyWithImpl<ViewerGlyphCollectionItem>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String? title, String? description) text,
-    required TResult Function(ViewerGlyphUnion glyph, String title) glyph,
-    required TResult Function(String title, String url) link,
-    required TResult Function(ViewerImageCollectionItemStyle style, String url,
-            String? title, String? description, double? width, double? height)
-        image,
-    required TResult Function(Widget widget) widget,
-  }) {
-    return glyph(this.glyph, title);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String? title, String? description)? text,
-    TResult Function(ViewerGlyphUnion glyph, String title)? glyph,
-    TResult Function(String title, String url)? link,
-    TResult Function(ViewerImageCollectionItemStyle style, String url,
-            String? title, String? description, double? width, double? height)?
-        image,
-    TResult Function(Widget widget)? widget,
-  }) {
-    return glyph?.call(this.glyph, title);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String? title, String? description)? text,
-    TResult Function(ViewerGlyphUnion glyph, String title)? glyph,
-    TResult Function(String title, String url)? link,
-    TResult Function(ViewerImageCollectionItemStyle style, String url,
-            String? title, String? description, double? width, double? height)?
-        image,
-    TResult Function(Widget widget)? widget,
-    required TResult orElse(),
-  }) {
-    if (glyph != null) {
-      return glyph(this.glyph, title);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(ViewerTextCollectionItem value) text,
-    required TResult Function(ViewerGlyphCollectionItem value) glyph,
-    required TResult Function(ViewerLinkCollectionItem value) link,
-    required TResult Function(ViewerImageCollectionItem value) image,
-    required TResult Function(ViewerWidgetCollectionItem value) widget,
-  }) {
-    return glyph(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(ViewerTextCollectionItem value)? text,
-    TResult Function(ViewerGlyphCollectionItem value)? glyph,
-    TResult Function(ViewerLinkCollectionItem value)? link,
-    TResult Function(ViewerImageCollectionItem value)? image,
-    TResult Function(ViewerWidgetCollectionItem value)? widget,
-  }) {
-    return glyph?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(ViewerTextCollectionItem value)? text,
-    TResult Function(ViewerGlyphCollectionItem value)? glyph,
-    TResult Function(ViewerLinkCollectionItem value)? link,
-    TResult Function(ViewerImageCollectionItem value)? image,
-    TResult Function(ViewerWidgetCollectionItem value)? widget,
-    required TResult orElse(),
-  }) {
-    if (glyph != null) {
-      return glyph(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class ViewerGlyphCollectionItem extends ViewerCollectionItemUnion {
-  const factory ViewerGlyphCollectionItem(
-      {required ViewerGlyphUnion glyph,
-      required String title}) = _$ViewerGlyphCollectionItem;
-  const ViewerGlyphCollectionItem._() : super._();
-
-  ViewerGlyphUnion get glyph;
-  String get title;
-  @JsonKey(ignore: true)
-  $ViewerGlyphCollectionItemCopyWith<ViewerGlyphCollectionItem> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -3268,8 +2794,12 @@ class _$ViewerLinkCollectionItem extends ViewerLinkCollectionItem
       : super._();
 
   @override
+
+  /// Title of the link
   final String title;
   @override
+
+  /// URI of the link
   final String url;
 
   @override
@@ -3311,7 +2841,6 @@ class _$ViewerLinkCollectionItem extends ViewerLinkCollectionItem
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String? title, String? description) text,
-    required TResult Function(ViewerGlyphUnion glyph, String title) glyph,
     required TResult Function(String title, String url) link,
     required TResult Function(ViewerImageCollectionItemStyle style, String url,
             String? title, String? description, double? width, double? height)
@@ -3325,7 +2854,6 @@ class _$ViewerLinkCollectionItem extends ViewerLinkCollectionItem
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String? title, String? description)? text,
-    TResult Function(ViewerGlyphUnion glyph, String title)? glyph,
     TResult Function(String title, String url)? link,
     TResult Function(ViewerImageCollectionItemStyle style, String url,
             String? title, String? description, double? width, double? height)?
@@ -3339,7 +2867,6 @@ class _$ViewerLinkCollectionItem extends ViewerLinkCollectionItem
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String? title, String? description)? text,
-    TResult Function(ViewerGlyphUnion glyph, String title)? glyph,
     TResult Function(String title, String url)? link,
     TResult Function(ViewerImageCollectionItemStyle style, String url,
             String? title, String? description, double? width, double? height)?
@@ -3357,7 +2884,6 @@ class _$ViewerLinkCollectionItem extends ViewerLinkCollectionItem
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(ViewerTextCollectionItem value) text,
-    required TResult Function(ViewerGlyphCollectionItem value) glyph,
     required TResult Function(ViewerLinkCollectionItem value) link,
     required TResult Function(ViewerImageCollectionItem value) image,
     required TResult Function(ViewerWidgetCollectionItem value) widget,
@@ -3369,7 +2895,6 @@ class _$ViewerLinkCollectionItem extends ViewerLinkCollectionItem
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(ViewerTextCollectionItem value)? text,
-    TResult Function(ViewerGlyphCollectionItem value)? glyph,
     TResult Function(ViewerLinkCollectionItem value)? link,
     TResult Function(ViewerImageCollectionItem value)? image,
     TResult Function(ViewerWidgetCollectionItem value)? widget,
@@ -3381,7 +2906,6 @@ class _$ViewerLinkCollectionItem extends ViewerLinkCollectionItem
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ViewerTextCollectionItem value)? text,
-    TResult Function(ViewerGlyphCollectionItem value)? glyph,
     TResult Function(ViewerLinkCollectionItem value)? link,
     TResult Function(ViewerImageCollectionItem value)? image,
     TResult Function(ViewerWidgetCollectionItem value)? widget,
@@ -3400,7 +2924,10 @@ abstract class ViewerLinkCollectionItem extends ViewerCollectionItemUnion {
       required String url}) = _$ViewerLinkCollectionItem;
   const ViewerLinkCollectionItem._() : super._();
 
+  /// Title of the link
   String get title;
+
+  /// URI of the link
   String get url;
   @JsonKey(ignore: true)
   $ViewerLinkCollectionItemCopyWith<ViewerLinkCollectionItem> get copyWith =>
@@ -3487,14 +3014,24 @@ class _$ViewerImageCollectionItem extends ViewerImageCollectionItem
   @override
   final ViewerImageCollectionItemStyle style;
   @override
+
+  /// URL of the image
   final String url;
   @override
+
+  /// Title of the link
   final String? title;
   @override
+
+  /// Description of the link
   final String? description;
   @override
+
+  /// Width of the image
   final double? width;
   @override
+
+  /// Height of the image
   final double? height;
 
   @override
@@ -3549,7 +3086,6 @@ class _$ViewerImageCollectionItem extends ViewerImageCollectionItem
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String? title, String? description) text,
-    required TResult Function(ViewerGlyphUnion glyph, String title) glyph,
     required TResult Function(String title, String url) link,
     required TResult Function(ViewerImageCollectionItemStyle style, String url,
             String? title, String? description, double? width, double? height)
@@ -3563,7 +3099,6 @@ class _$ViewerImageCollectionItem extends ViewerImageCollectionItem
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String? title, String? description)? text,
-    TResult Function(ViewerGlyphUnion glyph, String title)? glyph,
     TResult Function(String title, String url)? link,
     TResult Function(ViewerImageCollectionItemStyle style, String url,
             String? title, String? description, double? width, double? height)?
@@ -3577,7 +3112,6 @@ class _$ViewerImageCollectionItem extends ViewerImageCollectionItem
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String? title, String? description)? text,
-    TResult Function(ViewerGlyphUnion glyph, String title)? glyph,
     TResult Function(String title, String url)? link,
     TResult Function(ViewerImageCollectionItemStyle style, String url,
             String? title, String? description, double? width, double? height)?
@@ -3595,7 +3129,6 @@ class _$ViewerImageCollectionItem extends ViewerImageCollectionItem
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(ViewerTextCollectionItem value) text,
-    required TResult Function(ViewerGlyphCollectionItem value) glyph,
     required TResult Function(ViewerLinkCollectionItem value) link,
     required TResult Function(ViewerImageCollectionItem value) image,
     required TResult Function(ViewerWidgetCollectionItem value) widget,
@@ -3607,7 +3140,6 @@ class _$ViewerImageCollectionItem extends ViewerImageCollectionItem
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(ViewerTextCollectionItem value)? text,
-    TResult Function(ViewerGlyphCollectionItem value)? glyph,
     TResult Function(ViewerLinkCollectionItem value)? link,
     TResult Function(ViewerImageCollectionItem value)? image,
     TResult Function(ViewerWidgetCollectionItem value)? widget,
@@ -3619,7 +3151,6 @@ class _$ViewerImageCollectionItem extends ViewerImageCollectionItem
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ViewerTextCollectionItem value)? text,
-    TResult Function(ViewerGlyphCollectionItem value)? glyph,
     TResult Function(ViewerLinkCollectionItem value)? link,
     TResult Function(ViewerImageCollectionItem value)? image,
     TResult Function(ViewerWidgetCollectionItem value)? widget,
@@ -3643,10 +3174,20 @@ abstract class ViewerImageCollectionItem extends ViewerCollectionItemUnion {
   const ViewerImageCollectionItem._() : super._();
 
   ViewerImageCollectionItemStyle get style;
+
+  /// URL of the image
   String get url;
+
+  /// Title of the link
   String? get title;
+
+  /// Description of the link
   String? get description;
+
+  /// Width of the image
   double? get width;
+
+  /// Height of the image
   double? get height;
   @JsonKey(ignore: true)
   $ViewerImageCollectionItemCopyWith<ViewerImageCollectionItem> get copyWith =>
@@ -3693,6 +3234,8 @@ class _$ViewerWidgetCollectionItem extends ViewerWidgetCollectionItem
   const _$ViewerWidgetCollectionItem({required this.widget}) : super._();
 
   @override
+
+  /// Widget to be rendered
   final Widget widget;
 
   @override
@@ -3731,7 +3274,6 @@ class _$ViewerWidgetCollectionItem extends ViewerWidgetCollectionItem
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String? title, String? description) text,
-    required TResult Function(ViewerGlyphUnion glyph, String title) glyph,
     required TResult Function(String title, String url) link,
     required TResult Function(ViewerImageCollectionItemStyle style, String url,
             String? title, String? description, double? width, double? height)
@@ -3745,7 +3287,6 @@ class _$ViewerWidgetCollectionItem extends ViewerWidgetCollectionItem
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String? title, String? description)? text,
-    TResult Function(ViewerGlyphUnion glyph, String title)? glyph,
     TResult Function(String title, String url)? link,
     TResult Function(ViewerImageCollectionItemStyle style, String url,
             String? title, String? description, double? width, double? height)?
@@ -3759,7 +3300,6 @@ class _$ViewerWidgetCollectionItem extends ViewerWidgetCollectionItem
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String? title, String? description)? text,
-    TResult Function(ViewerGlyphUnion glyph, String title)? glyph,
     TResult Function(String title, String url)? link,
     TResult Function(ViewerImageCollectionItemStyle style, String url,
             String? title, String? description, double? width, double? height)?
@@ -3777,7 +3317,6 @@ class _$ViewerWidgetCollectionItem extends ViewerWidgetCollectionItem
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(ViewerTextCollectionItem value) text,
-    required TResult Function(ViewerGlyphCollectionItem value) glyph,
     required TResult Function(ViewerLinkCollectionItem value) link,
     required TResult Function(ViewerImageCollectionItem value) image,
     required TResult Function(ViewerWidgetCollectionItem value) widget,
@@ -3789,7 +3328,6 @@ class _$ViewerWidgetCollectionItem extends ViewerWidgetCollectionItem
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(ViewerTextCollectionItem value)? text,
-    TResult Function(ViewerGlyphCollectionItem value)? glyph,
     TResult Function(ViewerLinkCollectionItem value)? link,
     TResult Function(ViewerImageCollectionItem value)? image,
     TResult Function(ViewerWidgetCollectionItem value)? widget,
@@ -3801,7 +3339,6 @@ class _$ViewerWidgetCollectionItem extends ViewerWidgetCollectionItem
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ViewerTextCollectionItem value)? text,
-    TResult Function(ViewerGlyphCollectionItem value)? glyph,
     TResult Function(ViewerLinkCollectionItem value)? link,
     TResult Function(ViewerImageCollectionItem value)? image,
     TResult Function(ViewerWidgetCollectionItem value)? widget,
@@ -3819,169 +3356,9 @@ abstract class ViewerWidgetCollectionItem extends ViewerCollectionItemUnion {
       _$ViewerWidgetCollectionItem;
   const ViewerWidgetCollectionItem._() : super._();
 
+  /// Widget to be rendered
   Widget get widget;
   @JsonKey(ignore: true)
   $ViewerWidgetCollectionItemCopyWith<ViewerWidgetCollectionItem>
       get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-class _$ViewerCatalogLinkTearOff {
-  const _$ViewerCatalogLinkTearOff();
-
-  _ViewerCatalogLink call({required String title, required String url}) {
-    return _ViewerCatalogLink(
-      title: title,
-      url: url,
-    );
-  }
-}
-
-/// @nodoc
-const $ViewerCatalogLink = _$ViewerCatalogLinkTearOff();
-
-/// @nodoc
-mixin _$ViewerCatalogLink {
-  String get title => throw _privateConstructorUsedError;
-  String get url => throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $ViewerCatalogLinkCopyWith<ViewerCatalogLink> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $ViewerCatalogLinkCopyWith<$Res> {
-  factory $ViewerCatalogLinkCopyWith(
-          ViewerCatalogLink value, $Res Function(ViewerCatalogLink) then) =
-      _$ViewerCatalogLinkCopyWithImpl<$Res>;
-  $Res call({String title, String url});
-}
-
-/// @nodoc
-class _$ViewerCatalogLinkCopyWithImpl<$Res>
-    implements $ViewerCatalogLinkCopyWith<$Res> {
-  _$ViewerCatalogLinkCopyWithImpl(this._value, this._then);
-
-  final ViewerCatalogLink _value;
-  // ignore: unused_field
-  final $Res Function(ViewerCatalogLink) _then;
-
-  @override
-  $Res call({
-    Object? title = freezed,
-    Object? url = freezed,
-  }) {
-    return _then(_value.copyWith(
-      title: title == freezed
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String,
-      url: url == freezed
-          ? _value.url
-          : url // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-abstract class _$ViewerCatalogLinkCopyWith<$Res>
-    implements $ViewerCatalogLinkCopyWith<$Res> {
-  factory _$ViewerCatalogLinkCopyWith(
-          _ViewerCatalogLink value, $Res Function(_ViewerCatalogLink) then) =
-      __$ViewerCatalogLinkCopyWithImpl<$Res>;
-  @override
-  $Res call({String title, String url});
-}
-
-/// @nodoc
-class __$ViewerCatalogLinkCopyWithImpl<$Res>
-    extends _$ViewerCatalogLinkCopyWithImpl<$Res>
-    implements _$ViewerCatalogLinkCopyWith<$Res> {
-  __$ViewerCatalogLinkCopyWithImpl(
-      _ViewerCatalogLink _value, $Res Function(_ViewerCatalogLink) _then)
-      : super(_value, (v) => _then(v as _ViewerCatalogLink));
-
-  @override
-  _ViewerCatalogLink get _value => super._value as _ViewerCatalogLink;
-
-  @override
-  $Res call({
-    Object? title = freezed,
-    Object? url = freezed,
-  }) {
-    return _then(_ViewerCatalogLink(
-      title: title == freezed
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String,
-      url: url == freezed
-          ? _value.url
-          : url // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$_ViewerCatalogLink extends _ViewerCatalogLink
-    with DiagnosticableTreeMixin {
-  const _$_ViewerCatalogLink({required this.title, required this.url})
-      : super._();
-
-  @override
-  final String title;
-  @override
-  final String url;
-
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ViewerCatalogLink(title: $title, url: $url)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'ViewerCatalogLink'))
-      ..add(DiagnosticsProperty('title', title))
-      ..add(DiagnosticsProperty('url', url));
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _ViewerCatalogLink &&
-            const DeepCollectionEquality().equals(other.title, title) &&
-            const DeepCollectionEquality().equals(other.url, url));
-  }
-
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(title),
-      const DeepCollectionEquality().hash(url));
-
-  @JsonKey(ignore: true)
-  @override
-  _$ViewerCatalogLinkCopyWith<_ViewerCatalogLink> get copyWith =>
-      __$ViewerCatalogLinkCopyWithImpl<_ViewerCatalogLink>(this, _$identity);
-}
-
-abstract class _ViewerCatalogLink extends ViewerCatalogLink {
-  const factory _ViewerCatalogLink(
-      {required String title, required String url}) = _$_ViewerCatalogLink;
-  const _ViewerCatalogLink._() : super._();
-
-  @override
-  String get title;
-  @override
-  String get url;
-  @override
-  @JsonKey(ignore: true)
-  _$ViewerCatalogLinkCopyWith<_ViewerCatalogLink> get copyWith =>
-      throw _privateConstructorUsedError;
 }

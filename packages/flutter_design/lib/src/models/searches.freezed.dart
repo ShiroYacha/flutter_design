@@ -37,9 +37,16 @@ const $SearchableElement = _$SearchableElementTearOff();
 
 /// @nodoc
 mixin _$SearchableElement {
+  /// Type of the searchable object
   SearchableType get type => throw _privateConstructorUsedError;
+
+  /// Type of the item found by the search
   SearchableHitType get hitType => throw _privateConstructorUsedError;
+
+  /// Parent searchable object
   Searchable get searchable => throw _privateConstructorUsedError;
+
+  /// Matching text from the search
   String get text => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -160,12 +167,20 @@ class _$_SearchableElement extends _SearchableElement {
       : super._();
 
   @override
+
+  /// Type of the searchable object
   final SearchableType type;
   @override
+
+  /// Type of the item found by the search
   final SearchableHitType hitType;
   @override
+
+  /// Parent searchable object
   final Searchable searchable;
   @override
+
+  /// Matching text from the search
   final String text;
 
   @override
@@ -208,12 +223,20 @@ abstract class _SearchableElement extends SearchableElement {
   const _SearchableElement._() : super._();
 
   @override
+
+  /// Type of the searchable object
   SearchableType get type;
   @override
+
+  /// Type of the item found by the search
   SearchableHitType get hitType;
   @override
+
+  /// Parent searchable object
   Searchable get searchable;
   @override
+
+  /// Matching text from the search
   String get text;
   @override
   @JsonKey(ignore: true)
@@ -236,8 +259,6 @@ class _$SearchResultItemTearOff {
       required int score,
       required String title,
       String? subtitle,
-      required int labelHighlightStart,
-      required int labelHighlightEnd,
       required String uri}) {
     return _SearchResultItem(
       context: context,
@@ -246,8 +267,6 @@ class _$SearchResultItemTearOff {
       score: score,
       title: title,
       subtitle: subtitle,
-      labelHighlightStart: labelHighlightStart,
-      labelHighlightEnd: labelHighlightEnd,
       uri: uri,
     );
   }
@@ -262,14 +281,25 @@ const $SearchResultItem = _$SearchResultItemTearOff();
 
 /// @nodoc
 mixin _$SearchResultItem {
+  /// Context of the result
   SearchResultContext get context => throw _privateConstructorUsedError;
+
+  /// Type of the result item
   SearchResultItemType get type => throw _privateConstructorUsedError;
+
+  /// Type of the page
   SearchResultItemPageType get pageType => throw _privateConstructorUsedError;
+
+  /// Search score based on text similarity
   int get score => throw _privateConstructorUsedError;
+
+  /// Title of the result item
   String get title => throw _privateConstructorUsedError;
+
+  /// Subtitle of the result item
   String? get subtitle => throw _privateConstructorUsedError;
-  int get labelHighlightStart => throw _privateConstructorUsedError;
-  int get labelHighlightEnd => throw _privateConstructorUsedError;
+
+  /// Navigable URI of the result
   String get uri => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -290,8 +320,6 @@ abstract class $SearchResultItemCopyWith<$Res> {
       int score,
       String title,
       String? subtitle,
-      int labelHighlightStart,
-      int labelHighlightEnd,
       String uri});
 }
 
@@ -312,8 +340,6 @@ class _$SearchResultItemCopyWithImpl<$Res>
     Object? score = freezed,
     Object? title = freezed,
     Object? subtitle = freezed,
-    Object? labelHighlightStart = freezed,
-    Object? labelHighlightEnd = freezed,
     Object? uri = freezed,
   }) {
     return _then(_value.copyWith(
@@ -341,14 +367,6 @@ class _$SearchResultItemCopyWithImpl<$Res>
           ? _value.subtitle
           : subtitle // ignore: cast_nullable_to_non_nullable
               as String?,
-      labelHighlightStart: labelHighlightStart == freezed
-          ? _value.labelHighlightStart
-          : labelHighlightStart // ignore: cast_nullable_to_non_nullable
-              as int,
-      labelHighlightEnd: labelHighlightEnd == freezed
-          ? _value.labelHighlightEnd
-          : labelHighlightEnd // ignore: cast_nullable_to_non_nullable
-              as int,
       uri: uri == freezed
           ? _value.uri
           : uri // ignore: cast_nullable_to_non_nullable
@@ -371,8 +389,6 @@ abstract class _$SearchResultItemCopyWith<$Res>
       int score,
       String title,
       String? subtitle,
-      int labelHighlightStart,
-      int labelHighlightEnd,
       String uri});
 }
 
@@ -395,8 +411,6 @@ class __$SearchResultItemCopyWithImpl<$Res>
     Object? score = freezed,
     Object? title = freezed,
     Object? subtitle = freezed,
-    Object? labelHighlightStart = freezed,
-    Object? labelHighlightEnd = freezed,
     Object? uri = freezed,
   }) {
     return _then(_SearchResultItem(
@@ -424,14 +438,6 @@ class __$SearchResultItemCopyWithImpl<$Res>
           ? _value.subtitle
           : subtitle // ignore: cast_nullable_to_non_nullable
               as String?,
-      labelHighlightStart: labelHighlightStart == freezed
-          ? _value.labelHighlightStart
-          : labelHighlightStart // ignore: cast_nullable_to_non_nullable
-              as int,
-      labelHighlightEnd: labelHighlightEnd == freezed
-          ? _value.labelHighlightEnd
-          : labelHighlightEnd // ignore: cast_nullable_to_non_nullable
-              as int,
       uri: uri == freezed
           ? _value.uri
           : uri // ignore: cast_nullable_to_non_nullable
@@ -450,8 +456,6 @@ class _$_SearchResultItem extends _SearchResultItem {
       required this.score,
       required this.title,
       this.subtitle,
-      required this.labelHighlightStart,
-      required this.labelHighlightEnd,
       required this.uri})
       : super._();
 
@@ -459,27 +463,37 @@ class _$_SearchResultItem extends _SearchResultItem {
       _$$_SearchResultItemFromJson(json);
 
   @override
+
+  /// Context of the result
   final SearchResultContext context;
   @override
+
+  /// Type of the result item
   final SearchResultItemType type;
   @override
+
+  /// Type of the page
   final SearchResultItemPageType pageType;
   @override
+
+  /// Search score based on text similarity
   final int score;
   @override
+
+  /// Title of the result item
   final String title;
   @override
+
+  /// Subtitle of the result item
   final String? subtitle;
   @override
-  final int labelHighlightStart;
-  @override
-  final int labelHighlightEnd;
-  @override
+
+  /// Navigable URI of the result
   final String uri;
 
   @override
   String toString() {
-    return 'SearchResultItem(context: $context, type: $type, pageType: $pageType, score: $score, title: $title, subtitle: $subtitle, labelHighlightStart: $labelHighlightStart, labelHighlightEnd: $labelHighlightEnd, uri: $uri)';
+    return 'SearchResultItem(context: $context, type: $type, pageType: $pageType, score: $score, title: $title, subtitle: $subtitle, uri: $uri)';
   }
 
   @override
@@ -493,10 +507,6 @@ class _$_SearchResultItem extends _SearchResultItem {
             const DeepCollectionEquality().equals(other.score, score) &&
             const DeepCollectionEquality().equals(other.title, title) &&
             const DeepCollectionEquality().equals(other.subtitle, subtitle) &&
-            const DeepCollectionEquality()
-                .equals(other.labelHighlightStart, labelHighlightStart) &&
-            const DeepCollectionEquality()
-                .equals(other.labelHighlightEnd, labelHighlightEnd) &&
             const DeepCollectionEquality().equals(other.uri, uri));
   }
 
@@ -509,8 +519,6 @@ class _$_SearchResultItem extends _SearchResultItem {
       const DeepCollectionEquality().hash(score),
       const DeepCollectionEquality().hash(title),
       const DeepCollectionEquality().hash(subtitle),
-      const DeepCollectionEquality().hash(labelHighlightStart),
-      const DeepCollectionEquality().hash(labelHighlightEnd),
       const DeepCollectionEquality().hash(uri));
 
   @JsonKey(ignore: true)
@@ -532,8 +540,6 @@ abstract class _SearchResultItem extends SearchResultItem {
       required int score,
       required String title,
       String? subtitle,
-      required int labelHighlightStart,
-      required int labelHighlightEnd,
       required String uri}) = _$_SearchResultItem;
   const _SearchResultItem._() : super._();
 
@@ -541,22 +547,32 @@ abstract class _SearchResultItem extends SearchResultItem {
       _$_SearchResultItem.fromJson;
 
   @override
+
+  /// Context of the result
   SearchResultContext get context;
   @override
+
+  /// Type of the result item
   SearchResultItemType get type;
   @override
+
+  /// Type of the page
   SearchResultItemPageType get pageType;
   @override
+
+  /// Search score based on text similarity
   int get score;
   @override
+
+  /// Title of the result item
   String get title;
   @override
+
+  /// Subtitle of the result item
   String? get subtitle;
   @override
-  int get labelHighlightStart;
-  @override
-  int get labelHighlightEnd;
-  @override
+
+  /// Navigable URI of the result
   String get uri;
   @override
   @JsonKey(ignore: true)

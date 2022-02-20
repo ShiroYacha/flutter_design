@@ -4,24 +4,44 @@ import 'package:recase/recase.dart';
 
 import 'models/pages.dart';
 
+/// Take a list of flat document pages and group & layer them into a single component tree.
+/// Typically you can pass the generated [generatedComponentPages] via `flutter_design_codegen`.
 ViewerGroupPage buildComponentPageTree({
   required List<ViewerDocumentPage> componentPages,
+
+  /// Id of the component root node. This will also be converted to the node name.
   String id = 'components',
+
+  /// See [buildGroupedPageTrees]
+  bool compressLeaf = true,
+
+  /// See [buildGroupedPageTrees]
+  bool sortById = true,
 }) {
   // Prepand the [id] to all namespaces of the generated component document pages
   return buildGroupedPageTrees(
     componentPages
         .map((e) => e.copyWith(namespace: [id, ...e.namespace]))
         .toList(),
-    compressLeaf: true,
-    sortById: true,
+    compressLeaf: compressLeaf,
+    sortById: sortById,
   ).single;
 }
 
-// TODO: improve algo
+/// Generate a list of [ViewerGroupPage] by grouping and layering document pages
+/// with group pages based on the [namespace]. The returned results will be the
+/// first children nodes in a tree structure.
 List<ViewerGroupPage> buildGroupedPageTrees(
   List<ViewerDocumentPage> documentPages, {
+
+  /// Indicates if a parent node with a single child leaf should be compressed into
+  /// a single leaf.
+  ///
+  /// Example: g1/g2/p1 -> g1/g2, where now "g2" is the new document page as the [id]
+  /// and [namespace] of "g2" is copied to "p1".
   bool compressLeaf = false,
+
+  /// Indicates if the nodes should be sorted by their [id]s.
   bool sortById = false,
 }) {
   String namespaceToId(Iterable<String> namespace) => namespace.join(',');
