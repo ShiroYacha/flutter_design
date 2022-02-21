@@ -7,7 +7,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Flutter design',
-  tagline: 'Build beautiful designs using Flutter',
+  tagline: 'Supercharge your Flutter UX development',
   url: 'https://flutterdesign.io',
   baseUrl: '/',
   onBrokenLinks: 'throw',
@@ -15,6 +15,7 @@ const config = {
   favicon: 'img/favicon.png',
   organizationName: 'ShiroYacha', // Usually your GitHub org/user name.
   projectName: 'flutter_design', // Usually your repo name.
+  plugins: ["docusaurus-plugin-sass"],
 
   presets: [
     [
@@ -26,14 +27,8 @@ const config = {
           // Please change this to your repo.
           editUrl: 'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
         },
-        // blog: {
-        //   showReadingTime: true,
-        //   // Please change this to your repo.
-        //   editUrl:
-        //     'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
-        // },
         theme: {
-          customCss: require.resolve('./src/css/custom.css'),
+          customCss: require.resolve('./src/scss/main.scss'),
         },
         gtag: {
           trackingID: 'G-S8W5YK0FNP',
@@ -55,11 +50,10 @@ const config = {
         items: [
           {
             type: 'doc',
-            docId: 'intro',
-            position: 'left',
-            label: 'Tutorial',
+            docId: 'get_started',
+            position: 'right',
+            label: 'Docs',
           },
-          // { to: '/blog', label: 'Blog', position: 'left' },
           {
             href: 'https://github.com/ShiroYacha/flutter_design/',
             label: 'GitHub',
@@ -74,8 +68,8 @@ const config = {
             title: 'Docs',
             items: [
               {
-                label: 'Tutorial',
-                to: '/docs/intro',
+                label: 'Getting started',
+                to: '/docs/get_started',
               },
             ],
           },
@@ -95,10 +89,6 @@ const config = {
           {
             title: 'More',
             items: [
-              // {
-              //   label: 'Blog',
-              //   to: '/blog',
-              // },
               {
                 label: 'GitHub',
                 href: 'https://github.com/ShiroYacha/flutter_design/',
@@ -109,8 +99,10 @@ const config = {
         copyright: `Copyright © ${new Date().getFullYear()} Flutter Design, Built with Docusaurus.`,
       },
       prism: {
-        theme: lightCodeTheme,
-        darkTheme: darkCodeTheme,
+        defaultLanguage: "dart",
+        additionalLanguages: ["dart", "yaml"],
+        theme: require("prism-react-renderer/themes/vsLight"),
+        darkTheme: require("prism-react-renderer/themes/dracula"),
       },
     }),
 };

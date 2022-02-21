@@ -51,7 +51,7 @@ Here are the key objectives of the project:
     - Different device frames
     - Different theme frames
     - Different locale frames
-    - Runtime data configuration: you can easily "try-out" different data in runtime, e.g. Color, Values, or even Widget! It is also possible to create your own data generator.
+  - Runtime data configuration: you can easily "try-out" different data in runtime, e.g. Color, Values, or even Widget! It is also possible to create your own data generator.
 
 The UX and design is inspired by [Wanda Design System](https://design.wonderflow.ai/).
 

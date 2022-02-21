@@ -1,0 +1,58 @@
+# Concepts
+
+Now that you have setup the basic framework, let's dive into the core concepts and workflow.
+
+## Why use `flutter_design`?
+
+We all love Flutter and how easy it is to create cross-platform beautiful UX. But with great power comes great 
+responsibilities, you now would need to implement and fine tune designs across multiple platforms, form factors, 
+themes, etc.
+
+The main goal of `flutter_design` is to provide an easy-to-use framework to empower your creative designs and 
+enable you to fine tune it to perfection using ther integrated designer tool.
+
+You can also use `flutter_design` to setup your design system catalog to serve as a UX reference (e.g. host it 
+on the web).
+
+## Powerful designer tool
+
+The corner stone of the system is the powerful designer widget that comes with [flutter_design_viewer](https://pub.dev/packages/flutter_design_viewer). 
+Here are a list of features it provides:
+
+- **Widget designer**: visualize and interact with your widgets
+  - **Cross-platform**: support Web (with URL navigation), macOS, Windows, Android, iOS.
+  - **Multiple synchronized frames**: visualize your widgets across (user interactions such as tap, drag is broadcasted for all frames)
+    - Different **device** frames (powered by [DevicePreview](https://pub.dev/packages/device_preview))
+    - Different **theme** frames 
+    - Different **locale** frames
+    - Adjustable **canvas** frame
+  - **Data builder**: inject runtime configurable data to your widget constructor. You can also provide your own data builders.
+  - **Code viewer**: see the actual code that renders the widget side-by-side.
+- **Book structure**: organize your pages in a tree structure similar to [Docusaurus](https://docusaurus.io/).
+- **Search**: fully supported keyboard search with interface inspired by [DocSearch](https://docsearch.algolia.com/). Currently only in-memory search is implemented.
+- **API reference**: display basic API documentation on the widget constructor.
+
+
+:::note
+For more information about the designer tool, please check [Designer](/docs/designer/overview)
+:::
+
+
+## Code generation 
+
+The idea is to not burden the developer with boilerplate code to integrate your widget into the designer. Instead you can use simple annotations to generate code to populate the component pages. 
+
+Thanks to Flutter's [Tree shaking mechanism](https://www.alibabacloud.com/blog/the-tree-shaking-mechanism-in-flutter_597737), the generated designer code will not be included
+in the production code with a little bit of care.
+
+:::tip
+Although not recommended (as it might be quite verbose and error prone), it is possible to manually integrate your widget to the designer using pure dart code in your design viewer
+app to totally separate your production code & designer code. The downside is the cost to maintain such code and structure (especially in case of interface change).
+:::
+
+On the other hand, you can always integrate individual pages (currently only in Dart but MDX might be supported on demand) in the designer, especially meta pages such as "Design language", "Brand", etc.
+
+:::note
+For more information about how to use the code generator, please check [codegen](/docs/codegen/annotation).
+:::
+

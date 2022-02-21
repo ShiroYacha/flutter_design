@@ -30,12 +30,12 @@ dependencies:
   flutter:
     sdk: flutter
   # internal
-  # flutter_design: ^0.0.10-pre+1
-  flutter_design:
-    path: ../../flutter_design
-  # flutter_design_viewer: ^0.0.10-pre+1
-  flutter_design_viewer:
-    path: ../
+  flutter_design: ^0.0.10-pre+1
+  # flutter_design:
+  #   path: ../../flutter_design
+  flutter_design_viewer: ^0.0.10-pre+1
+  # flutter_design_viewer:
+  #   path: ../
   # icon
   flutter_feather_icons: ^2.0.0+1
   ionicons: ^0.1.2
@@ -51,8 +51,9 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_design_codegen:
-    path: ../../flutter_design_codegen
+  flutter_design_codegen: ^0.0.10-pre+1
+  # flutter_design_codegen:
+  #   path: ../../flutter_design_codegen
   build_runner: ^2.1.7
 
   # The "flutter_lints" package below contains a set of recommended lints to
