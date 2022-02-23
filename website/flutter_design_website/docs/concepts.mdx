@@ -14,6 +14,10 @@ enable you to fine tune it to perfection using ther integrated designer tool.
 You can also use `flutter_design` to setup your design system catalog to serve as a UX reference (e.g. host it 
 on the web).
 
+:::note
+For more information on each use-case, checkout [Use-cases](/docs/usecases).
+:::
+
 ## Powerful designer tool
 
 The corner stone of the system is the powerful designer widget that comes with [flutter_design_viewer](https://pub.dev/packages/flutter_design_viewer). 
@@ -47,12 +51,13 @@ in the production code with a little bit of care.
 
 :::tip
 Although not recommended (as it might be quite verbose and error prone), it is possible to manually integrate your widget to the designer using pure dart code in your design viewer
-app to totally separate your production code & designer code. The downside is the cost to maintain such code and structure (especially in case of interface change).
+app to totally separate your production code & designer code. The downside is the cost to maintain such code and structure (especially in case of interface change). For more info, please refer to 
+[Page factory builder](/docs/codegen/generators#page-factory-builder).
 :::
 
 On the other hand, you can always integrate individual pages (currently only in Dart but MDX might be supported on demand) in the designer, especially meta pages such as "Design language", "Brand", etc.
 
 :::note
-For more information about how to use the code generator, please check [codegen](/docs/codegen/annotation).
+For more information about how to use the code generator, please check [Codegen: Annotation](/docs/codegen/annotation).
 :::
 

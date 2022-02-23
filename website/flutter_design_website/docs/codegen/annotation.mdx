@@ -1,3 +1,50 @@
 # Annotation
 
-Coming soon ...
+The main annotation is `@Design(...)` or `@design` if you are not passing
+any additional parameters. It should be placed on a `Widget` class as such:
+
+:::tip
+Don't forget to add the `part '*.design.dart';` statement as it enables the part
+file builder.
+:::
+
+```dart
+@Design(
+  title: 'MyWidget',
+  subtitle: 'A very awesome widget',
+  description: 'A long long time ago ...(100 words)...',
+  designLink: 'https://www.figma.com/',
+  showApiDocs: false,
+  viewerInitValueMap: {
+    'uri': 'https://via.placeholder.com/150',
+  },
+)
+class MyWidget extends StatelessWidget {
+  //...
+}
+```
+
+Here are the list of parameters you can customize:
+
+- **title** (`String?`)
+  - override the title of the page (also in the explorer tree).
+  - if `null`, defaults to the name of the widget.
+- **subtitle** (`String?`)
+  - override the subtitle of the page (placed under the title). 
+  - if `null`, will not be shown.
+- **description** (`String?`)
+  - override the description of the page (place under the section links).
+  - if `null`, will not be shown. 
+- **designLink** (`String?`)
+  - if set, the user can see the link button on the widget designer.
+  - if `null`, will not be shown. 
+- **showApiDocs** (`bool = true`)
+  - if `true`, the API docs section will be generated. It describes the fields in the widget constructor.
+  - if `false`, will not be shown.
+- **viewerInitValueMap** (`Map<String,dynamic> = const {}`)
+  - configure the initial value for a given field name. 
+  - especially useful for `required` named fields as there is no default value. If both the initial value and 
+  the default value is specified, the latter will be discarded.
+  - currently most dart primitive types are supported.
+  - if not set, will default to the specified default value or `null`. If a non-nullable field's initial value
+  is not set, the designer might show an error.

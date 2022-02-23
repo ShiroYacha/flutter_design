@@ -7,17 +7,18 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_design/flutter_design.dart';
-import 'package:flutter_design_viewer/flutter_design_viewer.dart';
-import 'package:flutter_design_viewer/src/models/data.dart';
-import 'package:flutter_design_viewer/src/theme.dart';
-import 'package:flutter_design_viewer/src/utils.dart';
-import 'package:flutter_design_viewer/src/widget_keys.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:vrouter/vrouter.dart';
 
+import '../flutter_design_viewer.dart';
 import 'commands.dart';
+import 'default_data_builders.dart';
+import 'models/data.dart';
 import 'models/settings.dart';
 import 'navigator_observer.dart';
+import 'theme.dart';
+import 'utils.dart';
+import 'widget_keys.dart';
 import 'widgets/items/brandings.dart';
 import 'widgets/scaffolds/root_scaffold.dart';
 import 'widgets/screens/error_screens.dart';
@@ -78,7 +79,7 @@ class DesignSystemViewerApp extends HookConsumerWidget {
 
   Map<Type, List<DataBuilderCreator>> _mergeDataBuilders(
       Map<Type, List<DataBuilderCreator>> dataBuilders) {
-    return mergeMaps(_defaultBuilders, dataBuilders, value: (e1, e2) {
+    return mergeMaps(defaultBuilders, dataBuilders, value: (e1, e2) {
       // The user provided data builders will have priority
       return [
         ...e2,
@@ -225,35 +226,3 @@ class DesignSystemViewerRouter extends HookConsumerWidget {
     ];
   }
 }
-
-final _defaultBuilders = <Type, List<DataBuilderCreator>>{
-  String: [
-    ([d]) => d != null
-        ? DataTemplateStringRawBuilder(raw: d)
-        : DataTemplateStringRawBuilder(),
-    ([d]) => DataTemplateStringLoremBuilder(),
-  ],
-  Widget: [
-    ([d]) => DataTemplateWidgetPlaceholderBuilder(),
-  ],
-  List<Widget>: [
-    ([d]) => DataTemplateWidgetPlaceholderListBuilder(),
-  ],
-  Function: [
-    ([d]) => DataTemplateStubFunctionBuilder(),
-  ],
-  Color: [
-    ([d]) => d != null
-        ? DataTemplateColorPickerBuilder(color: d)
-        : DataTemplateColorPickerBuilder(),
-  ],
-  double: [
-    ([d]) => d != null
-        ? DataTemplateDoubleBuilder(value: d)
-        : DataTemplateDoubleBuilder(),
-  ],
-  int: [
-    ([d]) =>
-        d != null ? DataTemplateIntBuilder(value: d) : DataTemplateIntBuilder(),
-  ],
-};

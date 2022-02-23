@@ -1,5 +1,11 @@
 import React from "react";
-import GifPlayer from "react-gif-player";
+import ExecutionEnvironment from '@docusaurus/ExecutionEnvironment';
+import BrowserOnly from '@docusaurus/BrowserOnly';
+
+var GifPlayer;
+if (ExecutionEnvironment.canUseDOM) {
+  GifPlayer = require('react-gif-player');
+}
 
 interface VideoSnippetProps {
   title?: string;
@@ -19,7 +25,9 @@ export const VideoSnippet: React.FC<VideoSnippetProps> = ({ url, title }) => {
       </div>
       <div className="vidplayer_container">
         <div className="vidplayer">
-          <GifPlayer gif={url} autoplay />
+          <BrowserOnly>
+            {() => <GifPlayer gif={url} autoplay />}
+          </BrowserOnly>
         </div>
       </div>
     </div>

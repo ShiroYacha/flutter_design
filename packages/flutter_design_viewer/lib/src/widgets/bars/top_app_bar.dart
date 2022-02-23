@@ -29,7 +29,7 @@ class TopAppBar extends HookConsumerWidget {
           const SearchButton(),
           Spacers.h20,
           ThemableIconButton(
-            icon: Ionicons.logo_github,
+            icon: Ionicons.logo_twitter,
             onTap: () {},
           ),
           Spacers.h10,

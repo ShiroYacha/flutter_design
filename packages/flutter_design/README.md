@@ -83,7 +83,7 @@ class SpecialWidget extends StatelessWidget {
 ```
 
 After running `flutter packages pub run build_runner build --delete-conflicting-outputs` the catalogs will be generated:
-- `/lib/**/*.design.dart`: generated widget catalogs for the partial file.
+- `/lib/**/*.design.dart`: generated widget component pagesfor the partial file.
 - `lib/page_factory.design.dart`: this contains the aggregated `generatedComponentPages` that can be directly pass to the DesignSystemViewerApp described later.
 
 Finally you can create a flutter designer app (currently supporting Android, iOS, Web, macOS, Windows) to host the design system viewer by adding the following dependencies to the `pubspec.yaml`

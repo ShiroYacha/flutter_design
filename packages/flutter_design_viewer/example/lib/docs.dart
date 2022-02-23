@@ -7,6 +7,8 @@ const docPages = [
     title: 'Introduction',
     subtitle:
         'Wanda is Wonderflow\'s open-source design system built for products and digital experiences.',
+    description:
+        'Example text and design copied from https://design.wonderflow.ai/. ',
     sections: [
       ViewerSectionUnion.paragraph(
         id: 'overview',
@@ -94,39 +96,39 @@ Where possible, Wanda's components include abstractions to make labelling our co
     title: 'Brand',
     description: 'Wonderflow\'s digital identity',
   ),
-  ViewerDocumentPage(
-    id: 'colors',
-    namespace: ['design', 'foundations'],
-    title: 'Colors',
-  ),
-  ViewerDocumentPage(
-    id: 'typography',
-    namespace: ['design', 'foundations'],
-    title: 'Typography',
-  ),
-  ViewerDocumentPage(
-    id: 'elevations',
-    namespace: ['design', 'foundations'],
-    title: 'Elevations',
-  ),
-  ViewerDocumentPage(
-    id: 'iconography',
-    namespace: ['design'],
-    title: 'Iconography',
-  ),
-  ViewerDocumentPage(
-    id: 'themes',
-    namespace: ['design'],
-    title: 'Themes',
-  ),
-  ViewerDocumentPage(
-    id: 'buttons',
-    namespace: ['design', 'recipes'],
-    title: 'Buttons',
-  ),
-  ViewerDocumentPage(
-    id: 'dropdown',
-    namespace: ['design', 'recipes'],
-    title: 'Dropdown',
-  ),
+  // ViewerDocumentPage(
+  //   id: 'colors',
+  //   namespace: ['design', 'foundations'],
+  //   title: 'Colors',
+  // ),
+  // ViewerDocumentPage(
+  //   id: 'typography',
+  //   namespace: ['design', 'foundations'],
+  //   title: 'Typography',
+  // ),
+  // ViewerDocumentPage(
+  //   id: 'elevations',
+  //   namespace: ['design', 'foundations'],
+  //   title: 'Elevations',
+  // ),
+  // ViewerDocumentPage(
+  //   id: 'iconography',
+  //   namespace: ['design'],
+  //   title: 'Iconography',
+  // ),
+  // ViewerDocumentPage(
+  //   id: 'themes',
+  //   namespace: ['design'],
+  //   title: 'Themes',
+  // ),
+  // ViewerDocumentPage(
+  //   id: 'buttons',
+  //   namespace: ['design', 'recipes'],
+  //   title: 'Buttons',
+  // ),
+  // ViewerDocumentPage(
+  //   id: 'dropdown',
+  //   namespace: ['design', 'recipes'],
+  //   title: 'Dropdown',
+  // ),
 ];

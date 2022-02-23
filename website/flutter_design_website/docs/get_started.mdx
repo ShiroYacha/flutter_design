@@ -14,7 +14,6 @@ There are mainly 3 packages you need to install, typically in 2 separate Flutter
   - [flutter_design_viewer](https://pub.dev/packages/flutter_design_viewer): designer app used to showcase your design system portfolio and/or to debug your designs under different situations. 
 
 
-
 ## Basic usage
 
 First, on your design code base you have to add the following dependencies to your `pubspec.yaml`: 
@@ -48,7 +47,7 @@ After running the following build runner command,
 flutter packages pub run build_runner build --delete-conflicting-outputs
 ```
 the following files will be generated:
-- `/lib/**/*.design.dart`: generated widget catalogs for the partial file.
+- `/lib/**/*.design.dart`: generated widget component pagesfor the partial file.
 - `/lib/page_factory.design.dart`: this contains the aggregated `generatedComponentPages` that can be directly pass to the `DesignSystemViewerApp` described later.
 
 Finally you can create a flutter designer app (currently supporting Android, iOS, Web, macOS, Windows) to host the design system viewer by adding the following dependencies to the `pubspec.yaml`
@@ -66,7 +65,7 @@ Then you need to basically setup the design system viewer in your app using the 
 - `enabledThemes` the `ThemeData` your design system supports
 
 :::note
-You can also customize the pages by creating static or dynamic contents. For more information, please check out [Designer: Pages](/docs/designer#pages).
+You can also customize the pages by creating static or dynamic contents. For more information, please check out [Designer: Pages](/docs/designer/pages).
 :::
 
 ```dart

@@ -1,3 +1,64 @@
 # Generators
 
-Coming soon ...
+There are currently 2 builders in `flutter_design_codegen`:
+
+- **Design builder**: generates the `*.design.dart` part file that contains the component page fields.
+- **Page factory builder**: generates a single `page_factory.design.dart` file that aggregates all generated components into a single importable field.
+
+## Design builder
+
+The design builder scans the dart files for classes annotated with `@Design` or `@design`. Once it finds it, it will generate a component page using the convention: `generated{Folder1}{Folder2}{...}{Filex}{WidgetName}Page`.
+
+The `id` of the component will be the class name in camelCase. The `title` will be by default the widget's name, unless provided by the `@Design` annotation. Both `subtitle`, `description` is omitted if not provided by `@Design`.
+
+### Component section
+
+A single component section called `Anatomy` will be created for the default public constructor of the class. The section contains a `ViewerWidgetBuilder` which contains 
+all the meta data required to construct the widget using its constructor. The builder will scan all the fields (optional, named, positional, etc.) and store their metadata into a `fieldMetaDataset` field so 
+later the designer would know how to construct thoses fields using [DataBuilders](/docs/designer/data_builder). 
+
+Note that the `fieldMetaDataset` will take into account whether the field is nullable/optional, 
+the provided viewer initial values, via `viewerInitValueMap` or the default value on the constructor.
+
+:::warning
+
+Currently not all types are mapped configured the default data builders (if no data builder is configured for a specific type, the widget designer will throw an error during runtime). To see the currently by default configured data builders, check the [default_data_builders.dart](https://github.com/ShiroYacha/flutter_design/blob/main/packages/flutter_design_viewer/lib/src/default_data_builders.dart) file.
+
+Note that you can always provide your own data builder configuration for a specific type. However some types are not fully supported yet, such as `Function` with parameters. You can find all limitations listed in [FAQ: known limitations](/docs/faq#known-limitations).
+:::
+
+Futuremore, the source code of the constructor will be extracted into a source code snippet that will be shown along the widget in the designer. 
+
+:::note
+The source is extracted using the [analyzer](https://pub.dev/packages/analyzer) via the [abstract syntax tree (AST)](https://en.wikipedia.org/wiki/Abstract_syntax_tree) and formatted using [dart_style](https://github.com/dart-lang/dart_style) with some auto injected commas. Hence 
+the code might be a bit different than what you have actually written, e.g. the comments are gone, the formatting might be different, etc.
+:::
+
+### API docs section
+
+Finally, if the `showApiDocs` is `true` in the annotation (by default it is `true`), a section called `API reference` will be created which shows all the meta data previously collected on the constructor.
+
+## Page factory builder
+
+Similar to the design builder, the page factor builder scans all dart files for classes with the `@Design` or `@design` annotation. It then aggregates it, with an import statement
+for each file, the component page fields into a single field: `generatedComponentPages` which can be used to import your component pages to the designer.
+
+:::tip
+You can also include pages that are not generated, for instance to create your own component pages manually using the `ViewerDocumentPage` with a `ViewerComponentSection` section from `flutter_design`. To do that, you need to 
+specify a valid namespace for the component using the same convention mentioned in [Annotation](/docs/codegen/annotation) and inject it together with the generated component pages when you pass it to the designer
+
+```dart
+  DesignSystemViewerApp(
+      //...
+      pageGroups: [
+        buildComponentPageTree(componentPages: 
+          [
+            ...generatedComponentPages,
+            ...yourOwnComponentPages,
+          ]),
+      ],
+    ),
+```
+
+Note that by default the pages are sorted by namespace/id names.
+:::

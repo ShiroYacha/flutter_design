@@ -20,20 +20,22 @@ module.exports = {
     'roadmap',
     {
       type: 'category',
-      label: 'Codegen',
-      items: [
-        'codegen/annotation',
-        'codegen/generators',
-      ]
-    },
-    {
-      type: 'category',
       label: 'Designer',
       items: [
         'designer/overview',
         'designer/pages',
         'designer/widget_designer',
+        'designer/data_builder',
         'designer/api_docs',
+      ]
+    },
+    {
+      type: 'category',
+      label: 'Codegen',
+      items: [
+        'codegen/overview',
+        'codegen/annotation',
+        'codegen/generators',
       ]
     },
     {
@@ -43,6 +45,7 @@ module.exports = {
         'official_examples/demo_example',
       ]
     },
+    'faq',
     'contribute',
   ],
 };
