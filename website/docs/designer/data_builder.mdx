@@ -1,0 +1,59 @@
+# Data builder
+
+The data builder view allows users to configure at runtime the fields passed to the widget's constructor. 
+
+## Mechanism
+
+In order to leverage the data builders, you have to use the `DataBuilderFactory.build(context, 'field_name')` to 
+return a dynamic object to your constructor's field. This process is automated when using the [Code generator](/docs/codegen/generators#component-section).
+
+The data builder factory contains a map of `{Type: List of widget data builder}`, each entry uses the field's type as its key and a list of data builder as its value. 
+Here is an example of a data builder factory configuration for `String` type. Note that the `[d]` in the builder argument is the initial/default value of the field.
+
+
+```dart
+{
+  String: [
+    // Need to use a condition here to use the data builder constructor's default value
+    ([d]) => d != null
+        ? DataTemplateStringRawBuilder(raw: d)
+        : DataTemplateStringRawBuilder(),
+    ([d]) => DataTemplateStringLoremBuilder(),
+  ],
+}
+```
+At runtime, the widget designer provides a list of data builder options based on the target type. 
+It also checks the field's default/initial values to seed to the data builder if possible, i.e. the `[d]` argument.
+
+:::tip
+The initially selected data builder is the **first** element in the list of data builders of the target type. 
+Currently the user provided data builders will be **inserted before** the default data builders.
+
+```dart
+DesignSystemViewerApp(
+      dataBuilders: {
+        String: [
+          ([d]) =>
+              d != null ? MyStringDataBuilder(raw: d) : MyStringDataBuilder(),
+        ]
+      },
+)
+```
+:::
+
+Each data builder consists a set of configurable parameters and a user interface to be displayed in the data builder view. You can find some of 
+the examples and designs in the following section.
+
+:::note
+For more information on how to configure the data builder properties, please refer to [Annotation](/docs/codegen/annotation).
+:::
+
+## Default data builders
+
+:::note
+For the full list of current default data builders, please check on [Github](https://github.com/ShiroYacha/flutter_design/blob/main/packages/flutter_design_viewer/lib/src/default_data_builders.dart).
+:::
+
+Coming soon ...
+
+<!--### `Widget` data builders-->

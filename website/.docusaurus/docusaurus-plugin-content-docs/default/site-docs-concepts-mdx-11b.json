@@ -1,0 +1,23 @@
+{
+  "unversionedId": "concepts",
+  "id": "concepts",
+  "title": "Concepts",
+  "description": "Now that you have setup the basic framework, let's dive into the core concepts and workflow.",
+  "source": "@site/docs/concepts.mdx",
+  "sourceDirName": ".",
+  "slug": "/concepts",
+  "permalink": "/docs/concepts",
+  "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/concepts.mdx",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "Sidebar",
+  "previous": {
+    "title": "Getting started",
+    "permalink": "/docs/get_started"
+  },
+  "next": {
+    "title": "Use-cases",
+    "permalink": "/docs/usecases"
+  }
+}

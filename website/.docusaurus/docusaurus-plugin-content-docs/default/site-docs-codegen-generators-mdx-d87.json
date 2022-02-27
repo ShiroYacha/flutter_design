@@ -1,0 +1,23 @@
+{
+  "unversionedId": "codegen/generators",
+  "id": "codegen/generators",
+  "title": "Generators",
+  "description": "There are currently 2 builders in flutterdesigncodegen:",
+  "source": "@site/docs/codegen/generators.mdx",
+  "sourceDirName": "codegen",
+  "slug": "/codegen/generators",
+  "permalink": "/docs/codegen/generators",
+  "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/codegen/generators.mdx",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "Sidebar",
+  "previous": {
+    "title": "Annotation",
+    "permalink": "/docs/codegen/annotation"
+  },
+  "next": {
+    "title": "Demo example",
+    "permalink": "/docs/official_examples/demo_example"
+  }
+}

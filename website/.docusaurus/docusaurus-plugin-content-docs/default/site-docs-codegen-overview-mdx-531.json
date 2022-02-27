@@ -1,0 +1,23 @@
+{
+  "unversionedId": "codegen/overview",
+  "id": "codegen/overview",
+  "title": "Overview",
+  "description": "When running the builders from flutterdesigncodegen, they look for the @Design or @design annotations",
+  "source": "@site/docs/codegen/overview.mdx",
+  "sourceDirName": "codegen",
+  "slug": "/codegen/overview",
+  "permalink": "/docs/codegen/overview",
+  "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/codegen/overview.mdx",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "Sidebar",
+  "previous": {
+    "title": "Data builder",
+    "permalink": "/docs/designer/data_builder"
+  },
+  "next": {
+    "title": "Annotation",
+    "permalink": "/docs/codegen/annotation"
+  }
+}

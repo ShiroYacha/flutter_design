@@ -3,12 +3,12 @@ import 'dart:async';
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:build/build.dart';
+import 'package:collection/collection.dart';
 import 'package:dart_style/dart_style.dart';
 import 'package:flutter_design_annotation/flutter_design_annotation.dart';
+import 'package:flutter_design_codegen/src/utils.dart';
 import 'package:recase/recase.dart';
 import 'package:source_gen/source_gen.dart';
-
-import '../utils.dart';
 
 /// Generate [ViewerDocumentPage] from @TDesign annotated classes.
 class DesignGenerator extends GeneratorForAnnotation<TDesign> {
@@ -42,6 +42,7 @@ class DesignGenerator extends GeneratorForAnnotation<TDesign> {
     );
     final fieldMetaDatasetCode = _extractFieldMetaDataset(
       resolver: buildStep.resolver,
+      clazz: clazz,
       parameters: visitor.classType.element.constructors.first.parameters,
       annotation: annotation,
     );
@@ -181,6 +182,7 @@ ${await _extractSourceFromElement(
 
   String _extractFieldMetaDataset({
     required Resolver resolver,
+    required ClassElement clazz,
     required List<ParameterElement> parameters,
     required ConstantReader annotation,
   }) {
@@ -190,7 +192,7 @@ ${await _extractSourceFromElement(
       final type = e.type.element != null
           ? e.type.getDisplayString(withNullability: false)
           : 'Function';
-
+      final fieldDocumentation = _extractFieldDocumentation(clazz, e.name);
       sb.write(
         '''
 FieldMetaData(
@@ -201,11 +203,17 @@ FieldMetaData(
   defaultValue: ${e.defaultValueCode},
   defaultValueCode: ${e.defaultValueCode != null ? "'${e.defaultValueCode}'" : null},
   viewerInitValue: ${_readNullableAnnotationMapValue(annotation, 'viewerInitValueMap', e.name, e.type)},
-  documentation: ${e.documentationComment != null ? "'${e.documentationComment}'" : null},
+  documentation: ${fieldDocumentation != null ? "'''$fieldDocumentation'''" : null},
 ),''',
       );
     }
     sb.write(']');
     return sb.toString();
+  }
+
+  String? _extractFieldDocumentation(ClassElement clazz, String fieldName) {
+    return clazz.fields
+        .firstWhereOrNull((e) => e.name == fieldName)
+        ?.documentationComment?.replaceAll(r'^///', '');
   }
 }

@@ -5,13 +5,17 @@ import 'package:url_strategy/url_strategy.dart';
 import 'package:viewer_example/docs.dart';
 import 'package:viewer_example/page_factory.design.dart';
 
+import 'data_builders.dart';
+
 void main() {
+  // Recommended to make history browsing work better in web
   setPathUrlStrategy();
   runApp(
     DesignSystemViewerApp(
       settings: ViewerSettings(
         enabledLocales: {
           'en-US': const Locale('en', 'US'),
+          'de-DE': const Locale('de', 'DE'),
         },
         enabledThemes: {
           'light': ThemeData.light(),
@@ -19,8 +23,17 @@ void main() {
         },
         widgetDisplayHeight: 500,
       ),
+      dataBuilders: {
+        String: [
+          // Need to use a condition here to use the data builder constructor's default value
+          ([d]) =>
+              d != null ? MyStringDataBuilder(raw: d) : MyStringDataBuilder(),
+        ]
+      },
       pageGroups: [
+        // Your custom pages
         ...buildGroupedPageTrees(docPages),
+        // Generated @design/@Design annotated pages
         buildComponentPageTree(componentPages: generatedComponentPages),
       ],
     ),

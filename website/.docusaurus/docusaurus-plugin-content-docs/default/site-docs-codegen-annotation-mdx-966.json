@@ -1,0 +1,23 @@
+{
+  "unversionedId": "codegen/annotation",
+  "id": "codegen/annotation",
+  "title": "Annotation",
+  "description": "The main annotation is @Design(...) or @design if you are not passing",
+  "source": "@site/docs/codegen/annotation.mdx",
+  "sourceDirName": "codegen",
+  "slug": "/codegen/annotation",
+  "permalink": "/docs/codegen/annotation",
+  "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/codegen/annotation.mdx",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "Sidebar",
+  "previous": {
+    "title": "Overview",
+    "permalink": "/docs/codegen/overview"
+  },
+  "next": {
+    "title": "Generators",
+    "permalink": "/docs/codegen/generators"
+  }
+}

@@ -1,0 +1,85 @@
+import ThemedImage from '@theme/ThemedImage';
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
+# Overview
+
+[flutter_design_viewer](https://pub.dev/packages/flutter_design_viewer) comes with `DesignSystemViewerApp` widget
+that helps you easily create a designer app where you can test your implementation under various scenarios and also
+showcase your design system portfolio as following:
+
+```dart
+
+void main() {
+  // Recommended to make history browsing work better in web
+  setPathUrlStrategy();
+  runApp(
+    DesignSystemViewerApp(
+      settings: ViewerSettings(
+        enabledLocales: {
+          'en-US': const Locale('en', 'US'),
+          'de-DE': const Locale('de', 'DE'),
+        },
+        enabledThemes: {
+          'light': ThemeData.light(),
+          'dark': ThemeData.dark(),
+        },
+        widgetDisplayHeight: 500,
+      ),
+      dataBuilders: {
+        String: [
+          // Need to use a condition here to use the data builder constructor's default value
+          ([d]) =>
+              d != null ? MyStringDataBuilder(raw: d) : MyStringDataBuilder(),
+        ]
+      },
+      pageGroups: [
+        // Your custom pages
+        ...buildGroupedPageTrees(docPages),
+        // Generated @design/@Design annotated pages
+        buildComponentPageTree(componentPages: generatedComponentPages),
+      ],
+    ),
+  );
+}
+
+```
+
+There are 2 main properties you can configure on the widget:
+- **settings**: pass the static configuration of the designer app. Some of the fields are required such as `enabledLocales`, `enabledThemes` as 
+if they are not provided the corresponding features won't function correctly.
+- **pageGroups**: pass the collection of structured pages. There are utility methods such as `buildComponentPageTree` that will
+convert flat pages (e.g. generated pages) into a structured tree using the `namespace` parameter.
+
+:::note
+For more inforamtion on how to build different pages, see [Pages](/docs/designer/pages).
+:::
+
+## Designer app structure
+
+Here is a quick overview on different key parts of the designer app:
+
+<ThemedImage
+  alt="Designer app"
+  sources={{
+    light: useBaseUrl('/img/misc/designer_overview.png'),
+    dark: useBaseUrl('/img/misc/designer_overview_dark.png'),
+  }}
+/>
+
+- **Explorer**: outlines the tree structure of the pages. Allows the user to navigate through the pages. On smaller screens the explorer is by default hidden.
+- **Appbar**: contains most global configurations of the designer widget. Settings are persisted in local storage.
+  - **Global settings**: situated at the top left corner of the app bar. Allow the user to set the default configuration of the designer.
+  - **Search**: allow users to search globally for a page, section, etc. Can also be trigged with keyboard shortcut. 
+  - **Links**: misc links if provided.
+  - **Theme**: switch between `light`, `dark` and `system` mode.
+- **Page**: contains many different sections such as widget designer, text paragraphs, custom widgets, etc.
+  - **Widget designer**: one of the most useful section that allow users to interact with the widget under different circumstances.
+    - **Synchronized frames**: allow users to configure the parent container of the given widget.
+    - **Data builder**: provide a set of configurable data builders to generate different data models to pass in the widget's constructor.
+    - **Code viewer**: preview the code of the widget.
+    - ...
+  - ...
+
+:::note
+For more inforamtion on different page section types, see [Pages: Sections](/docs/designer/pages#sections).
+:::

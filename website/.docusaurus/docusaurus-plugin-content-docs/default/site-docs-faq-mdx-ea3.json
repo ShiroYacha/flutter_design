@@ -1,0 +1,23 @@
+{
+  "unversionedId": "faq",
+  "id": "faq",
+  "title": "FAQ",
+  "description": "Known limitations",
+  "source": "@site/docs/faq.mdx",
+  "sourceDirName": ".",
+  "slug": "/faq",
+  "permalink": "/docs/faq",
+  "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/faq.mdx",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "Sidebar",
+  "previous": {
+    "title": "Demo example",
+    "permalink": "/docs/official_examples/demo_example"
+  },
+  "next": {
+    "title": "Contribute",
+    "permalink": "/docs/contribute"
+  }
+}

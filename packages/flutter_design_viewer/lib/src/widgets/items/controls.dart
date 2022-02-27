@@ -243,11 +243,52 @@ class SelectableThemeGroup extends HookConsumerWidget {
           message: e,
           child: CircleAvatar(
             backgroundColor: color,
-            radius: 10,
+            radius: 8,
             child: CircleAvatar(
               backgroundColor:
                   viewerSettings.enabledThemes[e]?.scaffoldBackgroundColor,
-              radius: 8,
+              radius: 6,
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
+class SelectableLocaleGroup extends HookConsumerWidget {
+  final String value;
+  final void Function(String) onValueChanged;
+  const SelectableLocaleGroup({
+    required this.value,
+    required this.onValueChanged,
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final theme = Theme.of(context);
+    final viewerSettings = ref.watch(viewerSettingsProvider);
+    return SelectableGlyphGroup<String>(
+      items: viewerSettings.enabledLocales.keys,
+      selectedItem: value,
+      selectionChanged: (e) => onValueChanged(e),
+      builder: (context, e, [selected = false]) {
+        final color =
+            selected ? theme.primaryColor : theme.colorScheme.onBackground;
+        final locale = viewerSettings.enabledLocales[e]!;
+        return Tooltip(
+          message: locale.toLanguageTag(),
+          child: Container(
+            height: 16,
+            decoration: BoxDecoration(
+              border: Border.all(color: color),
+              borderRadius: BorderRadius.circular(4),
+            ),
+            padding: SpacingDesign.paddingHorizontal1,
+            child: Text(
+              locale.languageCode.toUpperCase(),
+              style: theme.textTheme.caption?.copyWith(color: color),
             ),
           ),
         );

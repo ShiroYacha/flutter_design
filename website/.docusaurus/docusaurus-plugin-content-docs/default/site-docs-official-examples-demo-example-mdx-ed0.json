@@ -1,0 +1,23 @@
+{
+  "unversionedId": "official_examples/demo_example",
+  "id": "official_examples/demo_example",
+  "title": "Demo example",
+  "description": "Checkout the web version of the demo example here//flutter-design-7b479.web.app/",
+  "source": "@site/docs/official_examples/demo_example.mdx",
+  "sourceDirName": "official_examples",
+  "slug": "/official_examples/demo_example",
+  "permalink": "/docs/official_examples/demo_example",
+  "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/official_examples/demo_example.mdx",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "Sidebar",
+  "previous": {
+    "title": "Generators",
+    "permalink": "/docs/codegen/generators"
+  },
+  "next": {
+    "title": "FAQ",
+    "permalink": "/docs/faq"
+  }
+}

@@ -1,0 +1,62 @@
+.vidsnippet {
+  position: relative;
+  @include themed(background-color, #FFFFFFFF, rgb(40, 42, 54));
+  border-radius: 6.4px;
+  box-shadow: var(--ifm-global-shadow-lw);
+
+  &__title_bar {
+    position: absolute;
+    right: 0;
+    left: 0;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    padding: 16px 14px;
+  }
+
+  &__dots {
+    display: flex;
+  }
+
+  &__dot {
+    height: 14px;
+    width: 14px;
+    margin-left: 4px;
+    border-radius: 50%;
+
+    @include themed(background-color, #00000013, #ffffff25);
+
+    @include min-width(lg) {
+      margin-left: 6px;
+    }
+  }
+
+  &__title {
+    position: absolute;
+    right: 0;
+    left: 0;
+    opacity: 0.64;
+    font-size: 13.4px;
+    text-align: center;
+    line-height: 0;
+  }
+
+  .vidplayer_container {
+    height: 615px;
+    width: 100%;
+    display: flex;
+  }
+
+  .vidplayer{
+    align-self: center;
+    width: 100%;
+
+    img {
+      width: 100%;
+    };
+
+    .gifplayer {
+      max-height: 540px;
+    };
+  }
+}

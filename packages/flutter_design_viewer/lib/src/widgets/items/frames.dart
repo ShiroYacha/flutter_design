@@ -106,9 +106,20 @@ class ComponentFramePanel extends HookConsumerWidget {
               if (localViewerState.displayMode == DisplayMode.codeOnly) {
                 return const CompontentFrameCodeDisplay(expand: false);
               }
+              final sideBySide = showDataBuilder ||
+                  localViewerState.displayMode ==
+                      DisplayMode.widgetCodeSideBySide;
               return SizedBox(
                 height: widgetDisplayHeight,
                 child: NSplitter(
+                  // Use a key composed of the current builder instance & side by side
+                  // to invalidate the initial fraction if needed
+                  key: ValueKey('${viewerWidgetBuilder.hashCode}_$sideBySide'),
+                  initialFractions: sideBySide
+                      // Display side by side if data builder or code is shown
+                      ? [0.5, 0.5]
+                      // Display widget fully if only showing widget
+                      : [1.0, 0.0],
                   items: [
                     const ComponentFrameWidgetDisplay(),
                     if (showDataBuilder)
@@ -117,7 +128,9 @@ class ComponentFramePanel extends HookConsumerWidget {
                       )
                     else if (localViewerState.displayMode ==
                         DisplayMode.widgetCodeSideBySide)
-                      const CompontentFrameCodeDisplay(expand: true),
+                      const CompontentFrameCodeDisplay(expand: true)
+                    else
+                      Container(),
                   ],
                 ),
               );
@@ -131,8 +144,12 @@ class ComponentFramePanel extends HookConsumerWidget {
 
 class NSplitter extends StatelessWidget {
   final List<Widget> items;
+  final List<double>? initialFractions;
+  final Axis axis;
   const NSplitter({
     required this.items,
+    this.axis = Axis.horizontal,
+    this.initialFractions,
     Key? key,
   })  : assert(items.length != 0),
         super(key: key);
@@ -143,13 +160,16 @@ class NSplitter extends StatelessWidget {
     if (items.length == 1) {
       return items.first;
     }
+    final horizontal = axis == Axis.horizontal;
     return Split(
-      axis: Axis.horizontal,
-      initialFractions: items.map((e) => 1.0 / items.length).toList(),
+      axis: axis,
+      initialFractions:
+          initialFractions ?? items.map((e) => 1.0 / items.length).toList(),
       splitters: items
           .skip(1)
           .map((e) => SizedBox(
-                width: 6,
+                width: horizontal ? 6 : 0,
+                height: horizontal ? 0 : 6,
                 child: MouseRegion(
                   child: DecoratedBox(
                     decoration: BoxDecoration(
@@ -310,7 +330,14 @@ class ComponentFrameWidgetDisplay extends HookConsumerWidget {
                 const ThemeDevicesFrameContainer(),
           },
         ) ??
-        const CanvasFrameContainer();
+        NSplitter(
+          axis: Axis.vertical,
+          initialFractions: const [1.0, 0.0],
+          items: [
+            const CanvasFrameContainer(),
+            Container(),
+          ],
+        );
   }
 }
 
@@ -378,6 +405,11 @@ class ComponentFrameToolbar extends HookConsumerWidget {
               SelectableThemeGroup(
                 value: targetThemeIdNotifier.value,
                 onValueChanged: (v) => targetThemeIdNotifier.value = v,
+              ),
+            if (viewModeNotifier.value != ViewMode.locales)
+              SelectableLocaleGroup(
+                value: targetLocaleIdNotifier.value,
+                onValueChanged: (v) => targetLocaleIdNotifier.value = v,
               ),
             SelectableDisplayModeGroup(
               value: displayModeNotifier.value,

@@ -1,0 +1,456 @@
+{
+  "docusaurus-plugin-content-docs": {
+    "default": {
+      "loadedVersions": [
+        {
+          "versionName": "current",
+          "versionLabel": "Next",
+          "versionPath": "/docs",
+          "tagsPath": "/docs/tags",
+          "versionEditUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs",
+          "versionEditUrlLocalized": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/i18n/en/docusaurus-plugin-content-docs/current",
+          "versionBanner": null,
+          "versionBadge": false,
+          "versionClassName": "docs-version-current",
+          "isLast": true,
+          "routePriority": -1,
+          "sidebarFilePath": "/Users/min/Documents/projects/flutter_design/website/sidebars.js",
+          "contentPath": "/Users/min/Documents/projects/flutter_design/website/docs",
+          "contentPathLocalized": "/Users/min/Documents/projects/flutter_design/website/i18n/en/docusaurus-plugin-content-docs/current",
+          "docs": [
+            {
+              "unversionedId": "codegen/annotation",
+              "id": "codegen/annotation",
+              "title": "Annotation",
+              "description": "The main annotation is @Design(...) or @design if you are not passing",
+              "source": "@site/docs/codegen/annotation.mdx",
+              "sourceDirName": "codegen",
+              "slug": "/codegen/annotation",
+              "permalink": "/docs/codegen/annotation",
+              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/codegen/annotation.mdx",
+              "tags": [],
+              "version": "current",
+              "frontMatter": {},
+              "sidebar": "Sidebar",
+              "previous": {
+                "title": "Overview",
+                "permalink": "/docs/codegen/overview"
+              },
+              "next": {
+                "title": "Generators",
+                "permalink": "/docs/codegen/generators"
+              }
+            },
+            {
+              "unversionedId": "codegen/generators",
+              "id": "codegen/generators",
+              "title": "Generators",
+              "description": "There are currently 2 builders in flutterdesigncodegen:",
+              "source": "@site/docs/codegen/generators.mdx",
+              "sourceDirName": "codegen",
+              "slug": "/codegen/generators",
+              "permalink": "/docs/codegen/generators",
+              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/codegen/generators.mdx",
+              "tags": [],
+              "version": "current",
+              "frontMatter": {},
+              "sidebar": "Sidebar",
+              "previous": {
+                "title": "Annotation",
+                "permalink": "/docs/codegen/annotation"
+              },
+              "next": {
+                "title": "Demo example",
+                "permalink": "/docs/official_examples/demo_example"
+              }
+            },
+            {
+              "unversionedId": "codegen/overview",
+              "id": "codegen/overview",
+              "title": "Overview",
+              "description": "When running the builders from flutterdesigncodegen, they look for the @Design or @design annotations",
+              "source": "@site/docs/codegen/overview.mdx",
+              "sourceDirName": "codegen",
+              "slug": "/codegen/overview",
+              "permalink": "/docs/codegen/overview",
+              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/codegen/overview.mdx",
+              "tags": [],
+              "version": "current",
+              "frontMatter": {},
+              "sidebar": "Sidebar",
+              "previous": {
+                "title": "Data builder",
+                "permalink": "/docs/designer/data_builder"
+              },
+              "next": {
+                "title": "Annotation",
+                "permalink": "/docs/codegen/annotation"
+              }
+            },
+            {
+              "unversionedId": "concepts",
+              "id": "concepts",
+              "title": "Concepts",
+              "description": "Now that you have setup the basic framework, let's dive into the core concepts and workflow.",
+              "source": "@site/docs/concepts.mdx",
+              "sourceDirName": ".",
+              "slug": "/concepts",
+              "permalink": "/docs/concepts",
+              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/concepts.mdx",
+              "tags": [],
+              "version": "current",
+              "frontMatter": {},
+              "sidebar": "Sidebar",
+              "previous": {
+                "title": "Getting started",
+                "permalink": "/docs/get_started"
+              },
+              "next": {
+                "title": "Use-cases",
+                "permalink": "/docs/usecases"
+              }
+            },
+            {
+              "unversionedId": "contribute",
+              "id": "contribute",
+              "title": "Contribute",
+              "description": "Coming soon ...",
+              "source": "@site/docs/contribute.mdx",
+              "sourceDirName": ".",
+              "slug": "/contribute",
+              "permalink": "/docs/contribute",
+              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/contribute.mdx",
+              "tags": [],
+              "version": "current",
+              "frontMatter": {},
+              "sidebar": "Sidebar",
+              "previous": {
+                "title": "FAQ",
+                "permalink": "/docs/faq"
+              }
+            },
+            {
+              "unversionedId": "designer/data_builder",
+              "id": "designer/data_builder",
+              "title": "Data builder",
+              "description": "The data builder view allows users to configure at runtime the fields passed to the widget's constructor.",
+              "source": "@site/docs/designer/data_builder.mdx",
+              "sourceDirName": "designer",
+              "slug": "/designer/data_builder",
+              "permalink": "/docs/designer/data_builder",
+              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/designer/data_builder.mdx",
+              "tags": [],
+              "version": "current",
+              "frontMatter": {},
+              "sidebar": "Sidebar",
+              "previous": {
+                "title": "Widget designer",
+                "permalink": "/docs/designer/widget_designer"
+              },
+              "next": {
+                "title": "Overview",
+                "permalink": "/docs/codegen/overview"
+              }
+            },
+            {
+              "unversionedId": "designer/overview",
+              "id": "designer/overview",
+              "title": "Overview",
+              "description": "flutterdesignviewer comes with DesignSystemViewerApp widget",
+              "source": "@site/docs/designer/overview.mdx",
+              "sourceDirName": "designer",
+              "slug": "/designer/overview",
+              "permalink": "/docs/designer/overview",
+              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/designer/overview.mdx",
+              "tags": [],
+              "version": "current",
+              "frontMatter": {},
+              "sidebar": "Sidebar",
+              "previous": {
+                "title": "Roadmap",
+                "permalink": "/docs/roadmap"
+              },
+              "next": {
+                "title": "Pages",
+                "permalink": "/docs/designer/pages"
+              }
+            },
+            {
+              "unversionedId": "designer/pages",
+              "id": "designer/pages",
+              "title": "Pages",
+              "description": "Page types",
+              "source": "@site/docs/designer/pages.mdx",
+              "sourceDirName": "designer",
+              "slug": "/designer/pages",
+              "permalink": "/docs/designer/pages",
+              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/designer/pages.mdx",
+              "tags": [],
+              "version": "current",
+              "frontMatter": {},
+              "sidebar": "Sidebar",
+              "previous": {
+                "title": "Overview",
+                "permalink": "/docs/designer/overview"
+              },
+              "next": {
+                "title": "Widget designer",
+                "permalink": "/docs/designer/widget_designer"
+              }
+            },
+            {
+              "unversionedId": "designer/widget_designer",
+              "id": "designer/widget_designer",
+              "title": "Widget designer",
+              "description": "Here we will deep dive into the widget designer, which allows the user to interact with the widget under various configurations.",
+              "source": "@site/docs/designer/widget_designer.mdx",
+              "sourceDirName": "designer",
+              "slug": "/designer/widget_designer",
+              "permalink": "/docs/designer/widget_designer",
+              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/designer/widget_designer.mdx",
+              "tags": [],
+              "version": "current",
+              "frontMatter": {},
+              "sidebar": "Sidebar",
+              "previous": {
+                "title": "Pages",
+                "permalink": "/docs/designer/pages"
+              },
+              "next": {
+                "title": "Data builder",
+                "permalink": "/docs/designer/data_builder"
+              }
+            },
+            {
+              "unversionedId": "faq",
+              "id": "faq",
+              "title": "FAQ",
+              "description": "Known limitations",
+              "source": "@site/docs/faq.mdx",
+              "sourceDirName": ".",
+              "slug": "/faq",
+              "permalink": "/docs/faq",
+              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/faq.mdx",
+              "tags": [],
+              "version": "current",
+              "frontMatter": {},
+              "sidebar": "Sidebar",
+              "previous": {
+                "title": "Demo example",
+                "permalink": "/docs/official_examples/demo_example"
+              },
+              "next": {
+                "title": "Contribute",
+                "permalink": "/docs/contribute"
+              }
+            },
+            {
+              "unversionedId": "get_started",
+              "id": "get_started",
+              "title": "Getting started",
+              "description": "Before we dive into the concepts and inner mechanism of the framework. Let's take a quick look at how to quickly setup a minimum design environment and workflow using Flutter design.",
+              "source": "@site/docs/get_started.mdx",
+              "sourceDirName": ".",
+              "slug": "/get_started",
+              "permalink": "/docs/get_started",
+              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/get_started.mdx",
+              "tags": [],
+              "version": "current",
+              "frontMatter": {},
+              "sidebar": "Sidebar",
+              "next": {
+                "title": "Concepts",
+                "permalink": "/docs/concepts"
+              }
+            },
+            {
+              "unversionedId": "official_examples/demo_example",
+              "id": "official_examples/demo_example",
+              "title": "Demo example",
+              "description": "Checkout the web version of the demo example here//flutter-design-7b479.web.app/",
+              "source": "@site/docs/official_examples/demo_example.mdx",
+              "sourceDirName": "official_examples",
+              "slug": "/official_examples/demo_example",
+              "permalink": "/docs/official_examples/demo_example",
+              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/official_examples/demo_example.mdx",
+              "tags": [],
+              "version": "current",
+              "frontMatter": {},
+              "sidebar": "Sidebar",
+              "previous": {
+                "title": "Generators",
+                "permalink": "/docs/codegen/generators"
+              },
+              "next": {
+                "title": "FAQ",
+                "permalink": "/docs/faq"
+              }
+            },
+            {
+              "unversionedId": "roadmap",
+              "id": "roadmap",
+              "title": "Roadmap",
+              "description": "Coming soon ...",
+              "source": "@site/docs/roadmap.mdx",
+              "sourceDirName": ".",
+              "slug": "/roadmap",
+              "permalink": "/docs/roadmap",
+              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/roadmap.mdx",
+              "tags": [],
+              "version": "current",
+              "frontMatter": {},
+              "sidebar": "Sidebar",
+              "previous": {
+                "title": "Use-cases",
+                "permalink": "/docs/usecases"
+              },
+              "next": {
+                "title": "Overview",
+                "permalink": "/docs/designer/overview"
+              }
+            },
+            {
+              "unversionedId": "usecases",
+              "id": "usecases",
+              "title": "Use-cases",
+              "description": "Here are a few typical use-cases of incorporating flutter_design into your Flutter development ecosystem.",
+              "source": "@site/docs/usecases.mdx",
+              "sourceDirName": ".",
+              "slug": "/usecases",
+              "permalink": "/docs/usecases",
+              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/usecases.mdx",
+              "tags": [],
+              "version": "current",
+              "frontMatter": {},
+              "sidebar": "Sidebar",
+              "previous": {
+                "title": "Concepts",
+                "permalink": "/docs/concepts"
+              },
+              "next": {
+                "title": "Roadmap",
+                "permalink": "/docs/roadmap"
+              }
+            }
+          ],
+          "sidebars": {
+            "Sidebar": [
+              {
+                "type": "doc",
+                "id": "get_started"
+              },
+              {
+                "type": "doc",
+                "id": "concepts"
+              },
+              {
+                "type": "doc",
+                "id": "usecases"
+              },
+              {
+                "type": "doc",
+                "id": "roadmap"
+              },
+              {
+                "type": "category",
+                "label": "Designer",
+                "items": [
+                  {
+                    "type": "doc",
+                    "id": "designer/overview"
+                  },
+                  {
+                    "type": "doc",
+                    "id": "designer/pages"
+                  },
+                  {
+                    "type": "doc",
+                    "id": "designer/widget_designer"
+                  },
+                  {
+                    "type": "doc",
+                    "id": "designer/data_builder"
+                  }
+                ],
+                "collapsible": true,
+                "collapsed": true
+              },
+              {
+                "type": "category",
+                "label": "Codegen",
+                "items": [
+                  {
+                    "type": "doc",
+                    "id": "codegen/overview"
+                  },
+                  {
+                    "type": "doc",
+                    "id": "codegen/annotation"
+                  },
+                  {
+                    "type": "doc",
+                    "id": "codegen/generators"
+                  }
+                ],
+                "collapsible": true,
+                "collapsed": true
+              },
+              {
+                "type": "category",
+                "label": "Official examples",
+                "items": [
+                  {
+                    "type": "doc",
+                    "id": "official_examples/demo_example"
+                  }
+                ],
+                "collapsible": true,
+                "collapsed": true
+              },
+              {
+                "type": "doc",
+                "id": "faq"
+              },
+              {
+                "type": "doc",
+                "id": "contribute"
+              }
+            ]
+          },
+          "mainDocId": "get_started",
+          "categoryGeneratedIndices": []
+        }
+      ]
+    }
+  },
+  "docusaurus-plugin-content-blog": {
+    "default": {
+      "blogSidebarTitle": "Recent posts",
+      "blogPosts": [],
+      "blogListPaginated": [],
+      "blogTags": {},
+      "blogTagsListPath": null
+    }
+  },
+  "docusaurus-plugin-content-pages": {
+    "default": [
+      {
+        "type": "jsx",
+        "permalink": "/",
+        "source": "@site/src/pages/index.tsx"
+      }
+    ]
+  },
+  "docusaurus-plugin-debug": {
+    "default": null
+  },
+  "docusaurus-plugin-google-gtag": {
+    "default": null
+  },
+  "docusaurus-theme-classic": {
+    "default": null
+  },
+  "docusaurus-plugin-sass": {
+    "default": null
+  }
+}

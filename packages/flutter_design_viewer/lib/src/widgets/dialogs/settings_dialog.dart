@@ -88,11 +88,23 @@ class SettingsDialog extends HookConsumerWidget {
                 TitleWidgetPair(
                   title: 'Default theme',
                   description:
-                      'Change the default theme of all widget viewers globally, excl. "Theme" view mode.',
+                      'Change the default theme of all widget viewers globally, excl. "Themes" view mode.',
                   widget: SelectableThemeGroup(
                     value: viewerState.targetThemeId,
                     onValueChanged: (v) => viewerStateNotifier.update(
                       (state) => state.copyWith(targetThemeId: v),
+                    ),
+                  ),
+                ),
+                Spacers.v20,
+                TitleWidgetPair(
+                  title: 'Default locale',
+                  description:
+                      'Change the default locale of all widget viewers globally, excl. "Locales" view mode.',
+                  widget: SelectableLocaleGroup(
+                    value: viewerState.targetLocaleId,
+                    onValueChanged: (v) => viewerStateNotifier.update(
+                      (state) => state.copyWith(targetLocaleId: v),
                     ),
                   ),
                 ),

@@ -1,0 +1,42 @@
+import ThemedImage from '@theme/ThemedImage';
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
+# Pages
+
+## Page types
+
+There are 2 types of pages:
+- **Group page**: `ViewerGroupPage`, a group page is a page that only contains children pages. It is displayed in the explorer as a collapsable node with only a title.
+- **Document page**: `ViewerDocumentPage` a "leaf" page that a title, an optional subtitle/description and contains various sections as described below.
+
+## Sections
+
+Each document page contains a list of sections of following types, displayed in order in a list.
+
+### Paragraph section
+`ViewerParagraphSection`, a paragraph section contains a title, an optional description and a collection of items that is displayed in a list:
+
+- **Text**: `ViewerTextCollectionItem`, contains paragraph text title and/or a description.
+- **Link**: `ViewerLinkCollectionItem`, contains title label and a url.
+- **Image**: `ViewerImageCollectionItem`, contains an image and some text and/or description.
+- **Widget**: `ViewerWidgetCollectionItem`, contains an arbitary widget provided by the user.
+
+### Component section
+`ViewerComponentSection`, a component section is shown in a widget designer. It typically contains the meta data
+to render the widget and its data.
+
+:::note
+For more information, please refer to [Widget designer](/docs/designer/widget_designer)
+:::
+
+### API reference section
+`ViewerApiDocsSection`, an API reference section specifies set of parameter meta data for each widget constructor. It takes the meta data
+from the component sections in the page.
+
+<ThemedImage
+  alt="API docs section"
+  sources={{
+    light: useBaseUrl('/img/misc/api_docs.png'),
+    dark: useBaseUrl('/img/misc/api_docs_dark.png'),
+  }}
+/>

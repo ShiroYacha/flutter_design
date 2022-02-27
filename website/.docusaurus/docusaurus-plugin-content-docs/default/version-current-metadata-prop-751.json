@@ -1,0 +1,207 @@
+{
+  "pluginId": "default",
+  "version": "current",
+  "label": "Next",
+  "banner": null,
+  "badge": false,
+  "className": "docs-version-current",
+  "isLast": true,
+  "docsSidebars": {
+    "Sidebar": [
+      {
+        "type": "link",
+        "label": "Getting started",
+        "href": "/docs/get_started",
+        "docId": "get_started"
+      },
+      {
+        "type": "link",
+        "label": "Concepts",
+        "href": "/docs/concepts",
+        "docId": "concepts"
+      },
+      {
+        "type": "link",
+        "label": "Use-cases",
+        "href": "/docs/usecases",
+        "docId": "usecases"
+      },
+      {
+        "type": "link",
+        "label": "Roadmap",
+        "href": "/docs/roadmap",
+        "docId": "roadmap"
+      },
+      {
+        "type": "category",
+        "label": "Designer",
+        "items": [
+          {
+            "type": "link",
+            "label": "Overview",
+            "href": "/docs/designer/overview",
+            "docId": "designer/overview"
+          },
+          {
+            "type": "link",
+            "label": "Pages",
+            "href": "/docs/designer/pages",
+            "docId": "designer/pages"
+          },
+          {
+            "type": "link",
+            "label": "Widget designer",
+            "href": "/docs/designer/widget_designer",
+            "docId": "designer/widget_designer"
+          },
+          {
+            "type": "link",
+            "label": "Data builder",
+            "href": "/docs/designer/data_builder",
+            "docId": "designer/data_builder"
+          }
+        ],
+        "collapsible": true,
+        "collapsed": true
+      },
+      {
+        "type": "category",
+        "label": "Codegen",
+        "items": [
+          {
+            "type": "link",
+            "label": "Overview",
+            "href": "/docs/codegen/overview",
+            "docId": "codegen/overview"
+          },
+          {
+            "type": "link",
+            "label": "Annotation",
+            "href": "/docs/codegen/annotation",
+            "docId": "codegen/annotation"
+          },
+          {
+            "type": "link",
+            "label": "Generators",
+            "href": "/docs/codegen/generators",
+            "docId": "codegen/generators"
+          }
+        ],
+        "collapsible": true,
+        "collapsed": true
+      },
+      {
+        "type": "category",
+        "label": "Official examples",
+        "items": [
+          {
+            "type": "link",
+            "label": "Demo example",
+            "href": "/docs/official_examples/demo_example",
+            "docId": "official_examples/demo_example"
+          }
+        ],
+        "collapsible": true,
+        "collapsed": true
+      },
+      {
+        "type": "link",
+        "label": "FAQ",
+        "href": "/docs/faq",
+        "docId": "faq"
+      },
+      {
+        "type": "link",
+        "label": "Contribute",
+        "href": "/docs/contribute",
+        "docId": "contribute"
+      }
+    ]
+  },
+  "docs": {
+    "codegen/annotation": {
+      "id": "codegen/annotation",
+      "title": "Annotation",
+      "description": "The main annotation is @Design(...) or @design if you are not passing",
+      "sidebar": "Sidebar"
+    },
+    "codegen/generators": {
+      "id": "codegen/generators",
+      "title": "Generators",
+      "description": "There are currently 2 builders in flutterdesigncodegen:",
+      "sidebar": "Sidebar"
+    },
+    "codegen/overview": {
+      "id": "codegen/overview",
+      "title": "Overview",
+      "description": "When running the builders from flutterdesigncodegen, they look for the @Design or @design annotations",
+      "sidebar": "Sidebar"
+    },
+    "concepts": {
+      "id": "concepts",
+      "title": "Concepts",
+      "description": "Now that you have setup the basic framework, let's dive into the core concepts and workflow.",
+      "sidebar": "Sidebar"
+    },
+    "contribute": {
+      "id": "contribute",
+      "title": "Contribute",
+      "description": "Coming soon ...",
+      "sidebar": "Sidebar"
+    },
+    "designer/data_builder": {
+      "id": "designer/data_builder",
+      "title": "Data builder",
+      "description": "The data builder view allows users to configure at runtime the fields passed to the widget's constructor.",
+      "sidebar": "Sidebar"
+    },
+    "designer/overview": {
+      "id": "designer/overview",
+      "title": "Overview",
+      "description": "flutterdesignviewer comes with DesignSystemViewerApp widget",
+      "sidebar": "Sidebar"
+    },
+    "designer/pages": {
+      "id": "designer/pages",
+      "title": "Pages",
+      "description": "Page types",
+      "sidebar": "Sidebar"
+    },
+    "designer/widget_designer": {
+      "id": "designer/widget_designer",
+      "title": "Widget designer",
+      "description": "Here we will deep dive into the widget designer, which allows the user to interact with the widget under various configurations.",
+      "sidebar": "Sidebar"
+    },
+    "faq": {
+      "id": "faq",
+      "title": "FAQ",
+      "description": "Known limitations",
+      "sidebar": "Sidebar"
+    },
+    "get_started": {
+      "id": "get_started",
+      "title": "Getting started",
+      "description": "Before we dive into the concepts and inner mechanism of the framework. Let's take a quick look at how to quickly setup a minimum design environment and workflow using Flutter design.",
+      "sidebar": "Sidebar"
+    },
+    "official_examples/demo_example": {
+      "id": "official_examples/demo_example",
+      "title": "Demo example",
+      "description": "Checkout the web version of the demo example here//flutter-design-7b479.web.app/",
+      "sidebar": "Sidebar"
+    },
+    "roadmap": {
+      "id": "roadmap",
+      "title": "Roadmap",
+      "description": "Coming soon ...",
+      "sidebar": "Sidebar"
+    },
+    "usecases": {
+      "id": "usecases",
+      "title": "Use-cases",
+      "description": "Here are a few typical use-cases of incorporating flutter_design into your Flutter development ecosystem.",
+      "sidebar": "Sidebar"
+    }
+  }
+}

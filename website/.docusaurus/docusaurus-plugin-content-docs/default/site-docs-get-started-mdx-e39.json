@@ -1,0 +1,19 @@
+{
+  "unversionedId": "get_started",
+  "id": "get_started",
+  "title": "Getting started",
+  "description": "Before we dive into the concepts and inner mechanism of the framework. Let's take a quick look at how to quickly setup a minimum design environment and workflow using Flutter design.",
+  "source": "@site/docs/get_started.mdx",
+  "sourceDirName": ".",
+  "slug": "/get_started",
+  "permalink": "/docs/get_started",
+  "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/get_started.mdx",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "Sidebar",
+  "next": {
+    "title": "Concepts",
+    "permalink": "/docs/concepts"
+  }
+}

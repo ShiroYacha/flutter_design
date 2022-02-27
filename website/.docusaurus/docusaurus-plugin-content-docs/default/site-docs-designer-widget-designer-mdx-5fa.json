@@ -1,0 +1,23 @@
+{
+  "unversionedId": "designer/widget_designer",
+  "id": "designer/widget_designer",
+  "title": "Widget designer",
+  "description": "Here we will deep dive into the widget designer, which allows the user to interact with the widget under various configurations.",
+  "source": "@site/docs/designer/widget_designer.mdx",
+  "sourceDirName": "designer",
+  "slug": "/designer/widget_designer",
+  "permalink": "/docs/designer/widget_designer",
+  "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/designer/widget_designer.mdx",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "Sidebar",
+  "previous": {
+    "title": "Pages",
+    "permalink": "/docs/designer/pages"
+  },
+  "next": {
+    "title": "Data builder",
+    "permalink": "/docs/designer/data_builder"
+  }
+}

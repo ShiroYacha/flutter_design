@@ -1,0 +1,93 @@
+import ThemedImage from '@theme/ThemedImage';
+import useBaseUrl from '@docusaurus/useBaseUrl';
+
+# Widget designer
+
+Here we will deep dive into the widget designer, which allows the user to interact with the widget under various configurations.
+
+## Toolbar
+
+You can configure and switch the states of each widget designer locally using the controls on the toolbar.
+
+<ThemedImage
+  alt="Widget design toolbar"
+  sources={{
+    light: useBaseUrl('/img/misc/widget_designer_toolbar.png'),
+    dark: useBaseUrl('/img/misc/widget_designer_toolbar_dark.png'),
+  }}
+/>
+
+- **View mode**: switch the frame view mode which contains the widget.
+  - `canvas`: show the widget centerly on an adjustable canvas.
+  - `devices`: show the widget centerly in selected devices. You can further specify the device using the drop down button below the toolbar when 
+  you are in `devices` view mode. The default selected devices could be configured in the global settings.
+  - `themes`: show the widget centerly under all provided themes in a default device. Likewise, this can be configured globally. The theme selection
+  color uses the `ThemeData.scaffoldBackgroundColor`. You can also hover to see the theme's name.
+  - `locales`: show the widget centerly under all provided locales in a default device. Likewise, this can be configured globally. The current locale
+  is displayed on the top left of the device frame.
+- **Theme mode**: select the default theme mode to be used in all view modes except `themes`.
+- **Locale mode**: select the default locale mode to be used in all view modes except `locales`.
+
+## Widget frame view
+
+The widget is displayed in different frames according to the current `view mode` configurable in the toolbar. As mentioned before, there are 4 view modes 
+which utilize the following 2 type of frames to display the widget:
+
+### Canvas frame
+Used by `canvas` view mode, the canvas frame is a constraint container where the widget is placed in the center. 
+
+:::tip
+You can adjust the canvas' border by dragging the frame border adjusters as shown below.
+:::
+
+<ThemedImage
+  alt="Widget canvas frame view"
+  sources={{
+    light: useBaseUrl('/img/misc/canvas_frame.png'),
+    dark: useBaseUrl('/img/misc/canvas_frame_dark.png'),
+  }}
+/>
+
+
+
+### Device frame
+Used by `devices`, `themes`, `locales` view modes, the device frame is a fixed-height container with the give aspect ratio of the selected device where the widget is placed in the center. 
+
+:::tip
+All basic gestures are synchronized across all device frames: tap, drag, drop, move. For desktop/web applications, the "drag" scroll behavior is enabled and is encouraged instead 
+of touchpad/mouse wheel scrolling since it is synchronized. However, note that the synchronization uses the exact relative coordinates of the gesture event, hence the behavior might 
+not be optmized on devices with vastly different screensize.
+:::
+
+<ThemedImage
+  alt="Widget device frame view"
+  sources={{
+    light: useBaseUrl('/img/misc/device_frame.png'),
+    dark: useBaseUrl('/img/misc/device_frame_dark.png'),
+  }}
+/>
+
+## Code view
+
+You can see the actual code snippet of the widget as well as the constructor used to render the widget in the widget designer in the code view.
+
+:::note
+The source is extracted via the [abstract syntax tree (AST)](https://en.wikipedia.org/wiki/Abstract_syntax_tree) and formatted using [dart_style](https://github.com/dart-lang/dart_style) with some auto injected commas. Hence 
+the code might be a bit different than what you have actually written. For more information, please refer to [Generators: Component section](/docs/codegen/generators#component-section)
+:::
+
+<ThemedImage
+  alt="Widget code view"
+  sources={{
+    light: useBaseUrl('/img/misc/code_view.png'),
+    dark: useBaseUrl('/img/misc/code_view_dark.png'),
+  }}
+/>
+
+
+## Data builder view
+
+The data builder view allows you to configure at runtime the fields passed to the widget's constructor. A set of predefined builders for common
+types are provided. You can also create and use your own builders.
+
+Since the data builder view is quite complex, there is a dedicated section for it: [Data builder](/docs/designer/data_builder).

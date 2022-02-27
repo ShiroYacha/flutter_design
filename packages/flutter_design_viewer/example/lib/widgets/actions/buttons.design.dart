@@ -36,7 +36,8 @@ final generatedWidgetsActionsButtonsButtonPage = ViewerDocumentPage(
             defaultValue: null,
             defaultValueCode: null,
             viewerInitValue: null,
-            documentation: null,
+            documentation:
+                '''/// The child of the button, positioned in the middle of the container.''',
           ),
           FieldMetaData(
             name: 'onPressed',
@@ -46,7 +47,8 @@ final generatedWidgetsActionsButtonsButtonPage = ViewerDocumentPage(
             defaultValue: null,
             defaultValueCode: null,
             viewerInitValue: null,
-            documentation: null,
+            documentation:
+                '''/// Callback when the button is pressed. If `null`, the button is disabled.''',
           ),
         ],
       ),

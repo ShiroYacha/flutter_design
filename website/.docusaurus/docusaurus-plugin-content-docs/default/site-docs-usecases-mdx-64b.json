@@ -1,0 +1,23 @@
+{
+  "unversionedId": "usecases",
+  "id": "usecases",
+  "title": "Use-cases",
+  "description": "Here are a few typical use-cases of incorporating flutter_design into your Flutter development ecosystem.",
+  "source": "@site/docs/usecases.mdx",
+  "sourceDirName": ".",
+  "slug": "/usecases",
+  "permalink": "/docs/usecases",
+  "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/usecases.mdx",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "Sidebar",
+  "previous": {
+    "title": "Concepts",
+    "permalink": "/docs/concepts"
+  },
+  "next": {
+    "title": "Roadmap",
+    "permalink": "/docs/roadmap"
+  }
+}

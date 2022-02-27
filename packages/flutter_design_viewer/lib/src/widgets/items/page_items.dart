@@ -6,6 +6,7 @@ import 'package:flutter_design_viewer/src/measures.dart';
 import 'package:flutter_design_viewer/src/widgets/items/text.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:vrouter/vrouter.dart';
 
@@ -304,21 +305,18 @@ class ApiDocsSection extends HookConsumerWidget {
                     ),
                   ),
                 ],
+
+                /// TODO: improve to use a proper data table with dynamic height configuration
+                dataRowHeight: e.builder.fieldMetaDataset
+                        .any((e) => e.documentation?.isNotEmpty == true)
+                    ? 80
+                    : null,
                 rows: e.builder.fieldMetaDataset
                     .map(
                       (e) => DataRow(
                         cells: <DataCell>[
                           DataCell(
-                            Container(
-                              decoration: BoxDecoration(
-                                color: theme.dialogBackgroundColor,
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: SpacingDesign.s10,
-                                  vertical: SpacingDesign.s6),
-                              child: Text(e.name),
-                            ),
+                            _ApiFieldNameTag(name: e.name),
                           ),
                           DataCell(
                             Text(
@@ -331,12 +329,20 @@ class ApiDocsSection extends HookConsumerWidget {
                           DataCell(
                             e.defaultValue != null
                                 ? Text(e.defaultValueCode!)
-                                : const SizedBox.shrink(),
+                                : const SizedBox(width: 100),
                           ),
                           DataCell(
                             e.documentation != null
-                                ? Text(e.documentation!)
-                                : const SizedBox.shrink(),
+                                ? Padding(
+                                    padding: SpacingDesign.paddingAll16,
+                                    child: SingleChildScrollView(
+                                      child: Text(
+                                        e.documentation!,
+                                        style: GoogleFonts.robotoMono(),
+                                      ),
+                                    ),
+                                  )
+                                : const SizedBox(width: 100),
                           ),
                         ],
                       ),
@@ -347,6 +353,28 @@ class ApiDocsSection extends HookConsumerWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class _ApiFieldNameTag extends StatelessWidget {
+  final String name;
+  const _ApiFieldNameTag({
+    required this.name,
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Container(
+      decoration: BoxDecoration(
+        color: theme.dialogBackgroundColor,
+        borderRadius: BorderRadius.circular(8),
+      ),
+      padding: const EdgeInsets.symmetric(
+          horizontal: SpacingDesign.s10, vertical: SpacingDesign.s6),
+      child: Text(name),
     );
   }
 }

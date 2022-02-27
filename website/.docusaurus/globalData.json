@@ -1,0 +1,103 @@
+{
+  "docusaurus-plugin-google-gtag": {
+    "default": {
+      "trackingID": "G-S8W5YK0FNP",
+      "anonymizeIP": true,
+      "id": "default"
+    }
+  },
+  "docusaurus-plugin-content-docs": {
+    "default": {
+      "path": "/docs",
+      "versions": [
+        {
+          "name": "current",
+          "label": "Next",
+          "isLast": true,
+          "path": "/docs",
+          "mainDocId": "get_started",
+          "docs": [
+            {
+              "id": "codegen/annotation",
+              "path": "/docs/codegen/annotation",
+              "sidebar": "Sidebar"
+            },
+            {
+              "id": "codegen/generators",
+              "path": "/docs/codegen/generators",
+              "sidebar": "Sidebar"
+            },
+            {
+              "id": "codegen/overview",
+              "path": "/docs/codegen/overview",
+              "sidebar": "Sidebar"
+            },
+            {
+              "id": "concepts",
+              "path": "/docs/concepts",
+              "sidebar": "Sidebar"
+            },
+            {
+              "id": "contribute",
+              "path": "/docs/contribute",
+              "sidebar": "Sidebar"
+            },
+            {
+              "id": "designer/data_builder",
+              "path": "/docs/designer/data_builder",
+              "sidebar": "Sidebar"
+            },
+            {
+              "id": "designer/overview",
+              "path": "/docs/designer/overview",
+              "sidebar": "Sidebar"
+            },
+            {
+              "id": "designer/pages",
+              "path": "/docs/designer/pages",
+              "sidebar": "Sidebar"
+            },
+            {
+              "id": "designer/widget_designer",
+              "path": "/docs/designer/widget_designer",
+              "sidebar": "Sidebar"
+            },
+            {
+              "id": "faq",
+              "path": "/docs/faq",
+              "sidebar": "Sidebar"
+            },
+            {
+              "id": "get_started",
+              "path": "/docs/get_started",
+              "sidebar": "Sidebar"
+            },
+            {
+              "id": "official_examples/demo_example",
+              "path": "/docs/official_examples/demo_example",
+              "sidebar": "Sidebar"
+            },
+            {
+              "id": "roadmap",
+              "path": "/docs/roadmap",
+              "sidebar": "Sidebar"
+            },
+            {
+              "id": "usecases",
+              "path": "/docs/usecases",
+              "sidebar": "Sidebar"
+            }
+          ],
+          "sidebars": {
+            "Sidebar": {
+              "link": {
+                "path": "/docs/get_started",
+                "label": "get_started"
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "unversionedId": "designer/data_builder",
+  "id": "designer/data_builder",
+  "title": "Data builder",
+  "description": "The data builder view allows users to configure at runtime the fields passed to the widget's constructor.",
+  "source": "@site/docs/designer/data_builder.mdx",
+  "sourceDirName": "designer",
+  "slug": "/designer/data_builder",
+  "permalink": "/docs/designer/data_builder",
+  "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/designer/data_builder.mdx",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "Sidebar",
+  "previous": {
+    "title": "Widget designer",
+    "permalink": "/docs/designer/widget_designer"
+  },
+  "next": {
+    "title": "Overview",
+    "permalink": "/docs/codegen/overview"
+  }
+}
