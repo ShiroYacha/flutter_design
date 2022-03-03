@@ -320,7 +320,7 @@ class ApiDocsSection extends HookConsumerWidget {
                           ),
                           DataCell(
                             Text(
-                              '${e.typeName}${e.isOptional ? '?' : ''}',
+                              '${e.typeName}${e.isNullable ? '?' : ''}',
                               style: theme.textTheme.bodyText1?.copyWith(
                                 color: theme.primaryColor,
                               ),

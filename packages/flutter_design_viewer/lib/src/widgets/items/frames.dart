@@ -10,8 +10,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_design/flutter_design.dart';
 import 'package:flutter_design_viewer/flutter_design_viewer.dart';
+import 'package:flutter_design_viewer/src/data_builders/builders.dart';
+import 'package:flutter_design_viewer/src/data_builders/factory.dart';
 import 'package:flutter_design_viewer/src/measures.dart';
-import 'package:flutter_design_viewer/src/models/data.dart';
 import 'package:flutter_design_viewer/src/widgets/dialogs/widget_dialog.dart';
 import 'package:flutter_design_viewer/src/widgets/items/buttons.dart';
 import 'package:flutter_design_viewer/src/widgets/screens/page_screen.dart';
@@ -19,6 +20,7 @@ import 'package:flutter_highlight/flutter_highlight.dart';
 import 'package:flutter_highlight/themes/atom-one-dark.dart';
 import 'package:flutter_highlight/themes/atom-one-light.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:get_it/get_it.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:ionicons/ionicons.dart';
@@ -61,7 +63,9 @@ class ComponentFramePanel extends HookConsumerWidget {
       for (var k in viewerWidgetBuilder.fieldMetaDataset.where((e) =>
           dataBuilderOptions.containsKey(e.name) &&
           dataBuilderOptions[e.name]!.isNotEmpty))
-        k.name: dataBuilderOptions[k.name]!.first
+        k.name: dataBuilderOptions[k.name]!.firstWhere((o) =>
+            k.viewerInitSelectorParam == null ||
+            o.hasParameterType(k.viewerInitSelectorParam))
     });
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -289,7 +293,7 @@ class CompontentFrameDataDisplay extends HookConsumerWidget {
                                     const WidgetSpan(child: Spacers.h6),
                                     TextSpan(
                                         text:
-                                            '${v.typeName}${v.isOptional ? '?' : ''}',
+                                            '${v.typeName}${v.isNullable ? '?' : ''}',
                                         style: theme.textTheme.subtitle1
                                             ?.copyWith(
                                                 color: theme.primaryColor)),
@@ -687,17 +691,24 @@ class EmbeddedAppRouterDelegate extends RouterDelegate<Object>
   Widget build(BuildContext context) {
     return Builder(
       builder: (context) {
-        return Consumer(
+        return HookConsumer(
           builder: (context, ref, widget) {
             final viewerWidgetBuilder = ref
                 .watch(viewerComponentSectionProvider.select((v) => v.builder));
             final dataBuilders = ref.watch(dataBuildersProvider);
+            final id = viewerWidgetBuilder.hashCode.toString();
+            // TODO: handle scoping issue with multiple widget designer
+            // per page
+            useEffect(() {
+              GetIt.instance.allowReassignment = true;
+              GetIt.instance.registerSingleton(
+                PubSubConnectedData(),
+              );
+            }, [id]);
             return Center(
               child: viewerWidgetBuilder.build(
                 context,
-                ManagedDataBuilderFactory(
-                  builders: dataBuilders,
-                ),
+                ManagedDataBuilderFactory(builders: dataBuilders),
               ),
             );
           },

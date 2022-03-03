@@ -11,14 +11,15 @@ dependencies:
   flutter:
     sdk: flutter
   # internal
-  flutter_design: ^0.0.10-pre+1
-  # flutter_design:
-  #   path: ../flutter_design
+  # flutter_design: ^0.0.10-pre+1
+  flutter_design:
+    path: ../flutter_design
   # framework
   flutter_hooks: ^0.18.2
   vrouter: ^1.2.0+21
   # state management
   hooks_riverpod: ^1.0.3
+  get_it: ^7.2.0
   # data
   freezed_annotation: ^1.1.0
   json_annotation: ^4.4.0

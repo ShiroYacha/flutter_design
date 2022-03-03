@@ -2075,19 +2075,21 @@ class _$FieldMetaDataTearOff {
       {required String name,
       required Type type,
       required String typeName,
-      required bool isOptional,
+      required bool isNullable,
       String? defaultValueCode,
       dynamic defaultValue,
       dynamic viewerInitValue,
+      dynamic viewerInitSelectorParam,
       String? documentation}) {
     return _FieldMetaData(
       name: name,
       type: type,
       typeName: typeName,
-      isOptional: isOptional,
+      isNullable: isNullable,
       defaultValueCode: defaultValueCode,
       defaultValue: defaultValue,
       viewerInitValue: viewerInitValue,
+      viewerInitSelectorParam: viewerInitSelectorParam,
       documentation: documentation,
     );
   }
@@ -2108,7 +2110,7 @@ mixin _$FieldMetaData {
   String get typeName => throw _privateConstructorUsedError;
 
   /// Flag if the field is option
-  bool get isOptional => throw _privateConstructorUsedError;
+  bool get isNullable => throw _privateConstructorUsedError;
 
   /// Default value in string format
   String? get defaultValueCode => throw _privateConstructorUsedError;
@@ -2121,6 +2123,9 @@ mixin _$FieldMetaData {
   /// the initial value and the default value is specified, the [viewerInitValue]
   /// will be used.
   dynamic get viewerInitValue => throw _privateConstructorUsedError;
+
+  /// TODO: decides how the data builder will be selected by default at runtime
+  dynamic get viewerInitSelectorParam => throw _privateConstructorUsedError;
 
   /// Documentation on the field
   String? get documentation => throw _privateConstructorUsedError;
@@ -2139,10 +2144,11 @@ abstract class $FieldMetaDataCopyWith<$Res> {
       {String name,
       Type type,
       String typeName,
-      bool isOptional,
+      bool isNullable,
       String? defaultValueCode,
       dynamic defaultValue,
       dynamic viewerInitValue,
+      dynamic viewerInitSelectorParam,
       String? documentation});
 }
 
@@ -2160,10 +2166,11 @@ class _$FieldMetaDataCopyWithImpl<$Res>
     Object? name = freezed,
     Object? type = freezed,
     Object? typeName = freezed,
-    Object? isOptional = freezed,
+    Object? isNullable = freezed,
     Object? defaultValueCode = freezed,
     Object? defaultValue = freezed,
     Object? viewerInitValue = freezed,
+    Object? viewerInitSelectorParam = freezed,
     Object? documentation = freezed,
   }) {
     return _then(_value.copyWith(
@@ -2179,9 +2186,9 @@ class _$FieldMetaDataCopyWithImpl<$Res>
           ? _value.typeName
           : typeName // ignore: cast_nullable_to_non_nullable
               as String,
-      isOptional: isOptional == freezed
-          ? _value.isOptional
-          : isOptional // ignore: cast_nullable_to_non_nullable
+      isNullable: isNullable == freezed
+          ? _value.isNullable
+          : isNullable // ignore: cast_nullable_to_non_nullable
               as bool,
       defaultValueCode: defaultValueCode == freezed
           ? _value.defaultValueCode
@@ -2194,6 +2201,10 @@ class _$FieldMetaDataCopyWithImpl<$Res>
       viewerInitValue: viewerInitValue == freezed
           ? _value.viewerInitValue
           : viewerInitValue // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      viewerInitSelectorParam: viewerInitSelectorParam == freezed
+          ? _value.viewerInitSelectorParam
+          : viewerInitSelectorParam // ignore: cast_nullable_to_non_nullable
               as dynamic,
       documentation: documentation == freezed
           ? _value.documentation
@@ -2214,10 +2225,11 @@ abstract class _$FieldMetaDataCopyWith<$Res>
       {String name,
       Type type,
       String typeName,
-      bool isOptional,
+      bool isNullable,
       String? defaultValueCode,
       dynamic defaultValue,
       dynamic viewerInitValue,
+      dynamic viewerInitSelectorParam,
       String? documentation});
 }
 
@@ -2237,10 +2249,11 @@ class __$FieldMetaDataCopyWithImpl<$Res>
     Object? name = freezed,
     Object? type = freezed,
     Object? typeName = freezed,
-    Object? isOptional = freezed,
+    Object? isNullable = freezed,
     Object? defaultValueCode = freezed,
     Object? defaultValue = freezed,
     Object? viewerInitValue = freezed,
+    Object? viewerInitSelectorParam = freezed,
     Object? documentation = freezed,
   }) {
     return _then(_FieldMetaData(
@@ -2256,9 +2269,9 @@ class __$FieldMetaDataCopyWithImpl<$Res>
           ? _value.typeName
           : typeName // ignore: cast_nullable_to_non_nullable
               as String,
-      isOptional: isOptional == freezed
-          ? _value.isOptional
-          : isOptional // ignore: cast_nullable_to_non_nullable
+      isNullable: isNullable == freezed
+          ? _value.isNullable
+          : isNullable // ignore: cast_nullable_to_non_nullable
               as bool,
       defaultValueCode: defaultValueCode == freezed
           ? _value.defaultValueCode
@@ -2271,6 +2284,10 @@ class __$FieldMetaDataCopyWithImpl<$Res>
       viewerInitValue: viewerInitValue == freezed
           ? _value.viewerInitValue
           : viewerInitValue // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      viewerInitSelectorParam: viewerInitSelectorParam == freezed
+          ? _value.viewerInitSelectorParam
+          : viewerInitSelectorParam // ignore: cast_nullable_to_non_nullable
               as dynamic,
       documentation: documentation == freezed
           ? _value.documentation
@@ -2287,10 +2304,11 @@ class _$_FieldMetaData extends _FieldMetaData with DiagnosticableTreeMixin {
       {required this.name,
       required this.type,
       required this.typeName,
-      required this.isOptional,
+      required this.isNullable,
       this.defaultValueCode,
       this.defaultValue,
       this.viewerInitValue,
+      this.viewerInitSelectorParam,
       this.documentation})
       : super._();
 
@@ -2309,7 +2327,7 @@ class _$_FieldMetaData extends _FieldMetaData with DiagnosticableTreeMixin {
   @override
 
   /// Flag if the field is option
-  final bool isOptional;
+  final bool isNullable;
   @override
 
   /// Default value in string format
@@ -2327,12 +2345,16 @@ class _$_FieldMetaData extends _FieldMetaData with DiagnosticableTreeMixin {
   final dynamic viewerInitValue;
   @override
 
+  /// TODO: decides how the data builder will be selected by default at runtime
+  final dynamic viewerInitSelectorParam;
+  @override
+
   /// Documentation on the field
   final String? documentation;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'FieldMetaData(name: $name, type: $type, typeName: $typeName, isOptional: $isOptional, defaultValueCode: $defaultValueCode, defaultValue: $defaultValue, viewerInitValue: $viewerInitValue, documentation: $documentation)';
+    return 'FieldMetaData(name: $name, type: $type, typeName: $typeName, isNullable: $isNullable, defaultValueCode: $defaultValueCode, defaultValue: $defaultValue, viewerInitValue: $viewerInitValue, viewerInitSelectorParam: $viewerInitSelectorParam, documentation: $documentation)';
   }
 
   @override
@@ -2343,10 +2365,12 @@ class _$_FieldMetaData extends _FieldMetaData with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty('name', name))
       ..add(DiagnosticsProperty('type', type))
       ..add(DiagnosticsProperty('typeName', typeName))
-      ..add(DiagnosticsProperty('isOptional', isOptional))
+      ..add(DiagnosticsProperty('isNullable', isNullable))
       ..add(DiagnosticsProperty('defaultValueCode', defaultValueCode))
       ..add(DiagnosticsProperty('defaultValue', defaultValue))
       ..add(DiagnosticsProperty('viewerInitValue', viewerInitValue))
+      ..add(DiagnosticsProperty(
+          'viewerInitSelectorParam', viewerInitSelectorParam))
       ..add(DiagnosticsProperty('documentation', documentation));
   }
 
@@ -2359,13 +2383,15 @@ class _$_FieldMetaData extends _FieldMetaData with DiagnosticableTreeMixin {
             const DeepCollectionEquality().equals(other.type, type) &&
             const DeepCollectionEquality().equals(other.typeName, typeName) &&
             const DeepCollectionEquality()
-                .equals(other.isOptional, isOptional) &&
+                .equals(other.isNullable, isNullable) &&
             const DeepCollectionEquality()
                 .equals(other.defaultValueCode, defaultValueCode) &&
             const DeepCollectionEquality()
                 .equals(other.defaultValue, defaultValue) &&
             const DeepCollectionEquality()
                 .equals(other.viewerInitValue, viewerInitValue) &&
+            const DeepCollectionEquality().equals(
+                other.viewerInitSelectorParam, viewerInitSelectorParam) &&
             const DeepCollectionEquality()
                 .equals(other.documentation, documentation));
   }
@@ -2376,10 +2402,11 @@ class _$_FieldMetaData extends _FieldMetaData with DiagnosticableTreeMixin {
       const DeepCollectionEquality().hash(name),
       const DeepCollectionEquality().hash(type),
       const DeepCollectionEquality().hash(typeName),
-      const DeepCollectionEquality().hash(isOptional),
+      const DeepCollectionEquality().hash(isNullable),
       const DeepCollectionEquality().hash(defaultValueCode),
       const DeepCollectionEquality().hash(defaultValue),
       const DeepCollectionEquality().hash(viewerInitValue),
+      const DeepCollectionEquality().hash(viewerInitSelectorParam),
       const DeepCollectionEquality().hash(documentation));
 
   @JsonKey(ignore: true)
@@ -2393,10 +2420,11 @@ abstract class _FieldMetaData extends FieldMetaData {
       {required String name,
       required Type type,
       required String typeName,
-      required bool isOptional,
+      required bool isNullable,
       String? defaultValueCode,
       dynamic defaultValue,
       dynamic viewerInitValue,
+      dynamic viewerInitSelectorParam,
       String? documentation}) = _$_FieldMetaData;
   const _FieldMetaData._() : super._();
 
@@ -2415,7 +2443,7 @@ abstract class _FieldMetaData extends FieldMetaData {
   @override
 
   /// Flag if the field is option
-  bool get isOptional;
+  bool get isNullable;
   @override
 
   /// Default value in string format
@@ -2431,6 +2459,10 @@ abstract class _FieldMetaData extends FieldMetaData {
   /// the initial value and the default value is specified, the [viewerInitValue]
   /// will be used.
   dynamic get viewerInitValue;
+  @override
+
+  /// TODO: decides how the data builder will be selected by default at runtime
+  dynamic get viewerInitSelectorParam;
   @override
 
   /// Documentation on the field

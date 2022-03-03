@@ -3,20 +3,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:flutter_design/flutter_design.dart';
-import 'package:flutter_design_viewer/src/models/data.dart';
 import 'package:flutter_design_viewer/src/widgets/items/buttons.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../measures.dart';
-import '../../theme.dart';
-import 'containers.dart';
-import 'controls.dart';
+import '../measures.dart';
+import '../theme.dart';
+import '../widgets/items/containers.dart';
+import '../widgets/items/controls.dart';
+import 'builders.dart';
 
 class DataTemplateStringLoremDesigner extends HookConsumerWidget {
   final DataTemplateStringLoremBuilder builder;
-  final UpdateDataBuilder<String> updateBuilder;
+  final UpdateDataBuilder<String, DataTemplateStringLoremParameter>
+      updateBuilder;
   const DataTemplateStringLoremDesigner({
     required this.builder,
     required this.updateBuilder,
@@ -25,11 +26,12 @@ class DataTemplateStringLoremDesigner extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Slider(
-      min: builder.min.toDouble(),
-      max: builder.max.toDouble(),
-      value: builder.length.toDouble(),
+      min: builder.parameter.min.toDouble(),
+      max: builder.parameter.max.toDouble(),
+      value: builder.parameter.length.toDouble(),
       onChanged: (v) {
-        updateBuilder(builder..length = v.floor());
+        updateBuilder(
+            builder..parameter = builder.parameter.copyWith(length: v.floor()));
       },
     );
   }
@@ -37,7 +39,7 @@ class DataTemplateStringLoremDesigner extends HookConsumerWidget {
 
 class DataTemplateStringRawDesigner extends HookConsumerWidget {
   final DataTemplateStringRawBuilder builder;
-  final UpdateDataBuilder<String> updateBuilder;
+  final UpdateDataBuilder<String, String> updateBuilder;
   const DataTemplateStringRawDesigner({
     required this.builder,
     required this.updateBuilder,
@@ -45,9 +47,9 @@ class DataTemplateStringRawDesigner extends HookConsumerWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final initValue = useState(builder.raw);
+    final initValue = useState(builder.parameter);
     final textEditingController = useTextEditingController(
-      text: builder.raw,
+      text: builder.parameter,
     );
     useEffect(() {
       textEditingController.selection = TextSelection(
@@ -55,7 +57,7 @@ class DataTemplateStringRawDesigner extends HookConsumerWidget {
         extentOffset: textEditingController.value.text.length,
       );
       textEditingController.addListener(() {
-        updateBuilder(builder..raw = textEditingController.value.text);
+        updateBuilder(builder..parameter = textEditingController.value.text);
       });
     }, []);
     return TextField(
@@ -76,7 +78,8 @@ class DataTemplateStringRawDesigner extends HookConsumerWidget {
 
 class DataTemplateWidgetPlaceholderDesigner extends HookConsumerWidget {
   final DataTemplateWidgetPlaceholderBuilder builder;
-  final UpdateDataBuilder<Widget> updateBuilder;
+  final UpdateDataBuilder<Widget, DataTemplateWidgetPlaceholderParameter>
+      updateBuilder;
   const DataTemplateWidgetPlaceholderDesigner({
     required this.builder,
     required this.updateBuilder,
@@ -103,7 +106,7 @@ class DataTemplateWidgetPlaceholderDesigner extends HookConsumerWidget {
                   WidgetSpan(
                     child: Container(
                       decoration: BoxDecoration(
-                        color: builder.color,
+                        color: builder.parameter.color,
                         borderRadius: BorderRadius.circular(
                           6,
                         ),
@@ -123,9 +126,10 @@ class DataTemplateWidgetPlaceholderDesigner extends HookConsumerWidget {
           ),
           collapsed: const SizedBox.shrink(),
           expanded: BlockPicker(
-            pickerColor: builder.color,
+            pickerColor: builder.parameter.color,
             onColorChanged: (v) {
-              updateBuilder(builder..color = v);
+              updateBuilder(
+                  builder..parameter = builder.parameter.copyWith(color: v));
               controller.toggle();
             },
             layoutBuilder: (context, colors, render) => Wrap(
@@ -136,9 +140,10 @@ class DataTemplateWidgetPlaceholderDesigner extends HookConsumerWidget {
         Spacers.v10,
         SizerControl(
           height: 250,
-          value: builder.size,
-          color: builder.color,
-          onValueChanged: (v) => updateBuilder(builder..size = v),
+          value: builder.parameter.size,
+          color: builder.parameter.color,
+          onValueChanged: (v) => updateBuilder(
+              builder..parameter = builder.parameter.copyWith(size: v)),
         ),
       ],
     );
@@ -147,7 +152,8 @@ class DataTemplateWidgetPlaceholderDesigner extends HookConsumerWidget {
 
 class DataTemplateWidgetPlaceholderListDesigner extends HookConsumerWidget {
   final DataTemplateWidgetPlaceholderListBuilder builder;
-  final UpdateDataBuilder<List<Widget>> updateBuilder;
+  final UpdateDataBuilder<List<Widget>,
+      DataTemplateWidgetPlaceholderListParameter> updateBuilder;
   const DataTemplateWidgetPlaceholderListDesigner({
     required this.builder,
     required this.updateBuilder,
@@ -160,16 +166,18 @@ class DataTemplateWidgetPlaceholderListDesigner extends HookConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         IntDesigner(
-            value: builder.count,
+            value: builder.parameter.count,
             onValueChanged: (v) {
-              updateBuilder(builder..count = v);
+              updateBuilder(
+                  builder..parameter = builder.parameter.copyWith(count: v));
             }),
         Spacers.v10,
         SizerControl(
           height: 250,
-          value: builder.size,
+          value: builder.parameter.size,
           color: theme.primaryColor,
-          onValueChanged: (v) => updateBuilder(builder..size = v),
+          onValueChanged: (v) => updateBuilder(
+              builder..parameter = builder.parameter.copyWith(size: v)),
         ),
       ],
     );
@@ -178,7 +186,7 @@ class DataTemplateWidgetPlaceholderListDesigner extends HookConsumerWidget {
 
 class DataTemplateColorPickerDesigner extends HookConsumerWidget {
   final DataTemplateColorPickerBuilder builder;
-  final UpdateDataBuilder<Color> updateBuilder;
+  final UpdateDataBuilder<Color, Color> updateBuilder;
   const DataTemplateColorPickerDesigner({
     required this.builder,
     required this.updateBuilder,
@@ -205,7 +213,7 @@ class DataTemplateColorPickerDesigner extends HookConsumerWidget {
                   WidgetSpan(
                     child: Container(
                       decoration: BoxDecoration(
-                        color: builder.color,
+                        color: builder.parameter,
                         borderRadius: BorderRadius.circular(
                           6,
                         ),
@@ -225,9 +233,9 @@ class DataTemplateColorPickerDesigner extends HookConsumerWidget {
           ),
           collapsed: const SizedBox.shrink(),
           expanded: BlockPicker(
-            pickerColor: builder.color,
+            pickerColor: builder.parameter,
             onColorChanged: (v) {
-              updateBuilder(builder..color = v);
+              updateBuilder(builder..parameter = v);
               controller.toggle();
             },
             layoutBuilder: (context, colors, render) => Wrap(
@@ -242,7 +250,7 @@ class DataTemplateColorPickerDesigner extends HookConsumerWidget {
 
 class DataTemplateDoubleDesigner extends HookConsumerWidget {
   final DataTemplateDoubleBuilder builder;
-  final UpdateDataBuilder<double> updateBuilder;
+  final UpdateDataBuilder<double, double> updateBuilder;
   const DataTemplateDoubleDesigner({
     required this.builder,
     required this.updateBuilder,
@@ -251,9 +259,9 @@ class DataTemplateDoubleDesigner extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return DoubleDesigner(
-      value: builder.value,
+      value: builder.parameter,
       onValueChanged: (v) {
-        updateBuilder(builder..value = v);
+        updateBuilder(builder..parameter = v);
       },
     );
   }
@@ -261,7 +269,7 @@ class DataTemplateDoubleDesigner extends HookConsumerWidget {
 
 class DataTemplateIntDesigner extends HookConsumerWidget {
   final DataTemplateIntBuilder builder;
-  final UpdateDataBuilder<int> updateBuilder;
+  final UpdateDataBuilder<int, int> updateBuilder;
   const DataTemplateIntDesigner({
     required this.builder,
     required this.updateBuilder,
@@ -270,9 +278,9 @@ class DataTemplateIntDesigner extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return IntDesigner(
-      value: builder.value,
+      value: builder.parameter,
       onValueChanged: (v) {
-        updateBuilder(builder..value = v);
+        updateBuilder(builder..parameter = v);
       },
     );
   }
@@ -385,6 +393,26 @@ class DoubleDesigner extends HookWidget {
           },
         ),
       ],
+    );
+  }
+}
+
+class DataTemplateBoolToggleDesigner extends HookConsumerWidget {
+  final DataTemplateBoolToggleBuilder builder;
+  final UpdateDataBuilder<bool, bool> updateBuilder;
+  const DataTemplateBoolToggleDesigner({
+    required this.builder,
+    required this.updateBuilder,
+    Key? key,
+  }) : super(key: key);
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return SwitchListTile(
+      value: builder.parameter,
+      title: const Text('Tap to toggle'),
+      onChanged: (v) {
+        updateBuilder(builder..parameter = v);
+      },
     );
   }
 }

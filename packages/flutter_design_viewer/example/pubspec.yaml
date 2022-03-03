@@ -30,9 +30,9 @@ dependencies:
   flutter:
     sdk: flutter
   # internal
-  flutter_design: ^0.0.10-pre+1
-  # flutter_design:
-  #   path: ../../flutter_design
+  # flutter_design: ^0.0.10-pre+1
+  flutter_design:
+    path: ../../flutter_design
   # flutter_design_viewer: ^0.0.10-pre+1
   flutter_design_viewer:
     path: ../

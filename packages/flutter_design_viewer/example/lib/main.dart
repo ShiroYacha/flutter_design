@@ -26,8 +26,7 @@ void main() {
       dataBuilders: {
         String: [
           // Need to use a condition here to use the data builder constructor's default value
-          ([d]) =>
-              d != null ? MyStringDataBuilder(raw: d) : MyStringDataBuilder(),
+          ([p]) => p != null ? MyStringDataBuilder(p) : MyStringDataBuilder(),
         ]
       },
       pageGroups: [

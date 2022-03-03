@@ -1,35 +1,46 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_design/flutter_design.dart';
 
-import 'models/data.dart';
+import 'data_builders/builders.dart';
+import 'data_builders/factory.dart';
 
 final defaultBuilders = <Type, List<DataBuilderCreator>>{
   String: [
-    ([d]) => d != null
-        ? DataTemplateStringRawBuilder(raw: d)
+    // TODO: p!=null could be handled by codegen
+    ([p]) => p != null
+        ? DataTemplateStringRawBuilder(p)
         : DataTemplateStringRawBuilder(),
-    ([d]) => DataTemplateStringLoremBuilder(),
+    ([p]) => DataTemplateStringLoremBuilder(),
   ],
   Widget: [
-    ([d]) => DataTemplateWidgetPlaceholderBuilder(),
+    ([p]) => DataTemplateWidgetPlaceholderBuilder(),
   ],
   List<Widget>: [
-    ([d]) => DataTemplateWidgetPlaceholderListBuilder(),
+    ([p]) => DataTemplateWidgetPlaceholderListBuilder(),
   ],
-  Function: [
-    ([d]) => DataTemplateStubFunctionBuilder(),
+  VoidCallback: [
+    ([p]) => DataTemplateStubFunctionBuilder(VoidCallback),
+  ],
+  VoidBoolCallback: [
+    ([p]) => DataTemplateStubFunctionBuilder(VoidBoolCallback),
+    ([p]) => DataTemplatePubConnectorBuilder(p),
   ],
   Color: [
-    ([d]) => d != null
-        ? DataTemplateColorPickerBuilder(color: d)
+    ([p]) => p != null
+        ? DataTemplateColorPickerBuilder(p)
         : DataTemplateColorPickerBuilder(),
   ],
   double: [
-    ([d]) => d != null
-        ? DataTemplateDoubleBuilder(value: d)
-        : DataTemplateDoubleBuilder(),
+    ([p]) =>
+        p != null ? DataTemplateDoubleBuilder(p) : DataTemplateDoubleBuilder(),
   ],
   int: [
-    ([d]) =>
-        d != null ? DataTemplateIntBuilder(value: d) : DataTemplateIntBuilder(),
+    ([p]) => p != null ? DataTemplateIntBuilder(p) : DataTemplateIntBuilder(),
+  ],
+  bool: [
+    ([p]) => p != null
+        ? DataTemplateBoolToggleBuilder(p)
+        : DataTemplateBoolToggleBuilder(),
+    ([p]) => DataTemplateSubConnectorBuilder(p),
   ],
 };

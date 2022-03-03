@@ -28,21 +28,24 @@ final generatedWidgetsMiscAvatarPage = ViewerDocumentPage(
             name: 'uri',
             type: String,
             typeName: 'String',
-            isOptional: false,
+            isNullable: false,
             defaultValue: null,
             defaultValueCode: null,
-            viewerInitValue:
-                r'https://static.independent.co.uk/2021/06/16/08/newFile-4.jpg?quality=75&width=982&height=726&auto=webp',
+            viewerInitValue: 'https://example.com',
+            viewerInitSelectorParam: DataTemplateStringLoremParameter(
+              length: 15,
+              min: 0,
+              max: 100,
+            ),
             documentation: null,
           ),
           FieldMetaData(
             name: 'radius',
             type: double,
             typeName: 'double',
-            isOptional: true,
+            isNullable: false,
             defaultValue: 30.0,
             defaultValueCode: '30.0',
-            viewerInitValue: null,
             documentation: null,
           ),
         ],
@@ -54,6 +57,9 @@ final generatedWidgetsMiscAvatarPage = ViewerDocumentPage(
 
 /// Widget
 class Avatar extends StatelessWidget {
+  @DesignField(
+      initialValue: 'https://example.com',
+      parameter: DataTemplateStringLoremParameter(length: 15))
   final String uri;
   final double radius;
   const Avatar({required this.uri, this.radius = 30.0, Key? key})

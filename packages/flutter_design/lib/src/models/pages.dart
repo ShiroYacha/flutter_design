@@ -208,7 +208,7 @@ class FieldMetaData with _$FieldMetaData {
     required String typeName,
 
     /// Flag if the field is option
-    required bool isOptional,
+    required bool isNullable,
 
     /// Default value in string format
     String? defaultValueCode,
@@ -221,6 +221,9 @@ class FieldMetaData with _$FieldMetaData {
     /// the initial value and the default value is specified, the [viewerInitValue]
     /// will be used.
     dynamic viewerInitValue,
+
+    /// TODO: decides how the data builder will be selected by default at runtime
+    dynamic viewerInitSelectorParam,
 
     /// Documentation on the field
     String? documentation,
@@ -292,7 +295,9 @@ class ViewerCollectionItemUnion
 typedef DataBuilderFactory = TDataBuilderFactory<BuildContext>;
 
 /// Function to update a data builder of type [T] with new values
-typedef UpdateDataBuilder<T> = TUpdateDataBuilder<Widget, BuildContext, T>;
+typedef UpdateDataBuilder<TData, TParameter>
+    = TUpdateDataBuilder<Widget, BuildContext, TData, TParameter>;
 
 /// Data builder for a specific type [T]
-typedef DataBuilder<T> = TDataBuilder<Widget, BuildContext, T>;
+typedef DataBuilder<TData, TParameter>
+    = TDataBuilder<Widget, BuildContext, TData, TParameter>;

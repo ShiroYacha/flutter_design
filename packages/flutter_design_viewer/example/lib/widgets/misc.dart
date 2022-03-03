@@ -5,14 +5,18 @@ part 'misc.design.dart';
 
 @Design(
   designLink: 'https://www.figma.com/',
-  viewerInitValueMap: {
-    'uri':
-        'https://static.independent.co.uk/2021/06/16/08/newFile-4.jpg?quality=75&width=982&height=726&auto=webp',
-  },
 )
 class Avatar extends StatelessWidget {
+  @DesignField(
+    initialValue: 'https://example.com',
+    parameter: DataTemplateStringLoremParameter(
+      length: 15,
+    ),
+  )
   final String uri;
+
   final double radius;
+
   const Avatar({
     required this.uri,
     this.radius = 30.0,

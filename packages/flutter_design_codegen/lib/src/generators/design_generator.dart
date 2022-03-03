@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:analyzer/dart/constant/value.dart';
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:build/build.dart';
@@ -9,6 +10,8 @@ import 'package:flutter_design_annotation/flutter_design_annotation.dart';
 import 'package:flutter_design_codegen/src/utils.dart';
 import 'package:recase/recase.dart';
 import 'package:source_gen/source_gen.dart';
+
+const _designFieldChecker = TypeChecker.fromRuntime(TDesignField);
 
 /// Generate [ViewerDocumentPage] from @TDesign annotated classes.
 class DesignGenerator extends GeneratorForAnnotation<TDesign> {
@@ -34,20 +37,33 @@ class DesignGenerator extends GeneratorForAnnotation<TDesign> {
     final folderNamespaces =
         extractClassElementFolderNamespace(element as ClassElement);
     final namespace = folderNamespaces;
+    // TODO: include factory constructors & user defined methods
+    final ctor = visitor.classType.element.constructors.first;
     // Construct viewer widget builder source
-    final buildCodepair = await _extractBuilderSourceCode(
+    final buildCodepair = await _compileBuilderSourceCode(
       resolver: buildStep.resolver,
       visitor: visitor,
       annotation: annotation,
     );
-    final fieldMetaDatasetCode = _extractFieldMetaDataset(
+    // Construct typedef map for function types
+    final fieldTypedefCodeMap = _compileFunctionTypedefSourceCodeMap(
       resolver: buildStep.resolver,
       clazz: clazz,
-      parameters: visitor.classType.element.constructors.first.parameters,
+      parameters: ctor.parameters,
+    );
+    // Construct field metadata code
+    final fieldMetaDatasetCode = _compileFieldMetaDatasetSourceCode(
+      clazz: clazz,
+      parameters: ctor.parameters,
+      fieldTypedefCodeMap: fieldTypedefCodeMap,
       annotation: annotation,
     );
-    // Assemble source
-    return '''
+    final sb = StringBuffer();
+    // Prepare typedef for function types
+    sb.write(fieldTypedefCodeMap.values.map((e) => '${e.code}\n').join());
+    // Assemble page source
+    sb.write(
+      '''
 final ${buildClassPageFieldName(element)} = ViewerDocumentPage(
   id: '${className.camelCase}',
   namespace: [${namespace.map((e) => "'$e'").join(',')}],
@@ -72,9 +88,9 @@ ${buildCodepair[1]}
 
 /// Widget
 ${await _extractSourceFromElement(
-      resolver: buildStep.resolver,
-      element: element,
-    )}
+        resolver: buildStep.resolver,
+        element: element,
+      )}
 \'\'\'
       ),
     ),
@@ -86,7 +102,9 @@ ${await _extractSourceFromElement(
 ''' : ''}
   ],
 );
-''';
+''',
+    );
+    return sb.toString();
   }
 
   Future<String> _extractSourceFromElement({
@@ -120,48 +138,18 @@ ${await _extractSourceFromElement(
     return "'''${reader.stringValue}'''";
   }
 
-  dynamic _readNullableAnnotationMapValue(
-    ConstantReader annotation,
-    String field,
-    String key,
-    DartType type,
-  ) {
-    final reader = annotation.read(field);
-    if (reader.isNull || !reader.isMap) return null;
-    final map = reader.mapValue;
-    for (final e in map.entries) {
-      if (e.key?.toStringValue() == key) {
-        if (type.isDartCoreString) {
-          return "r'${e.value!.toStringValue()}'";
-        }
-        if (type.isDartCoreDouble) {
-          return e.value!.toDoubleValue();
-        }
-        if (type.isDartCoreInt) {
-          return e.value!.toIntValue();
-        }
-        if (type.isDartCoreBool) {
-          return e.value!.toBoolValue();
-        }
-        if (type.isDartCoreList) {
-          return e.value!.toListValue();
-        }
-        if (type.isDartCoreMap) {
-          return e.value!.toMapValue();
-        }
-        if (type.isDartCoreSet) {
-          return e.value!.toSetValue();
-        }
-        if (type.isDartCoreSymbol) {
-          return e.value!.toSymbolValue();
-        }
-        throw UnsupportedError('Dynamic type not supported!');
-      }
+  /// TODO: improve this
+  String? _readLiteralAnnotationValue(DartObject? object) {
+    try {
+      final label = object.toString();
+      return label.substring(label.indexOf('(') + 1, label.indexOf(')'));
+    } catch (e) {
+      // Do nothing
     }
     return null;
   }
 
-  Future<List<String>> _extractBuilderSourceCode({
+  Future<List<String>> _compileBuilderSourceCode({
     required Resolver resolver,
     required ModelVisitor visitor,
     required ConstantReader annotation,
@@ -180,29 +168,74 @@ ${await _extractSourceFromElement(
     return [sb.toString(), sb.toString()];
   }
 
-  String _extractFieldMetaDataset({
+  Map<ParameterElement, _FunctionTypeDef> _compileFunctionTypedefSourceCodeMap({
     required Resolver resolver,
     required ClassElement clazz,
     required List<ParameterElement> parameters,
+  }) {
+    final map = <ParameterElement, _FunctionTypeDef>{};
+    for (final e in parameters.where((e) => e.type is FunctionType)) {
+      final typeCode = _getParameterDisplayString(e);
+      final alias = '\$FunctionAliasFor${ReCase(e.name).pascalCase}';
+      map[e] = _FunctionTypeDef(
+        alias: alias,
+        typeCode: typeCode,
+        code: 'typedef $alias = $typeCode;',
+      );
+    }
+    return map;
+  }
+
+  String _compileFieldMetaDatasetSourceCode({
+    required ClassElement clazz,
+    required List<ParameterElement> parameters,
+    required Map<ParameterElement, _FunctionTypeDef> fieldTypedefCodeMap,
     required ConstantReader annotation,
   }) {
     final sb = StringBuffer('const [');
     for (final e in parameters.where((e) => e.name != 'key')) {
-      // TODO: figure out how to deal with function signature...
-      final type = e.type.element != null
-          ? e.type.getDisplayString(withNullability: false)
-          : 'Function';
+      // Compute basic meta data
+      final type = fieldTypedefCodeMap.containsKey(e)
+          ? fieldTypedefCodeMap[e]!.alias
+          : _getParameterDisplayString(e);
+      final typeName = fieldTypedefCodeMap.containsKey(e)
+          ? fieldTypedefCodeMap[e]!.typeCode
+          : _getParameterDisplayString(e);
       final fieldDocumentation = _extractFieldDocumentation(clazz, e.name);
+      // Check if a design field annotation is provided on the constructor
+      // if not fallback to the class field declaration
+      final p = clazz.fields.firstWhereOrNull((f) => f.name == e.name);
+      final designFieldReader = _designFieldChecker.hasAnnotationOfExact(e)
+          ? _designFieldChecker.firstAnnotationOfExact(e)
+          : p != null
+              ? _designFieldChecker.hasAnnotationOfExact(p)
+                  ? _designFieldChecker.firstAnnotationOfExact(p)
+                  : null
+              : null;
+      // Compile initial value code
+      final viewerInitValue = _readLiteralAnnotationValue(
+        designFieldReader?.getField('initialValue'),
+      );
+      final viewerInitValueCode =
+          viewerInitValue != null ? 'viewerInitValue: $viewerInitValue,' : '';
+      // Compile initial data builder selector code
+      final initialSelectorParam =
+          _compileObjectSourceCode(designFieldReader?.getField('parameter'));
+      final initialSelectorParamCode = viewerInitValue?.isNotEmpty == true
+          ? 'viewerInitSelectorParam: $initialSelectorParam,'
+          : '';
+      // Compile source
       sb.write(
         '''
 FieldMetaData(
   name: '${e.name}',
   type: $type,
-  typeName: '$type',
-  isOptional: ${e.isOptional},
+  typeName: '$typeName',
+  isNullable: ${e.isNullable},
   defaultValue: ${e.defaultValueCode},
-  defaultValueCode: ${e.defaultValueCode != null ? "'${e.defaultValueCode}'" : null},
-  viewerInitValue: ${_readNullableAnnotationMapValue(annotation, 'viewerInitValueMap', e.name, e.type)},
+  defaultValueCode: ${!e.type.isDartCoreString ? "'${e.defaultValueCode}'" : e.defaultValueCode},
+  $viewerInitValueCode
+  $initialSelectorParamCode
   documentation: ${fieldDocumentation != null ? "'''$fieldDocumentation'''" : null},
 ),''',
       );
@@ -211,9 +244,71 @@ FieldMetaData(
     return sb.toString();
   }
 
+  String _compileObjectSourceCode(DartObject? object) {
+    final sb = StringBuffer();
+    final objectTypeElement = object?.type?.element;
+    if (objectTypeElement != null) {
+      final visitor = ModelVisitor();
+      objectTypeElement.visitChildren(visitor);
+
+      sb.write(
+          '${removeGeneratedCodePrefixSymbols(visitor.classType.element.name)}(');
+      // Ignore null element types, e.g. functions
+      final parameters =
+          visitor.classType.constructors.firstOrNull?.parameters ?? [];
+      for (final field in parameters) {
+        final value = object!.getField(field.name);
+        if (value != null) {
+          if (field.isPositional) {
+            sb.write('${_readLiteralAnnotationValue(value)},');
+          } else if (field.isNamed) {
+            sb.write('${field.name}: ${_readLiteralAnnotationValue(value)},');
+          } else {
+            throw UnsupportedError('Unsupported field: $field');
+          }
+        }
+      }
+      sb.write(')');
+    }
+    return sb.toString();
+  }
+
+  String _getParameterDisplayString(
+    ParameterElement e, {
+    bool checkNullability = false,
+  }) {
+    return e.type.getDisplayString(
+      // TODO: find a better way to do this...
+      withNullability: checkNullability && e.isNullable,
+    );
+  }
+
   String? _extractFieldDocumentation(ClassElement clazz, String fieldName) {
     return clazz.fields
         .firstWhereOrNull((e) => e.name == fieldName)
-        ?.documentationComment?.replaceAll(r'^///', '');
+        ?.documentationComment
+        ?.replaceAll('^///', '');
   }
+
+  String removeGeneratedCodePrefixSymbols(String className) {
+    // TODO: find a way to address workaround on generated classes,
+    // e.g. freezed -> currently removing all '_', '$'
+    return className.replaceAll(RegExp(r'^[_$]*'), '');
+  }
+}
+
+extension ParameterElementExtension on ParameterElement {
+  // TODO: find a better way as this might not work all the time
+  bool get isNullable => isOptional && !hasDefaultValue;
+}
+
+class _FunctionTypeDef {
+  final String alias;
+  final String typeCode;
+  final String code;
+  const _FunctionTypeDef({
+    required this.alias,
+    required this.typeCode,
+    required this.code,
+  });
 }

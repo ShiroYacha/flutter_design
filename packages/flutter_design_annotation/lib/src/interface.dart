@@ -3,16 +3,25 @@ typedef ComponentBuilder<TWidget, TBuildContext> = TWidget Function(
   TDataBuilderFactory<TBuildContext> factory,
 );
 
-typedef TUpdateDataBuilder<TWidget, TBuildContext, TData> = void Function(
-    TDataBuilder<TWidget, TBuildContext, TData> builder);
+typedef TUpdateDataBuilder<TWidget, TBuildContext, TData, TParameter> = void
+    Function(TDataBuilder<TWidget, TBuildContext, TData, TParameter> builder);
 
-abstract class TDataBuilder<TWidget, TBuildContext, TData> {
+abstract class TDataBuilder<TWidget, TBuildContext, TData, TParameter> {
+  /// TODO: see how to make this immutable...
+  TParameter parameter;
+  TDataBuilder(this.parameter);
   String get name;
-  TData build(TBuildContext context, String field);
+  TData build(
+    TBuildContext context,
+    String field,
+  );
   TWidget buildDesigner(
     TBuildContext context,
-    TUpdateDataBuilder<TWidget, TBuildContext, TData> updateBuilder,
+    TUpdateDataBuilder<TWidget, TBuildContext, TData, TParameter> updateBuilder,
   );
+  bool hasParameterType(dynamic parameter) {
+    return parameter is TParameter;
+  }
 }
 
 abstract class TDataBuilderFactory<TBuildContext> {
