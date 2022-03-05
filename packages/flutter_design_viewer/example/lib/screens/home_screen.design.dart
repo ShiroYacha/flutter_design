@@ -30,7 +30,7 @@ final generatedScreensHomeScreenHomeScreenPage = ViewerDocumentPage(
             typeName: 'Widget',
             isNullable: false,
             defaultValue: null,
-            defaultValueCode: 'null',
+            defaultValueCode: '''null''',
             documentation: null,
           ),
           FieldMetaData(
@@ -39,7 +39,7 @@ final generatedScreensHomeScreenHomeScreenPage = ViewerDocumentPage(
             typeName: 'AppBar',
             isNullable: true,
             defaultValue: null,
-            defaultValueCode: 'null',
+            defaultValueCode: '''null''',
             documentation: null,
           ),
         ],

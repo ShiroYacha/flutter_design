@@ -32,7 +32,7 @@ final generatedWidgetsMiscAvatarPage = ViewerDocumentPage(
             defaultValue: null,
             defaultValueCode: null,
             viewerInitSelectorParam:
-                'https://www.ladbible.com/cdn-cgi/image/width=720,quality=70,format=jpeg,fit=pad,dpr=1/https%3A%2F%2Fs3-images.ladbible.com%2Fs3%2Fcontent%2Fdc3138d56184d0490ddcc02c5e8a3b7a.png',
+                'https://images.unsplash.com/photo-1529778873920-4da4926a72c2',
             documentation: null,
           ),
           FieldMetaData(
@@ -41,7 +41,7 @@ final generatedWidgetsMiscAvatarPage = ViewerDocumentPage(
             typeName: 'double',
             isNullable: false,
             defaultValue: 30.0,
-            defaultValueCode: '30.0',
+            defaultValueCode: '''30.0''',
             documentation: null,
           ),
         ],
@@ -78,30 +78,48 @@ class Avatar extends StatelessWidget {
   ],
 );
 
-final generatedWidgetsMiscAvatarV2Page = ViewerDocumentPage(
-  id: 'avatarV2',
+final generatedWidgetsMiscAvatarDuoPage = ViewerDocumentPage(
+  id: 'avatarDuo',
   namespace: ['widgets', 'misc'],
-  title: 'AvatarV2',
+  title: 'AvatarDuo',
   subtitle: null,
   description: null,
   sections: [
     ViewerSectionUnion.component(
       id: 'anatomy',
       title: 'Anatomy',
-      ctorName: 'AvatarV2',
+      ctorName: 'AvatarDuo',
       designLink: null,
       builder: ViewerWidgetBuilder(
-        build: (context, factory) => AvatarV2(
-          model: factory.build(context, 'model'),
+        build: (context, factory) => AvatarDuo(
+          left: factory.build(context, 'left'),
+          right: factory.build(context, 'right'),
         ),
         fieldMetaDataset: const [
           FieldMetaData(
-            name: 'model',
+            name: 'left',
             type: AvatarModel,
             typeName: 'AvatarModel',
             isNullable: false,
             defaultValue: null,
-            defaultValueCode: 'null',
+            defaultValueCode: '''null''',
+            viewerInitSelectorParam: AvatarModel(
+              uri:
+                  'https://images.unsplash.com/photo-1529778873920-4da4926a72c2',
+              radius: 30.0,
+            ),
+            documentation: null,
+          ),
+          FieldMetaData(
+            name: 'right',
+            type: AvatarModel,
+            typeName: 'AvatarModel',
+            isNullable: false,
+            defaultValue: const AvatarModel(
+                uri:
+                    'https://cdn.omlet.co.uk/images/originals/sleeping_kitten.jpg'),
+            defaultValueCode:
+                '''const AvatarModel(uri: 'https://cdn.omlet.co.uk/images/originals/sleeping_kitten.jpg')''',
             documentation: null,
           ),
         ],
@@ -109,14 +127,30 @@ final generatedWidgetsMiscAvatarV2Page = ViewerDocumentPage(
       sourceCode: const ViewerSourceCode(
           location: 'package:viewer_example/widgets/misc.dart', code: '''
 /// Built from the following function 
-(context, factory) => AvatarV2(model: factory.build(context, 'model'),)
+(context, factory) => AvatarDuo(left: factory.build(context, 'left'),right: factory.build(context, 'right'),)
 
 /// Widget
-class AvatarV2 extends StatelessWidget {
-  final AvatarModel model;
-  const AvatarV2({required this.model, Key? key}) : super(key: key);
+class AvatarDuo extends StatelessWidget {
+  final AvatarModel left;
+  final AvatarModel right;
+  const AvatarDuo(
+      {required this.left,
+      this.right = const AvatarModel(
+          uri: 'https://cdn.omlet.co.uk/images/originals/sleeping_kitten.jpg'),
+      Key? key})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
+    return Row(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          _renderAvatar(context, left),
+          _renderAvatar(context, right)
+        ]);
+  }
+
+  CircleAvatar _renderAvatar(BuildContext context, AvatarModel model) {
     final theme = Theme.of(context);
     return CircleAvatar(
         backgroundColor: theme.backgroundColor,

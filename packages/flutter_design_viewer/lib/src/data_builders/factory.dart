@@ -39,14 +39,19 @@ class DataBuilderRegistry {
   List<DataBuilder> getOptionsFor(
     Type type,
     dynamic parameter,
-  ) =>
-      allBuilders[type]?.map((e) {
-        if (parameter == null) {
-          return e.call();
-        }
-        return e.call(parameter);
-      }).toList() ??
-      [];
+  ) {
+    final options = allBuilders[type]?.map((e) {
+          if (parameter == null) {
+            return e.call();
+          }
+          return e.call(parameter);
+        }).toList() ??
+        [];
+    if (options.isEmpty) {
+      options.add(DataTemplateDynamicReadonlyBuilder(parameter));
+    }
+    return options;
+  }
 
   Map<String, List<DataBuilder>> getAllOptionsFor(
           Map<String, FieldMetaData> idFieldMetaDataMap) =>

@@ -47,7 +47,7 @@ final generatedWidgetsActionsTogglesToggleButtonPage = ViewerDocumentPage(
             typeName: 'Color',
             isNullable: false,
             defaultValue: Colors.red,
-            defaultValueCode: 'Colors.red',
+            defaultValueCode: '''Colors.red''',
             documentation: null,
           ),
           FieldMetaData(
@@ -56,7 +56,7 @@ final generatedWidgetsActionsTogglesToggleButtonPage = ViewerDocumentPage(
             typeName: 'bool',
             isNullable: false,
             defaultValue: false,
-            defaultValueCode: 'false',
+            defaultValueCode: '''false''',
             viewerInitSelectorParam: DataTemplateSubConnectorParameter(
               defaultValue: false,
               key: 'active',
@@ -69,7 +69,7 @@ final generatedWidgetsActionsTogglesToggleButtonPage = ViewerDocumentPage(
             typeName: 'void Function(bool)',
             isNullable: true,
             defaultValue: null,
-            defaultValueCode: 'null',
+            defaultValueCode: '''null''',
             viewerInitSelectorParam: DataTemplatePubConnectorParameter(
               key: 'active',
             ),

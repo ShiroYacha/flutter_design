@@ -21,7 +21,7 @@ class PageScreen extends HookConsumerWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          TextDescription(
+          TitleDescription(
             style: TextDescriptionStyle.page(context),
             title: currentPage.title,
             description: currentPage.subtitle,
@@ -29,7 +29,7 @@ class PageScreen extends HookConsumerWidget {
           Spacers.v20,
           TableOfContents(sections: currentPage.sections),
           Spacers.v20,
-          TextDescription(
+          TitleDescription(
             style: TextDescriptionStyle.paragraph(context),
             description: currentPage.description,
           ),

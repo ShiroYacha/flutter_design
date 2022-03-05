@@ -10,6 +10,26 @@ import 'package:faker/faker.dart';
 import '../theme.dart';
 import 'designers.dart';
 
+class DataTemplateDynamicReadonlyBuilder extends DataBuilder<dynamic, dynamic> {
+  DataTemplateDynamicReadonlyBuilder([dynamic parameter]) : super(parameter);
+
+  @override
+  dynamic build(BuildContext context, String field) {
+    return parameter;
+  }
+
+  @override
+  Widget buildDesigner(
+    BuildContext context,
+    UpdateDataBuilder<dynamic, dynamic> updateBuilder,
+  ) {
+    return const SizedBox.shrink();
+  }
+
+  @override
+  String get name => 'Dynamic readonly';
+}
+
 class DataTemplateStringRawBuilder extends DataBuilder<String, String> {
   DataTemplateStringRawBuilder([
     String parameter = 'Type something',

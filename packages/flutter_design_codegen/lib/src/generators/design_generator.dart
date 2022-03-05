@@ -7,11 +7,10 @@ import 'package:build/build.dart';
 import 'package:collection/collection.dart';
 import 'package:dart_style/dart_style.dart';
 import 'package:flutter_design_annotation/flutter_design_annotation.dart';
+import 'package:flutter_design_codegen/src/ast.dart';
 import 'package:flutter_design_codegen/src/utils.dart';
 import 'package:recase/recase.dart';
 import 'package:source_gen/source_gen.dart';
-
-import '../ast.dart';
 
 const _designFieldChecker = TypeChecker.fromRuntime(TDesignField);
 
@@ -223,7 +222,7 @@ FieldMetaData(
   typeName: '$typeName',
   isNullable: ${e.isNullable},
   defaultValue: ${e.defaultValueCode},
-  defaultValueCode: ${!e.type.isDartCoreString ? "'${e.defaultValueCode}'" : e.defaultValueCode},
+  defaultValueCode: ${!e.type.isDartCoreString ? "'''${e.defaultValueCode}'''" : e.defaultValueCode},
   $initialSelectorParamCode
   documentation: ${fieldDocumentation != null ? "'''$fieldDocumentation'''" : null},
 ),''',
@@ -240,14 +239,7 @@ FieldMetaData(
       final visitor = ModelVisitor();
       objectTypeElement.visitChildren(visitor);
       // Compile base types
-      if (visitor.classType.isDartCoreBool ||
-          visitor.classType.isDartCoreString ||
-          visitor.classType.isDartCoreDouble ||
-          visitor.classType.isDartCoreInt ||
-          visitor.classType.isDartCoreMap ||
-          visitor.classType.isDartCoreList ||
-          visitor.classType.isDartCoreSet ||
-          visitor.classType.isDartCoreIterable) {
+      if (visitor.classType.isBaseType) {
         sb.write(_readLiteralAnnotationValue(object));
       }
       // Compile object type, ignore null element types, e.g. null, functions, etc.
@@ -259,7 +251,7 @@ FieldMetaData(
             visitor.classType.constructors.firstOrNull?.parameters ?? [];
         for (final field in parameters) {
           final value = object!.getField(field.name);
-          final literalValue = _readLiteralAnnotationValue(value);
+          final literalValue = _compileObjectSourceCode(value);
           if (value != null) {
             if (field.isPositional) {
               sb.write('$literalValue,');
@@ -303,6 +295,18 @@ FieldMetaData(
 extension ParameterElementExtension on ParameterElement {
   // TODO: find a better way as this might not work all the time
   bool get isNullable => isOptional && !hasDefaultValue;
+}
+
+extension DartTypeExtension on DartType {
+  bool get isBaseType =>
+      isDartCoreBool ||
+      isDartCoreString ||
+      isDartCoreDouble ||
+      isDartCoreInt ||
+      isDartCoreMap ||
+      isDartCoreList ||
+      isDartCoreSet ||
+      isDartCoreIterable;
 }
 
 class _FunctionTypeDef {

@@ -10,8 +10,7 @@ part 'misc.design.dart';
 )
 class Avatar extends StatelessWidget {
   @DesignField(
-      parameter:
-          'https://www.ladbible.com/cdn-cgi/image/width=720,quality=70,format=jpeg,fit=pad,dpr=1/https%3A%2F%2Fs3-images.ladbible.com%2Fs3%2Fcontent%2Fdc3138d56184d0490ddcc02c5e8a3b7a.png')
+      parameter: 'https://images.unsplash.com/photo-1529778873920-4da4926a72c2')
   final String uri;
 
   final double radius;
@@ -37,17 +36,37 @@ class Avatar extends StatelessWidget {
 }
 
 @design
-class AvatarV2 extends StatelessWidget {
-  @DesignField()
-  final AvatarModel model;
+class AvatarDuo extends StatelessWidget {
+  @DesignField(
+    parameter: AvatarModel(
+      uri: 'https://images.unsplash.com/photo-1529778873920-4da4926a72c2',
+    ),
+  )
+  final AvatarModel left;
 
-  const AvatarV2({
-    required this.model,
+  final AvatarModel right;
+
+  const AvatarDuo({
+    required this.left,
+    this.right = const AvatarModel(
+      uri: 'https://cdn.omlet.co.uk/images/originals/sleeping_kitten.jpg',
+    ),
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        _renderAvatar(context, left),
+        _renderAvatar(context, right),
+      ],
+    );
+  }
+
+  CircleAvatar _renderAvatar(BuildContext context, AvatarModel model) {
     final theme = Theme.of(context);
     return CircleAvatar(
       backgroundColor: theme.backgroundColor,

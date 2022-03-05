@@ -11,7 +11,7 @@ import 'widgets/actions/toggles.dart';
 final generatedComponentPages = <ViewerDocumentPage>[
   generatedScreensHomeScreenHomeScreenPage,
   generatedWidgetsMiscAvatarPage,
-  generatedWidgetsMiscAvatarV2Page,
+  generatedWidgetsMiscAvatarDuoPage,
   generatedWidgetsLayoutsContainersSpacedRowPage,
   generatedWidgetsLayoutsContainersResponsiveEvenRowPage,
   generatedWidgetsActionsButtonsButtonPage,

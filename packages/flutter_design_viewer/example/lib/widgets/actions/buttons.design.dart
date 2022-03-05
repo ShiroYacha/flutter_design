@@ -35,7 +35,7 @@ final generatedWidgetsActionsButtonsButtonPage = ViewerDocumentPage(
             typeName: 'Widget',
             isNullable: false,
             defaultValue: null,
-            defaultValueCode: 'null',
+            defaultValueCode: '''null''',
             documentation:
                 '''/// The child of the button, positioned in the middle of the container.''',
           ),
@@ -45,7 +45,7 @@ final generatedWidgetsActionsButtonsButtonPage = ViewerDocumentPage(
             typeName: 'void Function()',
             isNullable: true,
             defaultValue: null,
-            defaultValueCode: 'null',
+            defaultValueCode: '''null''',
             documentation:
                 '''/// Callback when the button is pressed. If `null`, the button is disabled.''',
           ),

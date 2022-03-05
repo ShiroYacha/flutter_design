@@ -76,7 +76,10 @@ class TextDescriptionStyle {
         fontWeight: FontWeight.w800,
         color: theme.colorScheme.onBackground,
       ),
-      descriptionStyle: theme.textTheme.headline6?.copyWith(height: 1.4),
+      descriptionStyle: theme.textTheme.headline6?.copyWith(
+        height: 1.4,
+        fontWeight: FontWeight.w200,
+      ),
     );
   }
   factory TextDescriptionStyle.paragraph(BuildContext context) {
@@ -91,11 +94,11 @@ class TextDescriptionStyle {
   }
 }
 
-class TextDescription extends StatelessWidget {
+class TitleDescription extends StatelessWidget {
   final TextDescriptionStyle style;
   final String? title;
   final String? description;
-  const TextDescription({
+  const TitleDescription({
     required this.style,
     this.title,
     this.description,
@@ -141,7 +144,7 @@ class ComponentSection extends HookConsumerWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          TextDescription(
+          TitleDescription(
             style: TextDescriptionStyle.section(context),
             title: component.title,
             description: component.description,
@@ -174,7 +177,7 @@ class ParagraphSection extends HookConsumerWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          TextDescription(
+          TitleDescription(
             style: TextDescriptionStyle.section(context),
             title: paragraph.title,
             description: paragraph.description,
@@ -234,7 +237,7 @@ class ViewerImageDisplay extends StatelessWidget {
             ),
             Spacers.h40,
             Expanded(
-              child: TextDescription(
+              child: TitleDescription(
                 style: TextDescriptionStyle.paragraph(context),
                 title: item.title,
                 description: item.description,
@@ -265,7 +268,7 @@ class ApiDocsSection extends HookConsumerWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          TextDescription(
+          TitleDescription(
             style: TextDescriptionStyle.section(context),
             title: apiDocs.title,
             description: apiDocs.description,
@@ -274,7 +277,7 @@ class ApiDocsSection extends HookConsumerWidget {
             <Widget>[],
             (pv, e) => [
               ...pv,
-              TextDescription(
+              TitleDescription(
                 style: TextDescriptionStyle.paragraph(context),
                 title: e.ctorName,
               ),
