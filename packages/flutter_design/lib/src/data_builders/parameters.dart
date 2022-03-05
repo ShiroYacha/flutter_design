@@ -35,8 +35,7 @@ class DataTemplateWidgetPlaceholderListParameter
 class DataTemplatePubConnectorParameter
     with _$DataTemplatePubConnectorParameter {
   const factory DataTemplatePubConnectorParameter({
-    required Type functionType,
-    required String key,
+    @Default('default') String key,
   }) = _DataTemplatePubConnectorParameter;
 }
 
@@ -44,7 +43,7 @@ class DataTemplatePubConnectorParameter
 class DataTemplateSubConnectorParameter
     with _$DataTemplateSubConnectorParameter {
   const factory DataTemplateSubConnectorParameter({
-    required dynamic defaultValue,
-    required String key,
+    @Default(null) dynamic defaultValue,
+    @Default('default') String key,
   }) = _DataTemplateSubConnectorParameter;
 }

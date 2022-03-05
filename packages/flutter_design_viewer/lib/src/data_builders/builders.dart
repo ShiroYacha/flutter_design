@@ -1,8 +1,8 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_design/flutter_design.dart';
 import 'package:flutter_design_viewer/src/widgets/items/images.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:get_it/get_it.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:recase/recase.dart';
 import 'package:faker/faker.dart';
@@ -167,8 +167,17 @@ class DataTemplateStubFunctionBuilder extends DataBuilder<Function, Type> {
   String get name => 'Stub function';
 }
 
-class PubSubConnectedData {
+class PubSubConnectedData extends InheritedWidget {
   final Map<String, dynamic> _data = {};
+
+  PubSubConnectedData({
+    required Widget child,
+    Key? key,
+  }) : super(key: key, child: child);
+
+  static PubSubConnectedData of(BuildContext context) {
+    return (context.dependOnInheritedWidgetOfExactType<PubSubConnectedData>()!);
+  }
 
   void write(String key, dynamic value) {
     _data[key] = value;
@@ -185,6 +194,11 @@ class PubSubConnectedData {
   void clear() {
     _data.clear();
   }
+
+  @override
+  bool updateShouldNotify(covariant PubSubConnectedData oldWidget) {
+    return !mapEquals(_data, oldWidget._data);
+  }
 }
 
 class DataTemplatePubConnectorBuilder
@@ -192,21 +206,20 @@ class DataTemplatePubConnectorBuilder
   late UpdateDataBuilder<Function, DataTemplatePubConnectorParameter>
       _updateBuilder;
 
-  DataTemplatePubConnectorBuilder(DataTemplatePubConnectorParameter parameter)
+  DataTemplatePubConnectorBuilder(
+      [DataTemplatePubConnectorParameter parameter =
+          const DataTemplatePubConnectorParameter()])
       : super(parameter);
 
   @override
   Function build(BuildContext context, String field) {
-    final data = GetIt.instance.get<PubSubConnectedData>();
-    if (parameter.functionType == VoidBoolCallback) {
-      return (b) {
-        data.write(parameter.key, b);
-        _updateBuilder(this);
-      };
-    } else if (parameter.functionType == VoidCallback) {
-      return () {};
-    }
-    throw UnsupportedError('Not implemented');
+    final data = PubSubConnectedData.of(context);
+    return (d) {
+      print(
+          'data = ${data.hashCode}, writing key = ${parameter.key}, value = $d');
+      data.write(parameter.key, d);
+      _updateBuilder(this);
+    };
   }
 
   @override
@@ -253,12 +266,16 @@ class DataTemplatePubConnectorBuilder
 
 class DataTemplateSubConnectorBuilder
     extends DataBuilder<dynamic, DataTemplateSubConnectorParameter> {
-  DataTemplateSubConnectorBuilder(DataTemplateSubConnectorParameter parameter)
+  DataTemplateSubConnectorBuilder(
+      [DataTemplateSubConnectorParameter parameter =
+          const DataTemplateSubConnectorParameter()])
       : super(parameter);
 
   @override
   dynamic build(BuildContext context, String field) {
-    final data = GetIt.instance.get<PubSubConnectedData>();
+    final data = PubSubConnectedData.of(context);
+    print(
+        'data = ${data.hashCode}, reading key = ${parameter.key}, value = ${data.read(parameter.key)}');
     return data.hasValue(parameter.key)
         ? data.read(parameter.key)
         : parameter.defaultValue;

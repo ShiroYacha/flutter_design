@@ -26,7 +26,7 @@ class MyStringDataBuilder extends DataBuilder<String, String> {
   }
 
   @override
-  String get name => 'Raw text';
+  String get name => 'Special text';
 }
 
 class MyStringDataDesigner extends HookConsumerWidget {

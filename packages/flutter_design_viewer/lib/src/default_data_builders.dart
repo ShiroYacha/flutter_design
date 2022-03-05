@@ -7,7 +7,7 @@ import 'data_builders/factory.dart';
 final defaultBuilders = <Type, List<DataBuilderCreator>>{
   String: [
     // TODO: p!=null could be handled by codegen
-    ([p]) => p != null
+    ([p]) => p != null && p is String
         ? DataTemplateStringRawBuilder(p)
         : DataTemplateStringRawBuilder(),
     ([p]) => DataTemplateStringLoremBuilder(),
@@ -23,24 +23,31 @@ final defaultBuilders = <Type, List<DataBuilderCreator>>{
   ],
   VoidBoolCallback: [
     ([p]) => DataTemplateStubFunctionBuilder(VoidBoolCallback),
-    ([p]) => DataTemplatePubConnectorBuilder(p),
+    ([p]) => p != null && p is DataTemplatePubConnectorParameter
+        ? DataTemplatePubConnectorBuilder(p)
+        : DataTemplatePubConnectorBuilder(),
   ],
   Color: [
-    ([p]) => p != null
+    ([p]) => p != null && p is Color
         ? DataTemplateColorPickerBuilder(p)
         : DataTemplateColorPickerBuilder(),
   ],
   double: [
-    ([p]) =>
-        p != null ? DataTemplateDoubleBuilder(p) : DataTemplateDoubleBuilder(),
+    ([p]) => p != null && p is double
+        ? DataTemplateDoubleBuilder(p)
+        : DataTemplateDoubleBuilder(),
   ],
   int: [
-    ([p]) => p != null ? DataTemplateIntBuilder(p) : DataTemplateIntBuilder(),
+    ([p]) => p != null && p is int
+        ? DataTemplateIntBuilder(p)
+        : DataTemplateIntBuilder(),
   ],
   bool: [
-    ([p]) => p != null
+    ([p]) => p != null && p is bool
         ? DataTemplateBoolToggleBuilder(p)
         : DataTemplateBoolToggleBuilder(),
-    ([p]) => DataTemplateSubConnectorBuilder(p),
+    ([p]) => p != null && p is DataTemplateSubConnectorParameter
+        ? DataTemplateSubConnectorBuilder(p)
+        : DataTemplateSubConnectorBuilder(),
   ],
 };

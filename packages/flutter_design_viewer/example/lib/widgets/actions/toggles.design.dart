@@ -6,7 +6,7 @@ part of 'toggles.dart';
 // DesignGenerator
 // **************************************************************************
 
-typedef $FunctionAliasForOnChanged = void Function(bool);
+typedef _$FunctionAliasForOnChanged = void Function(bool);
 final generatedWidgetsActionsTogglesToggleButtonPage = ViewerDocumentPage(
   id: 'toggleButton',
   namespace: ['widgets', 'actions', 'toggles'],
@@ -21,12 +21,26 @@ final generatedWidgetsActionsTogglesToggleButtonPage = ViewerDocumentPage(
       designLink: null,
       builder: ViewerWidgetBuilder(
         build: (context, factory) => ToggleButton(
+          title: factory.build(context, 'title'),
           color: factory.build(context, 'color'),
           active: factory.build(context, 'active'),
-          title: factory.build(context, 'title'),
           onChanged: factory.build(context, 'onChanged'),
         ),
         fieldMetaDataset: const [
+          FieldMetaData(
+            name: 'title',
+            type: String,
+            typeName: 'String',
+            isNullable: false,
+            defaultValue: null,
+            defaultValueCode: null,
+            viewerInitSelectorParam: DataTemplateStringLoremParameter(
+              length: 10,
+              min: 0,
+              max: 100,
+            ),
+            documentation: null,
+          ),
           FieldMetaData(
             name: 'color',
             type: Color,
@@ -43,24 +57,22 @@ final generatedWidgetsActionsTogglesToggleButtonPage = ViewerDocumentPage(
             isNullable: false,
             defaultValue: false,
             defaultValueCode: 'false',
-            documentation: null,
-          ),
-          FieldMetaData(
-            name: 'title',
-            type: String,
-            typeName: 'String',
-            isNullable: false,
-            defaultValue: 'This is a Toggle Button',
-            defaultValueCode: 'This is a Toggle Button',
+            viewerInitSelectorParam: DataTemplateSubConnectorParameter(
+              defaultValue: false,
+              key: 'active',
+            ),
             documentation: null,
           ),
           FieldMetaData(
             name: 'onChanged',
-            type: $FunctionAliasForOnChanged,
+            type: _$FunctionAliasForOnChanged,
             typeName: 'void Function(bool)',
             isNullable: true,
             defaultValue: null,
             defaultValueCode: 'null',
+            viewerInitSelectorParam: DataTemplatePubConnectorParameter(
+              key: 'active',
+            ),
             documentation: null,
           ),
         ],
@@ -69,27 +81,35 @@ final generatedWidgetsActionsTogglesToggleButtonPage = ViewerDocumentPage(
           location: 'package:viewer_example/widgets/actions/toggles.dart',
           code: '''
 /// Built from the following function 
-(context, factory) => ToggleButton(color: factory.build(context, 'color'),active: factory.build(context, 'active'),title: factory.build(context, 'title'),onChanged: factory.build(context, 'onChanged'),)
+(context, factory) => ToggleButton(title: factory.build(context, 'title'),color: factory.build(context, 'color'),active: factory.build(context, 'active'),onChanged: factory.build(context, 'onChanged'),)
 
 /// Widget
 class ToggleButton extends StatelessWidget {
-  final Color color;
+  @DesignField(
+      initialValue: 'This is a toggle button',
+      parameter: DataTemplateStringLoremParameter(length: 10))
   final String title;
+  final Color color;
+  @DesignField(
+      parameter:
+          DataTemplateSubConnectorParameter(key: 'active', defaultValue: false))
   final bool active;
+  @DesignField(parameter: DataTemplatePubConnectorParameter(key: 'active'))
   final void Function(bool?)? onChanged;
   const ToggleButton(
-      {this.color = Colors.red,
+      {required this.title,
+      this.color = Colors.red,
       this.active = false,
-      this.title = 'This is a Toggle Button',
       this.onChanged,
       Key? key})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-        title: Text(title),
-        textColor: color,
-        leading: Checkbox(value: active, onChanged: onChanged));
+    return CheckboxListTile(
+        title: Text(title, style: Theme.of(context).textTheme.headline6),
+        activeColor: color,
+        value: active,
+        onChanged: onChanged);
   }
 }
 

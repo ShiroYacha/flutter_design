@@ -36,12 +36,15 @@ class DataBuilderRegistry {
     required this.allBuilders,
   });
 
-  List<DataBuilder> getOptionsFor(Type type, dynamic defaultData) =>
+  List<DataBuilder> getOptionsFor(
+    Type type,
+    dynamic parameter,
+  ) =>
       allBuilders[type]?.map((e) {
-        if (defaultData == null) {
+        if (parameter == null) {
           return e.call();
         }
-        return e.call(defaultData);
+        return e.call(parameter);
       }).toList() ??
       [];
 
@@ -52,7 +55,7 @@ class DataBuilderRegistry {
           kvp.key: [
             ...getOptionsFor(
               kvp.value.type,
-              kvp.value.viewerInitValue ?? kvp.value.defaultValue,
+              kvp.value.viewerInitSelectorParam ?? kvp.value.defaultValue,
             ),
             if (kvp.value.isNullable) DataTemplateNullBuilder(),
           ]

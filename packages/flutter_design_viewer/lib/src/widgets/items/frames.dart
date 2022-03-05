@@ -20,7 +20,6 @@ import 'package:flutter_highlight/flutter_highlight.dart';
 import 'package:flutter_highlight/themes/atom-one-dark.dart';
 import 'package:flutter_highlight/themes/atom-one-light.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:get_it/get_it.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:ionicons/ionicons.dart';
@@ -313,6 +312,8 @@ class CompontentFrameDataDisplay extends HookConsumerWidget {
                           ),
                         ),
                         Spacers.v10,
+                        if (viewerWidgetBuilder.fieldMetaDataset.last == v)
+                          Spacers.v300,
                       ]).toList(),
             ),
     );
@@ -524,7 +525,7 @@ class CanvasFrameContainer extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const ContentApp();
+    return PubSubConnectedData(child: const ContentApp());
   }
 }
 
@@ -547,7 +548,8 @@ class DevicesFrameContainer extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final viewerState = ref.watch(viewerStateProvider);
+    final targetDeviceIds =
+        ref.watch(viewerStateProvider.select((value) => value.targetDeviceIds));
     final scrollController = useScrollController();
     return Scrollbar(
       controller: scrollController,
@@ -555,7 +557,7 @@ class DevicesFrameContainer extends HookConsumerWidget {
       child: ListView(
         controller: scrollController,
         scrollDirection: Axis.horizontal,
-        children: viewerState.targetDeviceIds
+        children: targetDeviceIds
             .map(
               (id) => Padding(
                 padding: const EdgeInsets.only(right: 10),
@@ -563,7 +565,9 @@ class DevicesFrameContainer extends HookConsumerWidget {
                   DeviceFrame(
                     device: _locateDeviceById(id),
                     isFrameVisible: true,
-                    screen: ContentApp(key: UniqueKey()),
+                    screen: PubSubConnectedData(
+                      child: ContentApp(key: ValueKey('ContentApp_$id')),
+                    ),
                   ),
                 ),
               ),
@@ -580,23 +584,28 @@ class ThemeDevicesFrameContainer extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final viewerSettings = ref.watch(viewerSettingsProvider);
-    final viewerState = ref.watch(viewerStateProvider);
+    final targetThemeIds =
+        ref.watch(viewerStateProvider.select((e) => e.targetThemeIds));
+    final targetDeviceId =
+        ref.watch(viewerStateProvider.select((e) => e.targetDeviceId));
     final scrollController = useScrollController();
     return ListView(
       controller: scrollController,
       scrollDirection: Axis.horizontal,
-      children: viewerState.targetThemeIds.map(
+      children: targetThemeIds.map(
         (id) {
           final theme = viewerSettings.enabledThemes[id];
           return Padding(
             padding: const EdgeInsets.only(right: 10),
             child: wrapInDeviceFrameTheme(
               DeviceFrame(
-                device: _locateDeviceById(viewerState.targetDeviceId),
+                device: _locateDeviceById(targetDeviceId),
                 isFrameVisible: true,
-                screen: ContentApp(
-                  key: Key('themed_$id'),
-                  themeDataOverride: theme,
+                screen: PubSubConnectedData(
+                  child: ContentApp(
+                    key: Key('ContentApp_$id'),
+                    themeDataOverride: theme,
+                  ),
                 ),
               ),
             ),
@@ -613,23 +622,28 @@ class LocalesDevicesFrameContainer extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final viewerSettings = ref.watch(viewerSettingsProvider);
-    final viewerState = ref.watch(viewerStateProvider);
+    final targetLocaleIds =
+        ref.watch(viewerStateProvider.select((e) => e.targetLocaleIds));
+    final targetDeviceId =
+        ref.watch(viewerStateProvider.select((e) => e.targetDeviceId));
     final scrollController = useScrollController();
     return ListView(
       controller: scrollController,
       scrollDirection: Axis.horizontal,
-      children: viewerState.targetLocaleIds.map(
+      children: targetLocaleIds.map(
         (id) {
           final locale = viewerSettings.enabledLocales[id];
           return Padding(
             padding: const EdgeInsets.only(right: 10),
             child: wrapInDeviceFrameTheme(
               DeviceFrame(
-                device: _locateDeviceById(viewerState.targetDeviceId),
+                device: _locateDeviceById(targetDeviceId),
                 isFrameVisible: true,
-                screen: ContentApp(
-                  key: Key('locales_${locale?.toLanguageTag()}'),
-                  localeOverride: locale,
+                screen: PubSubConnectedData(
+                  child: ContentApp(
+                    key: ValueKey('ContentApp_${locale?.toLanguageTag()}'),
+                    localeOverride: locale,
+                  ),
                 ),
               ),
             ),
@@ -689,32 +703,17 @@ class EmbeddedAppRouterDelegate extends RouterDelegate<Object>
     with ChangeNotifier, PopNavigatorRouterDelegateMixin<Object> {
   @override
   Widget build(BuildContext context) {
-    return Builder(
-      builder: (context) {
-        return HookConsumer(
-          builder: (context, ref, widget) {
-            final viewerWidgetBuilder = ref
-                .watch(viewerComponentSectionProvider.select((v) => v.builder));
-            final dataBuilders = ref.watch(dataBuildersProvider);
-            final id = viewerWidgetBuilder.hashCode.toString();
-            // TODO: handle scoping issue with multiple widget designer
-            // per page
-            useEffect(() {
-              GetIt.instance.allowReassignment = true;
-              GetIt.instance.registerSingleton(
-                PubSubConnectedData(),
-              );
-            }, [id]);
-            return Center(
-              child: viewerWidgetBuilder.build(
-                context,
-                ManagedDataBuilderFactory(builders: dataBuilders),
-              ),
-            );
-          },
-        );
-      },
-    );
+    return HookConsumer(builder: (context, ref, widget) {
+      final viewerWidgetBuilder =
+          ref.watch(viewerComponentSectionProvider.select((v) => v.builder));
+      final dataBuilders = ref.watch(dataBuildersProvider);
+      return Center(
+        child: viewerWidgetBuilder.build(
+          context,
+          ManagedDataBuilderFactory(builders: dataBuilders),
+        ),
+      );
+    });
   }
 
   @override

@@ -184,6 +184,8 @@ class SpacingDesign {
   static const double s80 = 80;
 
   static const double s100 = 100;
+
+  static const double s300 = 300;
 }
 
 class Paddings {
@@ -637,4 +639,6 @@ class Spacers {
   static const SizedBox h100 = SizedBox(width: SpacingDesign.s100);
 
   static const SizedBox v100 = SizedBox(height: SpacingDesign.s100);
+
+  static const SizedBox v300 = SizedBox(height: SpacingDesign.s300);
 }

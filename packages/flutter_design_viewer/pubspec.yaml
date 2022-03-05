@@ -19,7 +19,6 @@ dependencies:
   vrouter: ^1.2.0+21
   # state management
   hooks_riverpod: ^1.0.3
-  get_it: ^7.2.0
   # data
   freezed_annotation: ^1.1.0
   json_annotation: ^4.4.0

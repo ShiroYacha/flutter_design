@@ -176,7 +176,7 @@ ${await _extractSourceFromElement(
     final map = <ParameterElement, _FunctionTypeDef>{};
     for (final e in parameters.where((e) => e.type is FunctionType)) {
       final typeCode = _getParameterDisplayString(e);
-      final alias = '\$FunctionAliasFor${ReCase(e.name).pascalCase}';
+      final alias = '_\$FunctionAliasFor${ReCase(e.name).pascalCase}';
       map[e] = _FunctionTypeDef(
         alias: alias,
         typeCode: typeCode,
@@ -212,16 +212,10 @@ ${await _extractSourceFromElement(
                   ? _designFieldChecker.firstAnnotationOfExact(p)
                   : null
               : null;
-      // Compile initial value code
-      final viewerInitValue = _readLiteralAnnotationValue(
-        designFieldReader?.getField('initialValue'),
-      );
-      final viewerInitValueCode =
-          viewerInitValue != null ? 'viewerInitValue: $viewerInitValue,' : '';
       // Compile initial data builder selector code
       final initialSelectorParam =
           _compileObjectSourceCode(designFieldReader?.getField('parameter'));
-      final initialSelectorParamCode = viewerInitValue?.isNotEmpty == true
+      final initialSelectorParamCode = initialSelectorParam.isNotEmpty == true
           ? 'viewerInitSelectorParam: $initialSelectorParam,'
           : '';
       // Compile source
@@ -234,7 +228,6 @@ FieldMetaData(
   isNullable: ${e.isNullable},
   defaultValue: ${e.defaultValueCode},
   defaultValueCode: ${!e.type.isDartCoreString ? "'${e.defaultValueCode}'" : e.defaultValueCode},
-  $viewerInitValueCode
   $initialSelectorParamCode
   documentation: ${fieldDocumentation != null ? "'''$fieldDocumentation'''" : null},
 ),''',
@@ -250,25 +243,39 @@ FieldMetaData(
     if (objectTypeElement != null) {
       final visitor = ModelVisitor();
       objectTypeElement.visitChildren(visitor);
-
-      sb.write(
-          '${removeGeneratedCodePrefixSymbols(visitor.classType.element.name)}(');
-      // Ignore null element types, e.g. functions
-      final parameters =
-          visitor.classType.constructors.firstOrNull?.parameters ?? [];
-      for (final field in parameters) {
-        final value = object!.getField(field.name);
-        if (value != null) {
-          if (field.isPositional) {
-            sb.write('${_readLiteralAnnotationValue(value)},');
-          } else if (field.isNamed) {
-            sb.write('${field.name}: ${_readLiteralAnnotationValue(value)},');
-          } else {
-            throw UnsupportedError('Unsupported field: $field');
+      // Compile base types
+      if (visitor.classType.isDartCoreBool ||
+          visitor.classType.isDartCoreString ||
+          visitor.classType.isDartCoreDouble ||
+          visitor.classType.isDartCoreInt ||
+          visitor.classType.isDartCoreMap ||
+          visitor.classType.isDartCoreList ||
+          visitor.classType.isDartCoreSet ||
+          visitor.classType.isDartCoreIterable) {
+        sb.write(_readLiteralAnnotationValue(object));
+      }
+      // Compile object type, ignore null element types, e.g. null, functions, etc.
+      else if (visitor.classType.element.name != 'Null') {
+        sb.write(
+          '${removeGeneratedCodePrefixSymbols(visitor.classType.element.name)}(',
+        );
+        final parameters =
+            visitor.classType.constructors.firstOrNull?.parameters ?? [];
+        for (final field in parameters) {
+          final value = object!.getField(field.name);
+          final literalValue = _readLiteralAnnotationValue(value);
+          if (value != null) {
+            if (field.isPositional) {
+              sb.write('$literalValue,');
+            } else if (field.isNamed) {
+              sb.write('${field.name}: $literalValue,');
+            } else {
+              throw UnsupportedError('Unsupported field: $field');
+            }
           }
         }
+        sb.write(')');
       }
-      sb.write(')');
     }
     return sb.toString();
   }

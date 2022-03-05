@@ -2078,7 +2078,6 @@ class _$FieldMetaDataTearOff {
       required bool isNullable,
       String? defaultValueCode,
       dynamic defaultValue,
-      dynamic viewerInitValue,
       dynamic viewerInitSelectorParam,
       String? documentation}) {
     return _FieldMetaData(
@@ -2088,7 +2087,6 @@ class _$FieldMetaDataTearOff {
       isNullable: isNullable,
       defaultValueCode: defaultValueCode,
       defaultValue: defaultValue,
-      viewerInitValue: viewerInitValue,
       viewerInitSelectorParam: viewerInitSelectorParam,
       documentation: documentation,
     );
@@ -2118,13 +2116,14 @@ mixin _$FieldMetaData {
   /// Default value
   dynamic get defaultValue => throw _privateConstructorUsedError;
 
-  /// Initial value to be used by the viewer. This is especially useful for
-  /// `required` fields that has no default value on the constructor. If both
-  /// the initial value and the default value is specified, the [viewerInitValue]
+  /// The initial parameter of the initial data builder to be used by the viewer.
+  /// The designer will use the first data builder in the provided list which contains
+  /// the same parameter type.
+  ///
+  /// Some of the data builder takes an "initial value" of the field.
+  /// This is especially useful for `required` fields that has no default value on the constructor. If both
+  /// the initial value and the default value is specified, the [viewerInitSelectorParam]
   /// will be used.
-  dynamic get viewerInitValue => throw _privateConstructorUsedError;
-
-  /// TODO: decides how the data builder will be selected by default at runtime
   dynamic get viewerInitSelectorParam => throw _privateConstructorUsedError;
 
   /// Documentation on the field
@@ -2147,7 +2146,6 @@ abstract class $FieldMetaDataCopyWith<$Res> {
       bool isNullable,
       String? defaultValueCode,
       dynamic defaultValue,
-      dynamic viewerInitValue,
       dynamic viewerInitSelectorParam,
       String? documentation});
 }
@@ -2169,7 +2167,6 @@ class _$FieldMetaDataCopyWithImpl<$Res>
     Object? isNullable = freezed,
     Object? defaultValueCode = freezed,
     Object? defaultValue = freezed,
-    Object? viewerInitValue = freezed,
     Object? viewerInitSelectorParam = freezed,
     Object? documentation = freezed,
   }) {
@@ -2198,10 +2195,6 @@ class _$FieldMetaDataCopyWithImpl<$Res>
           ? _value.defaultValue
           : defaultValue // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      viewerInitValue: viewerInitValue == freezed
-          ? _value.viewerInitValue
-          : viewerInitValue // ignore: cast_nullable_to_non_nullable
-              as dynamic,
       viewerInitSelectorParam: viewerInitSelectorParam == freezed
           ? _value.viewerInitSelectorParam
           : viewerInitSelectorParam // ignore: cast_nullable_to_non_nullable
@@ -2228,7 +2221,6 @@ abstract class _$FieldMetaDataCopyWith<$Res>
       bool isNullable,
       String? defaultValueCode,
       dynamic defaultValue,
-      dynamic viewerInitValue,
       dynamic viewerInitSelectorParam,
       String? documentation});
 }
@@ -2252,7 +2244,6 @@ class __$FieldMetaDataCopyWithImpl<$Res>
     Object? isNullable = freezed,
     Object? defaultValueCode = freezed,
     Object? defaultValue = freezed,
-    Object? viewerInitValue = freezed,
     Object? viewerInitSelectorParam = freezed,
     Object? documentation = freezed,
   }) {
@@ -2281,10 +2272,6 @@ class __$FieldMetaDataCopyWithImpl<$Res>
           ? _value.defaultValue
           : defaultValue // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      viewerInitValue: viewerInitValue == freezed
-          ? _value.viewerInitValue
-          : viewerInitValue // ignore: cast_nullable_to_non_nullable
-              as dynamic,
       viewerInitSelectorParam: viewerInitSelectorParam == freezed
           ? _value.viewerInitSelectorParam
           : viewerInitSelectorParam // ignore: cast_nullable_to_non_nullable
@@ -2307,7 +2294,6 @@ class _$_FieldMetaData extends _FieldMetaData with DiagnosticableTreeMixin {
       required this.isNullable,
       this.defaultValueCode,
       this.defaultValue,
-      this.viewerInitValue,
       this.viewerInitSelectorParam,
       this.documentation})
       : super._();
@@ -2338,14 +2324,14 @@ class _$_FieldMetaData extends _FieldMetaData with DiagnosticableTreeMixin {
   final dynamic defaultValue;
   @override
 
-  /// Initial value to be used by the viewer. This is especially useful for
-  /// `required` fields that has no default value on the constructor. If both
-  /// the initial value and the default value is specified, the [viewerInitValue]
+  /// The initial parameter of the initial data builder to be used by the viewer.
+  /// The designer will use the first data builder in the provided list which contains
+  /// the same parameter type.
+  ///
+  /// Some of the data builder takes an "initial value" of the field.
+  /// This is especially useful for `required` fields that has no default value on the constructor. If both
+  /// the initial value and the default value is specified, the [viewerInitSelectorParam]
   /// will be used.
-  final dynamic viewerInitValue;
-  @override
-
-  /// TODO: decides how the data builder will be selected by default at runtime
   final dynamic viewerInitSelectorParam;
   @override
 
@@ -2354,7 +2340,7 @@ class _$_FieldMetaData extends _FieldMetaData with DiagnosticableTreeMixin {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'FieldMetaData(name: $name, type: $type, typeName: $typeName, isNullable: $isNullable, defaultValueCode: $defaultValueCode, defaultValue: $defaultValue, viewerInitValue: $viewerInitValue, viewerInitSelectorParam: $viewerInitSelectorParam, documentation: $documentation)';
+    return 'FieldMetaData(name: $name, type: $type, typeName: $typeName, isNullable: $isNullable, defaultValueCode: $defaultValueCode, defaultValue: $defaultValue, viewerInitSelectorParam: $viewerInitSelectorParam, documentation: $documentation)';
   }
 
   @override
@@ -2368,7 +2354,6 @@ class _$_FieldMetaData extends _FieldMetaData with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty('isNullable', isNullable))
       ..add(DiagnosticsProperty('defaultValueCode', defaultValueCode))
       ..add(DiagnosticsProperty('defaultValue', defaultValue))
-      ..add(DiagnosticsProperty('viewerInitValue', viewerInitValue))
       ..add(DiagnosticsProperty(
           'viewerInitSelectorParam', viewerInitSelectorParam))
       ..add(DiagnosticsProperty('documentation', documentation));
@@ -2388,8 +2373,6 @@ class _$_FieldMetaData extends _FieldMetaData with DiagnosticableTreeMixin {
                 .equals(other.defaultValueCode, defaultValueCode) &&
             const DeepCollectionEquality()
                 .equals(other.defaultValue, defaultValue) &&
-            const DeepCollectionEquality()
-                .equals(other.viewerInitValue, viewerInitValue) &&
             const DeepCollectionEquality().equals(
                 other.viewerInitSelectorParam, viewerInitSelectorParam) &&
             const DeepCollectionEquality()
@@ -2405,7 +2388,6 @@ class _$_FieldMetaData extends _FieldMetaData with DiagnosticableTreeMixin {
       const DeepCollectionEquality().hash(isNullable),
       const DeepCollectionEquality().hash(defaultValueCode),
       const DeepCollectionEquality().hash(defaultValue),
-      const DeepCollectionEquality().hash(viewerInitValue),
       const DeepCollectionEquality().hash(viewerInitSelectorParam),
       const DeepCollectionEquality().hash(documentation));
 
@@ -2423,7 +2405,6 @@ abstract class _FieldMetaData extends FieldMetaData {
       required bool isNullable,
       String? defaultValueCode,
       dynamic defaultValue,
-      dynamic viewerInitValue,
       dynamic viewerInitSelectorParam,
       String? documentation}) = _$_FieldMetaData;
   const _FieldMetaData._() : super._();
@@ -2454,14 +2435,14 @@ abstract class _FieldMetaData extends FieldMetaData {
   dynamic get defaultValue;
   @override
 
-  /// Initial value to be used by the viewer. This is especially useful for
-  /// `required` fields that has no default value on the constructor. If both
-  /// the initial value and the default value is specified, the [viewerInitValue]
+  /// The initial parameter of the initial data builder to be used by the viewer.
+  /// The designer will use the first data builder in the provided list which contains
+  /// the same parameter type.
+  ///
+  /// Some of the data builder takes an "initial value" of the field.
+  /// This is especially useful for `required` fields that has no default value on the constructor. If both
+  /// the initial value and the default value is specified, the [viewerInitSelectorParam]
   /// will be used.
-  dynamic get viewerInitValue;
-  @override
-
-  /// TODO: decides how the data builder will be selected by default at runtime
   dynamic get viewerInitSelectorParam;
   @override
 

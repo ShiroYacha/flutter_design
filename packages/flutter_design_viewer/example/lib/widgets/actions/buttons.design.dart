@@ -6,7 +6,7 @@ part of 'buttons.dart';
 // DesignGenerator
 // **************************************************************************
 
-typedef $FunctionAliasForOnPressed = void Function();
+typedef _$FunctionAliasForOnPressed = void Function();
 final generatedWidgetsActionsButtonsButtonPage = ViewerDocumentPage(
   id: 'button',
   namespace: ['widgets', 'actions', 'buttons'],
@@ -41,7 +41,7 @@ final generatedWidgetsActionsButtonsButtonPage = ViewerDocumentPage(
           ),
           FieldMetaData(
             name: 'onPressed',
-            type: $FunctionAliasForOnPressed,
+            type: _$FunctionAliasForOnPressed,
             typeName: 'void Function()',
             isNullable: true,
             defaultValue: null,

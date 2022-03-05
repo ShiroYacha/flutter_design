@@ -39,7 +39,7 @@ class PatternPainter extends CustomPainter {
 
     FixedSizeDots(
       bgColor: backgroundColor ?? theme.scaffoldBackgroundColor,
-      fgColor: foregroundColor ?? theme.disabledColor,
+      fgColor: (foregroundColor ?? theme.disabledColor).withOpacity(0.1),
     ).paintOnRect(
       canvas,
       size,

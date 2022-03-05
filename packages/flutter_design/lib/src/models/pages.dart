@@ -216,13 +216,14 @@ class FieldMetaData with _$FieldMetaData {
     /// Default value
     dynamic defaultValue,
 
-    /// Initial value to be used by the viewer. This is especially useful for
-    /// `required` fields that has no default value on the constructor. If both
-    /// the initial value and the default value is specified, the [viewerInitValue]
+    /// The initial parameter of the initial data builder to be used by the viewer.
+    /// The designer will use the first data builder in the provided list which contains
+    /// the same parameter type.
+    ///
+    /// Some of the data builder takes an "initial value" of the field.
+    /// This is especially useful for `required` fields that has no default value on the constructor. If both
+    /// the initial value and the default value is specified, the [viewerInitSelectorParam]
     /// will be used.
-    dynamic viewerInitValue,
-
-    /// TODO: decides how the data builder will be selected by default at runtime
     dynamic viewerInitSelectorParam,
 
     /// Documentation on the field

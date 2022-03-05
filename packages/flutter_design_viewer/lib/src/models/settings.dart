@@ -104,7 +104,7 @@ class ViewerSettings with _$ViewerSettings {
     required Map<String, Locale> enabledLocales,
     required Map<String, ThemeData> enabledThemes,
     @Default(Breakpoints()) Breakpoints breakpoints,
-    @Default(500.0) double widgetDisplayHeight,
+    @Default(600.0) double widgetDisplayHeight,
   }) = _ViewerSettigns;
 }
 

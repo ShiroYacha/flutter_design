@@ -562,10 +562,8 @@ abstract class _DataTemplateWidgetPlaceholderListParameter
 class _$DataTemplatePubConnectorParameterTearOff {
   const _$DataTemplatePubConnectorParameterTearOff();
 
-  _DataTemplatePubConnectorParameter call(
-      {required Type functionType, required String key}) {
+  _DataTemplatePubConnectorParameter call({String key = 'default'}) {
     return _DataTemplatePubConnectorParameter(
-      functionType: functionType,
       key: key,
     );
   }
@@ -577,7 +575,6 @@ const $DataTemplatePubConnectorParameter =
 
 /// @nodoc
 mixin _$DataTemplatePubConnectorParameter {
-  Type get functionType => throw _privateConstructorUsedError;
   String get key => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -591,7 +588,7 @@ abstract class $DataTemplatePubConnectorParameterCopyWith<$Res> {
           DataTemplatePubConnectorParameter value,
           $Res Function(DataTemplatePubConnectorParameter) then) =
       _$DataTemplatePubConnectorParameterCopyWithImpl<$Res>;
-  $Res call({Type functionType, String key});
+  $Res call({String key});
 }
 
 /// @nodoc
@@ -605,14 +602,9 @@ class _$DataTemplatePubConnectorParameterCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? functionType = freezed,
     Object? key = freezed,
   }) {
     return _then(_value.copyWith(
-      functionType: functionType == freezed
-          ? _value.functionType
-          : functionType // ignore: cast_nullable_to_non_nullable
-              as Type,
       key: key == freezed
           ? _value.key
           : key // ignore: cast_nullable_to_non_nullable
@@ -629,7 +621,7 @@ abstract class _$DataTemplatePubConnectorParameterCopyWith<$Res>
           $Res Function(_DataTemplatePubConnectorParameter) then) =
       __$DataTemplatePubConnectorParameterCopyWithImpl<$Res>;
   @override
-  $Res call({Type functionType, String key});
+  $Res call({String key});
 }
 
 /// @nodoc
@@ -647,14 +639,9 @@ class __$DataTemplatePubConnectorParameterCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? functionType = freezed,
     Object? key = freezed,
   }) {
     return _then(_DataTemplatePubConnectorParameter(
-      functionType: functionType == freezed
-          ? _value.functionType
-          : functionType // ignore: cast_nullable_to_non_nullable
-              as Type,
       key: key == freezed
           ? _value.key
           : key // ignore: cast_nullable_to_non_nullable
@@ -668,17 +655,15 @@ class __$DataTemplatePubConnectorParameterCopyWithImpl<$Res>
 class _$_DataTemplatePubConnectorParameter
     with DiagnosticableTreeMixin
     implements _DataTemplatePubConnectorParameter {
-  const _$_DataTemplatePubConnectorParameter(
-      {required this.functionType, required this.key});
+  const _$_DataTemplatePubConnectorParameter({this.key = 'default'});
 
-  @override
-  final Type functionType;
+  @JsonKey()
   @override
   final String key;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'DataTemplatePubConnectorParameter(functionType: $functionType, key: $key)';
+    return 'DataTemplatePubConnectorParameter(key: $key)';
   }
 
   @override
@@ -686,7 +671,6 @@ class _$_DataTemplatePubConnectorParameter
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'DataTemplatePubConnectorParameter'))
-      ..add(DiagnosticsProperty('functionType', functionType))
       ..add(DiagnosticsProperty('key', key));
   }
 
@@ -695,16 +679,12 @@ class _$_DataTemplatePubConnectorParameter
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _DataTemplatePubConnectorParameter &&
-            const DeepCollectionEquality()
-                .equals(other.functionType, functionType) &&
             const DeepCollectionEquality().equals(other.key, key));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(functionType),
-      const DeepCollectionEquality().hash(key));
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(key));
 
   @JsonKey(ignore: true)
   @override
@@ -716,12 +696,9 @@ class _$_DataTemplatePubConnectorParameter
 
 abstract class _DataTemplatePubConnectorParameter
     implements DataTemplatePubConnectorParameter {
-  const factory _DataTemplatePubConnectorParameter(
-      {required Type functionType,
-      required String key}) = _$_DataTemplatePubConnectorParameter;
+  const factory _DataTemplatePubConnectorParameter({String key}) =
+      _$_DataTemplatePubConnectorParameter;
 
-  @override
-  Type get functionType;
   @override
   String get key;
   @override
@@ -736,7 +713,7 @@ class _$DataTemplateSubConnectorParameterTearOff {
   const _$DataTemplateSubConnectorParameterTearOff();
 
   _DataTemplateSubConnectorParameter call(
-      {required dynamic defaultValue, required String key}) {
+      {dynamic defaultValue = null, String key = 'default'}) {
     return _DataTemplateSubConnectorParameter(
       defaultValue: defaultValue,
       key: key,
@@ -842,10 +819,12 @@ class _$_DataTemplateSubConnectorParameter
     with DiagnosticableTreeMixin
     implements _DataTemplateSubConnectorParameter {
   const _$_DataTemplateSubConnectorParameter(
-      {required this.defaultValue, required this.key});
+      {this.defaultValue = null, this.key = 'default'});
 
+  @JsonKey()
   @override
   final dynamic defaultValue;
+  @JsonKey()
   @override
   final String key;
 
@@ -890,8 +869,8 @@ class _$_DataTemplateSubConnectorParameter
 abstract class _DataTemplateSubConnectorParameter
     implements DataTemplateSubConnectorParameter {
   const factory _DataTemplateSubConnectorParameter(
-      {required dynamic defaultValue,
-      required String key}) = _$_DataTemplateSubConnectorParameter;
+      {dynamic defaultValue,
+      String key}) = _$_DataTemplateSubConnectorParameter;
 
   @override
   dynamic get defaultValue;
