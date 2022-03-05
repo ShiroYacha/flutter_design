@@ -53,9 +53,6 @@ final generatedWidgetsMiscAvatarPage = ViewerDocumentPage(
 
 /// Widget
 class Avatar extends StatelessWidget {
-  @DesignField(
-      parameter:
-          'https://www.ladbible.com/cdn-cgi/image/width=720,quality=70,format=jpeg,fit=pad,dpr=1/https%3A%2F%2Fs3-images.ladbible.com%2Fs3%2Fcontent%2Fdc3138d56184d0490ddcc02c5e8a3b7a.png')
   final String uri;
   final double radius;
   const Avatar({required this.uri, this.radius = 30.0, Key? key})
@@ -116,7 +113,6 @@ final generatedWidgetsMiscAvatarV2Page = ViewerDocumentPage(
 
 /// Widget
 class AvatarV2 extends StatelessWidget {
-  @DesignField()
   final AvatarModel model;
   const AvatarV2({required this.model, Key? key}) : super(key: key);
   @override

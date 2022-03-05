@@ -11,6 +11,8 @@ import 'package:flutter_design_codegen/src/utils.dart';
 import 'package:recase/recase.dart';
 import 'package:source_gen/source_gen.dart';
 
+import '../ast.dart';
+
 const _designFieldChecker = TypeChecker.fromRuntime(TDesignField);
 
 /// Generate [ViewerDocumentPage] from @TDesign annotated classes.
@@ -111,18 +113,12 @@ ${await _extractSourceFromElement(
     required Resolver resolver,
     required Element element,
   }) async {
-    final code = (await resolver.astNodeFor(element)).toString();
+    final buffer = StringBuffer();
+    (await resolver.astNodeFor(element))!
+        .accept(ToSourceIgnoringDesignAnnotationsVisitor(buffer));
     return DartFormatter().format(
-      code
-          // TODO: find a better approach, e.g. impl. visitor
-          // Skip all annotations
-          .substring(
-            element is ClassElement
-                ? code.contains('@design')
-                    ? code.indexOf('@design class') + 7
-                    : code.indexOf(') class') + 2
-                : 0,
-          )
+      buffer
+          .toString()
           // Add commas to all probable places
           .replaceAll('[^(]);', ',);')
           .replaceAll('[^;]})', ',})'),

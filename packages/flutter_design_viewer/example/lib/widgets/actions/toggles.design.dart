@@ -85,16 +85,9 @@ final generatedWidgetsActionsTogglesToggleButtonPage = ViewerDocumentPage(
 
 /// Widget
 class ToggleButton extends StatelessWidget {
-  @DesignField(
-      initialValue: 'This is a toggle button',
-      parameter: DataTemplateStringLoremParameter(length: 10))
   final String title;
   final Color color;
-  @DesignField(
-      parameter:
-          DataTemplateSubConnectorParameter(key: 'active', defaultValue: false))
   final bool active;
-  @DesignField(parameter: DataTemplatePubConnectorParameter(key: 'active'))
   final void Function(bool?)? onChanged;
   const ToggleButton(
       {required this.title,
