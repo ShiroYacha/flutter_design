@@ -14,8 +14,8 @@ final generatedScreensHomeScreenHomeScreenPage = ViewerDocumentPage(
   description: null,
   sections: [
     ViewerSectionUnion.component(
-      id: 'anatomy',
-      title: 'Anatomy',
+      id: 'home_screen',
+      title: 'HomeScreen',
       ctorName: 'HomeScreen',
       designLink: null,
       builder: ViewerWidgetBuilder(

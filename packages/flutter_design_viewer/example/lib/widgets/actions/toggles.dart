@@ -6,7 +6,6 @@ part 'toggles.design.dart';
 @design
 class ToggleButton extends StatelessWidget {
   @DesignField(
-    initialValue: 'This is a toggle button',
     parameter: DataTemplateStringLoremParameter(length: 10),
   )
   final String title;

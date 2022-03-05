@@ -38,31 +38,24 @@ class DesignGenerator extends GeneratorForAnnotation<TDesign> {
     final folderNamespaces =
         extractClassElementFolderNamespace(element as ClassElement);
     final namespace = folderNamespaces;
-    // TODO: include factory constructors & user defined methods
-    final ctor = visitor.classType.element.constructors.first;
-    // Construct viewer widget builder source
-    final buildCodepair = await _compileBuilderSourceCode(
-      resolver: buildStep.resolver,
-      visitor: visitor,
-      annotation: annotation,
-    );
-    // Construct typedef map for function types
-    final fieldTypedefCodeMap = _compileFunctionTypedefSourceCodeMap(
-      resolver: buildStep.resolver,
-      clazz: clazz,
-      parameters: ctor.parameters,
-    );
-    // Construct field metadata code
-    final fieldMetaDatasetCode = _compileFieldMetaDatasetSourceCode(
-      clazz: clazz,
-      parameters: ctor.parameters,
-      fieldTypedefCodeMap: fieldTypedefCodeMap,
-      annotation: annotation,
-    );
+    // Generate sources for all public constructors, including factory constructors
     final sb = StringBuffer();
-    // Prepare typedef for function types
-    sb.write(fieldTypedefCodeMap.values.map((e) => '${e.code}\n').join());
-    // Assemble page source
+    final typedefSourceCodes = <String>[];
+    final componentSourceCodes = <String>[];
+    for (final ctor in visitor.classType.element.constructors) {
+      final componentSourcePair = await _compileComponentSectionSourceCodePair(
+        ctor: ctor,
+        resolver: buildStep.resolver,
+        clazz: clazz,
+        element: element,
+        annotation: annotation,
+      );
+      typedefSourceCodes.add(componentSourcePair[0]);
+      componentSourceCodes.add(componentSourcePair[1]);
+    }
+    // Render typedef for function types
+    sb.writeAll(typedefSourceCodes);
+    // Render page source
     sb.write(
       '''
 final ${buildClassPageFieldName(element)} = ViewerDocumentPage(
@@ -72,29 +65,7 @@ final ${buildClassPageFieldName(element)} = ViewerDocumentPage(
   subtitle: ${_readNullableAnnotationStringValue(annotation, 'subtitle')},
   description: ${_readNullableAnnotationStringValue(annotation, 'description')},
   sections: [
-    ViewerSectionUnion.component(
-      id: 'anatomy',
-      title: 'Anatomy',
-      ctorName: '$className',
-      designLink: ${_readNullableAnnotationStringValue(annotation, 'designLink')},
-      builder: ViewerWidgetBuilder(
-        build: ${buildCodepair[0]},
-        fieldMetaDataset: $fieldMetaDatasetCode,
-      ),
-      sourceCode: const ViewerSourceCode(
-        location: '${element.librarySource.uri}',
-        code: \'\'\'
-/// Built from the following function 
-${buildCodepair[1]}
-
-/// Widget
-${await _extractSourceFromElement(
-        resolver: buildStep.resolver,
-        element: element,
-      )}
-\'\'\'
-      ),
-    ),
+    ${componentSourceCodes.join('\n')}
     ${annotation.read('showApiDocs').boolValue ? '''
     const ViewerSectionUnion.apiDocs(
       id: 'apiDocs',
@@ -106,6 +77,63 @@ ${await _extractSourceFromElement(
 ''',
     );
     return sb.toString();
+  }
+
+  Future<List<String>> _compileComponentSectionSourceCodePair({
+    required Resolver resolver,
+    required Element element,
+    required ClassElement clazz,
+    required ConstructorElement ctor,
+    required ConstantReader annotation,
+  }) async {
+    // Construct viewer widget builder source
+    final buildCodepair = await _compileBuilderSourceCode(
+      resolver: resolver,
+      ctor: ctor,
+      annotation: annotation,
+    );
+    // Construct typedef map for function types
+    final fieldTypedefCodeMap = _compileFunctionTypedefSourceCodeMap(
+      resolver: resolver,
+      clazz: clazz,
+      ctor: ctor,
+      parameters: ctor.parameters,
+    );
+    // Construct field metadata code
+    final fieldMetaDatasetCode = _compileFieldMetaDatasetSourceCode(
+      clazz: clazz,
+      parameters: ctor.parameters,
+      fieldTypedefCodeMap: fieldTypedefCodeMap,
+      annotation: annotation,
+    );
+    return [
+      fieldTypedefCodeMap.values.map((e) => '${e.code}\n').join(),
+      '''
+ViewerSectionUnion.component(
+      id: '${ReCase(ctor.displayName).snakeCase}',
+      title: '${ctor.displayName}',
+      ctorName: '${ctor.displayName}',
+      designLink: ${_readNullableAnnotationStringValue(annotation, 'designLink')},
+      builder: ViewerWidgetBuilder(
+        build: ${buildCodepair[0]},
+        fieldMetaDataset: $fieldMetaDatasetCode,
+      ),
+      sourceCode: const ViewerSourceCode(
+        location: '${element.librarySource!.uri}',
+        code: \'\'\'
+/// Built from the following function 
+${buildCodepair[1]}
+
+/// Widget
+${await _extractSourceFromElement(
+        resolver: resolver,
+        element: element,
+      )}
+\'\'\'
+      ),
+    ),
+'''
+    ];
   }
 
   Future<String> _extractSourceFromElement({
@@ -146,12 +174,11 @@ ${await _extractSourceFromElement(
 
   Future<List<String>> _compileBuilderSourceCode({
     required Resolver resolver,
-    required ModelVisitor visitor,
+    required ConstructorElement ctor,
     required ConstantReader annotation,
   }) async {
-    final clazz = visitor.classType.element;
-    final params = visitor.classType.element.constructors.first.parameters;
-    final sb = StringBuffer('(context, factory) => ${clazz.name}(');
+    final params = ctor.parameters;
+    final sb = StringBuffer('(context, factory) => ${ctor.displayName}(');
     for (final e in params.where((e) => e.name != 'key')) {
       if (e.isNamed) {
         sb.write("${e.name}: factory.build(context, '${e.name}'),");
@@ -166,12 +193,14 @@ ${await _extractSourceFromElement(
   Map<ParameterElement, _FunctionTypeDef> _compileFunctionTypedefSourceCodeMap({
     required Resolver resolver,
     required ClassElement clazz,
+    required ConstructorElement ctor,
     required List<ParameterElement> parameters,
   }) {
     final map = <ParameterElement, _FunctionTypeDef>{};
     for (final e in parameters.where((e) => e.type is FunctionType)) {
       final typeCode = _getParameterDisplayString(e);
-      final alias = '_\$FunctionAliasFor${ReCase(e.name).pascalCase}';
+      final alias =
+          '_\$FunctionAliasFor${ReCase(e.name).pascalCase}Via${ReCase(ctor.displayName).pascalCase}';
       map[e] = _FunctionTypeDef(
         alias: alias,
         typeCode: typeCode,

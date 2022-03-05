@@ -6,7 +6,7 @@ part of 'toggles.dart';
 // DesignGenerator
 // **************************************************************************
 
-typedef _$FunctionAliasForOnChanged = void Function(bool);
+typedef _$FunctionAliasForOnChangedViaToggleButton = void Function(bool);
 final generatedWidgetsActionsTogglesToggleButtonPage = ViewerDocumentPage(
   id: 'toggleButton',
   namespace: ['widgets', 'actions', 'toggles'],
@@ -15,8 +15,8 @@ final generatedWidgetsActionsTogglesToggleButtonPage = ViewerDocumentPage(
   description: null,
   sections: [
     ViewerSectionUnion.component(
-      id: 'anatomy',
-      title: 'Anatomy',
+      id: 'toggle_button',
+      title: 'ToggleButton',
       ctorName: 'ToggleButton',
       designLink: null,
       builder: ViewerWidgetBuilder(
@@ -65,7 +65,7 @@ final generatedWidgetsActionsTogglesToggleButtonPage = ViewerDocumentPage(
           ),
           FieldMetaData(
             name: 'onChanged',
-            type: _$FunctionAliasForOnChanged,
+            type: _$FunctionAliasForOnChangedViaToggleButton,
             typeName: 'void Function(bool)',
             isNullable: true,
             defaultValue: null,

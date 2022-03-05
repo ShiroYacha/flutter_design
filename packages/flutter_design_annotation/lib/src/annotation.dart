@@ -27,13 +27,10 @@ class TDesign {
   });
 }
 
-class TDesignField<TParameter> {
-  final dynamic initialValue;
-
+class TDesignField {
   final dynamic parameter;
 
   const TDesignField({
-    this.initialValue,
     this.parameter,
   });
 }

@@ -14,8 +14,8 @@ final generatedWidgetsMiscAvatarPage = ViewerDocumentPage(
   description: null,
   sections: [
     ViewerSectionUnion.component(
-      id: 'anatomy',
-      title: 'Anatomy',
+      id: 'avatar',
+      title: 'Avatar',
       ctorName: 'Avatar',
       designLink: '''https://www.figma.com/''',
       builder: ViewerWidgetBuilder(
@@ -86,8 +86,8 @@ final generatedWidgetsMiscAvatarDuoPage = ViewerDocumentPage(
   description: null,
   sections: [
     ViewerSectionUnion.component(
-      id: 'anatomy',
-      title: 'Anatomy',
+      id: 'avatar_duo',
+      title: 'AvatarDuo',
       ctorName: 'AvatarDuo',
       designLink: null,
       builder: ViewerWidgetBuilder(

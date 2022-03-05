@@ -18,15 +18,19 @@ class Button extends StatelessWidget {
   /// Callback when the button is pressed. If `null`, the button is disabled.
   final VoidCallback? onPressed;
 
-  /// Interesting ... does this work?
+  /// Default constructor
   const Button({
     required this.child,
     this.onPressed,
     Key? key,
   }) : super(key: key);
 
+  /// Label variant
   factory Button.label({
-    required String label,
+    @DesignField(
+      parameter: DataTemplateStringLoremParameter(length: 10),
+    )
+        required String label,
     VoidCallback? onPressed,
     Key? key,
   }) =>

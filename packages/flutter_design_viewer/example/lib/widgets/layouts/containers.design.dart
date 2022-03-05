@@ -14,8 +14,8 @@ final generatedWidgetsLayoutsContainersSpacedRowPage = ViewerDocumentPage(
   description: null,
   sections: [
     ViewerSectionUnion.component(
-      id: 'anatomy',
-      title: 'Anatomy',
+      id: 'spaced_row',
+      title: 'SpacedRow',
       ctorName: 'SpacedRow',
       designLink: null,
       builder: ViewerWidgetBuilder(
@@ -84,8 +84,8 @@ final generatedWidgetsLayoutsContainersResponsiveEvenRowPage =
   description: null,
   sections: [
     ViewerSectionUnion.component(
-      id: 'anatomy',
-      title: 'Anatomy',
+      id: 'responsive_even_row',
+      title: 'ResponsiveEvenRow',
       ctorName: 'ResponsiveEvenRow',
       designLink: null,
       builder: ViewerWidgetBuilder(
