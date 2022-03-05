@@ -1,6 +1,6 @@
 name: flutter_design_annotation
 description: Annotation used by `flutter_design_codegen` to generate design system component catalog. Avoid using this package directly, you should use `flutter_design` instead.
-version: 0.0.10-pre+1
+version: 0.0.10
 homepage: https://flutterdesign.io/
 
 environment:

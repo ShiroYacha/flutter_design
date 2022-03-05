@@ -6,7 +6,7 @@ import 'data_builders/factory.dart';
 
 final defaultBuilders = <Type, List<DataBuilderCreator>>{
   String: [
-    // TODO: p!=null could be handled by codegen
+    // TODO: this could be handled by codegen
     ([p]) => p != null && p is String
         ? DataTemplateStringRawBuilder(p)
         : DataTemplateStringRawBuilder(),

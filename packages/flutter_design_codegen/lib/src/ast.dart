@@ -8,7 +8,6 @@ import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/dart/ast/token.dart';
 // ignore: implementation_imports
 import 'package:analyzer/src/dart/ast/ast.dart';
-// ignore: depend_on_referenced_packages
 import 'package:meta/meta.dart';
 
 const _annotationsToIgnore = [
