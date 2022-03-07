@@ -11,9 +11,9 @@ dependencies:
   flutter:
     sdk: flutter
   # internal
-  # flutter_design: ^0.0.11-pre+1
-  flutter_design:
-    path: ../flutter_design
+  flutter_design: ^0.0.11-pre+1
+  # flutter_design:
+  #   path: ../flutter_design
   # framework
   flutter_hooks: ^0.18.2
   vrouter: ^1.2.0+21
