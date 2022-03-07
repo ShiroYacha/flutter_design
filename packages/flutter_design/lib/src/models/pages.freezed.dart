@@ -2465,13 +2465,6 @@ class _$ViewerCollectionItemUnionTearOff {
     );
   }
 
-  ViewerLinkCollectionItem link({required String title, required String url}) {
-    return ViewerLinkCollectionItem(
-      title: title,
-      url: url,
-    );
-  }
-
   ViewerImageCollectionItem image(
       {required ViewerImageCollectionItemStyle style,
       required String url,
@@ -2504,7 +2497,6 @@ mixin _$ViewerCollectionItemUnion {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String? title, String? description) text,
-    required TResult Function(String title, String url) link,
     required TResult Function(ViewerImageCollectionItemStyle style, String url,
             String? title, String? description, double? width, double? height)
         image,
@@ -2514,7 +2506,6 @@ mixin _$ViewerCollectionItemUnion {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String? title, String? description)? text,
-    TResult Function(String title, String url)? link,
     TResult Function(ViewerImageCollectionItemStyle style, String url,
             String? title, String? description, double? width, double? height)?
         image,
@@ -2524,7 +2515,6 @@ mixin _$ViewerCollectionItemUnion {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String? title, String? description)? text,
-    TResult Function(String title, String url)? link,
     TResult Function(ViewerImageCollectionItemStyle style, String url,
             String? title, String? description, double? width, double? height)?
         image,
@@ -2535,7 +2525,6 @@ mixin _$ViewerCollectionItemUnion {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(ViewerTextCollectionItem value) text,
-    required TResult Function(ViewerLinkCollectionItem value) link,
     required TResult Function(ViewerImageCollectionItem value) image,
     required TResult Function(ViewerWidgetCollectionItem value) widget,
   }) =>
@@ -2543,7 +2532,6 @@ mixin _$ViewerCollectionItemUnion {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(ViewerTextCollectionItem value)? text,
-    TResult Function(ViewerLinkCollectionItem value)? link,
     TResult Function(ViewerImageCollectionItem value)? image,
     TResult Function(ViewerWidgetCollectionItem value)? widget,
   }) =>
@@ -2551,7 +2539,6 @@ mixin _$ViewerCollectionItemUnion {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ViewerTextCollectionItem value)? text,
-    TResult Function(ViewerLinkCollectionItem value)? link,
     TResult Function(ViewerImageCollectionItem value)? image,
     TResult Function(ViewerWidgetCollectionItem value)? widget,
     required TResult orElse(),
@@ -2669,7 +2656,6 @@ class _$ViewerTextCollectionItem extends ViewerTextCollectionItem
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String? title, String? description) text,
-    required TResult Function(String title, String url) link,
     required TResult Function(ViewerImageCollectionItemStyle style, String url,
             String? title, String? description, double? width, double? height)
         image,
@@ -2682,7 +2668,6 @@ class _$ViewerTextCollectionItem extends ViewerTextCollectionItem
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String? title, String? description)? text,
-    TResult Function(String title, String url)? link,
     TResult Function(ViewerImageCollectionItemStyle style, String url,
             String? title, String? description, double? width, double? height)?
         image,
@@ -2695,7 +2680,6 @@ class _$ViewerTextCollectionItem extends ViewerTextCollectionItem
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String? title, String? description)? text,
-    TResult Function(String title, String url)? link,
     TResult Function(ViewerImageCollectionItemStyle style, String url,
             String? title, String? description, double? width, double? height)?
         image,
@@ -2712,7 +2696,6 @@ class _$ViewerTextCollectionItem extends ViewerTextCollectionItem
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(ViewerTextCollectionItem value) text,
-    required TResult Function(ViewerLinkCollectionItem value) link,
     required TResult Function(ViewerImageCollectionItem value) image,
     required TResult Function(ViewerWidgetCollectionItem value) widget,
   }) {
@@ -2723,7 +2706,6 @@ class _$ViewerTextCollectionItem extends ViewerTextCollectionItem
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(ViewerTextCollectionItem value)? text,
-    TResult Function(ViewerLinkCollectionItem value)? link,
     TResult Function(ViewerImageCollectionItem value)? image,
     TResult Function(ViewerWidgetCollectionItem value)? widget,
   }) {
@@ -2734,7 +2716,6 @@ class _$ViewerTextCollectionItem extends ViewerTextCollectionItem
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ViewerTextCollectionItem value)? text,
-    TResult Function(ViewerLinkCollectionItem value)? link,
     TResult Function(ViewerImageCollectionItem value)? image,
     TResult Function(ViewerWidgetCollectionItem value)? widget,
     required TResult orElse(),
@@ -2758,192 +2739,6 @@ abstract class ViewerTextCollectionItem extends ViewerCollectionItemUnion {
   String? get description;
   @JsonKey(ignore: true)
   $ViewerTextCollectionItemCopyWith<ViewerTextCollectionItem> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $ViewerLinkCollectionItemCopyWith<$Res> {
-  factory $ViewerLinkCollectionItemCopyWith(ViewerLinkCollectionItem value,
-          $Res Function(ViewerLinkCollectionItem) then) =
-      _$ViewerLinkCollectionItemCopyWithImpl<$Res>;
-  $Res call({String title, String url});
-}
-
-/// @nodoc
-class _$ViewerLinkCollectionItemCopyWithImpl<$Res>
-    extends _$ViewerCollectionItemUnionCopyWithImpl<$Res>
-    implements $ViewerLinkCollectionItemCopyWith<$Res> {
-  _$ViewerLinkCollectionItemCopyWithImpl(ViewerLinkCollectionItem _value,
-      $Res Function(ViewerLinkCollectionItem) _then)
-      : super(_value, (v) => _then(v as ViewerLinkCollectionItem));
-
-  @override
-  ViewerLinkCollectionItem get _value =>
-      super._value as ViewerLinkCollectionItem;
-
-  @override
-  $Res call({
-    Object? title = freezed,
-    Object? url = freezed,
-  }) {
-    return _then(ViewerLinkCollectionItem(
-      title: title == freezed
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String,
-      url: url == freezed
-          ? _value.url
-          : url // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$ViewerLinkCollectionItem extends ViewerLinkCollectionItem
-    with DiagnosticableTreeMixin {
-  const _$ViewerLinkCollectionItem({required this.title, required this.url})
-      : super._();
-
-  @override
-
-  /// Title of the link
-  final String title;
-  @override
-
-  /// URI of the link
-  final String url;
-
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ViewerCollectionItemUnion.link(title: $title, url: $url)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'ViewerCollectionItemUnion.link'))
-      ..add(DiagnosticsProperty('title', title))
-      ..add(DiagnosticsProperty('url', url));
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is ViewerLinkCollectionItem &&
-            const DeepCollectionEquality().equals(other.title, title) &&
-            const DeepCollectionEquality().equals(other.url, url));
-  }
-
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(title),
-      const DeepCollectionEquality().hash(url));
-
-  @JsonKey(ignore: true)
-  @override
-  $ViewerLinkCollectionItemCopyWith<ViewerLinkCollectionItem> get copyWith =>
-      _$ViewerLinkCollectionItemCopyWithImpl<ViewerLinkCollectionItem>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String? title, String? description) text,
-    required TResult Function(String title, String url) link,
-    required TResult Function(ViewerImageCollectionItemStyle style, String url,
-            String? title, String? description, double? width, double? height)
-        image,
-    required TResult Function(Widget widget) widget,
-  }) {
-    return link(title, url);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(String? title, String? description)? text,
-    TResult Function(String title, String url)? link,
-    TResult Function(ViewerImageCollectionItemStyle style, String url,
-            String? title, String? description, double? width, double? height)?
-        image,
-    TResult Function(Widget widget)? widget,
-  }) {
-    return link?.call(title, url);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String? title, String? description)? text,
-    TResult Function(String title, String url)? link,
-    TResult Function(ViewerImageCollectionItemStyle style, String url,
-            String? title, String? description, double? width, double? height)?
-        image,
-    TResult Function(Widget widget)? widget,
-    required TResult orElse(),
-  }) {
-    if (link != null) {
-      return link(title, url);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(ViewerTextCollectionItem value) text,
-    required TResult Function(ViewerLinkCollectionItem value) link,
-    required TResult Function(ViewerImageCollectionItem value) image,
-    required TResult Function(ViewerWidgetCollectionItem value) widget,
-  }) {
-    return link(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(ViewerTextCollectionItem value)? text,
-    TResult Function(ViewerLinkCollectionItem value)? link,
-    TResult Function(ViewerImageCollectionItem value)? image,
-    TResult Function(ViewerWidgetCollectionItem value)? widget,
-  }) {
-    return link?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(ViewerTextCollectionItem value)? text,
-    TResult Function(ViewerLinkCollectionItem value)? link,
-    TResult Function(ViewerImageCollectionItem value)? image,
-    TResult Function(ViewerWidgetCollectionItem value)? widget,
-    required TResult orElse(),
-  }) {
-    if (link != null) {
-      return link(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class ViewerLinkCollectionItem extends ViewerCollectionItemUnion {
-  const factory ViewerLinkCollectionItem(
-      {required String title,
-      required String url}) = _$ViewerLinkCollectionItem;
-  const ViewerLinkCollectionItem._() : super._();
-
-  /// Title of the link
-  String get title;
-
-  /// URI of the link
-  String get url;
-  @JsonKey(ignore: true)
-  $ViewerLinkCollectionItemCopyWith<ViewerLinkCollectionItem> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -3099,7 +2894,6 @@ class _$ViewerImageCollectionItem extends ViewerImageCollectionItem
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String? title, String? description) text,
-    required TResult Function(String title, String url) link,
     required TResult Function(ViewerImageCollectionItemStyle style, String url,
             String? title, String? description, double? width, double? height)
         image,
@@ -3112,7 +2906,6 @@ class _$ViewerImageCollectionItem extends ViewerImageCollectionItem
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String? title, String? description)? text,
-    TResult Function(String title, String url)? link,
     TResult Function(ViewerImageCollectionItemStyle style, String url,
             String? title, String? description, double? width, double? height)?
         image,
@@ -3125,7 +2918,6 @@ class _$ViewerImageCollectionItem extends ViewerImageCollectionItem
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String? title, String? description)? text,
-    TResult Function(String title, String url)? link,
     TResult Function(ViewerImageCollectionItemStyle style, String url,
             String? title, String? description, double? width, double? height)?
         image,
@@ -3142,7 +2934,6 @@ class _$ViewerImageCollectionItem extends ViewerImageCollectionItem
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(ViewerTextCollectionItem value) text,
-    required TResult Function(ViewerLinkCollectionItem value) link,
     required TResult Function(ViewerImageCollectionItem value) image,
     required TResult Function(ViewerWidgetCollectionItem value) widget,
   }) {
@@ -3153,7 +2944,6 @@ class _$ViewerImageCollectionItem extends ViewerImageCollectionItem
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(ViewerTextCollectionItem value)? text,
-    TResult Function(ViewerLinkCollectionItem value)? link,
     TResult Function(ViewerImageCollectionItem value)? image,
     TResult Function(ViewerWidgetCollectionItem value)? widget,
   }) {
@@ -3164,7 +2954,6 @@ class _$ViewerImageCollectionItem extends ViewerImageCollectionItem
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ViewerTextCollectionItem value)? text,
-    TResult Function(ViewerLinkCollectionItem value)? link,
     TResult Function(ViewerImageCollectionItem value)? image,
     TResult Function(ViewerWidgetCollectionItem value)? widget,
     required TResult orElse(),
@@ -3287,7 +3076,6 @@ class _$ViewerWidgetCollectionItem extends ViewerWidgetCollectionItem
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String? title, String? description) text,
-    required TResult Function(String title, String url) link,
     required TResult Function(ViewerImageCollectionItemStyle style, String url,
             String? title, String? description, double? width, double? height)
         image,
@@ -3300,7 +3088,6 @@ class _$ViewerWidgetCollectionItem extends ViewerWidgetCollectionItem
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String? title, String? description)? text,
-    TResult Function(String title, String url)? link,
     TResult Function(ViewerImageCollectionItemStyle style, String url,
             String? title, String? description, double? width, double? height)?
         image,
@@ -3313,7 +3100,6 @@ class _$ViewerWidgetCollectionItem extends ViewerWidgetCollectionItem
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String? title, String? description)? text,
-    TResult Function(String title, String url)? link,
     TResult Function(ViewerImageCollectionItemStyle style, String url,
             String? title, String? description, double? width, double? height)?
         image,
@@ -3330,7 +3116,6 @@ class _$ViewerWidgetCollectionItem extends ViewerWidgetCollectionItem
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(ViewerTextCollectionItem value) text,
-    required TResult Function(ViewerLinkCollectionItem value) link,
     required TResult Function(ViewerImageCollectionItem value) image,
     required TResult Function(ViewerWidgetCollectionItem value) widget,
   }) {
@@ -3341,7 +3126,6 @@ class _$ViewerWidgetCollectionItem extends ViewerWidgetCollectionItem
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(ViewerTextCollectionItem value)? text,
-    TResult Function(ViewerLinkCollectionItem value)? link,
     TResult Function(ViewerImageCollectionItem value)? image,
     TResult Function(ViewerWidgetCollectionItem value)? widget,
   }) {
@@ -3352,7 +3136,6 @@ class _$ViewerWidgetCollectionItem extends ViewerWidgetCollectionItem
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ViewerTextCollectionItem value)? text,
-    TResult Function(ViewerLinkCollectionItem value)? link,
     TResult Function(ViewerImageCollectionItem value)? image,
     TResult Function(ViewerWidgetCollectionItem value)? widget,
     required TResult orElse(),

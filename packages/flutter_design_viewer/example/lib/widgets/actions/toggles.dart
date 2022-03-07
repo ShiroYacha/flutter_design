@@ -6,14 +6,14 @@ part 'toggles.design.dart';
 @design
 class ToggleButton extends StatelessWidget {
   @DesignField(
-    parameter: DataTemplateStringLoremParameter(length: 10),
+    parameter: DesignParamStringLorem(length: 10),
   )
   final String title;
 
   final Color color;
 
   @DesignField(
-    parameter: DataTemplateSubConnectorParameter(
+    parameter: DesignParamSubscriber(
       key: 'active',
       defaultValue: false,
     ),
@@ -21,7 +21,7 @@ class ToggleButton extends StatelessWidget {
   final bool active;
 
   @DesignField(
-    parameter: DataTemplatePubConnectorParameter(
+    parameter: DesignParamPublisher(
       key: 'active',
     ),
   )

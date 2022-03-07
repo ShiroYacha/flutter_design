@@ -4,46 +4,71 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'parameters.freezed.dart';
 
+/// Configures a lorem ipsum string generator
+///
+/// The generated data is of type `String`
 @freezed
-class DataTemplateStringLoremParameter with _$DataTemplateStringLoremParameter {
-  const factory DataTemplateStringLoremParameter({
+class DesignParamStringLorem with _$DesignParamStringLorem {
+  const factory DesignParamStringLorem({
+    /// Length of the generated sentence
     @Default(10) int length,
+
+    /// Min length of the generated sentence
     @Default(0) int min,
+
+    /// Max length of the generated sentence
     @Default(100) int max,
-  }) = _DataTemplateStringLoremParameter;
+  }) = _DesignParamStringLorem;
 }
 
+/// Configures a widget placeholder generator
+///
+/// The generated data is of type `Widget`
 @freezed
-class DataTemplateWidgetPlaceholderParameter
-    with _$DataTemplateWidgetPlaceholderParameter {
-  const factory DataTemplateWidgetPlaceholderParameter({
+class DesignParamWidgetPlaceholder with _$DesignParamWidgetPlaceholder {
+  const factory DesignParamWidgetPlaceholder({
+    /// Background color of the placeholder
     @Default(Colors.amber) Color color,
+
+    /// Size of the placeholder
     @Default(Size(100, 100)) Size size,
-  }) = _DataTemplateWidgetPlaceholderParameter;
+  }) = _DesignParamWidgetPlaceholder;
 }
 
+/// Configures a widget placeholder list generator. Each placeholder
+/// will take a [MaterialColor] from [Colors.primaries]
+///
+/// The generated data is of type `List<Widget>`
 @freezed
-class DataTemplateWidgetPlaceholderListParameter
-    with _$DataTemplateWidgetPlaceholderListParameter {
-  const factory DataTemplateWidgetPlaceholderListParameter({
+class DesignParamWidgetPlaceholderList with _$DesignParamWidgetPlaceholderList {
+  const factory DesignParamWidgetPlaceholderList({
+    /// Size of the placeholder
     @Default(Size(100, 100)) Size size,
+
+    /// Number of placeholders
     @Default(3) int count,
-  }) = _DataTemplateWidgetPlaceholderListParameter;
+  }) = _DesignParamWidgetPlaceholderList;
 }
 
+/// Configures a dynamic publisher generator. It should be used along with
+/// a [DesignParamSubscriber] with the same [key].
+///
+/// The generated data is of type `Void Function(dynamic)`
 @freezed
-class DataTemplatePubConnectorParameter
-    with _$DataTemplatePubConnectorParameter {
-  const factory DataTemplatePubConnectorParameter({
+class DesignParamPublisher with _$DesignParamPublisher {
+  const factory DesignParamPublisher({
     @Default('default') String key,
-  }) = _DataTemplatePubConnectorParameter;
+  }) = _DesignParamPublisher;
 }
 
+/// Configures a dynamic subscriber generator. It should be used along with
+/// a [DesignParamPublisher] with the same [key].
+///
+/// The generated data is of type `dynamic`
 @freezed
-class DataTemplateSubConnectorParameter
-    with _$DataTemplateSubConnectorParameter {
-  const factory DataTemplateSubConnectorParameter({
+class DesignParamSubscriber with _$DesignParamSubscriber {
+  const factory DesignParamSubscriber({
     @Default(null) dynamic defaultValue,
     @Default('default') String key,
-  }) = _DataTemplateSubConnectorParameter;
+  }) = _DesignParamSubscriber;
 }

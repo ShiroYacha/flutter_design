@@ -7,7 +7,9 @@ import 'package:patterns_canvas/patterns_canvas.dart';
 import '../../measures.dart';
 
 class PatternedBackground extends HookConsumerWidget {
+  final double foregroundOpacity;
   const PatternedBackground({
+    this.foregroundOpacity = 0.5,
     Key? key,
   }) : super(key: key);
 
@@ -17,6 +19,7 @@ class PatternedBackground extends HookConsumerWidget {
       size: const Size(double.infinity, double.infinity),
       painter: PatternPainter(
         theme: Theme.of(context),
+        foregroundOpacity: foregroundOpacity,
       ),
     );
   }
@@ -26,11 +29,13 @@ class PatternPainter extends CustomPainter {
   final ThemeData theme;
   final Color? backgroundColor;
   final Color? foregroundColor;
+  final double foregroundOpacity;
 
   PatternPainter({
     required this.theme,
     this.backgroundColor,
     this.foregroundColor,
+    this.foregroundOpacity = 0.5,
   });
 
   @override
@@ -39,7 +44,8 @@ class PatternPainter extends CustomPainter {
 
     FixedSizeDots(
       bgColor: backgroundColor ?? theme.scaffoldBackgroundColor,
-      fgColor: (foregroundColor ?? theme.disabledColor).withOpacity(0.1),
+      fgColor: (foregroundColor ?? theme.disabledColor)
+          .withOpacity(foregroundOpacity),
     ).paintOnRect(
       canvas,
       size,

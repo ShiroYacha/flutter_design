@@ -1,5 +1,7 @@
 # Annotation
 
+## `@Design`
+
 The main annotation is `@Design(...)` or `@design` if you are not passing
 any additional parameters. It should be placed on a `Widget` class as such:
 
@@ -15,9 +17,6 @@ file builder.
   description: 'A long long time ago ...(100 words)...',
   designLink: 'https://www.figma.com/',
   showApiDocs: false,
-  viewerInitValueMap: {
-    'uri': 'https://via.placeholder.com/150',
-  },
 )
 class MyWidget extends StatelessWidget {
   //...
@@ -41,10 +40,45 @@ Here are the list of parameters you can customize:
 - **showApiDocs** (`bool = true`)
   - if `true`, the API docs section will be generated. It describes the fields in the widget constructor.
   - if `false`, will not be shown.
-- **viewerInitValueMap** (`Map<String,dynamic> = const {}`)
-  - configure the initial value for a given field name. 
-  - especially useful for `required` named fields as there is no default value. If both the initial value and 
-  the default value is specified, the latter will be discarded.
-  - currently most dart primitive types are supported.
-  - if not set, will default to the specified default value or `null`. If a non-nullable field's initial value
-  is not set, the designer might show an error.
+
+
+## `@DesignField`
+
+Another useful annotation is `@DesignField` which allows you to initialize the [Data builder](/docs/designer/data_builder) of a given field 
+in your widget's constructor at runtime via the field `parameter`.
+
+The designer will use the first data builder in the provided list which matches the same parameter type.
+
+:::tip
+For concrete examples on how to use the various out-of-the-box data builders, checkout the documentation on [Default data builders](/docs/designer/data_builder#default-data-builders).
+:::
+
+Some of the data builder takes a `parameter` or an "initial value" of the field. This is especially useful for `required` fields that has no default value on the constructor. If both
+the `parameter` and the default value is specified, the `parameter` will be used.
+
+
+It can be configured in the 2 following places, in the order of priority if overlapped:
+
+1. **Constructor parameter**: placed on the parameter of a constructor/factory constructor of the widget, this will the first place the designer looks when 
+constructing the widget initially.
+
+```dart
+  factory ToggleButton.special({
+    @DesignField(parameter: DesignParamStringLorem())
+    required String title,
+    //...
+    Key? key,
+  }) : super(key: key);
+
+```
+
+2. **Class field**: placed on the class field, this will be the secondary place the designer looks at if no annotation is provided at the target constructor.
+
+```dart
+class ToggleButton extends StatelessWidget {
+  @DesignField(parameter: DesignParamStringLorem())
+  final String title;
+  
+  // ...
+}
+```

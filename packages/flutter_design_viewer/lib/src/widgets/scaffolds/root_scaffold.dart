@@ -16,19 +16,19 @@ enum ScreenBreakpoint {
 final screenBreakpointProvider =
     Provider<ScreenBreakpoint>((ref) => ScreenBreakpoint.desktop);
 
-final rootScaffoldKeyProvider = Provider.autoDispose<GlobalKey<ScaffoldState>>(
-    (ref) => throw UnimplementedError());
+final rootScaffoldKeyProvider =
+    Provider<GlobalKey<ScaffoldState>>((ref) => GlobalKey<ScaffoldState>());
 
 class RootScaffold extends HookConsumerWidget {
-  final rootScaffoldKey = GlobalKey<ScaffoldState>();
   final Widget child;
-  RootScaffold({
+  const RootScaffold({
     required this.child,
     Key? key,
   }) : super(key: key);
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final viewerSettings = ref.watch(viewerSettingsProvider);
+    final rootScaffoldKey = ref.watch(rootScaffoldKeyProvider);
     return LayoutBuilder(
       builder: (context, constraints) {
         final isDesktop =
@@ -58,21 +58,23 @@ class RootScaffold extends HookConsumerWidget {
                       },
                     ),
                   ),
-            body: Row(
-              children: [
-                if (isDesktop) const ExplorerDrawer(),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const TopAppBar(),
-                      Expanded(
-                        child: child,
-                      ),
-                    ],
+            body: SafeArea(
+              child: Row(
+                children: [
+                  if (isDesktop) const ExplorerDrawer(),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const TopAppBar(),
+                        Expanded(
+                          child: child,
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         );

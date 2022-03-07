@@ -20,8 +20,8 @@ final generatedWidgetsActionsButtonsButtonPage = ViewerDocumentPage(
       from Material design.''',
   sections: [
     ViewerSectionUnion.component(
-      id: 'button',
-      title: 'Button',
+      id: 'component_anatomy',
+      title: 'Anatomy',
       ctorName: 'Button',
       designLink: null,
       builder: ViewerWidgetBuilder(
@@ -76,7 +76,7 @@ class Button extends StatelessWidget {
 '''),
     ),
     ViewerSectionUnion.component(
-      id: 'button_label',
+      id: 'component_button_label',
       title: 'Button.label',
       ctorName: 'Button.label',
       designLink: null,
@@ -93,7 +93,7 @@ class Button extends StatelessWidget {
             isNullable: false,
             defaultValue: null,
             defaultValueCode: null,
-            viewerInitSelectorParam: DataTemplateStringLoremParameter(
+            viewerInitSelectorParam: DesignParamStringLorem(
               length: 10,
               min: 0,
               max: 100,

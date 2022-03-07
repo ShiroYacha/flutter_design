@@ -22,7 +22,7 @@
               "unversionedId": "codegen/annotation",
               "id": "codegen/annotation",
               "title": "Annotation",
-              "description": "The main annotation is @Design(...) or @design if you are not passing",
+              "description": "@Design",
               "source": "@site/docs/codegen/annotation.mdx",
               "sourceDirName": "codegen",
               "slug": "/codegen/annotation",
@@ -106,27 +106,8 @@
                 "permalink": "/docs/get_started"
               },
               "next": {
-                "title": "Use-cases",
-                "permalink": "/docs/usecases"
-              }
-            },
-            {
-              "unversionedId": "contribute",
-              "id": "contribute",
-              "title": "Contribute",
-              "description": "Coming soon ...",
-              "source": "@site/docs/contribute.mdx",
-              "sourceDirName": ".",
-              "slug": "/contribute",
-              "permalink": "/docs/contribute",
-              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/contribute.mdx",
-              "tags": [],
-              "version": "current",
-              "frontMatter": {},
-              "sidebar": "Sidebar",
-              "previous": {
-                "title": "FAQ",
-                "permalink": "/docs/faq"
+                "title": "Overview",
+                "permalink": "/docs/designer/overview"
               }
             },
             {
@@ -167,8 +148,8 @@
               "frontMatter": {},
               "sidebar": "Sidebar",
               "previous": {
-                "title": "Roadmap",
-                "permalink": "/docs/roadmap"
+                "title": "Concepts",
+                "permalink": "/docs/concepts"
               },
               "next": {
                 "title": "Pages",
@@ -236,12 +217,8 @@
               "frontMatter": {},
               "sidebar": "Sidebar",
               "previous": {
-                "title": "Demo example",
-                "permalink": "/docs/official_examples/demo_example"
-              },
-              "next": {
-                "title": "Contribute",
-                "permalink": "/docs/contribute"
+                "title": "Roadmap",
+                "permalink": "/docs/roadmap"
               }
             },
             {
@@ -282,15 +259,15 @@
                 "permalink": "/docs/codegen/generators"
               },
               "next": {
-                "title": "FAQ",
-                "permalink": "/docs/faq"
+                "title": "Roadmap",
+                "permalink": "/docs/roadmap"
               }
             },
             {
               "unversionedId": "roadmap",
               "id": "roadmap",
               "title": "Roadmap",
-              "description": "Coming soon ...",
+              "description": "A detailed roadmap is upcoming, you can checkout my current tasks and their status on https://trello.com/b/mEMLTRVc/flutterdesign.",
               "source": "@site/docs/roadmap.mdx",
               "sourceDirName": ".",
               "slug": "/roadmap",
@@ -301,35 +278,12 @@
               "frontMatter": {},
               "sidebar": "Sidebar",
               "previous": {
-                "title": "Use-cases",
-                "permalink": "/docs/usecases"
+                "title": "Demo example",
+                "permalink": "/docs/official_examples/demo_example"
               },
               "next": {
-                "title": "Overview",
-                "permalink": "/docs/designer/overview"
-              }
-            },
-            {
-              "unversionedId": "usecases",
-              "id": "usecases",
-              "title": "Use-cases",
-              "description": "Here are a few typical use-cases of incorporating flutter_design into your Flutter development ecosystem.",
-              "source": "@site/docs/usecases.mdx",
-              "sourceDirName": ".",
-              "slug": "/usecases",
-              "permalink": "/docs/usecases",
-              "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/usecases.mdx",
-              "tags": [],
-              "version": "current",
-              "frontMatter": {},
-              "sidebar": "Sidebar",
-              "previous": {
-                "title": "Concepts",
-                "permalink": "/docs/concepts"
-              },
-              "next": {
-                "title": "Roadmap",
-                "permalink": "/docs/roadmap"
+                "title": "FAQ",
+                "permalink": "/docs/faq"
               }
             }
           ],
@@ -342,14 +296,6 @@
               {
                 "type": "doc",
                 "id": "concepts"
-              },
-              {
-                "type": "doc",
-                "id": "usecases"
-              },
-              {
-                "type": "doc",
-                "id": "roadmap"
               },
               {
                 "type": "category",
@@ -409,11 +355,11 @@
               },
               {
                 "type": "doc",
-                "id": "faq"
+                "id": "roadmap"
               },
               {
                 "type": "doc",
-                "id": "contribute"
+                "id": "faq"
               }
             ]
           },

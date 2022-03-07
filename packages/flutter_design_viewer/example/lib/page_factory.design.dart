@@ -7,6 +7,7 @@ import 'widgets/misc.dart';
 import 'widgets/layouts/containers.dart';
 import 'widgets/actions/buttons.dart';
 import 'widgets/actions/toggles.dart';
+import 'widgets/actions/sliders.dart';
 
 final generatedComponentPages = <ViewerDocumentPage>[
   generatedScreensHomeScreenHomeScreenPage,
@@ -16,4 +17,5 @@ final generatedComponentPages = <ViewerDocumentPage>[
   generatedWidgetsLayoutsContainersResponsiveEvenRowPage,
   generatedWidgetsActionsButtonsButtonPage,
   generatedWidgetsActionsTogglesToggleButtonPage,
+  generatedWidgetsActionsSlidersRangeAdjustableSliderPage,
 ];

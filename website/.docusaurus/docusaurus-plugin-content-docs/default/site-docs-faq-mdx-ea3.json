@@ -13,11 +13,7 @@
   "frontMatter": {},
   "sidebar": "Sidebar",
   "previous": {
-    "title": "Demo example",
-    "permalink": "/docs/official_examples/demo_example"
-  },
-  "next": {
-    "title": "Contribute",
-    "permalink": "/docs/contribute"
+    "title": "Roadmap",
+    "permalink": "/docs/roadmap"
   }
 }

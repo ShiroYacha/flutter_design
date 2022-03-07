@@ -707,10 +707,13 @@ class EmbeddedAppRouterDelegate extends RouterDelegate<Object>
       final viewerWidgetBuilder =
           ref.watch(viewerComponentSectionProvider.select((v) => v.builder));
       final dataBuilders = ref.watch(dataBuildersProvider);
-      return Center(
-        child: viewerWidgetBuilder.build(
-          context,
-          ManagedDataBuilderFactory(builders: dataBuilders),
+      return Material(
+        color: Colors.transparent,
+        child: Center(
+          child: viewerWidgetBuilder.build(
+            context,
+            ManagedDataBuilderFactory(builders: dataBuilders),
+          ),
         ),
       );
     });
@@ -771,7 +774,7 @@ class ContentApp extends HookConsumerWidget {
               ],
               child: Stack(
                 children: [
-                  const PatternedBackground(),
+                  const PatternedBackground(foregroundOpacity: 0.1),
                   [
                     ViewMode.themes,
                     ViewMode.locales,

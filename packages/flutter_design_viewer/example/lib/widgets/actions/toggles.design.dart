@@ -15,8 +15,8 @@ final generatedWidgetsActionsTogglesToggleButtonPage = ViewerDocumentPage(
   description: null,
   sections: [
     ViewerSectionUnion.component(
-      id: 'toggle_button',
-      title: 'ToggleButton',
+      id: 'component_anatomy',
+      title: 'Anatomy',
       ctorName: 'ToggleButton',
       designLink: null,
       builder: ViewerWidgetBuilder(
@@ -34,7 +34,7 @@ final generatedWidgetsActionsTogglesToggleButtonPage = ViewerDocumentPage(
             isNullable: false,
             defaultValue: null,
             defaultValueCode: null,
-            viewerInitSelectorParam: DataTemplateStringLoremParameter(
+            viewerInitSelectorParam: DesignParamStringLorem(
               length: 10,
               min: 0,
               max: 100,
@@ -57,7 +57,7 @@ final generatedWidgetsActionsTogglesToggleButtonPage = ViewerDocumentPage(
             isNullable: false,
             defaultValue: false,
             defaultValueCode: '''false''',
-            viewerInitSelectorParam: DataTemplateSubConnectorParameter(
+            viewerInitSelectorParam: DesignParamSubscriber(
               defaultValue: false,
               key: 'active',
             ),
@@ -70,7 +70,7 @@ final generatedWidgetsActionsTogglesToggleButtonPage = ViewerDocumentPage(
             isNullable: true,
             defaultValue: null,
             defaultValueCode: '''null''',
-            viewerInitSelectorParam: DataTemplatePubConnectorParameter(
+            viewerInitSelectorParam: DesignParamPublisher(
               key: 'active',
             ),
             documentation: null,

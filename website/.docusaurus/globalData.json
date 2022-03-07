@@ -38,11 +38,6 @@
               "sidebar": "Sidebar"
             },
             {
-              "id": "contribute",
-              "path": "/docs/contribute",
-              "sidebar": "Sidebar"
-            },
-            {
               "id": "designer/data_builder",
               "path": "/docs/designer/data_builder",
               "sidebar": "Sidebar"
@@ -80,11 +75,6 @@
             {
               "id": "roadmap",
               "path": "/docs/roadmap",
-              "sidebar": "Sidebar"
-            },
-            {
-              "id": "usecases",
-              "path": "/docs/usecases",
               "sidebar": "Sidebar"
             }
           ],

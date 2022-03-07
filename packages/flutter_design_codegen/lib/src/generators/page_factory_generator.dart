@@ -33,7 +33,7 @@ class PageFactoryBuilder implements Builder {
       final library = await buildStep.resolver.libraryFor(input);
       final classesInLibrary = LibraryReader(library).classes;
       for (final clazz in classesInLibrary) {
-        if (!hasAnnotation<TDesign>(clazz.metadata)) continue;
+        if (!hasAnnotation<Design>(clazz.metadata)) continue;
         fields.add(buildClassPageFieldName(clazz));
         // Parse import info
         final packageUri = clazz.source.uri.path.substring(

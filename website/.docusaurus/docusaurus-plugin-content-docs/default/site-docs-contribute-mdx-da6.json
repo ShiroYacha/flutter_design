@@ -2,7 +2,7 @@
   "unversionedId": "contribute",
   "id": "contribute",
   "title": "Contribute",
-  "description": "Coming soon ...",
+  "description": "Your contribution is greatly appreciated! Please refer to the Contributing file for guidance.",
   "source": "@site/docs/contribute.mdx",
   "sourceDirName": ".",
   "slug": "/contribute",
@@ -13,7 +13,7 @@
   "frontMatter": {},
   "sidebar": "Sidebar",
   "previous": {
-    "title": "FAQ",
-    "permalink": "/docs/faq"
+    "title": "Roadmap",
+    "permalink": "/docs/roadmap"
   }
 }

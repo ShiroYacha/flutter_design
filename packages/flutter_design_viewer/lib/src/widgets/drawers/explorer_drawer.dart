@@ -158,7 +158,7 @@ class PageGroupNode extends HookConsumerWidget {
               uri: Uri().resolve('#${viewerPage.uri}'),
               onTap: () {
                 if (rootScaffoldKey.currentState?.isDrawerOpen == true) {
-                  Navigator.of(rootScaffoldKey.currentContext!).pop();
+                  rootScaffoldKey.currentState!.openEndDrawer();
                 }
                 router.toSegments(viewerPage.segments);
               },

@@ -4,6 +4,7 @@ import 'package:flutter_design/flutter_design.dart';
 import 'package:flutter_design_viewer/flutter_design_viewer.dart';
 import 'package:flutter_design_viewer/src/measures.dart';
 import 'package:flutter_design_viewer/src/widgets/items/text.dart';
+import 'package:flutter_design_viewer/src/widgets/scaffolds/root_scaffold.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -191,10 +192,13 @@ class ParagraphSection extends HookConsumerWidget {
                 (p, e) => [
                   ...p,
                   e.map(
-                    text: (text) => const SizedBox.shrink(),
-                    link: (link) => const SizedBox.shrink(),
+                    text: (text) => TitleDescription(
+                      style: TextDescriptionStyle.paragraph(context),
+                      title: text.title,
+                      description: text.description,
+                    ),
                     image: (image) => ViewerImageDisplay(item: image),
-                    widget: (widget) => const SizedBox.shrink(),
+                    widget: (widget) => widget.widget,
                   ),
                   Spacers.v40,
                 ],
@@ -216,7 +220,7 @@ void _scrollIntoViewIfUrlEndsWithId(BuildContext context, String id) {
   }, [router.url]);
 }
 
-class ViewerImageDisplay extends StatelessWidget {
+class ViewerImageDisplay extends HookConsumerWidget {
   final ViewerImageCollectionItem item;
   const ViewerImageDisplay({
     required this.item,
@@ -224,17 +228,33 @@ class ViewerImageDisplay extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final image = CachedNetworkImage(
+      imageUrl: item.url,
+      width: item.width,
+      height: item.height,
+    );
+    final screenBreakpoint = ref.watch(screenBreakpointProvider);
+    if (screenBreakpoint == ScreenBreakpoint.mobile) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          image,
+          Spacers.v10,
+          TitleDescription(
+            style: TextDescriptionStyle.paragraph(context),
+            title: item.title,
+            description: item.description,
+          )
+        ],
+      );
+    }
     switch (item.style) {
       case ViewerImageCollectionItemStyle.imageOnLeft:
         return Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CachedNetworkImage(
-              imageUrl: item.url,
-              width: item.width,
-              height: item.height,
-            ),
+            image,
             Spacers.h40,
             Expanded(
               child: TitleDescription(

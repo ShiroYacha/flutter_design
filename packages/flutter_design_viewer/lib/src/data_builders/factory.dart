@@ -48,7 +48,7 @@ class DataBuilderRegistry {
         }).toList() ??
         [];
     if (options.isEmpty) {
-      options.add(DataTemplateDynamicReadonlyBuilder(parameter));
+      options.add(DesignReadonlyBuilder(parameter));
     }
     return options;
   }
@@ -62,7 +62,7 @@ class DataBuilderRegistry {
               kvp.value.type,
               kvp.value.viewerInitSelectorParam ?? kvp.value.defaultValue,
             ),
-            if (kvp.value.isNullable) DataTemplateNullBuilder(),
+            if (kvp.value.isNullable) DesignNullBuilder(),
           ]
       };
 }

@@ -14,11 +14,10 @@ import '../widgets/items/containers.dart';
 import '../widgets/items/controls.dart';
 import 'builders.dart';
 
-class DataTemplateStringLoremDesigner extends HookConsumerWidget {
-  final DataTemplateStringLoremBuilder builder;
-  final UpdateDataBuilder<String, DataTemplateStringLoremParameter>
-      updateBuilder;
-  const DataTemplateStringLoremDesigner({
+class DesignStringLoremDesigner extends HookConsumerWidget {
+  final DesignStringLoremBuilder builder;
+  final UpdateDataBuilder<String, DesignParamStringLorem> updateBuilder;
+  const DesignStringLoremDesigner({
     required this.builder,
     required this.updateBuilder,
     Key? key,
@@ -37,10 +36,10 @@ class DataTemplateStringLoremDesigner extends HookConsumerWidget {
   }
 }
 
-class DataTemplateStringRawDesigner extends HookConsumerWidget {
-  final DataTemplateStringRawBuilder builder;
+class DesignStringDesigner extends HookConsumerWidget {
+  final DesignStringBuilder builder;
   final UpdateDataBuilder<String, String> updateBuilder;
-  const DataTemplateStringRawDesigner({
+  const DesignStringDesigner({
     required this.builder,
     required this.updateBuilder,
     Key? key,
@@ -76,11 +75,10 @@ class DataTemplateStringRawDesigner extends HookConsumerWidget {
   }
 }
 
-class DataTemplateWidgetPlaceholderDesigner extends HookConsumerWidget {
-  final DataTemplateWidgetPlaceholderBuilder builder;
-  final UpdateDataBuilder<Widget, DataTemplateWidgetPlaceholderParameter>
-      updateBuilder;
-  const DataTemplateWidgetPlaceholderDesigner({
+class DesignWidgetPlaceholderDesigner extends HookConsumerWidget {
+  final DesignWidgetPlaceholderBuilder builder;
+  final UpdateDataBuilder<Widget, DesignParamWidgetPlaceholder> updateBuilder;
+  const DesignWidgetPlaceholderDesigner({
     required this.builder,
     required this.updateBuilder,
     Key? key,
@@ -150,11 +148,11 @@ class DataTemplateWidgetPlaceholderDesigner extends HookConsumerWidget {
   }
 }
 
-class DataTemplateWidgetPlaceholderListDesigner extends HookConsumerWidget {
-  final DataTemplateWidgetPlaceholderListBuilder builder;
-  final UpdateDataBuilder<List<Widget>,
-      DataTemplateWidgetPlaceholderListParameter> updateBuilder;
-  const DataTemplateWidgetPlaceholderListDesigner({
+class DesignWidgetPlaceholderListDesigner extends HookConsumerWidget {
+  final DesignWidgetPlaceholderListBuilder builder;
+  final UpdateDataBuilder<List<Widget>, DesignParamWidgetPlaceholderList>
+      updateBuilder;
+  const DesignWidgetPlaceholderListDesigner({
     required this.builder,
     required this.updateBuilder,
     Key? key,
@@ -184,10 +182,10 @@ class DataTemplateWidgetPlaceholderListDesigner extends HookConsumerWidget {
   }
 }
 
-class DataTemplateColorPickerDesigner extends HookConsumerWidget {
-  final DataTemplateColorPickerBuilder builder;
+class DesignColorPickerDesigner extends HookConsumerWidget {
+  final DesignColorPickerBuilder builder;
   final UpdateDataBuilder<Color, Color> updateBuilder;
-  const DataTemplateColorPickerDesigner({
+  const DesignColorPickerDesigner({
     required this.builder,
     required this.updateBuilder,
     Key? key,
@@ -248,10 +246,10 @@ class DataTemplateColorPickerDesigner extends HookConsumerWidget {
   }
 }
 
-class DataTemplateDoubleDesigner extends HookConsumerWidget {
-  final DataTemplateDoubleBuilder builder;
+class DesignDoubleDesigner extends HookConsumerWidget {
+  final DesignDoubleBuilder builder;
   final UpdateDataBuilder<double, double> updateBuilder;
-  const DataTemplateDoubleDesigner({
+  const DesignDoubleDesigner({
     required this.builder,
     required this.updateBuilder,
     Key? key,
@@ -267,10 +265,10 @@ class DataTemplateDoubleDesigner extends HookConsumerWidget {
   }
 }
 
-class DataTemplateIntDesigner extends HookConsumerWidget {
-  final DataTemplateIntBuilder builder;
+class DesignIntDesigner extends HookConsumerWidget {
+  final DesignIntBuilder builder;
   final UpdateDataBuilder<int, int> updateBuilder;
-  const DataTemplateIntDesigner({
+  const DesignIntDesigner({
     required this.builder,
     required this.updateBuilder,
     Key? key,
@@ -397,10 +395,10 @@ class DoubleDesigner extends HookWidget {
   }
 }
 
-class DataTemplateBoolToggleDesigner extends HookConsumerWidget {
-  final DataTemplateBoolToggleBuilder builder;
+class DesignBoolToggleDesigner extends HookConsumerWidget {
+  final DesignBoolToggleBuilder builder;
   final UpdateDataBuilder<bool, bool> updateBuilder;
-  const DataTemplateBoolToggleDesigner({
+  const DesignBoolToggleDesigner({
     required this.builder,
     required this.updateBuilder,
     Key? key,

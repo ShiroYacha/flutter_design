@@ -2,7 +2,7 @@
   "unversionedId": "codegen/annotation",
   "id": "codegen/annotation",
   "title": "Annotation",
-  "description": "The main annotation is @Design(...) or @design if you are not passing",
+  "description": "@Design",
   "source": "@site/docs/codegen/annotation.mdx",
   "sourceDirName": "codegen",
   "slug": "/codegen/annotation",

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_design_viewer/src/measures.dart';
 import 'package:flutter_design_viewer/src/widgets/items/frames.dart';
+import 'package:flutter_design_viewer/src/widgets/scaffolds/root_scaffold.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final componentFrameToolbarSizeProvider =
@@ -11,7 +12,8 @@ class WidgetDialog extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
-    final mediaQuery = MediaQuery.of(context);
+    final rootScaffoldKey = ref.watch(rootScaffoldKeyProvider);
+    final mediaQuery = MediaQuery.of(rootScaffoldKey.currentState!.context);
     final fullHeight = mediaQuery.size.height;
     final componentFrameToolbarSize =
         ref.watch(componentFrameToolbarSizeProvider);
@@ -27,6 +29,10 @@ class WidgetDialog extends HookConsumerWidget {
         child: ComponentFramePanel(
           widgetDisplayHeight: fullHeight -
               componentFrameToolbarSize.height -
+              mediaQuery.viewInsets.top -
+              mediaQuery.viewPadding.top -
+              mediaQuery.viewInsets.bottom -
+              mediaQuery.viewPadding.bottom -
               SpacingDesign.s10 * 2,
         ),
       ),

@@ -1,11 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_design_annotation/flutter_design_annotation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:recase/recase.dart';
 
 import '../../flutter_design.dart';
-import 'searches.dart';
 
 part 'pages.freezed.dart';
 
@@ -252,15 +250,6 @@ class ViewerCollectionItemUnion
     /// Description of the item
     String? description,
   }) = ViewerTextCollectionItem;
-
-  /// Link paragraph item
-  const factory ViewerCollectionItemUnion.link({
-    /// Title of the link
-    required String title,
-
-    /// URI of the link
-    required String url,
-  }) = ViewerLinkCollectionItem;
 
   /// Image paragraph item
   const factory ViewerCollectionItemUnion.image({

@@ -2,4 +2,15 @@
 
 ## Known limitations
 
-Coming soon
+### Limited supported function types on data builders
+
+Currently, due to limitation in the implementation, only a handful of function signatures are provided out-of-the-box.
+Check [Github](https://github.com/ShiroYacha/flutter_design/blob/main/packages/flutter_design/lib/src/types.dart) for the list of supported function type.
+
+
+## Typical errors
+
+### `type 'Null' is not a subtype of type 'xxx'`
+
+This typically happens if a default value or initial value (via `@DesignField(parameter: ...)`) is 
+not provided to a non-nullable field type.

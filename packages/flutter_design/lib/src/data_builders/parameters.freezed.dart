@@ -15,12 +15,11 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-class _$DataTemplateStringLoremParameterTearOff {
-  const _$DataTemplateStringLoremParameterTearOff();
+class _$DesignParamStringLoremTearOff {
+  const _$DesignParamStringLoremTearOff();
 
-  _DataTemplateStringLoremParameter call(
-      {int length = 10, int min = 0, int max = 100}) {
-    return _DataTemplateStringLoremParameter(
+  _DesignParamStringLorem call({int length = 10, int min = 0, int max = 100}) {
+    return _DesignParamStringLorem(
       length: length,
       min: min,
       max: max,
@@ -29,37 +28,35 @@ class _$DataTemplateStringLoremParameterTearOff {
 }
 
 /// @nodoc
-const $DataTemplateStringLoremParameter =
-    _$DataTemplateStringLoremParameterTearOff();
+const $DesignParamStringLorem = _$DesignParamStringLoremTearOff();
 
 /// @nodoc
-mixin _$DataTemplateStringLoremParameter {
+mixin _$DesignParamStringLorem {
   int get length => throw _privateConstructorUsedError;
   int get min => throw _privateConstructorUsedError;
   int get max => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $DataTemplateStringLoremParameterCopyWith<DataTemplateStringLoremParameter>
-      get copyWith => throw _privateConstructorUsedError;
+  $DesignParamStringLoremCopyWith<DesignParamStringLorem> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $DataTemplateStringLoremParameterCopyWith<$Res> {
-  factory $DataTemplateStringLoremParameterCopyWith(
-          DataTemplateStringLoremParameter value,
-          $Res Function(DataTemplateStringLoremParameter) then) =
-      _$DataTemplateStringLoremParameterCopyWithImpl<$Res>;
+abstract class $DesignParamStringLoremCopyWith<$Res> {
+  factory $DesignParamStringLoremCopyWith(DesignParamStringLorem value,
+          $Res Function(DesignParamStringLorem) then) =
+      _$DesignParamStringLoremCopyWithImpl<$Res>;
   $Res call({int length, int min, int max});
 }
 
 /// @nodoc
-class _$DataTemplateStringLoremParameterCopyWithImpl<$Res>
-    implements $DataTemplateStringLoremParameterCopyWith<$Res> {
-  _$DataTemplateStringLoremParameterCopyWithImpl(this._value, this._then);
+class _$DesignParamStringLoremCopyWithImpl<$Res>
+    implements $DesignParamStringLoremCopyWith<$Res> {
+  _$DesignParamStringLoremCopyWithImpl(this._value, this._then);
 
-  final DataTemplateStringLoremParameter _value;
+  final DesignParamStringLorem _value;
   // ignore: unused_field
-  final $Res Function(DataTemplateStringLoremParameter) _then;
+  final $Res Function(DesignParamStringLorem) _then;
 
   @override
   $Res call({
@@ -85,28 +82,25 @@ class _$DataTemplateStringLoremParameterCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$DataTemplateStringLoremParameterCopyWith<$Res>
-    implements $DataTemplateStringLoremParameterCopyWith<$Res> {
-  factory _$DataTemplateStringLoremParameterCopyWith(
-          _DataTemplateStringLoremParameter value,
-          $Res Function(_DataTemplateStringLoremParameter) then) =
-      __$DataTemplateStringLoremParameterCopyWithImpl<$Res>;
+abstract class _$DesignParamStringLoremCopyWith<$Res>
+    implements $DesignParamStringLoremCopyWith<$Res> {
+  factory _$DesignParamStringLoremCopyWith(_DesignParamStringLorem value,
+          $Res Function(_DesignParamStringLorem) then) =
+      __$DesignParamStringLoremCopyWithImpl<$Res>;
   @override
   $Res call({int length, int min, int max});
 }
 
 /// @nodoc
-class __$DataTemplateStringLoremParameterCopyWithImpl<$Res>
-    extends _$DataTemplateStringLoremParameterCopyWithImpl<$Res>
-    implements _$DataTemplateStringLoremParameterCopyWith<$Res> {
-  __$DataTemplateStringLoremParameterCopyWithImpl(
-      _DataTemplateStringLoremParameter _value,
-      $Res Function(_DataTemplateStringLoremParameter) _then)
-      : super(_value, (v) => _then(v as _DataTemplateStringLoremParameter));
+class __$DesignParamStringLoremCopyWithImpl<$Res>
+    extends _$DesignParamStringLoremCopyWithImpl<$Res>
+    implements _$DesignParamStringLoremCopyWith<$Res> {
+  __$DesignParamStringLoremCopyWithImpl(_DesignParamStringLorem _value,
+      $Res Function(_DesignParamStringLorem) _then)
+      : super(_value, (v) => _then(v as _DesignParamStringLorem));
 
   @override
-  _DataTemplateStringLoremParameter get _value =>
-      super._value as _DataTemplateStringLoremParameter;
+  _DesignParamStringLorem get _value => super._value as _DesignParamStringLorem;
 
   @override
   $Res call({
@@ -114,7 +108,7 @@ class __$DataTemplateStringLoremParameterCopyWithImpl<$Res>
     Object? min = freezed,
     Object? max = freezed,
   }) {
-    return _then(_DataTemplateStringLoremParameter(
+    return _then(_DesignParamStringLorem(
       length: length == freezed
           ? _value.length
           : length // ignore: cast_nullable_to_non_nullable
@@ -133,10 +127,10 @@ class __$DataTemplateStringLoremParameterCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_DataTemplateStringLoremParameter
+class _$_DesignParamStringLorem
     with DiagnosticableTreeMixin
-    implements _DataTemplateStringLoremParameter {
-  const _$_DataTemplateStringLoremParameter(
+    implements _DesignParamStringLorem {
+  const _$_DesignParamStringLorem(
       {this.length = 10, this.min = 0, this.max = 100});
 
   @JsonKey()
@@ -151,14 +145,14 @@ class _$_DataTemplateStringLoremParameter
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'DataTemplateStringLoremParameter(length: $length, min: $min, max: $max)';
+    return 'DesignParamStringLorem(length: $length, min: $min, max: $max)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'DataTemplateStringLoremParameter'))
+      ..add(DiagnosticsProperty('type', 'DesignParamStringLorem'))
       ..add(DiagnosticsProperty('length', length))
       ..add(DiagnosticsProperty('min', min))
       ..add(DiagnosticsProperty('max', max));
@@ -168,7 +162,7 @@ class _$_DataTemplateStringLoremParameter
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _DataTemplateStringLoremParameter &&
+            other is _DesignParamStringLorem &&
             const DeepCollectionEquality().equals(other.length, length) &&
             const DeepCollectionEquality().equals(other.min, min) &&
             const DeepCollectionEquality().equals(other.max, max));
@@ -183,15 +177,14 @@ class _$_DataTemplateStringLoremParameter
 
   @JsonKey(ignore: true)
   @override
-  _$DataTemplateStringLoremParameterCopyWith<_DataTemplateStringLoremParameter>
-      get copyWith => __$DataTemplateStringLoremParameterCopyWithImpl<
-          _DataTemplateStringLoremParameter>(this, _$identity);
+  _$DesignParamStringLoremCopyWith<_DesignParamStringLorem> get copyWith =>
+      __$DesignParamStringLoremCopyWithImpl<_DesignParamStringLorem>(
+          this, _$identity);
 }
 
-abstract class _DataTemplateStringLoremParameter
-    implements DataTemplateStringLoremParameter {
-  const factory _DataTemplateStringLoremParameter(
-      {int length, int min, int max}) = _$_DataTemplateStringLoremParameter;
+abstract class _DesignParamStringLorem implements DesignParamStringLorem {
+  const factory _DesignParamStringLorem({int length, int min, int max}) =
+      _$_DesignParamStringLorem;
 
   @override
   int get length;
@@ -201,17 +194,17 @@ abstract class _DataTemplateStringLoremParameter
   int get max;
   @override
   @JsonKey(ignore: true)
-  _$DataTemplateStringLoremParameterCopyWith<_DataTemplateStringLoremParameter>
-      get copyWith => throw _privateConstructorUsedError;
+  _$DesignParamStringLoremCopyWith<_DesignParamStringLorem> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-class _$DataTemplateWidgetPlaceholderParameterTearOff {
-  const _$DataTemplateWidgetPlaceholderParameterTearOff();
+class _$DesignParamWidgetPlaceholderTearOff {
+  const _$DesignParamWidgetPlaceholderTearOff();
 
-  _DataTemplateWidgetPlaceholderParameter call(
+  _DesignParamWidgetPlaceholder call(
       {Color color = Colors.amber, Size size = const Size(100, 100)}) {
-    return _DataTemplateWidgetPlaceholderParameter(
+    return _DesignParamWidgetPlaceholder(
       color: color,
       size: size,
     );
@@ -219,37 +212,35 @@ class _$DataTemplateWidgetPlaceholderParameterTearOff {
 }
 
 /// @nodoc
-const $DataTemplateWidgetPlaceholderParameter =
-    _$DataTemplateWidgetPlaceholderParameterTearOff();
+const $DesignParamWidgetPlaceholder = _$DesignParamWidgetPlaceholderTearOff();
 
 /// @nodoc
-mixin _$DataTemplateWidgetPlaceholderParameter {
+mixin _$DesignParamWidgetPlaceholder {
   Color get color => throw _privateConstructorUsedError;
   Size get size => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $DataTemplateWidgetPlaceholderParameterCopyWith<
-          DataTemplateWidgetPlaceholderParameter>
+  $DesignParamWidgetPlaceholderCopyWith<DesignParamWidgetPlaceholder>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $DataTemplateWidgetPlaceholderParameterCopyWith<$Res> {
-  factory $DataTemplateWidgetPlaceholderParameterCopyWith(
-          DataTemplateWidgetPlaceholderParameter value,
-          $Res Function(DataTemplateWidgetPlaceholderParameter) then) =
-      _$DataTemplateWidgetPlaceholderParameterCopyWithImpl<$Res>;
+abstract class $DesignParamWidgetPlaceholderCopyWith<$Res> {
+  factory $DesignParamWidgetPlaceholderCopyWith(
+          DesignParamWidgetPlaceholder value,
+          $Res Function(DesignParamWidgetPlaceholder) then) =
+      _$DesignParamWidgetPlaceholderCopyWithImpl<$Res>;
   $Res call({Color color, Size size});
 }
 
 /// @nodoc
-class _$DataTemplateWidgetPlaceholderParameterCopyWithImpl<$Res>
-    implements $DataTemplateWidgetPlaceholderParameterCopyWith<$Res> {
-  _$DataTemplateWidgetPlaceholderParameterCopyWithImpl(this._value, this._then);
+class _$DesignParamWidgetPlaceholderCopyWithImpl<$Res>
+    implements $DesignParamWidgetPlaceholderCopyWith<$Res> {
+  _$DesignParamWidgetPlaceholderCopyWithImpl(this._value, this._then);
 
-  final DataTemplateWidgetPlaceholderParameter _value;
+  final DesignParamWidgetPlaceholder _value;
   // ignore: unused_field
-  final $Res Function(DataTemplateWidgetPlaceholderParameter) _then;
+  final $Res Function(DesignParamWidgetPlaceholder) _then;
 
   @override
   $Res call({
@@ -270,36 +261,35 @@ class _$DataTemplateWidgetPlaceholderParameterCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$DataTemplateWidgetPlaceholderParameterCopyWith<$Res>
-    implements $DataTemplateWidgetPlaceholderParameterCopyWith<$Res> {
-  factory _$DataTemplateWidgetPlaceholderParameterCopyWith(
-          _DataTemplateWidgetPlaceholderParameter value,
-          $Res Function(_DataTemplateWidgetPlaceholderParameter) then) =
-      __$DataTemplateWidgetPlaceholderParameterCopyWithImpl<$Res>;
+abstract class _$DesignParamWidgetPlaceholderCopyWith<$Res>
+    implements $DesignParamWidgetPlaceholderCopyWith<$Res> {
+  factory _$DesignParamWidgetPlaceholderCopyWith(
+          _DesignParamWidgetPlaceholder value,
+          $Res Function(_DesignParamWidgetPlaceholder) then) =
+      __$DesignParamWidgetPlaceholderCopyWithImpl<$Res>;
   @override
   $Res call({Color color, Size size});
 }
 
 /// @nodoc
-class __$DataTemplateWidgetPlaceholderParameterCopyWithImpl<$Res>
-    extends _$DataTemplateWidgetPlaceholderParameterCopyWithImpl<$Res>
-    implements _$DataTemplateWidgetPlaceholderParameterCopyWith<$Res> {
-  __$DataTemplateWidgetPlaceholderParameterCopyWithImpl(
-      _DataTemplateWidgetPlaceholderParameter _value,
-      $Res Function(_DataTemplateWidgetPlaceholderParameter) _then)
-      : super(
-            _value, (v) => _then(v as _DataTemplateWidgetPlaceholderParameter));
+class __$DesignParamWidgetPlaceholderCopyWithImpl<$Res>
+    extends _$DesignParamWidgetPlaceholderCopyWithImpl<$Res>
+    implements _$DesignParamWidgetPlaceholderCopyWith<$Res> {
+  __$DesignParamWidgetPlaceholderCopyWithImpl(
+      _DesignParamWidgetPlaceholder _value,
+      $Res Function(_DesignParamWidgetPlaceholder) _then)
+      : super(_value, (v) => _then(v as _DesignParamWidgetPlaceholder));
 
   @override
-  _DataTemplateWidgetPlaceholderParameter get _value =>
-      super._value as _DataTemplateWidgetPlaceholderParameter;
+  _DesignParamWidgetPlaceholder get _value =>
+      super._value as _DesignParamWidgetPlaceholder;
 
   @override
   $Res call({
     Object? color = freezed,
     Object? size = freezed,
   }) {
-    return _then(_DataTemplateWidgetPlaceholderParameter(
+    return _then(_DesignParamWidgetPlaceholder(
       color: color == freezed
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
@@ -314,10 +304,10 @@ class __$DataTemplateWidgetPlaceholderParameterCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_DataTemplateWidgetPlaceholderParameter
+class _$_DesignParamWidgetPlaceholder
     with DiagnosticableTreeMixin
-    implements _DataTemplateWidgetPlaceholderParameter {
-  const _$_DataTemplateWidgetPlaceholderParameter(
+    implements _DesignParamWidgetPlaceholder {
+  const _$_DesignParamWidgetPlaceholder(
       {this.color = Colors.amber, this.size = const Size(100, 100)});
 
   @JsonKey()
@@ -329,15 +319,14 @@ class _$_DataTemplateWidgetPlaceholderParameter
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'DataTemplateWidgetPlaceholderParameter(color: $color, size: $size)';
+    return 'DesignParamWidgetPlaceholder(color: $color, size: $size)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(
-          DiagnosticsProperty('type', 'DataTemplateWidgetPlaceholderParameter'))
+      ..add(DiagnosticsProperty('type', 'DesignParamWidgetPlaceholder'))
       ..add(DiagnosticsProperty('color', color))
       ..add(DiagnosticsProperty('size', size));
   }
@@ -346,7 +335,7 @@ class _$_DataTemplateWidgetPlaceholderParameter
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _DataTemplateWidgetPlaceholderParameter &&
+            other is _DesignParamWidgetPlaceholder &&
             const DeepCollectionEquality().equals(other.color, color) &&
             const DeepCollectionEquality().equals(other.size, size));
   }
@@ -359,16 +348,15 @@ class _$_DataTemplateWidgetPlaceholderParameter
 
   @JsonKey(ignore: true)
   @override
-  _$DataTemplateWidgetPlaceholderParameterCopyWith<
-          _DataTemplateWidgetPlaceholderParameter>
-      get copyWith => __$DataTemplateWidgetPlaceholderParameterCopyWithImpl<
-          _DataTemplateWidgetPlaceholderParameter>(this, _$identity);
+  _$DesignParamWidgetPlaceholderCopyWith<_DesignParamWidgetPlaceholder>
+      get copyWith => __$DesignParamWidgetPlaceholderCopyWithImpl<
+          _DesignParamWidgetPlaceholder>(this, _$identity);
 }
 
-abstract class _DataTemplateWidgetPlaceholderParameter
-    implements DataTemplateWidgetPlaceholderParameter {
-  const factory _DataTemplateWidgetPlaceholderParameter(
-      {Color color, Size size}) = _$_DataTemplateWidgetPlaceholderParameter;
+abstract class _DesignParamWidgetPlaceholder
+    implements DesignParamWidgetPlaceholder {
+  const factory _DesignParamWidgetPlaceholder({Color color, Size size}) =
+      _$_DesignParamWidgetPlaceholder;
 
   @override
   Color get color;
@@ -376,18 +364,17 @@ abstract class _DataTemplateWidgetPlaceholderParameter
   Size get size;
   @override
   @JsonKey(ignore: true)
-  _$DataTemplateWidgetPlaceholderParameterCopyWith<
-          _DataTemplateWidgetPlaceholderParameter>
+  _$DesignParamWidgetPlaceholderCopyWith<_DesignParamWidgetPlaceholder>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-class _$DataTemplateWidgetPlaceholderListParameterTearOff {
-  const _$DataTemplateWidgetPlaceholderListParameterTearOff();
+class _$DesignParamWidgetPlaceholderListTearOff {
+  const _$DesignParamWidgetPlaceholderListTearOff();
 
-  _DataTemplateWidgetPlaceholderListParameter call(
+  _DesignParamWidgetPlaceholderList call(
       {Size size = const Size(100, 100), int count = 3}) {
-    return _DataTemplateWidgetPlaceholderListParameter(
+    return _DesignParamWidgetPlaceholderList(
       size: size,
       count: count,
     );
@@ -395,38 +382,36 @@ class _$DataTemplateWidgetPlaceholderListParameterTearOff {
 }
 
 /// @nodoc
-const $DataTemplateWidgetPlaceholderListParameter =
-    _$DataTemplateWidgetPlaceholderListParameterTearOff();
+const $DesignParamWidgetPlaceholderList =
+    _$DesignParamWidgetPlaceholderListTearOff();
 
 /// @nodoc
-mixin _$DataTemplateWidgetPlaceholderListParameter {
+mixin _$DesignParamWidgetPlaceholderList {
   Size get size => throw _privateConstructorUsedError;
   int get count => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $DataTemplateWidgetPlaceholderListParameterCopyWith<
-          DataTemplateWidgetPlaceholderListParameter>
+  $DesignParamWidgetPlaceholderListCopyWith<DesignParamWidgetPlaceholderList>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $DataTemplateWidgetPlaceholderListParameterCopyWith<$Res> {
-  factory $DataTemplateWidgetPlaceholderListParameterCopyWith(
-          DataTemplateWidgetPlaceholderListParameter value,
-          $Res Function(DataTemplateWidgetPlaceholderListParameter) then) =
-      _$DataTemplateWidgetPlaceholderListParameterCopyWithImpl<$Res>;
+abstract class $DesignParamWidgetPlaceholderListCopyWith<$Res> {
+  factory $DesignParamWidgetPlaceholderListCopyWith(
+          DesignParamWidgetPlaceholderList value,
+          $Res Function(DesignParamWidgetPlaceholderList) then) =
+      _$DesignParamWidgetPlaceholderListCopyWithImpl<$Res>;
   $Res call({Size size, int count});
 }
 
 /// @nodoc
-class _$DataTemplateWidgetPlaceholderListParameterCopyWithImpl<$Res>
-    implements $DataTemplateWidgetPlaceholderListParameterCopyWith<$Res> {
-  _$DataTemplateWidgetPlaceholderListParameterCopyWithImpl(
-      this._value, this._then);
+class _$DesignParamWidgetPlaceholderListCopyWithImpl<$Res>
+    implements $DesignParamWidgetPlaceholderListCopyWith<$Res> {
+  _$DesignParamWidgetPlaceholderListCopyWithImpl(this._value, this._then);
 
-  final DataTemplateWidgetPlaceholderListParameter _value;
+  final DesignParamWidgetPlaceholderList _value;
   // ignore: unused_field
-  final $Res Function(DataTemplateWidgetPlaceholderListParameter) _then;
+  final $Res Function(DesignParamWidgetPlaceholderList) _then;
 
   @override
   $Res call({
@@ -447,36 +432,35 @@ class _$DataTemplateWidgetPlaceholderListParameterCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$DataTemplateWidgetPlaceholderListParameterCopyWith<$Res>
-    implements $DataTemplateWidgetPlaceholderListParameterCopyWith<$Res> {
-  factory _$DataTemplateWidgetPlaceholderListParameterCopyWith(
-          _DataTemplateWidgetPlaceholderListParameter value,
-          $Res Function(_DataTemplateWidgetPlaceholderListParameter) then) =
-      __$DataTemplateWidgetPlaceholderListParameterCopyWithImpl<$Res>;
+abstract class _$DesignParamWidgetPlaceholderListCopyWith<$Res>
+    implements $DesignParamWidgetPlaceholderListCopyWith<$Res> {
+  factory _$DesignParamWidgetPlaceholderListCopyWith(
+          _DesignParamWidgetPlaceholderList value,
+          $Res Function(_DesignParamWidgetPlaceholderList) then) =
+      __$DesignParamWidgetPlaceholderListCopyWithImpl<$Res>;
   @override
   $Res call({Size size, int count});
 }
 
 /// @nodoc
-class __$DataTemplateWidgetPlaceholderListParameterCopyWithImpl<$Res>
-    extends _$DataTemplateWidgetPlaceholderListParameterCopyWithImpl<$Res>
-    implements _$DataTemplateWidgetPlaceholderListParameterCopyWith<$Res> {
-  __$DataTemplateWidgetPlaceholderListParameterCopyWithImpl(
-      _DataTemplateWidgetPlaceholderListParameter _value,
-      $Res Function(_DataTemplateWidgetPlaceholderListParameter) _then)
-      : super(_value,
-            (v) => _then(v as _DataTemplateWidgetPlaceholderListParameter));
+class __$DesignParamWidgetPlaceholderListCopyWithImpl<$Res>
+    extends _$DesignParamWidgetPlaceholderListCopyWithImpl<$Res>
+    implements _$DesignParamWidgetPlaceholderListCopyWith<$Res> {
+  __$DesignParamWidgetPlaceholderListCopyWithImpl(
+      _DesignParamWidgetPlaceholderList _value,
+      $Res Function(_DesignParamWidgetPlaceholderList) _then)
+      : super(_value, (v) => _then(v as _DesignParamWidgetPlaceholderList));
 
   @override
-  _DataTemplateWidgetPlaceholderListParameter get _value =>
-      super._value as _DataTemplateWidgetPlaceholderListParameter;
+  _DesignParamWidgetPlaceholderList get _value =>
+      super._value as _DesignParamWidgetPlaceholderList;
 
   @override
   $Res call({
     Object? size = freezed,
     Object? count = freezed,
   }) {
-    return _then(_DataTemplateWidgetPlaceholderListParameter(
+    return _then(_DesignParamWidgetPlaceholderList(
       size: size == freezed
           ? _value.size
           : size // ignore: cast_nullable_to_non_nullable
@@ -491,10 +475,10 @@ class __$DataTemplateWidgetPlaceholderListParameterCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_DataTemplateWidgetPlaceholderListParameter
+class _$_DesignParamWidgetPlaceholderList
     with DiagnosticableTreeMixin
-    implements _DataTemplateWidgetPlaceholderListParameter {
-  const _$_DataTemplateWidgetPlaceholderListParameter(
+    implements _DesignParamWidgetPlaceholderList {
+  const _$_DesignParamWidgetPlaceholderList(
       {this.size = const Size(100, 100), this.count = 3});
 
   @JsonKey()
@@ -506,15 +490,14 @@ class _$_DataTemplateWidgetPlaceholderListParameter
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'DataTemplateWidgetPlaceholderListParameter(size: $size, count: $count)';
+    return 'DesignParamWidgetPlaceholderList(size: $size, count: $count)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty(
-          'type', 'DataTemplateWidgetPlaceholderListParameter'))
+      ..add(DiagnosticsProperty('type', 'DesignParamWidgetPlaceholderList'))
       ..add(DiagnosticsProperty('size', size))
       ..add(DiagnosticsProperty('count', count));
   }
@@ -523,7 +506,7 @@ class _$_DataTemplateWidgetPlaceholderListParameter
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _DataTemplateWidgetPlaceholderListParameter &&
+            other is _DesignParamWidgetPlaceholderList &&
             const DeepCollectionEquality().equals(other.size, size) &&
             const DeepCollectionEquality().equals(other.count, count));
   }
@@ -536,16 +519,15 @@ class _$_DataTemplateWidgetPlaceholderListParameter
 
   @JsonKey(ignore: true)
   @override
-  _$DataTemplateWidgetPlaceholderListParameterCopyWith<
-          _DataTemplateWidgetPlaceholderListParameter>
-      get copyWith => __$DataTemplateWidgetPlaceholderListParameterCopyWithImpl<
-          _DataTemplateWidgetPlaceholderListParameter>(this, _$identity);
+  _$DesignParamWidgetPlaceholderListCopyWith<_DesignParamWidgetPlaceholderList>
+      get copyWith => __$DesignParamWidgetPlaceholderListCopyWithImpl<
+          _DesignParamWidgetPlaceholderList>(this, _$identity);
 }
 
-abstract class _DataTemplateWidgetPlaceholderListParameter
-    implements DataTemplateWidgetPlaceholderListParameter {
-  const factory _DataTemplateWidgetPlaceholderListParameter(
-      {Size size, int count}) = _$_DataTemplateWidgetPlaceholderListParameter;
+abstract class _DesignParamWidgetPlaceholderList
+    implements DesignParamWidgetPlaceholderList {
+  const factory _DesignParamWidgetPlaceholderList({Size size, int count}) =
+      _$_DesignParamWidgetPlaceholderList;
 
   @override
   Size get size;
@@ -553,52 +535,49 @@ abstract class _DataTemplateWidgetPlaceholderListParameter
   int get count;
   @override
   @JsonKey(ignore: true)
-  _$DataTemplateWidgetPlaceholderListParameterCopyWith<
-          _DataTemplateWidgetPlaceholderListParameter>
+  _$DesignParamWidgetPlaceholderListCopyWith<_DesignParamWidgetPlaceholderList>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-class _$DataTemplatePubConnectorParameterTearOff {
-  const _$DataTemplatePubConnectorParameterTearOff();
+class _$DesignParamPublisherTearOff {
+  const _$DesignParamPublisherTearOff();
 
-  _DataTemplatePubConnectorParameter call({String key = 'default'}) {
-    return _DataTemplatePubConnectorParameter(
+  _DesignParamPublisher call({String key = 'default'}) {
+    return _DesignParamPublisher(
       key: key,
     );
   }
 }
 
 /// @nodoc
-const $DataTemplatePubConnectorParameter =
-    _$DataTemplatePubConnectorParameterTearOff();
+const $DesignParamPublisher = _$DesignParamPublisherTearOff();
 
 /// @nodoc
-mixin _$DataTemplatePubConnectorParameter {
+mixin _$DesignParamPublisher {
   String get key => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $DataTemplatePubConnectorParameterCopyWith<DataTemplatePubConnectorParameter>
-      get copyWith => throw _privateConstructorUsedError;
+  $DesignParamPublisherCopyWith<DesignParamPublisher> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $DataTemplatePubConnectorParameterCopyWith<$Res> {
-  factory $DataTemplatePubConnectorParameterCopyWith(
-          DataTemplatePubConnectorParameter value,
-          $Res Function(DataTemplatePubConnectorParameter) then) =
-      _$DataTemplatePubConnectorParameterCopyWithImpl<$Res>;
+abstract class $DesignParamPublisherCopyWith<$Res> {
+  factory $DesignParamPublisherCopyWith(DesignParamPublisher value,
+          $Res Function(DesignParamPublisher) then) =
+      _$DesignParamPublisherCopyWithImpl<$Res>;
   $Res call({String key});
 }
 
 /// @nodoc
-class _$DataTemplatePubConnectorParameterCopyWithImpl<$Res>
-    implements $DataTemplatePubConnectorParameterCopyWith<$Res> {
-  _$DataTemplatePubConnectorParameterCopyWithImpl(this._value, this._then);
+class _$DesignParamPublisherCopyWithImpl<$Res>
+    implements $DesignParamPublisherCopyWith<$Res> {
+  _$DesignParamPublisherCopyWithImpl(this._value, this._then);
 
-  final DataTemplatePubConnectorParameter _value;
+  final DesignParamPublisher _value;
   // ignore: unused_field
-  final $Res Function(DataTemplatePubConnectorParameter) _then;
+  final $Res Function(DesignParamPublisher) _then;
 
   @override
   $Res call({
@@ -614,34 +593,31 @@ class _$DataTemplatePubConnectorParameterCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$DataTemplatePubConnectorParameterCopyWith<$Res>
-    implements $DataTemplatePubConnectorParameterCopyWith<$Res> {
-  factory _$DataTemplatePubConnectorParameterCopyWith(
-          _DataTemplatePubConnectorParameter value,
-          $Res Function(_DataTemplatePubConnectorParameter) then) =
-      __$DataTemplatePubConnectorParameterCopyWithImpl<$Res>;
+abstract class _$DesignParamPublisherCopyWith<$Res>
+    implements $DesignParamPublisherCopyWith<$Res> {
+  factory _$DesignParamPublisherCopyWith(_DesignParamPublisher value,
+          $Res Function(_DesignParamPublisher) then) =
+      __$DesignParamPublisherCopyWithImpl<$Res>;
   @override
   $Res call({String key});
 }
 
 /// @nodoc
-class __$DataTemplatePubConnectorParameterCopyWithImpl<$Res>
-    extends _$DataTemplatePubConnectorParameterCopyWithImpl<$Res>
-    implements _$DataTemplatePubConnectorParameterCopyWith<$Res> {
-  __$DataTemplatePubConnectorParameterCopyWithImpl(
-      _DataTemplatePubConnectorParameter _value,
-      $Res Function(_DataTemplatePubConnectorParameter) _then)
-      : super(_value, (v) => _then(v as _DataTemplatePubConnectorParameter));
+class __$DesignParamPublisherCopyWithImpl<$Res>
+    extends _$DesignParamPublisherCopyWithImpl<$Res>
+    implements _$DesignParamPublisherCopyWith<$Res> {
+  __$DesignParamPublisherCopyWithImpl(
+      _DesignParamPublisher _value, $Res Function(_DesignParamPublisher) _then)
+      : super(_value, (v) => _then(v as _DesignParamPublisher));
 
   @override
-  _DataTemplatePubConnectorParameter get _value =>
-      super._value as _DataTemplatePubConnectorParameter;
+  _DesignParamPublisher get _value => super._value as _DesignParamPublisher;
 
   @override
   $Res call({
     Object? key = freezed,
   }) {
-    return _then(_DataTemplatePubConnectorParameter(
+    return _then(_DesignParamPublisher(
       key: key == freezed
           ? _value.key
           : key // ignore: cast_nullable_to_non_nullable
@@ -652,10 +628,10 @@ class __$DataTemplatePubConnectorParameterCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_DataTemplatePubConnectorParameter
+class _$_DesignParamPublisher
     with DiagnosticableTreeMixin
-    implements _DataTemplatePubConnectorParameter {
-  const _$_DataTemplatePubConnectorParameter({this.key = 'default'});
+    implements _DesignParamPublisher {
+  const _$_DesignParamPublisher({this.key = 'default'});
 
   @JsonKey()
   @override
@@ -663,14 +639,14 @@ class _$_DataTemplatePubConnectorParameter
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'DataTemplatePubConnectorParameter(key: $key)';
+    return 'DesignParamPublisher(key: $key)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'DataTemplatePubConnectorParameter'))
+      ..add(DiagnosticsProperty('type', 'DesignParamPublisher'))
       ..add(DiagnosticsProperty('key', key));
   }
 
@@ -678,7 +654,7 @@ class _$_DataTemplatePubConnectorParameter
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _DataTemplatePubConnectorParameter &&
+            other is _DesignParamPublisher &&
             const DeepCollectionEquality().equals(other.key, key));
   }
 
@@ -688,33 +664,29 @@ class _$_DataTemplatePubConnectorParameter
 
   @JsonKey(ignore: true)
   @override
-  _$DataTemplatePubConnectorParameterCopyWith<
-          _DataTemplatePubConnectorParameter>
-      get copyWith => __$DataTemplatePubConnectorParameterCopyWithImpl<
-          _DataTemplatePubConnectorParameter>(this, _$identity);
+  _$DesignParamPublisherCopyWith<_DesignParamPublisher> get copyWith =>
+      __$DesignParamPublisherCopyWithImpl<_DesignParamPublisher>(
+          this, _$identity);
 }
 
-abstract class _DataTemplatePubConnectorParameter
-    implements DataTemplatePubConnectorParameter {
-  const factory _DataTemplatePubConnectorParameter({String key}) =
-      _$_DataTemplatePubConnectorParameter;
+abstract class _DesignParamPublisher implements DesignParamPublisher {
+  const factory _DesignParamPublisher({String key}) = _$_DesignParamPublisher;
 
   @override
   String get key;
   @override
   @JsonKey(ignore: true)
-  _$DataTemplatePubConnectorParameterCopyWith<
-          _DataTemplatePubConnectorParameter>
-      get copyWith => throw _privateConstructorUsedError;
+  _$DesignParamPublisherCopyWith<_DesignParamPublisher> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-class _$DataTemplateSubConnectorParameterTearOff {
-  const _$DataTemplateSubConnectorParameterTearOff();
+class _$DesignParamSubscriberTearOff {
+  const _$DesignParamSubscriberTearOff();
 
-  _DataTemplateSubConnectorParameter call(
+  _DesignParamSubscriber call(
       {dynamic defaultValue = null, String key = 'default'}) {
-    return _DataTemplateSubConnectorParameter(
+    return _DesignParamSubscriber(
       defaultValue: defaultValue,
       key: key,
     );
@@ -722,36 +694,34 @@ class _$DataTemplateSubConnectorParameterTearOff {
 }
 
 /// @nodoc
-const $DataTemplateSubConnectorParameter =
-    _$DataTemplateSubConnectorParameterTearOff();
+const $DesignParamSubscriber = _$DesignParamSubscriberTearOff();
 
 /// @nodoc
-mixin _$DataTemplateSubConnectorParameter {
+mixin _$DesignParamSubscriber {
   dynamic get defaultValue => throw _privateConstructorUsedError;
   String get key => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $DataTemplateSubConnectorParameterCopyWith<DataTemplateSubConnectorParameter>
-      get copyWith => throw _privateConstructorUsedError;
+  $DesignParamSubscriberCopyWith<DesignParamSubscriber> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $DataTemplateSubConnectorParameterCopyWith<$Res> {
-  factory $DataTemplateSubConnectorParameterCopyWith(
-          DataTemplateSubConnectorParameter value,
-          $Res Function(DataTemplateSubConnectorParameter) then) =
-      _$DataTemplateSubConnectorParameterCopyWithImpl<$Res>;
+abstract class $DesignParamSubscriberCopyWith<$Res> {
+  factory $DesignParamSubscriberCopyWith(DesignParamSubscriber value,
+          $Res Function(DesignParamSubscriber) then) =
+      _$DesignParamSubscriberCopyWithImpl<$Res>;
   $Res call({dynamic defaultValue, String key});
 }
 
 /// @nodoc
-class _$DataTemplateSubConnectorParameterCopyWithImpl<$Res>
-    implements $DataTemplateSubConnectorParameterCopyWith<$Res> {
-  _$DataTemplateSubConnectorParameterCopyWithImpl(this._value, this._then);
+class _$DesignParamSubscriberCopyWithImpl<$Res>
+    implements $DesignParamSubscriberCopyWith<$Res> {
+  _$DesignParamSubscriberCopyWithImpl(this._value, this._then);
 
-  final DataTemplateSubConnectorParameter _value;
+  final DesignParamSubscriber _value;
   // ignore: unused_field
-  final $Res Function(DataTemplateSubConnectorParameter) _then;
+  final $Res Function(DesignParamSubscriber) _then;
 
   @override
   $Res call({
@@ -772,35 +742,32 @@ class _$DataTemplateSubConnectorParameterCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$DataTemplateSubConnectorParameterCopyWith<$Res>
-    implements $DataTemplateSubConnectorParameterCopyWith<$Res> {
-  factory _$DataTemplateSubConnectorParameterCopyWith(
-          _DataTemplateSubConnectorParameter value,
-          $Res Function(_DataTemplateSubConnectorParameter) then) =
-      __$DataTemplateSubConnectorParameterCopyWithImpl<$Res>;
+abstract class _$DesignParamSubscriberCopyWith<$Res>
+    implements $DesignParamSubscriberCopyWith<$Res> {
+  factory _$DesignParamSubscriberCopyWith(_DesignParamSubscriber value,
+          $Res Function(_DesignParamSubscriber) then) =
+      __$DesignParamSubscriberCopyWithImpl<$Res>;
   @override
   $Res call({dynamic defaultValue, String key});
 }
 
 /// @nodoc
-class __$DataTemplateSubConnectorParameterCopyWithImpl<$Res>
-    extends _$DataTemplateSubConnectorParameterCopyWithImpl<$Res>
-    implements _$DataTemplateSubConnectorParameterCopyWith<$Res> {
-  __$DataTemplateSubConnectorParameterCopyWithImpl(
-      _DataTemplateSubConnectorParameter _value,
-      $Res Function(_DataTemplateSubConnectorParameter) _then)
-      : super(_value, (v) => _then(v as _DataTemplateSubConnectorParameter));
+class __$DesignParamSubscriberCopyWithImpl<$Res>
+    extends _$DesignParamSubscriberCopyWithImpl<$Res>
+    implements _$DesignParamSubscriberCopyWith<$Res> {
+  __$DesignParamSubscriberCopyWithImpl(_DesignParamSubscriber _value,
+      $Res Function(_DesignParamSubscriber) _then)
+      : super(_value, (v) => _then(v as _DesignParamSubscriber));
 
   @override
-  _DataTemplateSubConnectorParameter get _value =>
-      super._value as _DataTemplateSubConnectorParameter;
+  _DesignParamSubscriber get _value => super._value as _DesignParamSubscriber;
 
   @override
   $Res call({
     Object? defaultValue = freezed,
     Object? key = freezed,
   }) {
-    return _then(_DataTemplateSubConnectorParameter(
+    return _then(_DesignParamSubscriber(
       defaultValue: defaultValue == freezed
           ? _value.defaultValue
           : defaultValue // ignore: cast_nullable_to_non_nullable
@@ -815,10 +782,10 @@ class __$DataTemplateSubConnectorParameterCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_DataTemplateSubConnectorParameter
+class _$_DesignParamSubscriber
     with DiagnosticableTreeMixin
-    implements _DataTemplateSubConnectorParameter {
-  const _$_DataTemplateSubConnectorParameter(
+    implements _DesignParamSubscriber {
+  const _$_DesignParamSubscriber(
       {this.defaultValue = null, this.key = 'default'});
 
   @JsonKey()
@@ -830,14 +797,14 @@ class _$_DataTemplateSubConnectorParameter
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'DataTemplateSubConnectorParameter(defaultValue: $defaultValue, key: $key)';
+    return 'DesignParamSubscriber(defaultValue: $defaultValue, key: $key)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'DataTemplateSubConnectorParameter'))
+      ..add(DiagnosticsProperty('type', 'DesignParamSubscriber'))
       ..add(DiagnosticsProperty('defaultValue', defaultValue))
       ..add(DiagnosticsProperty('key', key));
   }
@@ -846,7 +813,7 @@ class _$_DataTemplateSubConnectorParameter
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _DataTemplateSubConnectorParameter &&
+            other is _DesignParamSubscriber &&
             const DeepCollectionEquality()
                 .equals(other.defaultValue, defaultValue) &&
             const DeepCollectionEquality().equals(other.key, key));
@@ -860,17 +827,14 @@ class _$_DataTemplateSubConnectorParameter
 
   @JsonKey(ignore: true)
   @override
-  _$DataTemplateSubConnectorParameterCopyWith<
-          _DataTemplateSubConnectorParameter>
-      get copyWith => __$DataTemplateSubConnectorParameterCopyWithImpl<
-          _DataTemplateSubConnectorParameter>(this, _$identity);
+  _$DesignParamSubscriberCopyWith<_DesignParamSubscriber> get copyWith =>
+      __$DesignParamSubscriberCopyWithImpl<_DesignParamSubscriber>(
+          this, _$identity);
 }
 
-abstract class _DataTemplateSubConnectorParameter
-    implements DataTemplateSubConnectorParameter {
-  const factory _DataTemplateSubConnectorParameter(
-      {dynamic defaultValue,
-      String key}) = _$_DataTemplateSubConnectorParameter;
+abstract class _DesignParamSubscriber implements DesignParamSubscriber {
+  const factory _DesignParamSubscriber({dynamic defaultValue, String key}) =
+      _$_DesignParamSubscriber;
 
   @override
   dynamic get defaultValue;
@@ -878,7 +842,6 @@ abstract class _DataTemplateSubConnectorParameter
   String get key;
   @override
   @JsonKey(ignore: true)
-  _$DataTemplateSubConnectorParameterCopyWith<
-          _DataTemplateSubConnectorParameter>
-      get copyWith => throw _privateConstructorUsedError;
+  _$DesignParamSubscriberCopyWith<_DesignParamSubscriber> get copyWith =>
+      throw _privateConstructorUsedError;
 }

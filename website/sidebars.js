@@ -16,8 +16,6 @@ module.exports = {
   Sidebar: [
     'get_started',
     'concepts',
-    'usecases',
-    'roadmap',
     {
       type: 'category',
       label: 'Designer',
@@ -44,7 +42,7 @@ module.exports = {
         'official_examples/demo_example',
       ]
     },
+    'roadmap',
     'faq',
-    'contribute',
   ],
 };

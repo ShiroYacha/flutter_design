@@ -10,8 +10,8 @@ import 'package:faker/faker.dart';
 import '../theme.dart';
 import 'designers.dart';
 
-class DataTemplateDynamicReadonlyBuilder extends DataBuilder<dynamic, dynamic> {
-  DataTemplateDynamicReadonlyBuilder([dynamic parameter]) : super(parameter);
+class DesignReadonlyBuilder extends DataBuilder<dynamic, dynamic> {
+  DesignReadonlyBuilder([dynamic parameter]) : super(parameter);
 
   @override
   dynamic build(BuildContext context, String field) {
@@ -30,8 +30,8 @@ class DataTemplateDynamicReadonlyBuilder extends DataBuilder<dynamic, dynamic> {
   String get name => 'Dynamic readonly';
 }
 
-class DataTemplateStringRawBuilder extends DataBuilder<String, String> {
-  DataTemplateStringRawBuilder([
+class DesignStringBuilder extends DataBuilder<String, String> {
+  DesignStringBuilder([
     String parameter = 'Type something',
   ]) : super(parameter);
 
@@ -45,7 +45,7 @@ class DataTemplateStringRawBuilder extends DataBuilder<String, String> {
     BuildContext context,
     UpdateDataBuilder<String, String> updateBuilder,
   ) {
-    return DataTemplateStringRawDesigner(
+    return DesignStringDesigner(
       builder: this,
       updateBuilder: updateBuilder,
     );
@@ -55,11 +55,10 @@ class DataTemplateStringRawBuilder extends DataBuilder<String, String> {
   String get name => 'Raw text';
 }
 
-class DataTemplateStringLoremBuilder
-    extends DataBuilder<String, DataTemplateStringLoremParameter> {
-  DataTemplateStringLoremBuilder([
-    DataTemplateStringLoremParameter parameter =
-        const DataTemplateStringLoremParameter(),
+class DesignStringLoremBuilder
+    extends DataBuilder<String, DesignParamStringLorem> {
+  DesignStringLoremBuilder([
+    DesignParamStringLorem parameter = const DesignParamStringLorem(),
   ]) : super(parameter);
 
   @override
@@ -72,9 +71,9 @@ class DataTemplateStringLoremBuilder
   @override
   Widget buildDesigner(
     BuildContext context,
-    UpdateDataBuilder<String, DataTemplateStringLoremParameter> updateBuilder,
+    UpdateDataBuilder<String, DesignParamStringLorem> updateBuilder,
   ) {
-    return DataTemplateStringLoremDesigner(
+    return DesignStringLoremDesigner(
       builder: this,
       updateBuilder: updateBuilder,
     );
@@ -84,11 +83,11 @@ class DataTemplateStringLoremBuilder
   String get name => 'Lorem ipsum';
 }
 
-class DataTemplateWidgetPlaceholderBuilder
-    extends DataBuilder<Widget, DataTemplateWidgetPlaceholderParameter> {
-  DataTemplateWidgetPlaceholderBuilder([
-    DataTemplateWidgetPlaceholderParameter parameter =
-        const DataTemplateWidgetPlaceholderParameter(),
+class DesignWidgetPlaceholderBuilder
+    extends DataBuilder<Widget, DesignParamWidgetPlaceholder> {
+  DesignWidgetPlaceholderBuilder([
+    DesignParamWidgetPlaceholder parameter =
+        const DesignParamWidgetPlaceholder(),
   ]) : super(parameter);
 
   @override
@@ -107,10 +106,9 @@ class DataTemplateWidgetPlaceholderBuilder
   @override
   Widget buildDesigner(
     BuildContext context,
-    UpdateDataBuilder<Widget, DataTemplateWidgetPlaceholderParameter>
-        updateBuilder,
+    UpdateDataBuilder<Widget, DesignParamWidgetPlaceholder> updateBuilder,
   ) {
-    return DataTemplateWidgetPlaceholderDesigner(
+    return DesignWidgetPlaceholderDesigner(
       builder: this,
       updateBuilder: updateBuilder,
     );
@@ -120,11 +118,11 @@ class DataTemplateWidgetPlaceholderBuilder
   String get name => 'Widget placeholder';
 }
 
-class DataTemplateWidgetPlaceholderListBuilder extends DataBuilder<List<Widget>,
-    DataTemplateWidgetPlaceholderListParameter> {
-  DataTemplateWidgetPlaceholderListBuilder([
-    DataTemplateWidgetPlaceholderListParameter parameter =
-        const DataTemplateWidgetPlaceholderListParameter(),
+class DesignWidgetPlaceholderListBuilder
+    extends DataBuilder<List<Widget>, DesignParamWidgetPlaceholderList> {
+  DesignWidgetPlaceholderListBuilder([
+    DesignParamWidgetPlaceholderList parameter =
+        const DesignParamWidgetPlaceholderList(),
   ]) : super(parameter);
 
   @override
@@ -149,10 +147,10 @@ class DataTemplateWidgetPlaceholderListBuilder extends DataBuilder<List<Widget>,
   @override
   Widget buildDesigner(
     BuildContext context,
-    UpdateDataBuilder<List<Widget>, DataTemplateWidgetPlaceholderListParameter>
+    UpdateDataBuilder<List<Widget>, DesignParamWidgetPlaceholderList>
         updateBuilder,
   ) {
-    return DataTemplateWidgetPlaceholderListDesigner(
+    return DesignWidgetPlaceholderListDesigner(
       builder: this,
       updateBuilder: updateBuilder,
     );
@@ -162,8 +160,8 @@ class DataTemplateWidgetPlaceholderListBuilder extends DataBuilder<List<Widget>,
   String get name => 'Widget placeholder list';
 }
 
-class DataTemplateStubFunctionBuilder extends DataBuilder<Function, Type> {
-  DataTemplateStubFunctionBuilder(Type parameter) : super(parameter);
+class DesignStubFunctionBuilder extends DataBuilder<Function, Type> {
+  DesignStubFunctionBuilder(Type parameter) : super(parameter);
 
   @override
   Function build(BuildContext context, String field) {
@@ -221,22 +219,18 @@ class PubSubConnectedData extends InheritedWidget {
   }
 }
 
-class DataTemplatePubConnectorBuilder
-    extends DataBuilder<Function, DataTemplatePubConnectorParameter> {
-  late UpdateDataBuilder<Function, DataTemplatePubConnectorParameter>
-      _updateBuilder;
+class DesignPublisherBuilder
+    extends DataBuilder<Function, DesignParamPublisher> {
+  late UpdateDataBuilder<Function, DesignParamPublisher> _updateBuilder;
 
-  DataTemplatePubConnectorBuilder(
-      [DataTemplatePubConnectorParameter parameter =
-          const DataTemplatePubConnectorParameter()])
+  DesignPublisherBuilder(
+      [DesignParamPublisher parameter = const DesignParamPublisher()])
       : super(parameter);
 
   @override
   Function build(BuildContext context, String field) {
     final data = PubSubConnectedData.of(context);
     return (d) {
-      print(
-          'data = ${data.hashCode}, writing key = ${parameter.key}, value = $d');
       data.write(parameter.key, d);
       _updateBuilder(this);
     };
@@ -245,8 +239,7 @@ class DataTemplatePubConnectorBuilder
   @override
   Widget buildDesigner(
     BuildContext context,
-    UpdateDataBuilder<Function, DataTemplatePubConnectorParameter>
-        updateBuilder,
+    UpdateDataBuilder<Function, DesignParamPublisher> updateBuilder,
   ) {
     // Store the updater locally to notify
     // TODO: this is ugly AF
@@ -281,21 +274,18 @@ class DataTemplatePubConnectorBuilder
   }
 
   @override
-  String get name => 'Pub connector';
+  String get name => 'Publisher';
 }
 
-class DataTemplateSubConnectorBuilder
-    extends DataBuilder<dynamic, DataTemplateSubConnectorParameter> {
-  DataTemplateSubConnectorBuilder(
-      [DataTemplateSubConnectorParameter parameter =
-          const DataTemplateSubConnectorParameter()])
+class DesignSubscriberBuilder
+    extends DataBuilder<dynamic, DesignParamSubscriber> {
+  DesignSubscriberBuilder(
+      [DesignParamSubscriber parameter = const DesignParamSubscriber()])
       : super(parameter);
 
   @override
   dynamic build(BuildContext context, String field) {
     final data = PubSubConnectedData.of(context);
-    print(
-        'data = ${data.hashCode}, reading key = ${parameter.key}, value = ${data.read(parameter.key)}');
     return data.hasValue(parameter.key)
         ? data.read(parameter.key)
         : parameter.defaultValue;
@@ -304,7 +294,7 @@ class DataTemplateSubConnectorBuilder
   @override
   Widget buildDesigner(
     BuildContext context,
-    UpdateDataBuilder<dynamic, DataTemplateSubConnectorParameter> updateBuilder,
+    UpdateDataBuilder<dynamic, DesignParamSubscriber> updateBuilder,
   ) {
     return HookConsumer(builder: (
       context,
@@ -334,11 +324,11 @@ class DataTemplateSubConnectorBuilder
   }
 
   @override
-  String get name => 'Sub connector';
+  String get name => 'Subscriber';
 }
 
-class DataTemplateNullBuilder extends DataBuilder<void, void> {
-  DataTemplateNullBuilder() : super(null);
+class DesignNullBuilder extends DataBuilder<void, void> {
+  DesignNullBuilder() : super(null);
 
   @override
   void build(BuildContext context, String field) {
@@ -357,8 +347,8 @@ class DataTemplateNullBuilder extends DataBuilder<void, void> {
   String get name => 'Null';
 }
 
-class DataTemplateColorPickerBuilder extends DataBuilder<Color, Color> {
-  DataTemplateColorPickerBuilder([
+class DesignColorPickerBuilder extends DataBuilder<Color, Color> {
+  DesignColorPickerBuilder([
     Color parameter = Colors.amber,
   ]) : super(parameter);
 
@@ -372,7 +362,7 @@ class DataTemplateColorPickerBuilder extends DataBuilder<Color, Color> {
     BuildContext context,
     UpdateDataBuilder<Color, Color> updateBuilder,
   ) {
-    return DataTemplateColorPickerDesigner(
+    return DesignColorPickerDesigner(
       builder: this,
       updateBuilder: updateBuilder,
     );
@@ -382,8 +372,8 @@ class DataTemplateColorPickerBuilder extends DataBuilder<Color, Color> {
   String get name => 'Color picker';
 }
 
-class DataTemplateDoubleBuilder extends DataBuilder<double, double> {
-  DataTemplateDoubleBuilder([
+class DesignDoubleBuilder extends DataBuilder<double, double> {
+  DesignDoubleBuilder([
     double parameter = 0,
   ]) : super(parameter);
 
@@ -397,7 +387,7 @@ class DataTemplateDoubleBuilder extends DataBuilder<double, double> {
     BuildContext context,
     UpdateDataBuilder<double, double> updateBuilder,
   ) {
-    return DataTemplateDoubleDesigner(
+    return DesignDoubleDesigner(
       builder: this,
       updateBuilder: updateBuilder,
     );
@@ -407,8 +397,8 @@ class DataTemplateDoubleBuilder extends DataBuilder<double, double> {
   String get name => 'Double picker';
 }
 
-class DataTemplateIntBuilder extends DataBuilder<int, int> {
-  DataTemplateIntBuilder([
+class DesignIntBuilder extends DataBuilder<int, int> {
+  DesignIntBuilder([
     int parameter = 0,
   ]) : super(parameter);
 
@@ -422,7 +412,7 @@ class DataTemplateIntBuilder extends DataBuilder<int, int> {
     BuildContext context,
     UpdateDataBuilder<int, int> updateBuilder,
   ) {
-    return DataTemplateIntDesigner(
+    return DesignIntDesigner(
       builder: this,
       updateBuilder: updateBuilder,
     );
@@ -432,8 +422,8 @@ class DataTemplateIntBuilder extends DataBuilder<int, int> {
   String get name => 'Integer picker';
 }
 
-class DataTemplateBoolToggleBuilder extends DataBuilder<bool, bool> {
-  DataTemplateBoolToggleBuilder([
+class DesignBoolToggleBuilder extends DataBuilder<bool, bool> {
+  DesignBoolToggleBuilder([
     bool parameter = false,
   ]) : super(parameter);
 
@@ -447,7 +437,7 @@ class DataTemplateBoolToggleBuilder extends DataBuilder<bool, bool> {
     BuildContext context,
     UpdateDataBuilder<bool, bool> updateBuilder,
   ) {
-    return DataTemplateBoolToggleDesigner(
+    return DesignBoolToggleDesigner(
       builder: this,
       updateBuilder: updateBuilder,
     );

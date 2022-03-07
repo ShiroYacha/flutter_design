@@ -12,10 +12,10 @@ import 'package:flutter_design_codegen/src/utils.dart';
 import 'package:recase/recase.dart';
 import 'package:source_gen/source_gen.dart';
 
-const _designFieldChecker = TypeChecker.fromRuntime(TDesignField);
+const _designFieldChecker = TypeChecker.fromRuntime(DesignField);
 
 /// Generate [ViewerDocumentPage] from @TDesign annotated classes.
-class DesignGenerator extends GeneratorForAnnotation<TDesign> {
+class DesignGenerator extends GeneratorForAnnotation<Design> {
   @override
   FutureOr<String> generateForAnnotatedElement(
     Element element,
@@ -106,12 +106,17 @@ final ${buildClassPageFieldName(element)} = ViewerDocumentPage(
       fieldTypedefCodeMap: fieldTypedefCodeMap,
       annotation: annotation,
     );
+    // Construct full component section source code
+    final id = ctor.displayName == clazz.name
+        ? 'anatomy'
+        : ReCase(ctor.displayName).snakeCase;
+    final title = ctor.displayName == clazz.name ? 'Anatomy' : ctor.displayName;
     return [
       fieldTypedefCodeMap.values.map((e) => '${e.code}\n').join(),
       '''
 ViewerSectionUnion.component(
-      id: '${ReCase(ctor.displayName).snakeCase}',
-      title: '${ctor.displayName}',
+      id: 'component_$id',
+      title: '$title',
       ctorName: '${ctor.displayName}',
       designLink: ${_readNullableAnnotationStringValue(annotation, 'designLink')},
       builder: ViewerWidgetBuilder(

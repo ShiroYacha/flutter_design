@@ -16,9 +16,9 @@ Here is an example of a data builder factory configuration for `String` type. No
   String: [
     // Need to use a condition here to use the data builder constructor's default value
     ([d]) => d != null
-        ? DataTemplateStringRawBuilder(raw: d)
-        : DataTemplateStringRawBuilder(),
-    ([d]) => DataTemplateStringLoremBuilder(),
+        ? DesignStringBuilder(raw: d)
+        : DesignStringBuilder(),
+    ([d]) => DesignStringLoremBuilder(),
   ],
 }
 ```
@@ -44,16 +44,233 @@ DesignSystemViewerApp(
 Each data builder consists a set of configurable parameters and a user interface to be displayed in the data builder view. You can find some of 
 the examples and designs in the following section.
 
+
+It is possible to configure the initial data builder using the `@DesignField` annotation. If not specified, the widget designer
+will try to match the first fitting data builder using the type of the field as well as the default value.
+
 :::note
-For more information on how to configure the data builder properties, please refer to [Annotation](/docs/codegen/annotation).
+For more information on how to configure the data builder properties, please refer to [Annotation](/docs/codegen/annotation). 
+All examples on default data builders can be found in the next section.
 :::
 
 ## Default data builders
 
+The designer comes with a set of commonly used data builders, all prefixed with the keyword `Design-`. 
+All examples shown uses the explicit initial value configuration on the class field. 
+
 :::note
-For the full list of current default data builders, please check on [Github](https://github.com/ShiroYacha/flutter_design/blob/main/packages/flutter_design_viewer/lib/src/default_data_builders.dart).
+For the latest list of out-of-the-box data builders, please check on [Github](https://github.com/ShiroYacha/flutter_design/blob/main/packages/flutter_design_viewer/lib/src/default_data_builders.dart). 
+Note that `DesignReadonlyBuilder` and `DesignNullBuilder` are not configured in that list as they are 
+configured as fallback in the data builder factory directly.
 :::
 
-Coming soon ...
+### Fallback builders
 
-<!--### `Widget` data builders-->
+#### 🏭 `DesignReadonlyBuilder` -> `dynamic`
+
+This is the "fallback" data builder when there isn't any other builder configured to handle the field type. It is readonly and will be simply supplying your constructor with a constant value, either
+from the default value or from the initial value.
+
+Here is an example using this builder to use complex data types (although to support configuring complex type is on the roadmap).
+
+```dart
+class AvatarModel {
+  final String uri;
+  final double radius;
+  const AvatarModel({
+    required this.uri,
+    this.radius = 30.0,
+  });
+}
+
+@design
+class Avatar extends StatelessWidget {
+
+  @DesignField(
+    parameter: AvatarModel(
+      uri: 'https://images.unsplash.com/photo-1529778873920-4da4926a72c2',
+    ),
+  )
+  final AvatarModel model;
+
+}
+```
+
+:::caution
+You would need to supply a default/initial value for non-nullable type. Otherwise you might see the following error:
+`type 'Null' is not a subtype of type 'xxx'`
+:::
+
+#### 🏭 `DesignNullBuilder` -> `null`
+
+This is another "fallback" data builder. It will simply provide a `null` value. There is no need to configure to use
+this builder, i.e. just leave the nullable field unset (or set as `null`). 
+
+### `String` builders
+
+#### 🏭 `DesignStringBuilder` -> `String`
+
+This is a string builder which allows the user to input the string value in a text field at runtime. It is the default
+builder for string field provided with a `String` default/initial value.
+
+```dart
+@design
+class Avatar extends StatelessWidget {
+  @DesignField(parameter: 'https://images.unsplash.com/photo-1529778873920-4da4926a72c2')
+  final String uri;
+}
+```
+
+#### 🏭 `DesignStringLoremBuilder` -> `String`
+
+This is a string builder which generates a [Lorem Ipsum](https://en.wikipedia.org/wiki/Lorem_ipsum) sentence. You can configure
+the initial length of the words, as well as the min/max value of the adjustment range at runtime.
+
+```dart
+@design
+class Button extends StatelessWidget {
+  @DesignField(parameter: DesignParamStringLorem(length: 10, min: 0, max: 100))
+  final String label;
+}
+```
+
+### `double` builders
+
+#### 🏭 `DesignDoubleBuilder` -> `double`
+
+This is a double value builder which allows the user to adjust the double value in a slider/text field at runtime. It is the default
+builder for double field provided with a `double` default/initial value.
+
+:::caution
+Make sure you enforce a `double` value by specifying the precision or type, e.g. `1.0` instead of `1` (you will
+get an error that says `Int` is not a `Double`).
+:::
+
+```dart
+@design
+class Avatar extends StatelessWidget {
+  @DesignField(parameter: 30.0)
+  final double radius;
+}
+```
+
+### `int` builders
+
+#### 🏭 `DesignIntBuilder` -> `double`
+
+Similar to `DesignDoubleBuilder`, this is an int value builder with an adjustable slider/text field at runtime. It is the default
+builder for int field provided with a `int` default/initial value. 
+
+```dart
+@design
+class Badge extends StatelessWidget {
+  @DesignField(parameter: 2)
+  final int count;
+}
+```
+
+### `bool` builders
+
+#### 🏭 `DesignBoolToggleBuilder` -> `bool`
+
+This is a boolean value builder which allows the user to toggle its state (`true`/`false`) at runtime. It is the default
+builder for boolean field provided with a `bool` default/initial value. 
+
+```dart
+@design
+class Badge extends StatelessWidget {
+  @DesignField(parameter: true)
+  final bool isHighlighted;
+}
+```
+
+
+### `Widget` builders
+
+#### 🏭 `DesignWidgetPlaceholderBuilder` -> `Widget`
+
+This is a widget placeholder builder which allows the user specify the color and size of the placeholder at runtime. It is the default
+builder for widget field provided with a `Widget` type. 
+
+:::tip
+Note that for this builder, you do not need to explicitly state the default/initial value as a default placeholder will always be created.
+However, you could use `DesignParamWidgetPlaceholder` to specify the initial placeholder.
+:::
+
+```dart
+@design
+class SpecialContainer extends StatelessWidget {
+  @DesignField(parameter: DesignParamWidgetPlaceholder(color: Colors.red, size: Size(100, 50)))
+  final Widget child;
+}
+```
+
+
+#### 🏭 `DesignWidgetPlaceholderListBuilder` -> `List<Widget>`
+
+Similar to `DesignWidgetPlaceholderBuilder`, this is a builder that creates a list of placeholders instead of one. You can adjust
+the number of placeholders and their size. The color is taken in order from `Colors.primaries`.
+
+:::tip
+Note that for this builder, you do not need to explicitly state the default/initial value as a default list placeholder will always be created.
+However, you could use `DesignParamWidgetPlaceholderList` to specify the initial placeholder.
+:::
+
+```dart
+@design
+class SpecialContainer extends StatelessWidget {
+  @DesignField(parameter: DesignParamWidgetPlaceholderList(count: 4, size: Size(100, 50)))
+  final List<Widget> children;
+}
+```
+
+### `Function` builders
+
+#### 🏭 `DesignStubFunctionBuilder` -> `Function`
+
+This is a function builder that creates a do-nothing stub function. A snack message will be shown nevertheless when the created function is called. 
+It is the default builder for function field. There is nothing to configure to use this builder. 
+
+:::caution
+Currently, due to limitation in the implementation, only a handful of function signatures are provided out-of-the-box.
+Check [Github](https://github.com/ShiroYacha/flutter_design/blob/main/packages/flutter_design/lib/src/types.dart) for the list of supported function type.
+:::
+
+:::tip
+You can use `DesignStubFunctionBuilder` to enable a button and `DesignNullBuilder` to disable it.
+:::
+
+### Special builders
+
+#### 🏭 `DesignPublisherBuilder` -> `Function` + `DesignSubscriberBuilder` -> `dynamic`
+
+This is a special pair of builders implemented using the [Publish/subscribe pattern](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern). 
+It is typically used to handle a `value`/`onValueChange` situation.
+
+The publisher builds a function that takes a single parameter which would be consumed by the subscriber with the same `key`.
+
+:::caution
+Currently, due to limitation in the implementation, only a handful of function signatures are provided out-of-the-box.
+Check [Github](https://github.com/ShiroYacha/flutter_design/blob/main/packages/flutter_design/lib/src/types.dart) for the list of supported function type.
+:::
+
+```dart
+@design
+class ToggleButton extends StatelessWidget {
+  @DesignField(
+    parameter: DesignParamSubscriber(
+      key: 'active',
+      defaultValue: false,
+    ),
+  )
+  final bool active;
+
+  @DesignField(
+    parameter: DesignParamPublisher(
+      key: 'active',
+    ),
+  )
+  final void Function(bool?)? onChanged;
+}
+```
+

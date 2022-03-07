@@ -28,7 +28,7 @@ class Button extends StatelessWidget {
   /// Label variant
   factory Button.label({
     @DesignField(
-      parameter: DataTemplateStringLoremParameter(length: 10),
+      parameter: DesignParamStringLorem(length: 10),
     )
         required String label,
     VoidCallback? onPressed,

@@ -70,9 +70,13 @@ dependencies:
   flutter_design_viewer:
 ```
 
-Then you need to basically setup the design system viewer in your app using the `generatedComponentPages` along with some other settings you might want to configure:
-- `enabledLocales` the locales your design system supports
-- `enabledThemes` the `ThemeData` your design system supports
+Then you need to basically setup the design system viewer in your app using the `generatedComponentPages` along with some other things you might want to configure:
+- `settings`
+  - `enabledLocales`: the locales your design system supports.
+  - `enabledThemes`: the `ThemeData` your design system supports.
+- `dataBuilders`: your custom data builders
+- `pageGroups`: grouped pages in the design system catalog.
+
 
 :::note
 You can also customize the pages by creating static or dynamic contents. For more information, please check out [Designer: Pages](/docs/designer/pages).

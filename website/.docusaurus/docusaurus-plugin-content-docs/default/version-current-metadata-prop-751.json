@@ -21,18 +21,6 @@
         "docId": "concepts"
       },
       {
-        "type": "link",
-        "label": "Use-cases",
-        "href": "/docs/usecases",
-        "docId": "usecases"
-      },
-      {
-        "type": "link",
-        "label": "Roadmap",
-        "href": "/docs/roadmap",
-        "docId": "roadmap"
-      },
-      {
         "type": "category",
         "label": "Designer",
         "items": [
@@ -106,15 +94,15 @@
       },
       {
         "type": "link",
-        "label": "FAQ",
-        "href": "/docs/faq",
-        "docId": "faq"
+        "label": "Roadmap",
+        "href": "/docs/roadmap",
+        "docId": "roadmap"
       },
       {
         "type": "link",
-        "label": "Contribute",
-        "href": "/docs/contribute",
-        "docId": "contribute"
+        "label": "FAQ",
+        "href": "/docs/faq",
+        "docId": "faq"
       }
     ]
   },
@@ -122,7 +110,7 @@
     "codegen/annotation": {
       "id": "codegen/annotation",
       "title": "Annotation",
-      "description": "The main annotation is @Design(...) or @design if you are not passing",
+      "description": "@Design",
       "sidebar": "Sidebar"
     },
     "codegen/generators": {
@@ -141,12 +129,6 @@
       "id": "concepts",
       "title": "Concepts",
       "description": "Now that you have setup the basic framework, let's dive into the core concepts and workflow.",
-      "sidebar": "Sidebar"
-    },
-    "contribute": {
-      "id": "contribute",
-      "title": "Contribute",
-      "description": "Coming soon ...",
       "sidebar": "Sidebar"
     },
     "designer/data_builder": {
@@ -194,13 +176,7 @@
     "roadmap": {
       "id": "roadmap",
       "title": "Roadmap",
-      "description": "Coming soon ...",
-      "sidebar": "Sidebar"
-    },
-    "usecases": {
-      "id": "usecases",
-      "title": "Use-cases",
-      "description": "Here are a few typical use-cases of incorporating flutter_design into your Flutter development ecosystem.",
+      "description": "A detailed roadmap is upcoming, you can checkout my current tasks and their status on https://trello.com/b/mEMLTRVc/flutterdesign.",
       "sidebar": "Sidebar"
     }
   }

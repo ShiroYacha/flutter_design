@@ -9,6 +9,17 @@ There are 2 types of pages:
 - **Group page**: `ViewerGroupPage`, a group page is a page that only contains children pages. It is displayed in the explorer as a collapsable node with only a title.
 - **Document page**: `ViewerDocumentPage` a "leaf" page that a title, an optional subtitle/description and contains various sections as described below.
 
+## Group pages
+
+You can pass all pages to the designer using the `pageGroups` field on `DesignSystemViewerApp`. Note that each 'pageGroup' represents a root node on the explorer. 
+
+:::caution
+Currently, the namespace on each page node has to be specified additional to the internal tree structure. For generated component pages you can easily use the utility method `buildComponentPageTree` to 
+generate the root page group. However, it's less trivial to generate static content via `buildGroupedPageTrees` as you would need to carefully specify the namespace correctly on each page.
+
+An improvement is planned on the roadmap, but please before then, refer to the [example code](https://github.com/ShiroYacha/flutter_design/blob/main/packages/flutter_design_viewer/example/lib/docs.dart) to create static content correctly.
+:::
+
 ## Sections
 
 Each document page contains a list of sections of following types, displayed in order in a list.
@@ -17,16 +28,17 @@ Each document page contains a list of sections of following types, displayed in 
 `ViewerParagraphSection`, a paragraph section contains a title, an optional description and a collection of items that is displayed in a list:
 
 - **Text**: `ViewerTextCollectionItem`, contains paragraph text title and/or a description.
-- **Link**: `ViewerLinkCollectionItem`, contains title label and a url.
 - **Image**: `ViewerImageCollectionItem`, contains an image and some text and/or description.
 - **Widget**: `ViewerWidgetCollectionItem`, contains an arbitary widget provided by the user.
 
 ### Component section
-`ViewerComponentSection`, a component section is shown in a widget designer. It typically contains the meta data
-to render the widget and its data.
+`ViewerComponentSection`, a component section contains the widget designer. It uses the specified meta data of the constructor to render the widget and allows 
+the user to play with dynamic runtime data using the data builders.
+
+Using the `@Design` annotation, each public constructor (named or factory) will generate a component section. 
 
 :::note
-For more information, please refer to [Widget designer](/docs/designer/widget_designer)
+For more information on the specifics of the component section, please refer to [Widget designer](/docs/designer/widget_designer)
 :::
 
 ### API reference section
