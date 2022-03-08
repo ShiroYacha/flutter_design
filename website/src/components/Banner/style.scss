@@ -13,6 +13,16 @@
     padding: 4rem 6rem;
   }
 
+  &__content_centered {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    max-width: math.div($max-width, 1);
+    padding: 1rem;
+    padding-left: 7rem;
+    padding-top: 8rem;
+  }
+
   &__content {
     display: flex;
     flex-direction: column;

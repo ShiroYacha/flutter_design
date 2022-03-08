@@ -52,6 +52,11 @@ class SpecialWidget extends StatelessWidget {
 }
 ```
 
+:::caution
+In some cases, this single annotation is not sufficient, e.g. when you have a non-nullable field without a default value. In that case, you would need to 
+specify the initial value/parameter of the field using `@DesignField` annotation. For more information, please take a look at [Annotation](/docs/codegen/annotation).
+:::
+
 After running the following build runner command,  
 ``` bash
 flutter packages pub run build_runner build --delete-conflicting-outputs

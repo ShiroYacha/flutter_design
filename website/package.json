@@ -24,6 +24,7 @@
     "prism-react-renderer": "^1.2.1",
     "raw-loader": "^4.0.2",
     "react": "^17.0.1",
+    "react-breakpoints": "^3.0.3",
     "react-dom": "^17.0.1",
     "react-gif-player": "^0.4.2",
     "sass": "^1.49.8"
