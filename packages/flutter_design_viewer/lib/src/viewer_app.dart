@@ -130,6 +130,7 @@ class DesignSystemViewerRouter extends HookConsumerWidget {
       } finally {
         BotToast.closeAllLoading();
       }
+      return null;
     }, []);
     // Persists viewer state to cache upon changes
     ref.listen<ViewerState>(viewerStateProvider, (previous, next) async {

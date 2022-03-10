@@ -32,8 +32,13 @@ const $DesignParamStringLorem = _$DesignParamStringLoremTearOff();
 
 /// @nodoc
 mixin _$DesignParamStringLorem {
+  /// Length of the generated sentence
   int get length => throw _privateConstructorUsedError;
+
+  /// Min length of the generated sentence
   int get min => throw _privateConstructorUsedError;
+
+  /// Max length of the generated sentence
   int get max => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -135,12 +140,18 @@ class _$_DesignParamStringLorem
 
   @JsonKey()
   @override
+
+  /// Length of the generated sentence
   final int length;
   @JsonKey()
   @override
+
+  /// Min length of the generated sentence
   final int min;
   @JsonKey()
   @override
+
+  /// Max length of the generated sentence
   final int max;
 
   @override
@@ -187,10 +198,16 @@ abstract class _DesignParamStringLorem implements DesignParamStringLorem {
       _$_DesignParamStringLorem;
 
   @override
+
+  /// Length of the generated sentence
   int get length;
   @override
+
+  /// Min length of the generated sentence
   int get min;
   @override
+
+  /// Max length of the generated sentence
   int get max;
   @override
   @JsonKey(ignore: true)
@@ -216,7 +233,10 @@ const $DesignParamWidgetPlaceholder = _$DesignParamWidgetPlaceholderTearOff();
 
 /// @nodoc
 mixin _$DesignParamWidgetPlaceholder {
+  /// Background color of the placeholder
   Color get color => throw _privateConstructorUsedError;
+
+  /// Size of the placeholder
   Size get size => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -312,9 +332,13 @@ class _$_DesignParamWidgetPlaceholder
 
   @JsonKey()
   @override
+
+  /// Background color of the placeholder
   final Color color;
   @JsonKey()
   @override
+
+  /// Size of the placeholder
   final Size size;
 
   @override
@@ -359,8 +383,12 @@ abstract class _DesignParamWidgetPlaceholder
       _$_DesignParamWidgetPlaceholder;
 
   @override
+
+  /// Background color of the placeholder
   Color get color;
   @override
+
+  /// Size of the placeholder
   Size get size;
   @override
   @JsonKey(ignore: true)
@@ -387,7 +415,10 @@ const $DesignParamWidgetPlaceholderList =
 
 /// @nodoc
 mixin _$DesignParamWidgetPlaceholderList {
+  /// Size of the placeholder
   Size get size => throw _privateConstructorUsedError;
+
+  /// Number of placeholders
   int get count => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -483,9 +514,13 @@ class _$_DesignParamWidgetPlaceholderList
 
   @JsonKey()
   @override
+
+  /// Size of the placeholder
   final Size size;
   @JsonKey()
   @override
+
+  /// Number of placeholders
   final int count;
 
   @override
@@ -530,8 +565,12 @@ abstract class _DesignParamWidgetPlaceholderList
       _$_DesignParamWidgetPlaceholderList;
 
   @override
+
+  /// Size of the placeholder
   Size get size;
   @override
+
+  /// Number of placeholders
   int get count;
   @override
   @JsonKey(ignore: true)

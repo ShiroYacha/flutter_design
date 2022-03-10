@@ -440,7 +440,7 @@ class _$ViewerSettingsTearOff {
       {required Map<String, Locale> enabledLocales,
       required Map<String, ThemeData> enabledThemes,
       Breakpoints breakpoints = const Breakpoints(),
-      double widgetDisplayHeight = 500.0}) {
+      double widgetDisplayHeight = 600.0}) {
     return _ViewerSettigns(
       enabledLocales: enabledLocales,
       enabledThemes: enabledThemes,
@@ -587,7 +587,7 @@ class _$_ViewerSettigns implements _ViewerSettigns {
       {required this.enabledLocales,
       required this.enabledThemes,
       this.breakpoints = const Breakpoints(),
-      this.widgetDisplayHeight = 500.0});
+      this.widgetDisplayHeight = 600.0});
 
   @override
   final Map<String, Locale> enabledLocales;
