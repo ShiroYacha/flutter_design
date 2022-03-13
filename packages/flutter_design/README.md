@@ -73,9 +73,9 @@ dev_dependencies:
   flutter_design_codegen:
 ```
 
-Note that you might need to add this to the readme file (I'm working on a fix to avoid needing this override):
+Note that you might need to add this to the `pubspec.yaml` file (I'm working on a fix to avoid needing this override):
 
-```
+```yaml
 dependency_overrides:
   analyzer: 3.2.0
 ```
