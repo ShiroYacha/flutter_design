@@ -105,6 +105,7 @@ class ViewerSettings with _$ViewerSettings {
     required Map<String, ThemeData> enabledThemes,
     @Default(Breakpoints()) Breakpoints breakpoints,
     @Default(600.0) double widgetDisplayHeight,
+    String? githubLink,
   }) = _ViewerSettigns;
 }
 

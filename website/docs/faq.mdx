@@ -14,3 +14,20 @@ Check [Github](https://github.com/ShiroYacha/flutter_design/blob/main/packages/f
 
 This typically happens if a default value or initial value (via `@DesignField(parameter: ...)`) is 
 not provided to a non-nullable field type.
+
+### Context: 'AstVisitor.visitConstructorSelector' is defined here.
+
+Note that you might need to add this to the readme file (I'm working on a fix to avoid needing this override):
+
+```
+dependency_overrides:
+  analyzer: 3.2.0
+```
+
+If you see errors like: 
+```
+class ToSourceIgnoringDesignAnnotationsVisitor implements AstVisitor {
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../../../Dev/flutter/.pub-cache/hosted/pub.dartlang.org/analyzer-3.3.1/lib/dart/ast/ast.dart:405:6: Context: 'AstVisitor.visitConstructorSelector' is defined here.
+```
+:::

@@ -31,8 +31,8 @@ final viewerSettingsProvider =
 final viewerStateProvider = StateProvider<ViewerState>(
   (ref) => ViewerState(
     viewMode: ViewMode.themes,
+    displayMode: DisplayMode.widgetCodeSideBySide,
     themeMode: ThemeMode.dark,
-    displayMode: DisplayMode.widgetOnly,
     showDataBuilderByDefault: true,
     expandExplorerNodesByDefault: true,
     targetDeviceId: Devices.ios.iPhone12.identifier.toString(),
@@ -47,6 +47,7 @@ final viewerStateProvider = StateProvider<ViewerState>(
 const routePathNameSeparator = '||';
 
 class DesignSystemViewerApp extends HookConsumerWidget {
+  final String? initialRoute;
   final Widget? branding;
   final ViewerSettings settings;
   final List<ViewerGroupPage> pageGroups;
@@ -57,6 +58,7 @@ class DesignSystemViewerApp extends HookConsumerWidget {
     required this.settings,
     this.dataBuilders = const {},
     this.branding,
+    this.initialRoute,
     Key? key,
   }) : super(key: key);
 
@@ -73,7 +75,7 @@ class DesignSystemViewerApp extends HookConsumerWidget {
           ),
         )
       ],
-      child: const DesignSystemViewerRouter(),
+      child: DesignSystemViewerRouter(initialRoute: initialRoute),
     );
   }
 
@@ -90,7 +92,11 @@ class DesignSystemViewerApp extends HookConsumerWidget {
 }
 
 class DesignSystemViewerRouter extends HookConsumerWidget {
-  const DesignSystemViewerRouter({Key? key}) : super(key: key);
+  final String? initialRoute;
+  const DesignSystemViewerRouter({
+    this.initialRoute,
+    Key? key,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final pageGroups = ref.watch(pageGroupsProvider);
@@ -105,7 +111,7 @@ class DesignSystemViewerRouter extends HookConsumerWidget {
         viewerStateNotifier.state = cache?.isValid == true
             ? cache!
             : ViewerState(
-                viewMode: ViewMode.canvas,
+                viewMode: ViewMode.themes,
                 displayMode: DisplayMode.widgetCodeSideBySide,
                 themeMode: ThemeMode.dark,
                 showDataBuilderByDefault: true,
@@ -152,7 +158,8 @@ class DesignSystemViewerRouter extends HookConsumerWidget {
       ],
       initialUrl: pageGroups.isEmpty
           ? '/404'
-          : pageGroups.first.children.map((e) => e.firstDocumentUri).first,
+          : (initialRoute ??
+              pageGroups.first.children.map((e) => e.firstDocumentUri).first),
       onGenerateTitle: (context) {
         return WidgetKeys.navKey.currentContext != null
             ? VRouter.of(WidgetKeys.navKey.currentContext!)

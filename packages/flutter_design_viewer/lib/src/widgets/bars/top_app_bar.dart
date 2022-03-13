@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../flutter_design_viewer.dart';
 import '../../measures.dart';
@@ -12,7 +13,12 @@ class TopAppBar extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
-    final viewerState = ref.watch(viewerStateProvider);
+    final themeModeTooltip =
+        ref.watch(viewerStateProvider.select((e) => e.themeModeTooltip));
+    final themeModeIcon =
+        ref.watch(viewerStateProvider.select((e) => e.themeModeIcon));
+    final githubLink =
+        ref.watch(viewerSettingsProvider.select((e) => e.githubLink));
     final viewerStateNotifier = ref.read(viewerStateProvider.notifier);
     return Container(
       padding: SpacingDesign.paddingAll10,
@@ -28,15 +34,15 @@ class TopAppBar extends HookConsumerWidget {
           const Expanded(child: SizedBox.shrink()),
           const SearchButton(),
           Spacers.h20,
-          ThemableIconButton(
-            icon: Ionicons.logo_twitter,
-            onTap: () {},
-          ),
-          Spacers.h10,
-          ThemableIconButton(
-            onTap: () {},
-            icon: Ionicons.logo_github,
-          ),
+          if (githubLink != null)
+            ThemableIconButton(
+              onTap: () async {
+                if (await canLaunch(githubLink)) {
+                  launch(githubLink);
+                }
+              },
+              icon: Ionicons.logo_github,
+            ),
           Spacers.h10,
           ThemableIconButton(
             onTap: () {
@@ -46,8 +52,8 @@ class TopAppBar extends HookConsumerWidget {
                 ),
               );
             },
-            tooltip: viewerState.themeModeTooltip,
-            icon: viewerState.themeModeIcon,
+            tooltip: themeModeTooltip,
+            icon: themeModeIcon,
           ),
         ],
       ),

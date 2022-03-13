@@ -128,7 +128,9 @@ class ViewerSectionUnion with _$ViewerSectionUnion implements Searchable {
 
     /// Description of the section.
     String? description,
-    @Default([]) List<List<ViewerCollectionItemUnion>> contents,
+
+    /// List of content items
+    @Default([]) List<ViewerCollectionItemUnion> contents,
   }) = ViewerParagraphSection;
 
   const factory ViewerSectionUnion.component({

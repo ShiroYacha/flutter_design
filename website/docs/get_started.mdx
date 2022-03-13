@@ -65,6 +65,22 @@ the following files will be generated:
 - `/lib/**/*.design.dart`: generated widget component pagesfor the partial file.
 - `/lib/page_factory.design.dart`: this contains the aggregated `generatedComponentPages` that can be directly pass to the `DesignSystemViewerApp` described later.
 
+:::caution
+Note that you might need to add this to the readme file (I'm working on a fix to avoid needing this override):
+
+```
+dependency_overrides:
+  analyzer: 3.2.0
+```
+
+If you see errors like: 
+```
+class ToSourceIgnoringDesignAnnotationsVisitor implements AstVisitor {
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../../../Dev/flutter/.pub-cache/hosted/pub.dartlang.org/analyzer-3.3.1/lib/dart/ast/ast.dart:405:6: Context: 'AstVisitor.visitConstructorSelector' is defined here.
+```
+:::
+
 Finally you can create a flutter designer app (currently supporting Android, iOS, Web, macOS, Windows) to host the design system viewer by adding the following dependencies to the `pubspec.yaml`
 
 ```yaml

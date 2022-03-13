@@ -183,26 +183,21 @@ class ParagraphSection extends HookConsumerWidget {
             title: paragraph.title,
             description: paragraph.description,
           ),
+          Spacers.v20,
           ...paragraph.contents.fold(
             [],
             (previousValue, element) => [
               ...previousValue,
-              ...element.fold(
-                [],
-                (p, e) => [
-                  ...p,
-                  e.map(
-                    text: (text) => TitleDescription(
-                      style: TextDescriptionStyle.paragraph(context),
-                      title: text.title,
-                      description: text.description,
-                    ),
-                    image: (image) => ViewerImageDisplay(item: image),
-                    widget: (widget) => widget.widget,
-                  ),
-                  Spacers.v40,
-                ],
+              element.map(
+                text: (text) => TitleDescription(
+                  style: TextDescriptionStyle.paragraph(context),
+                  title: text.title,
+                  description: text.description,
+                ),
+                image: (image) => ViewerImageDisplay(item: image),
+                widget: (widget) => widget.widget,
               ),
+              Spacers.v40,
             ],
           ),
         ],

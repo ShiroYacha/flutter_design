@@ -24,38 +24,36 @@ We, as diverse humans, have our own unique way to think about problems and we wa
         title: 'Principles',
         description: '''''',
         contents: [
-          [
-            ViewerImageCollectionItem(
-              style: ViewerImageCollectionItemStyle.imageOnLeft,
-              title: 'Accessibility',
-              description:
-                  '''In 2016 the UN declared Internet access as a human right. We, as builder of web technologies, have a responsibility to [create products that are accessible](/get_started/accessibility) to the highest number of people, just like an architect tries to eliminate architectural barrier when designing public building.''',
-              width: 300,
-              height: 300,
-              url:
-                  'https://images.pexels.com/photos/7434255/pexels-photo-7434255.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
-            ),
-            ViewerImageCollectionItem(
-              style: ViewerImageCollectionItemStyle.imageOnLeft,
-              title: 'Form follows function',
-              description:
-                  '''When time or resources are limited, what design trade-offs would least harm the design’s success? Wanda approach aims to serve human needs while carefully considering human behaviour. Our Design Language aspire to create beauty as a byproduct of functionality, rather than mere decoration.''',
-              width: 300,
-              height: 300,
-              url:
-                  'https://images.pexels.com/photos/9999717/pexels-photo-9999717.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
-            ),
-            ViewerImageCollectionItem(
-              style: ViewerImageCollectionItemStyle.imageOnLeft,
-              title: 'Progress over perfections',
-              description:
-                  '''Wanda is a constantly evolving product that represent our best shot at a Design system yet. We're sure that our future selves will have a lot to disagree about decision that we took today — and that's perfectly ok: done is better than perfect.''',
-              width: 300,
-              height: 300,
-              url:
-                  'https://images.pexels.com/photos/10611115/pexels-photo-10611115.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
-            ),
-          ]
+          ViewerImageCollectionItem(
+            style: ViewerImageCollectionItemStyle.imageOnLeft,
+            title: 'Accessibility',
+            description:
+                '''In 2016 the UN declared Internet access as a human right. We, as builder of web technologies, have a responsibility to [create products that are accessible](/get_started/accessibility) to the highest number of people, just like an architect tries to eliminate architectural barrier when designing public building.''',
+            width: 300,
+            height: 300,
+            url:
+                'https://images.pexels.com/photos/7434255/pexels-photo-7434255.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+          ),
+          ViewerImageCollectionItem(
+            style: ViewerImageCollectionItemStyle.imageOnLeft,
+            title: 'Form follows function',
+            description:
+                '''When time or resources are limited, what design trade-offs would least harm the design’s success? Wanda approach aims to serve human needs while carefully considering human behaviour. Our Design Language aspire to create beauty as a byproduct of functionality, rather than mere decoration.''',
+            width: 300,
+            height: 300,
+            url:
+                'https://images.pexels.com/photos/9999717/pexels-photo-9999717.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+          ),
+          ViewerImageCollectionItem(
+            style: ViewerImageCollectionItemStyle.imageOnLeft,
+            title: 'Progress over perfections',
+            description:
+                '''Wanda is a constantly evolving product that represent our best shot at a Design system yet. We're sure that our future selves will have a lot to disagree about decision that we took today — and that's perfectly ok: done is better than perfect.''',
+            width: 300,
+            height: 300,
+            url:
+                'https://images.pexels.com/photos/10611115/pexels-photo-10611115.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+          ),
         ],
       ),
     ],

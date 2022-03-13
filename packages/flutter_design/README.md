@@ -73,6 +73,20 @@ dev_dependencies:
   flutter_design_codegen:
 ```
 
+Note that you might need to add this to the readme file (I'm working on a fix to avoid needing this override):
+
+```
+dependency_overrides:
+  analyzer: 3.2.0
+```
+
+If you see errors like: 
+```
+class ToSourceIgnoringDesignAnnotationsVisitor implements AstVisitor {
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../../../Dev/flutter/.pub-cache/hosted/pub.dartlang.org/analyzer-3.3.1/lib/dart/ast/ast.dart:405:6: Context: 'AstVisitor.visitConstructorSelector' is defined here.
+```
+
 Then you would need to annotate the widgets you want to integrate in the design system viewer using the `@design` annotation. Yes, it's that easy!  
 
 ```dart

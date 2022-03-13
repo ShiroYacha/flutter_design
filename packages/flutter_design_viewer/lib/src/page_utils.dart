@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_design/flutter_design.dart';
+import 'package:flutter_design_viewer/src/widgets/items/theme_items.dart';
 
 const ViewerParagraphSection _comingSoonSection = ViewerParagraphSection(
     id: 'coming_soon', title: '...', description: 'Coming soon ...');
@@ -8,7 +9,7 @@ const ViewerParagraphSection _comingSoonSection = ViewerParagraphSection(
 ViewerGroupPage buildThemePageGroup({
   required Map<String, ThemeData> themes,
 }) {
-  return const ViewerGroupPage(
+  return ViewerGroupPage(
     id: 'themes',
     namespace: [],
     title: 'Themes',
@@ -17,7 +18,22 @@ ViewerGroupPage buildThemePageGroup({
         id: 'colors',
         namespace: ['themes'],
         title: 'Colors',
-        sections: [_comingSoonSection],
+        subtitle:
+            'Colors defined using the [Material color system](https://m3.material.io/styles/color/the-color-system/color-roles).',
+        sections: [
+          ViewerSectionUnion.paragraph(
+              id: 'schemes',
+              title: 'ColorScheme',
+              description:
+                  'Colors defined in [ColorScheme](https://api.flutter.dev/flutter/material/ColorScheme-class.html).',
+              contents: <ViewerCollectionItemUnion>[
+                ViewerWidgetCollectionItem(
+                  widget: ThemeViewersCollection(
+                    builder: (ctx) => const ColorSchemeViewer(),
+                  ),
+                ),
+              ]),
+        ],
       ),
       ViewerDocumentPage(
         id: 'typography',

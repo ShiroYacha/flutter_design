@@ -909,7 +909,7 @@ class _$ViewerSectionUnionTearOff {
       {required String id,
       required String title,
       String? description,
-      List<List<ViewerCollectionItemUnion>> contents = const []}) {
+      List<ViewerCollectionItemUnion> contents = const []}) {
     return ViewerParagraphSection(
       id: id,
       title: title,
@@ -964,7 +964,7 @@ mixin _$ViewerSectionUnion {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String id, String title, String? description,
-            List<List<ViewerCollectionItemUnion>> contents)
+            List<ViewerCollectionItemUnion> contents)
         paragraph,
     required TResult Function(
             String id,
@@ -982,7 +982,7 @@ mixin _$ViewerSectionUnion {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String id, String title, String? description,
-            List<List<ViewerCollectionItemUnion>> contents)?
+            List<ViewerCollectionItemUnion> contents)?
         paragraph,
     TResult Function(
             String id,
@@ -999,7 +999,7 @@ mixin _$ViewerSectionUnion {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String id, String title, String? description,
-            List<List<ViewerCollectionItemUnion>> contents)?
+            List<ViewerCollectionItemUnion> contents)?
         paragraph,
     TResult Function(
             String id,
@@ -1093,7 +1093,7 @@ abstract class $ViewerParagraphSectionCopyWith<$Res>
       {String id,
       String title,
       String? description,
-      List<List<ViewerCollectionItemUnion>> contents});
+      List<ViewerCollectionItemUnion> contents});
 }
 
 /// @nodoc
@@ -1130,7 +1130,7 @@ class _$ViewerParagraphSectionCopyWithImpl<$Res>
       contents: contents == freezed
           ? _value.contents
           : contents // ignore: cast_nullable_to_non_nullable
-              as List<List<ViewerCollectionItemUnion>>,
+              as List<ViewerCollectionItemUnion>,
     ));
   }
 }
@@ -1160,7 +1160,9 @@ class _$ViewerParagraphSection extends ViewerParagraphSection
   final String? description;
   @JsonKey()
   @override
-  final List<List<ViewerCollectionItemUnion>> contents;
+
+  /// List of content items
+  final List<ViewerCollectionItemUnion> contents;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -1208,7 +1210,7 @@ class _$ViewerParagraphSection extends ViewerParagraphSection
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String id, String title, String? description,
-            List<List<ViewerCollectionItemUnion>> contents)
+            List<ViewerCollectionItemUnion> contents)
         paragraph,
     required TResult Function(
             String id,
@@ -1229,7 +1231,7 @@ class _$ViewerParagraphSection extends ViewerParagraphSection
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String id, String title, String? description,
-            List<List<ViewerCollectionItemUnion>> contents)?
+            List<ViewerCollectionItemUnion> contents)?
         paragraph,
     TResult Function(
             String id,
@@ -1249,7 +1251,7 @@ class _$ViewerParagraphSection extends ViewerParagraphSection
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String id, String title, String? description,
-            List<List<ViewerCollectionItemUnion>> contents)?
+            List<ViewerCollectionItemUnion> contents)?
         paragraph,
     TResult Function(
             String id,
@@ -1306,11 +1308,10 @@ class _$ViewerParagraphSection extends ViewerParagraphSection
 
 abstract class ViewerParagraphSection extends ViewerSectionUnion {
   const factory ViewerParagraphSection(
-          {required String id,
-          required String title,
-          String? description,
-          List<List<ViewerCollectionItemUnion>> contents}) =
-      _$ViewerParagraphSection;
+      {required String id,
+      required String title,
+      String? description,
+      List<ViewerCollectionItemUnion> contents}) = _$ViewerParagraphSection;
   const ViewerParagraphSection._() : super._();
 
   @override
@@ -1325,7 +1326,9 @@ abstract class ViewerParagraphSection extends ViewerSectionUnion {
 
   /// Description of the section.
   String? get description;
-  List<List<ViewerCollectionItemUnion>> get contents;
+
+  /// List of content items
+  List<ViewerCollectionItemUnion> get contents;
   @override
   @JsonKey(ignore: true)
   $ViewerParagraphSectionCopyWith<ViewerParagraphSection> get copyWith =>
@@ -1520,7 +1523,7 @@ class _$ViewerComponentSection extends ViewerComponentSection
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String id, String title, String? description,
-            List<List<ViewerCollectionItemUnion>> contents)
+            List<ViewerCollectionItemUnion> contents)
         paragraph,
     required TResult Function(
             String id,
@@ -1542,7 +1545,7 @@ class _$ViewerComponentSection extends ViewerComponentSection
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String id, String title, String? description,
-            List<List<ViewerCollectionItemUnion>> contents)?
+            List<ViewerCollectionItemUnion> contents)?
         paragraph,
     TResult Function(
             String id,
@@ -1563,7 +1566,7 @@ class _$ViewerComponentSection extends ViewerComponentSection
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String id, String title, String? description,
-            List<List<ViewerCollectionItemUnion>> contents)?
+            List<ViewerCollectionItemUnion> contents)?
         paragraph,
     TResult Function(
             String id,
@@ -1768,7 +1771,7 @@ class _$ViewerApiDocsSection extends ViewerApiDocsSection
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String id, String title, String? description,
-            List<List<ViewerCollectionItemUnion>> contents)
+            List<ViewerCollectionItemUnion> contents)
         paragraph,
     required TResult Function(
             String id,
@@ -1789,7 +1792,7 @@ class _$ViewerApiDocsSection extends ViewerApiDocsSection
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(String id, String title, String? description,
-            List<List<ViewerCollectionItemUnion>> contents)?
+            List<ViewerCollectionItemUnion> contents)?
         paragraph,
     TResult Function(
             String id,
@@ -1809,7 +1812,7 @@ class _$ViewerApiDocsSection extends ViewerApiDocsSection
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String id, String title, String? description,
-            List<List<ViewerCollectionItemUnion>> contents)?
+            List<ViewerCollectionItemUnion> contents)?
         paragraph,
     TResult Function(
             String id,
