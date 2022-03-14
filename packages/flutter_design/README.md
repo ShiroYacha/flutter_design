@@ -78,6 +78,7 @@ Note that you might need to add this to the `pubspec.yaml` file (I'm working on 
 ```yaml
 dependency_overrides:
   analyzer: 3.2.0
+  dart_style: 2.2.1
 ```
 
 If you see errors like: 
