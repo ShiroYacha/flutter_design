@@ -8,6 +8,7 @@ const ViewerParagraphSection _comingSoonSection = ViewerParagraphSection(
 /// Build a dedicated page group to showcase the provided themes [ThemeData]
 ViewerGroupPage buildThemePageGroup({
   required Map<String, ThemeData> themes,
+  List<IconData>? iconDataset,
 }) {
   return ViewerGroupPage(
     id: 'themes',
@@ -29,6 +30,7 @@ ViewerGroupPage buildThemePageGroup({
               contents: <ViewerCollectionItemUnion>[
                 ViewerWidgetCollectionItem(
                   widget: ThemeViewersCollection(
+                    renderWithBackgroundPattern: false,
                     builder: (ctx) => const ColorSchemeViewer(),
                   ),
                 ),
@@ -39,13 +41,47 @@ ViewerGroupPage buildThemePageGroup({
         id: 'typography',
         namespace: ['themes'],
         title: 'Typography',
-        sections: [_comingSoonSection],
+        sections: [
+          ViewerSectionUnion.paragraph(
+            id: 'textThemes',
+            title: 'Text themes',
+            description:
+                'Text themes defined in [ThemeData.textTheme](https://api.flutter.dev/flutter/material/ThemeData-class.html).',
+            contents: <ViewerCollectionItemUnion>[
+              ViewerWidgetCollectionItem(
+                widget: ThemeViewersCollection(
+                  builder: (ctx) => const TypographyViewer(),
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
       ViewerDocumentPage(
         id: 'iconography',
         namespace: ['themes'],
         title: 'Iconography',
-        sections: [_comingSoonSection],
+        sections: [
+          ViewerSectionUnion.paragraph(
+            id: 'icons',
+            title: 'Icons',
+            description: iconDataset != null
+                ? 'Provided set of icons using the default icon theme.'
+                : '''
+Set of default [MaterialIcons](https://api.flutter.dev/flutter/material/Icons-class.html) using the default icon theme.
+You can provide your own set of icons using the `iconDataset` field on method `buildThemePageGroup`.
+''',
+            contents: <ViewerCollectionItemUnion>[
+              ViewerWidgetCollectionItem(
+                widget: ThemeViewersCollection(
+                  renderWithBackgroundPattern: false,
+                  renderWithBackgroundColor: true,
+                  builder: (ctx) => IconViewer(iconDataset),
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
       ViewerGroupPage(
         id: 'actions',

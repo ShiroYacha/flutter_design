@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_design/flutter_design.dart';
 import 'package:flutter_design_viewer/flutter_design_viewer.dart';
+import 'package:ionicons/ionicons.dart';
 import 'package:json_theme/json_theme.dart';
 import 'package:url_strategy/url_strategy.dart';
 import 'package:viewer_example/docs.dart';
@@ -26,7 +27,7 @@ void main() async {
   };
   runApp(
     DesignSystemViewerApp(
-      initialRoute: '/components/widgets/actions/toggles',
+      // initialRoute: '/components/widgets/actions/toggles',
       settings: ViewerSettings(
         enabledLocales: {
           'en-US': const Locale('en', 'US'),
@@ -49,7 +50,14 @@ void main() async {
         // Your custom pages
         ...buildGroupedPageTrees(docPages),
         // Theme page
-        buildThemePageGroup(themes: themes),
+        buildThemePageGroup(
+          themes: themes,
+          iconDataset: List.generate(
+            0xee33 - 0xe900,
+            (index) => IoniconsData(index + 0xe900),
+            growable: false,
+          ),
+        ),
         // Generated @design/@Design annotated pages
         buildComponentPageTree(componentPages: generatedComponentPages),
       ],

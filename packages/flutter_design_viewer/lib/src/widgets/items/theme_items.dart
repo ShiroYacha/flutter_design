@@ -5,13 +5,23 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:recase/recase.dart';
 
 import '../../measures.dart';
+import 'default_icons.dart';
+import 'images.dart';
 
 class ThemeViewersCollection extends HookConsumerWidget {
   static const _minWidth = 800.0;
+
+  /// Render with a dot-patterned background (performance heavy)
+  final bool renderWithBackgroundPattern;
+
+  /// Render with a surface colored background
+  final bool renderWithBackgroundColor;
   final WidgetBuilder builder;
 
   const ThemeViewersCollection({
     required this.builder,
+    this.renderWithBackgroundPattern = true,
+    this.renderWithBackgroundColor = false,
     Key? key,
   }) : super(key: key);
 
@@ -20,6 +30,10 @@ class ThemeViewersCollection extends HookConsumerWidget {
     final theme = Theme.of(context);
     final themes =
         ref.watch(viewerSettingsProvider.select((e) => e.enabledThemes));
+    final content = Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: builder(context),
+    );
     return StaggeredGrid.extent(
       axisDirection: AxisDirection.down,
       maxCrossAxisExtent: _minWidth,
@@ -46,14 +60,27 @@ class ThemeViewersCollection extends HookConsumerWidget {
                           ),
                         ),
                       ),
-                      TextSpan(text: ReCase(e.key).sentenceCase)
+                      TextSpan(
+                        text: ReCase(e.key).sentenceCase,
+                        style: theme.textTheme.titleSmall,
+                      )
                     ],
                   ),
                 ),
                 Spacers.v6,
                 Theme(
                   data: e.value,
-                  child: const ColorSchemeViewer(),
+                  child: renderWithBackgroundPattern
+                      ? PatternedBackground(
+                          foregroundOpacity: 0.1,
+                          child: content,
+                        )
+                      : renderWithBackgroundColor
+                          ? Container(
+                              color: e.value.backgroundColor,
+                              child: content,
+                            )
+                          : content,
                 ),
               ],
             ),
@@ -262,6 +289,77 @@ class _ExpandedColorTile extends StatelessWidget {
             alignment: Alignment.bottomLeft,
           ),
         ]),
+      ),
+    );
+  }
+}
+
+class TypographyViewer extends StatelessWidget {
+  const TypographyViewer({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: {
+        'Display Large': theme.textTheme.displayLarge,
+        'Display Medium': theme.textTheme.displayMedium,
+        'Display Small': theme.textTheme.displaySmall,
+        'Headline Large': theme.textTheme.headlineLarge,
+        'Headline Medium': theme.textTheme.headlineMedium,
+        'Headline Small': theme.textTheme.headlineSmall,
+        'Title Large': theme.textTheme.titleLarge,
+        'Title Medium': theme.textTheme.titleMedium,
+        'Title Small': theme.textTheme.titleSmall,
+        'Label Large': theme.textTheme.labelLarge,
+        'Label Medium': theme.textTheme.labelMedium,
+        'Label Small': theme.textTheme.labelSmall,
+        'Body Large': theme.textTheme.bodyLarge,
+        'Body Medium': theme.textTheme.bodyMedium,
+        'Body Small': theme.textTheme.bodySmall,
+      }
+          .entries
+          .where((e) => e.value != null)
+          .map((e) => Padding(
+                padding: const EdgeInsets.only(bottom: 16.0),
+                child: Text(
+                  e.key,
+                  style: e.value,
+                ),
+              ))
+          .toList(),
+    );
+  }
+}
+
+class IconViewer extends StatelessWidget {
+  final List<IconData>? iconDataset;
+  const IconViewer(
+    this.iconDataset, {
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final iconDataset =
+        (this.iconDataset ?? defaultMaterialIcons).toSet().toList();
+    return GridView.builder(
+      gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+        maxCrossAxisExtent: 60,
+        childAspectRatio: 1.0,
+      ),
+      itemCount: iconDataset.length,
+      shrinkWrap: true,
+      itemBuilder: (context, index) => PatternedBackground(
+        foregroundOpacity: 0.1,
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Icon(
+            iconDataset[index],
+            size: 20,
+          ),
+        ),
       ),
     );
   }

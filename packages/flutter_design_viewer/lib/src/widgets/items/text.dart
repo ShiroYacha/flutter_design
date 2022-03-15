@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:vrouter/vrouter.dart';
 
@@ -14,6 +15,7 @@ class MarkdownText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return MarkdownBody(
       data: text,
       onTapLink: (String text, String? url, String? title) {
@@ -29,9 +31,10 @@ class MarkdownText extends StatelessWidget {
       },
       selectable: true,
       styleSheet: MarkdownStyleSheet.fromTheme(
-        Theme.of(context),
+        theme,
       ).copyWith(
         p: textStyle,
+        code: GoogleFonts.spaceMono(fontSize: 16),
       ),
     );
   }

@@ -1,26 +1,28 @@
 import 'package:flag/flag.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:patterns_canvas/patterns_canvas.dart';
 
 import '../../measures.dart';
 
-class PatternedBackground extends HookConsumerWidget {
+class PatternedBackground extends StatelessWidget {
   final double foregroundOpacity;
+  final Widget? child;
   const PatternedBackground({
     this.foregroundOpacity = 0.5,
+    this.child,
     Key? key,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return CustomPaint(
       size: const Size(double.infinity, double.infinity),
       painter: PatternPainter(
         theme: Theme.of(context),
         foregroundOpacity: foregroundOpacity,
       ),
+      child: child,
     );
   }
 }
