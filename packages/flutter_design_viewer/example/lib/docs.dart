@@ -6,7 +6,7 @@ const docPages = [
     namespace: ['get_started'],
     title: 'Introduction',
     subtitle:
-        'Wanda is Wonderflow\'s open-source design system built for products and digital experiences.',
+        'Welcome to the demo project of [flutter_design](https://pub.dev/packages/flutter_design).',
     description:
         'Example text and design copied from https://design.wonderflow.ai/. ',
     sections: [
@@ -58,42 +58,58 @@ We, as diverse humans, have our own unique way to think about problems and we wa
       ),
     ],
   ),
+//   ViewerDocumentPage(
+//     id: 'accessibility',
+//     namespace: ['get_started'],
+//     title: 'Accessibility',
+//     subtitle:
+//         'Wanda is Wonderflow\'s open-source design system built for products and digital experiences.',
+//     sections: [
+//       ViewerSectionUnion.paragraph(
+//         id: 'overview',
+//         title: 'Overview',
+//         description: '''
+// Wanda follows the WAI-ARIA authoring practices guidelines and are tested in a wide selection of modern browsers and commonly used assistive technologies.
+//                     ''',
+//       ),
+//       ViewerSectionUnion.paragraph(
+//         id: 'wai_aria',
+//         title: 'WAI-ARIA',
+//         description:
+//             '''[WAI-ARIA](https://www.w3.org/TR/wai-aria-1.2/), published and maintained by the W3C, specifies the semantics for many common UI patterns that show up in Wanda's components. This is designed to provide meaning for controls that aren't built using elements provided by the browser. For example, if you use a div instead of a button element to create a button, there are attributes you need to add to the div in order to convey that it's a button for screen readers or voice recognition tools, and this is why should use a button in these situations.\n
+// In addition to semantics, there are behaviors that are expected from different types of components. A button element is going to respond to certain interactions in ways that a div will not, so it's up to the developer to reimplement those interactions with JavaScript. The [WAI-ARIA authoring practices](https://www.w3.org/TR/wai-aria-practices-1.2/) provide additional guidance for implementing behaviors for various controls that come with Wanda's components.''',
+//       ),
+//       ViewerSectionUnion.paragraph(
+//         id: 'accessible_labels',
+//         title: 'Accessible labels',
+//         description:
+//             '''With many built-in form controls, the native HTML `label` element is designed to provide semantic meaning and context for corresponding input elements. For non-form control elements, or for custom controls like those provided by Wanda, WAI-ARIA [provides a specification](https://www.w3.org/TR/wai-aria-1.2/#namecalculation) for how to provide accessible names and descriptions to those contols.\n
+// Where possible, Wanda's components include abstractions to make labelling our controls simple. The `label` primitive is designed to work with many of our controls. Ultimately it's up to you to provide those labels so that users have the proper context when navigating your application.''',
+//       ),
+//     ],
+//   ),
   ViewerDocumentPage(
-    id: 'accessibility',
-    namespace: ['get_started'],
-    title: 'Accessibility',
-    subtitle:
-        'Wanda is Wonderflow\'s open-source design system built for products and digital experiences.',
-    sections: [
-      ViewerSectionUnion.paragraph(
-        id: 'overview',
-        title: 'Overview',
-        description: '''
-Wanda follows the WAI-ARIA authoring practices guidelines and are tested in a wide selection of modern browsers and commonly used assistive technologies.
-                    ''',
-      ),
-      ViewerSectionUnion.paragraph(
-        id: 'wai_aria',
-        title: 'WAI-ARIA',
-        description:
-            '''[WAI-ARIA](https://www.w3.org/TR/wai-aria-1.2/), published and maintained by the W3C, specifies the semantics for many common UI patterns that show up in Wanda's components. This is designed to provide meaning for controls that aren't built using elements provided by the browser. For example, if you use a div instead of a button element to create a button, there are attributes you need to add to the div in order to convey that it's a button for screen readers or voice recognition tools, and this is why should use a button in these situations.\n
-In addition to semantics, there are behaviors that are expected from different types of components. A button element is going to respond to certain interactions in ways that a div will not, so it's up to the developer to reimplement those interactions with JavaScript. The [WAI-ARIA authoring practices](https://www.w3.org/TR/wai-aria-practices-1.2/) provide additional guidance for implementing behaviors for various controls that come with Wanda's components.''',
-      ),
-      ViewerSectionUnion.paragraph(
-        id: 'accessible_labels',
-        title: 'Accessible labels',
-        description:
-            '''With many built-in form controls, the native HTML `label` element is designed to provide semantic meaning and context for corresponding input elements. For non-form control elements, or for custom controls like those provided by Wanda, WAI-ARIA [provides a specification](https://www.w3.org/TR/wai-aria-1.2/#namecalculation) for how to provide accessible names and descriptions to those contols.\n
-Where possible, Wanda's components include abstractions to make labelling our controls simple. The `label` primitive is designed to work with many of our controls. Ultimately it's up to you to provide those labels so that users have the proper context when navigating your application.''',
-      ),
-    ],
-  ),
-  ViewerDocumentPage(
-    id: 'brand',
-    namespace: ['design'],
-    title: 'Brand',
-    description: 'Wonderflow\'s digital identity',
-  ),
+      id: 'brand',
+      namespace: ['design'],
+      title: 'Brand',
+      subtitle:
+          'Branding and related assets of [flutter_design](https://pub.dev/packages/flutter_design).',
+      sections: [
+        ViewerSectionUnion.paragraph(
+            id: 'logo',
+            title: 'Logo',
+            description:
+                'Since it\'s all about Flutter & design, the logo uses a water-colored version of a bird similar to the Flutter Bird.',
+            contents: [
+              ViewerImageCollectionItem(
+                style: ViewerImageCollectionItemStyle.imageOnLeft,
+                width: 300,
+                height: 300,
+                url:
+                    'https://github.com/ShiroYacha/flutter_design/blob/main/assets/branding/logo_readme.png?raw=true',
+              ),
+            ])
+      ]),
   // ViewerDocumentPage(
   //   id: 'colors',
   //   namespace: ['design', 'foundations'],

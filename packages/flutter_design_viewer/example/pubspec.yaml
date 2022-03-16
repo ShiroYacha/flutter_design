@@ -41,7 +41,6 @@ dependencies:
   ionicons: ^0.1.2
   # system
   url_strategy: ^0.2.0
-  json_theme: ^3.3.1
   # framework
   flutter_hooks: ^0.18.2
   # state management
@@ -75,8 +74,7 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  assets:
-    - assets/themes/
+  # assets:
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

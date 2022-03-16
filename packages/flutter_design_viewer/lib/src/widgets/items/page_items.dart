@@ -108,23 +108,22 @@ class TitleDescription extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SelectableText.rich(
-      TextSpan(
-        children: [
-          if (title != null)
-            TextSpan(
-              text: '$title\n\n',
-              style: style.titleStyle,
-            ),
-          if (description != null)
-            WidgetSpan(
-              child: MarkdownText(
-                description!,
-                textStyle: style.descriptionStyle,
-              ),
-            ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        if (title != null) ...[
+          SelectableText(
+            '$title',
+            style: style.titleStyle,
+          ),
+          Spacers.v16,
         ],
-      ),
+        if (description != null)
+          MarkdownText(
+            description!,
+            textStyle: style.descriptionStyle,
+          ),
+      ],
     );
   }
 }
@@ -183,7 +182,7 @@ class ParagraphSection extends HookConsumerWidget {
             title: paragraph.title,
             description: paragraph.description,
           ),
-          Spacers.v20,
+          Spacers.v40,
           ...paragraph.contents.fold(
             [],
             (previousValue, element) => [
@@ -197,7 +196,7 @@ class ParagraphSection extends HookConsumerWidget {
                 image: (image) => ViewerImageDisplay(item: image),
                 widget: (widget) => widget.widget,
               ),
-              Spacers.v40,
+              Spacers.v20,
             ],
           ),
         ],
