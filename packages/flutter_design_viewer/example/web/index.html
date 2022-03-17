@@ -18,24 +18,47 @@
   <base href="/">
   <!-- <base href="$FLUTTER_BASE_HREF"> -->
 
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="A new Flutter project.">
 
-  <!-- iOS meta tags & icons -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="example">
-  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png" />
-
-  <title>example</title>
   <link rel="manifest" href="manifest.json">
+
+  <!-- Primary Meta Tags -->
+  <title>Flutter design example app</title>
+  <meta name="title" content="Flutter design example app">
+  <meta name="description" content="Example web app powered by flutter_design.">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://flutter-design-7b479.web.app/">
+  <meta property="og:title" content="Flutter design example app">
+  <meta property="og:description" content="Example web app powered by flutter_design.">
+  <meta property="og:image"
+    content="https://github.com/ShiroYacha/flutter_design/blob/main/assets/branding/logo_long.png?raw=true">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://flutter-design-7b479.web.app/">
+  <meta property="twitter:title" content="Flutter design example app">
+  <meta property="twitter:description" content="Example web app powered by flutter_design.">
+  <meta property="twitter:image"
+    content="https://github.com/ShiroYacha/flutter_design/blob/main/assets/branding/logo_long.png?raw=true">
 </head>
 
-<body>
+<body style="margin: 0px">
+  <div style="background-color: black; width: 100vw; height: 100vh; display: table-cell; vertical-align: middle;">
+    <lottie-player src="https://assets1.lottiefiles.com/packages/lf20_mjr11zfo.json" background="transparent" speed="1"
+      style="width: 30vw; height: 30vh; margin: 0 auto;" loop autoplay></lottie-player>
+  </div>
   <!-- This script installs service_worker.js to provide PWA functionality to
        application. For more information, see:
        https://developers.google.com/web/fundamentals/primers/service-workers -->
