@@ -187,12 +187,12 @@ It takes the [TargetPlatform](https://api.flutter.dev/flutter/foundation/TargetP
               ),
             ],
           ),
-          ViewerDocumentPage(
-            id: 'inputs',
-            namespace: ['themes', 'actions'],
-            title: 'Inputs',
-            sections: [_comingSoonSection],
-          ),
+          // ViewerDocumentPage(
+          //   id: 'inputs',
+          //   namespace: ['themes', 'actions'],
+          //   title: 'Inputs',
+          //   sections: [_comingSoonSection],
+          // ),
         ],
       ),
     ],
