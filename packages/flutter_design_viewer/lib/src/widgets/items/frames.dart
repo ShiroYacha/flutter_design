@@ -604,7 +604,7 @@ class ThemeDevicesFrameContainer extends HookConsumerWidget {
                 screen: PubSubConnectedData(
                   child: ContentApp(
                     key: Key('ContentApp_$id'),
-                    themeDataOverride: theme,
+                    themeOverride: theme,
                   ),
                 ),
               ),
@@ -727,11 +727,11 @@ class EmbeddedAppRouterDelegate extends RouterDelegate<Object>
 }
 
 class ContentApp extends HookConsumerWidget {
-  final ThemeData? themeDataOverride;
+  final DesignTheme? themeOverride;
   final Locale? localeOverride;
   const ContentApp({
     Key? key,
-    this.themeDataOverride,
+    this.themeOverride,
     this.localeOverride,
   }) : super(key: key);
 
@@ -740,11 +740,12 @@ class ContentApp extends HookConsumerWidget {
     final viewerSettings = ref.watch(viewerSettingsProvider);
     final viewerState = ref.watch(viewerStateProvider);
     final currentPage = ref.watch(currentPageProvider);
+    final designerBuilder = ref.watch(designerBuilderProvider);
     // final localNavigatorKeys = ref.watch(localNavigatorKeysProvider);
     final locale = localeOverride ??
         viewerSettings.enabledLocales[viewerState.targetLocaleId]!;
-    final theme = themeDataOverride ??
-        viewerSettings.enabledThemes[viewerState.targetThemeId];
+    final theme = themeOverride ??
+        viewerSettings.enabledThemes[viewerState.targetThemeId]!;
     final randomSeed = ref.watch(randomSeedProvider);
     final keyboardVisible = ref.watch(keyboardVisibleProvider);
     // final navigatorKey = useMemoized(() => GlobalKey<NavigatorState>(), [key]);
@@ -762,7 +763,7 @@ class ContentApp extends HookConsumerWidget {
           useInheritedMediaQuery: true,
           debugShowCheckedModeBanner: false,
           locale: locale,
-          theme: theme,
+          theme: theme.materialTheme,
           onGenerateTitle: (BuildContext context) {
             return currentPage.title;
           },
@@ -772,37 +773,41 @@ class ContentApp extends HookConsumerWidget {
               overrides: [
                 seededRandomProvider.overrideWithValue(Random(randomSeed)),
               ],
-              child: Stack(
-                children: [
-                  const PatternedBackground(foregroundOpacity: 0.1),
-                  [
-                    ViewMode.themes,
-                    ViewMode.locales,
-                    ViewMode.devices,
-                  ].contains(viewerState.viewMode)
-                      ? DeviceEventSyncContainer(
-                          key: Key(key.toString()),
-                          child: widget!,
-                        )
-                      : widget!,
-                  Positioned(
-                    left: MediaQuery.of(ctx).viewPadding.left + 10,
-                    top: MediaQuery.of(ctx).viewInsets.top,
-                    child: Padding(
-                      padding: viewerState.viewMode == ViewMode.canvas
-                          ? EdgeInsets.zero
-                          : const EdgeInsets.all(8.0),
-                      child: LocaleBadge(
-                        name: locale.toLanguageTag(),
-                        locale: locale,
-                        textStyle: Theme.of(ctx)
-                            .textTheme
-                            .caption!
-                            .copyWith(fontSize: 12),
+              child: designerBuilder(
+                ctx,
+                theme,
+                Stack(
+                  children: [
+                    const PatternedBackground(foregroundOpacity: 0.1),
+                    [
+                      ViewMode.themes,
+                      ViewMode.locales,
+                      ViewMode.devices,
+                    ].contains(viewerState.viewMode)
+                        ? DeviceEventSyncContainer(
+                            key: Key(key.toString()),
+                            child: widget!,
+                          )
+                        : widget!,
+                    Positioned(
+                      left: MediaQuery.of(ctx).viewPadding.left + 10,
+                      top: MediaQuery.of(ctx).viewInsets.top,
+                      child: Padding(
+                        padding: viewerState.viewMode == ViewMode.canvas
+                            ? EdgeInsets.zero
+                            : const EdgeInsets.all(8.0),
+                        child: LocaleBadge(
+                          name: locale.toLanguageTag(),
+                          locale: locale,
+                          textStyle: Theme.of(ctx)
+                              .textTheme
+                              .caption!
+                              .copyWith(fontSize: 12),
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             );
           },

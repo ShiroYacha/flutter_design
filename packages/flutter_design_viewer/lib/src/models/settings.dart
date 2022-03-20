@@ -3,6 +3,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_design_viewer/src/design_theme.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:localstorage/localstorage.dart';
@@ -102,7 +103,7 @@ class ViewerState with _$ViewerState {
 class ViewerSettings with _$ViewerSettings {
   const factory ViewerSettings({
     required Map<String, Locale> enabledLocales,
-    required Map<String, ThemeData> enabledThemes,
+    required Map<String, DesignTheme> enabledThemes,
     @Default(Breakpoints()) Breakpoints breakpoints,
     @Default(600.0) double widgetDisplayHeight,
     String? githubLink,

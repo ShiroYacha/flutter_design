@@ -106,7 +106,7 @@ We, as diverse humans, have our own unique way to think about problems and we wa
                 width: 300,
                 height: 300,
                 url:
-                    'https://github.com/ShiroYacha/flutter_design/blob/main/assets/branding/logo_readme.png?raw=true',
+                    'https://flutter-design-7b479.web.app/assets/packages/flutter_design_viewer/assets/images/logo.png',
               ),
             ])
       ]),

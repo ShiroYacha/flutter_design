@@ -64,8 +64,8 @@ class ThemeViewersCollection extends HookConsumerWidget {
                               backgroundColor: theme.disabledColor,
                               radius: 8,
                               child: CircleAvatar(
-                                backgroundColor:
-                                    e.value.scaffoldBackgroundColor,
+                                backgroundColor: e.value.materialTheme
+                                    .scaffoldBackgroundColor,
                                 radius: 6,
                               ),
                             ),
@@ -80,7 +80,7 @@ class ThemeViewersCollection extends HookConsumerWidget {
                   ),
                   Spacers.v6,
                   Theme(
-                    data: e.value,
+                    data: e.value.materialTheme,
                     child: renderWithBackgroundPattern
                         ? PatternedBackground(
                             foregroundOpacity: 0.05,
@@ -88,7 +88,7 @@ class ThemeViewersCollection extends HookConsumerWidget {
                           )
                         : renderWithBackgroundColor
                             ? Container(
-                                color: e.value.backgroundColor,
+                                color: e.value.materialTheme.backgroundColor,
                                 child: content,
                               )
                             : content,

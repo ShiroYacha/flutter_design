@@ -245,8 +245,8 @@ class SelectableThemeGroup extends HookConsumerWidget {
             backgroundColor: color,
             radius: 8,
             child: CircleAvatar(
-              backgroundColor:
-                  viewerSettings.enabledThemes[e]?.scaffoldBackgroundColor,
+              backgroundColor: viewerSettings
+                  .enabledThemes[e]?.materialTheme.scaffoldBackgroundColor,
               radius: 6,
             ),
           ),

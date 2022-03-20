@@ -14,7 +14,6 @@ import '../flutter_design_viewer.dart';
 import 'commands.dart';
 import 'data_builders/factory.dart';
 import 'default_data_builders.dart';
-import 'models/settings.dart';
 import 'navigator_observer.dart';
 import 'theme.dart';
 import 'utils.dart';
@@ -43,8 +42,12 @@ final viewerStateProvider = StateProvider<ViewerState>(
     targetThemeIds: [],
   ),
 );
+final designerBuilderProvider =
+    Provider<DesignerBuilder>((ref) => throw UnimplementedError());
 
 const routePathNameSeparator = '||';
+
+typedef DesignerBuilder = Widget Function(BuildContext, DesignTheme, Widget);
 
 class DesignSystemViewerApp extends HookConsumerWidget {
   final String? initialRoute;
@@ -52,6 +55,7 @@ class DesignSystemViewerApp extends HookConsumerWidget {
   final ViewerSettings settings;
   final List<ViewerGroupPage> pageGroups;
   final Map<Type, List<DataBuilderCreator>> dataBuilders;
+  final DesignerBuilder? designerBuilder;
 
   const DesignSystemViewerApp({
     required this.pageGroups,
@@ -59,6 +63,7 @@ class DesignSystemViewerApp extends HookConsumerWidget {
     this.dataBuilders = const {},
     this.branding,
     this.initialRoute,
+    this.designerBuilder,
     Key? key,
   }) : super(key: key);
 
@@ -73,7 +78,10 @@ class DesignSystemViewerApp extends HookConsumerWidget {
           DataBuilderRegistry(
             allBuilders: _mergeDataBuilders(dataBuilders),
           ),
-        )
+        ),
+        designerBuilderProvider.overrideWithValue(
+          designerBuilder ?? (ctx, theme, child) => child,
+        ),
       ],
       child: DesignSystemViewerRouter(initialRoute: initialRoute),
     );

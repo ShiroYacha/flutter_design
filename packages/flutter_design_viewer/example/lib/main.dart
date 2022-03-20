@@ -15,14 +15,18 @@ void main() async {
   setPathUrlStrategy();
   // Prepare material themes
   final themes = {
-    'light': ThemeData(
-      colorSchemeSeed: Colors.teal,
-      brightness: Brightness.light,
-    ).copyWith(useMaterial3: false),
-    'dark': ThemeData(
-      colorSchemeSeed: Colors.teal,
-      brightness: Brightness.dark,
-    ).copyWith(useMaterial3: false),
+    'light': DesignTheme(
+      materialTheme: ThemeData(
+        colorSchemeSeed: Colors.teal,
+        brightness: Brightness.light,
+      ).copyWith(useMaterial3: false),
+    ),
+    'dark': DesignTheme(
+      materialTheme: ThemeData(
+        colorSchemeSeed: Colors.teal,
+        brightness: Brightness.dark,
+      ).copyWith(useMaterial3: false),
+    ),
   };
   runApp(
     DesignSystemViewerApp(
@@ -49,7 +53,9 @@ void main() async {
         ...buildGroupedPageTrees(docPages),
         // Theme pages (you can also opt out of the material 3 themes)
         buildThemePageGroup(
-          themes: themes,
+          themes: {
+            for (final e in themes.entries) e.key: e.value.materialTheme,
+          },
           useMaterial3: false,
           iconDataset: List.generate(
             0xea33 - 0xe900,

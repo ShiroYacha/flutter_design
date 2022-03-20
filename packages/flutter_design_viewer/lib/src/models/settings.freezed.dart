@@ -438,7 +438,7 @@ class _$ViewerSettingsTearOff {
 
   _ViewerSettigns call(
       {required Map<String, Locale> enabledLocales,
-      required Map<String, ThemeData> enabledThemes,
+      required Map<String, DesignTheme> enabledThemes,
       Breakpoints breakpoints = const Breakpoints(),
       double widgetDisplayHeight = 600.0,
       String? githubLink}) {
@@ -458,7 +458,7 @@ const $ViewerSettings = _$ViewerSettingsTearOff();
 /// @nodoc
 mixin _$ViewerSettings {
   Map<String, Locale> get enabledLocales => throw _privateConstructorUsedError;
-  Map<String, ThemeData> get enabledThemes =>
+  Map<String, DesignTheme> get enabledThemes =>
       throw _privateConstructorUsedError;
   Breakpoints get breakpoints => throw _privateConstructorUsedError;
   double get widgetDisplayHeight => throw _privateConstructorUsedError;
@@ -476,7 +476,7 @@ abstract class $ViewerSettingsCopyWith<$Res> {
       _$ViewerSettingsCopyWithImpl<$Res>;
   $Res call(
       {Map<String, Locale> enabledLocales,
-      Map<String, ThemeData> enabledThemes,
+      Map<String, DesignTheme> enabledThemes,
       Breakpoints breakpoints,
       double widgetDisplayHeight,
       String? githubLink});
@@ -509,7 +509,7 @@ class _$ViewerSettingsCopyWithImpl<$Res>
       enabledThemes: enabledThemes == freezed
           ? _value.enabledThemes
           : enabledThemes // ignore: cast_nullable_to_non_nullable
-              as Map<String, ThemeData>,
+              as Map<String, DesignTheme>,
       breakpoints: breakpoints == freezed
           ? _value.breakpoints
           : breakpoints // ignore: cast_nullable_to_non_nullable
@@ -542,7 +542,7 @@ abstract class _$ViewerSettignsCopyWith<$Res>
   @override
   $Res call(
       {Map<String, Locale> enabledLocales,
-      Map<String, ThemeData> enabledThemes,
+      Map<String, DesignTheme> enabledThemes,
       Breakpoints breakpoints,
       double widgetDisplayHeight,
       String? githubLink});
@@ -578,7 +578,7 @@ class __$ViewerSettignsCopyWithImpl<$Res>
       enabledThemes: enabledThemes == freezed
           ? _value.enabledThemes
           : enabledThemes // ignore: cast_nullable_to_non_nullable
-              as Map<String, ThemeData>,
+              as Map<String, DesignTheme>,
       breakpoints: breakpoints == freezed
           ? _value.breakpoints
           : breakpoints // ignore: cast_nullable_to_non_nullable
@@ -608,7 +608,7 @@ class _$_ViewerSettigns implements _ViewerSettigns {
   @override
   final Map<String, Locale> enabledLocales;
   @override
-  final Map<String, ThemeData> enabledThemes;
+  final Map<String, DesignTheme> enabledThemes;
   @JsonKey()
   @override
   final Breakpoints breakpoints;
@@ -658,7 +658,7 @@ class _$_ViewerSettigns implements _ViewerSettigns {
 abstract class _ViewerSettigns implements ViewerSettings {
   const factory _ViewerSettigns(
       {required Map<String, Locale> enabledLocales,
-      required Map<String, ThemeData> enabledThemes,
+      required Map<String, DesignTheme> enabledThemes,
       Breakpoints breakpoints,
       double widgetDisplayHeight,
       String? githubLink}) = _$_ViewerSettigns;
@@ -666,7 +666,7 @@ abstract class _ViewerSettigns implements ViewerSettings {
   @override
   Map<String, Locale> get enabledLocales;
   @override
-  Map<String, ThemeData> get enabledThemes;
+  Map<String, DesignTheme> get enabledThemes;
   @override
   Breakpoints get breakpoints;
   @override
