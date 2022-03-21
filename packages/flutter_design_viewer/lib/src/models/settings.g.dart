@@ -26,6 +26,7 @@ _$_ViewerState _$$_ViewerStateFromJson(Map<String, dynamic> json) =>
       targetLocaleIds: (json['targetLocaleIds'] as List<dynamic>)
           .map((e) => e as String)
           .toList(),
+      explorerPinned: json['explorerPinned'] as bool? ?? false,
       uri: json['uri'] as String?,
     );
 
@@ -42,6 +43,7 @@ Map<String, dynamic> _$$_ViewerStateToJson(_$_ViewerState instance) =>
       'targetThemeIds': instance.targetThemeIds,
       'targetLocaleId': instance.targetLocaleId,
       'targetLocaleIds': instance.targetLocaleIds,
+      'explorerPinned': instance.explorerPinned,
       'uri': instance.uri,
     };
 

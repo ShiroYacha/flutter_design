@@ -41,6 +41,7 @@ class ViewerState with _$ViewerState {
     required List<String> targetThemeIds,
     required String targetLocaleId,
     required List<String> targetLocaleIds,
+    @Default(false) bool explorerPinned,
     String? uri,
   }) = _ViewerState;
 

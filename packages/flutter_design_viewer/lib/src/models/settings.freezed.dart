@@ -34,6 +34,7 @@ class _$ViewerStateTearOff {
       required List<String> targetThemeIds,
       required String targetLocaleId,
       required List<String> targetLocaleIds,
+      bool explorerPinned = false,
       String? uri}) {
     return _ViewerState(
       viewMode: viewMode,
@@ -47,6 +48,7 @@ class _$ViewerStateTearOff {
       targetThemeIds: targetThemeIds,
       targetLocaleId: targetLocaleId,
       targetLocaleIds: targetLocaleIds,
+      explorerPinned: explorerPinned,
       uri: uri,
     );
   }
@@ -72,6 +74,7 @@ mixin _$ViewerState {
   List<String> get targetThemeIds => throw _privateConstructorUsedError;
   String get targetLocaleId => throw _privateConstructorUsedError;
   List<String> get targetLocaleIds => throw _privateConstructorUsedError;
+  bool get explorerPinned => throw _privateConstructorUsedError;
   String? get uri => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -97,6 +100,7 @@ abstract class $ViewerStateCopyWith<$Res> {
       List<String> targetThemeIds,
       String targetLocaleId,
       List<String> targetLocaleIds,
+      bool explorerPinned,
       String? uri});
 }
 
@@ -121,6 +125,7 @@ class _$ViewerStateCopyWithImpl<$Res> implements $ViewerStateCopyWith<$Res> {
     Object? targetThemeIds = freezed,
     Object? targetLocaleId = freezed,
     Object? targetLocaleIds = freezed,
+    Object? explorerPinned = freezed,
     Object? uri = freezed,
   }) {
     return _then(_value.copyWith(
@@ -168,6 +173,10 @@ class _$ViewerStateCopyWithImpl<$Res> implements $ViewerStateCopyWith<$Res> {
           ? _value.targetLocaleIds
           : targetLocaleIds // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      explorerPinned: explorerPinned == freezed
+          ? _value.explorerPinned
+          : explorerPinned // ignore: cast_nullable_to_non_nullable
+              as bool,
       uri: uri == freezed
           ? _value.uri
           : uri // ignore: cast_nullable_to_non_nullable
@@ -195,6 +204,7 @@ abstract class _$ViewerStateCopyWith<$Res>
       List<String> targetThemeIds,
       String targetLocaleId,
       List<String> targetLocaleIds,
+      bool explorerPinned,
       String? uri});
 }
 
@@ -221,6 +231,7 @@ class __$ViewerStateCopyWithImpl<$Res> extends _$ViewerStateCopyWithImpl<$Res>
     Object? targetThemeIds = freezed,
     Object? targetLocaleId = freezed,
     Object? targetLocaleIds = freezed,
+    Object? explorerPinned = freezed,
     Object? uri = freezed,
   }) {
     return _then(_ViewerState(
@@ -268,6 +279,10 @@ class __$ViewerStateCopyWithImpl<$Res> extends _$ViewerStateCopyWithImpl<$Res>
           ? _value.targetLocaleIds
           : targetLocaleIds // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      explorerPinned: explorerPinned == freezed
+          ? _value.explorerPinned
+          : explorerPinned // ignore: cast_nullable_to_non_nullable
+              as bool,
       uri: uri == freezed
           ? _value.uri
           : uri // ignore: cast_nullable_to_non_nullable
@@ -291,6 +306,7 @@ class _$_ViewerState extends _ViewerState {
       required this.targetThemeIds,
       required this.targetLocaleId,
       required this.targetLocaleIds,
+      this.explorerPinned = false,
       this.uri})
       : super._();
 
@@ -319,12 +335,15 @@ class _$_ViewerState extends _ViewerState {
   final String targetLocaleId;
   @override
   final List<String> targetLocaleIds;
+  @JsonKey()
+  @override
+  final bool explorerPinned;
   @override
   final String? uri;
 
   @override
   String toString() {
-    return 'ViewerState(viewMode: $viewMode, displayMode: $displayMode, themeMode: $themeMode, showDataBuilderByDefault: $showDataBuilderByDefault, expandExplorerNodesByDefault: $expandExplorerNodesByDefault, targetDeviceId: $targetDeviceId, targetDeviceIds: $targetDeviceIds, targetThemeId: $targetThemeId, targetThemeIds: $targetThemeIds, targetLocaleId: $targetLocaleId, targetLocaleIds: $targetLocaleIds, uri: $uri)';
+    return 'ViewerState(viewMode: $viewMode, displayMode: $displayMode, themeMode: $themeMode, showDataBuilderByDefault: $showDataBuilderByDefault, expandExplorerNodesByDefault: $expandExplorerNodesByDefault, targetDeviceId: $targetDeviceId, targetDeviceIds: $targetDeviceIds, targetThemeId: $targetThemeId, targetThemeIds: $targetThemeIds, targetLocaleId: $targetLocaleId, targetLocaleIds: $targetLocaleIds, explorerPinned: $explorerPinned, uri: $uri)';
   }
 
   @override
@@ -353,6 +372,8 @@ class _$_ViewerState extends _ViewerState {
                 .equals(other.targetLocaleId, targetLocaleId) &&
             const DeepCollectionEquality()
                 .equals(other.targetLocaleIds, targetLocaleIds) &&
+            const DeepCollectionEquality()
+                .equals(other.explorerPinned, explorerPinned) &&
             const DeepCollectionEquality().equals(other.uri, uri));
   }
 
@@ -370,6 +391,7 @@ class _$_ViewerState extends _ViewerState {
       const DeepCollectionEquality().hash(targetThemeIds),
       const DeepCollectionEquality().hash(targetLocaleId),
       const DeepCollectionEquality().hash(targetLocaleIds),
+      const DeepCollectionEquality().hash(explorerPinned),
       const DeepCollectionEquality().hash(uri));
 
   @JsonKey(ignore: true)
@@ -396,6 +418,7 @@ abstract class _ViewerState extends ViewerState {
       required List<String> targetThemeIds,
       required String targetLocaleId,
       required List<String> targetLocaleIds,
+      bool explorerPinned,
       String? uri}) = _$_ViewerState;
   const _ViewerState._() : super._();
 
@@ -424,6 +447,8 @@ abstract class _ViewerState extends ViewerState {
   String get targetLocaleId;
   @override
   List<String> get targetLocaleIds;
+  @override
+  bool get explorerPinned;
   @override
   String? get uri;
   @override

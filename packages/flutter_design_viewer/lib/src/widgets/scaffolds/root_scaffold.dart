@@ -28,6 +28,8 @@ class RootScaffold extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final viewerSettings = ref.watch(viewerSettingsProvider);
+    final explorerPinned =
+        ref.watch(viewerStateProvider.select((e) => e.explorerPinned));
     final rootScaffoldKey = ref.watch(rootScaffoldKeyProvider);
     return LayoutBuilder(
       builder: (context, constraints) {
@@ -48,7 +50,7 @@ class RootScaffold extends HookConsumerWidget {
             drawer: const ExplorerDrawer(),
             floatingActionButtonLocation:
                 FloatingActionButtonLocation.startDocked,
-            floatingActionButton: isDesktop
+            floatingActionButton: isDesktop && explorerPinned
                 ? null
                 : Paddings.bottom20(
                     child: FloatingActionButton(
@@ -61,7 +63,7 @@ class RootScaffold extends HookConsumerWidget {
             body: SafeArea(
               child: Row(
                 children: [
-                  if (isDesktop) const ExplorerDrawer(),
+                  if (isDesktop && explorerPinned) const ExplorerDrawer(),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,

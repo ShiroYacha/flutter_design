@@ -1,4 +1,5 @@
 import 'package:expandable/expandable.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_design/flutter_design.dart';
 import 'package:flutter_design_viewer/flutter_design_viewer.dart';
@@ -19,6 +20,9 @@ class ExplorerDrawer extends HookConsumerWidget {
     final theme = Theme.of(context);
     final branding = ref.watch(brandingProvider);
     final rootPages = ref.watch(pageGroupsProvider);
+    final explorerPinned =
+        ref.watch(viewerStateProvider.select((e) => e.explorerPinned));
+    final screenBreakpoint = ref.watch(screenBreakpointProvider);
     return Container(
       padding: SpacingDesign.paddingVertical16,
       decoration: BoxDecoration(
@@ -33,14 +37,34 @@ class ExplorerDrawer extends HookConsumerWidget {
         key: const PageStorageKey<String>('ExplorerListView'),
         controller: useScrollController(),
         children: [
-          GestureDetector(
-            onTap: () {
-              VRouter.of(context).to('/');
-            },
-            child: Paddings.horizontal16(
-              child: branding,
-            ),
-          ).asMouseClickRegion,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              GestureDetector(
+                onTap: kIsWeb
+                    ? () {
+                        VRouter.of(context).to('/');
+                      }
+                    : null,
+                child: Paddings.horizontal16(
+                  child: branding,
+                ),
+              ).asMouseClickRegion,
+              if (screenBreakpoint.index == ScreenBreakpoint.desktop.index)
+                Paddings.right20(
+                  child: GestureDetector(
+                    child: Icon(
+                      explorerPinned ? Icons.push_pin : Icons.push_pin_outlined,
+                      size: 18,
+                    ),
+                    onTap: () {
+                      ref.watch(viewerStateProvider.notifier).update((state) =>
+                          state.copyWith(explorerPinned: !explorerPinned));
+                    },
+                  ),
+                ),
+            ],
+          ),
           Spacers.v20,
           ...rootPages.fold(
             [],
