@@ -61,7 +61,7 @@ class ExplorerDrawer extends HookConsumerWidget {
                       ref.watch(viewerStateProvider.notifier).update((state) =>
                           state.copyWith(explorerPinned: !explorerPinned));
                     },
-                  ),
+                  ).asMouseClickRegion,
                 ),
             ],
           ),

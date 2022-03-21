@@ -34,7 +34,10 @@ class MarkdownText extends StatelessWidget {
         theme,
       ).copyWith(
         p: textStyle,
-        code: GoogleFonts.spaceMono(fontSize: 16),
+        code: GoogleFonts.spaceMono(
+            fontSize: textStyle?.fontSize != null
+                ? (textStyle!.fontSize! * 0.8)
+                : null),
       ),
     );
   }
