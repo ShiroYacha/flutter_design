@@ -6,6 +6,7 @@ part of 'sliders.dart';
 // DesignGenerator
 // **************************************************************************
 
+// ignore_for_file: type=lint
 typedef _$FunctionAliasForOnChangedViaRangeAdjustableSlider = void Function(
     double);
 final generatedWidgetsActionsSlidersRangeAdjustableSliderPage =

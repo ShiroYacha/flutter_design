@@ -6,6 +6,7 @@ part of 'buttons.dart';
 // DesignGenerator
 // **************************************************************************
 
+// ignore_for_file: type=lint
 typedef _$FunctionAliasForOnPressedViaButton = void Function();
 typedef _$FunctionAliasForOnPressedViaButtonLabel = void Function();
 final generatedWidgetsActionsButtonsButtonPage = ViewerDocumentPage(

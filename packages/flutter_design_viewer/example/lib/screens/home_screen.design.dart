@@ -6,6 +6,7 @@ part of 'home_screen.dart';
 // DesignGenerator
 // **************************************************************************
 
+// ignore_for_file: type=lint
 final generatedScreensHomeScreenHomeScreenPage = ViewerDocumentPage(
   id: 'homeScreen',
   namespace: ['screens', 'home_screen'],

@@ -6,6 +6,7 @@ part of 'toggles.dart';
 // DesignGenerator
 // **************************************************************************
 
+// ignore_for_file: type=lint
 typedef _$FunctionAliasForOnChangedViaToggleButton = void Function(bool);
 final generatedWidgetsActionsTogglesToggleButtonPage = ViewerDocumentPage(
   id: 'toggleButton',

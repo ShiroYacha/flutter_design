@@ -6,6 +6,7 @@ part of 'containers.dart';
 // DesignGenerator
 // **************************************************************************
 
+// ignore_for_file: type=lint
 final generatedWidgetsLayoutsContainersSpacedRowPage = ViewerDocumentPage(
   id: 'spacedRow',
   namespace: ['widgets', 'layouts', 'containers'],
@@ -75,6 +76,7 @@ class SpacedRow extends StatelessWidget {
   ],
 );
 
+// ignore_for_file: type=lint
 final generatedWidgetsLayoutsContainersResponsiveEvenRowPage =
     ViewerDocumentPage(
   id: 'responsiveEvenRow',

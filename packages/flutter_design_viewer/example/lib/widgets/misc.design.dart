@@ -6,6 +6,7 @@ part of 'misc.dart';
 // DesignGenerator
 // **************************************************************************
 
+// ignore_for_file: type=lint
 final generatedWidgetsMiscAvatarPage = ViewerDocumentPage(
   id: 'avatar',
   namespace: ['widgets', 'misc'],
@@ -80,6 +81,7 @@ class Avatar extends StatelessWidget {
   ],
 );
 
+// ignore_for_file: type=lint
 final generatedWidgetsMiscAvatarDuoPage = ViewerDocumentPage(
   id: 'avatarDuo',
   namespace: ['widgets', 'misc'],

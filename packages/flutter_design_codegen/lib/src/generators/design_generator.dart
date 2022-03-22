@@ -54,6 +54,12 @@ class DesignGenerator extends GeneratorForAnnotation<Design> {
       typedefSourceCodes.add(componentSourcePair[0]);
       componentSourceCodes.add(componentSourcePair[1]);
     }
+    // Render ignore statements
+    sb.write(
+      '''
+// ignore_for_file: type=lint
+''',
+    );
     // Render typedef for function types
     sb.writeAll(typedefSourceCodes);
     // Render page source
