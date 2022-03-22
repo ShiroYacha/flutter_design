@@ -37,6 +37,12 @@ final generatedWidgetsActionsButtonsButtonPage = ViewerDocumentPage(
             isNullable: false,
             defaultValue: null,
             defaultValueCode: '''null''',
+            viewerInitSelectorParam: DesignParamWidgetPlaceholder(
+              size: Size(
+                100.0,
+                100.0,
+              ),
+            ),
             documentation:
                 '''/// The child of the button, positioned in the middle of the container.''',
           ),
@@ -95,8 +101,6 @@ class Button extends StatelessWidget {
             defaultValueCode: null,
             viewerInitSelectorParam: DesignParamStringLorem(
               length: 10,
-              min: 0,
-              max: 100,
             ),
             documentation: null,
           ),

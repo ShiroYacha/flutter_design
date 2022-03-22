@@ -36,8 +36,6 @@ final generatedWidgetsActionsTogglesToggleButtonPage = ViewerDocumentPage(
             defaultValueCode: null,
             viewerInitSelectorParam: DesignParamStringLorem(
               length: 10,
-              min: 0,
-              max: 100,
             ),
             documentation: null,
           ),
@@ -58,8 +56,8 @@ final generatedWidgetsActionsTogglesToggleButtonPage = ViewerDocumentPage(
             defaultValue: false,
             defaultValueCode: '''false''',
             viewerInitSelectorParam: DesignParamSubscriber(
-              defaultValue: false,
               key: 'active',
+              defaultValue: false,
             ),
             documentation: null,
           ),

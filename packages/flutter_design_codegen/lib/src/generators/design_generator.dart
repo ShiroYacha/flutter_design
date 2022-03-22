@@ -44,6 +44,7 @@ class DesignGenerator extends GeneratorForAnnotation<Design> {
     final componentSourceCodes = <String>[];
     for (final ctor in visitor.classType.element.constructors) {
       final componentSourcePair = await _compileComponentSectionSourceCodePair(
+        reader: annotation,
         ctor: ctor,
         resolver: buildStep.resolver,
         clazz: clazz,
@@ -80,6 +81,7 @@ final ${buildClassPageFieldName(element)} = ViewerDocumentPage(
   }
 
   Future<List<String>> _compileComponentSectionSourceCodePair({
+    required ConstantReader reader,
     required Resolver resolver,
     required Element element,
     required ClassElement clazz,
@@ -278,25 +280,33 @@ FieldMetaData(
       }
       // Compile object type, ignore null element types, e.g. null, functions, etc.
       else if (visitor.classType.element.name != 'Null') {
-        sb.write(
-          '${removeGeneratedCodePrefixSymbols(visitor.classType.element.name)}(',
-        );
-        final parameters =
-            visitor.classType.constructors.firstOrNull?.parameters ?? [];
-        for (final field in parameters) {
-          final value = object!.getField(field.name);
-          final literalValue = _compileObjectSourceCode(value);
-          if (value != null) {
-            if (field.isPositional) {
-              sb.write('$literalValue,');
-            } else if (field.isNamed) {
-              sb.write('${field.name}: $literalValue,');
-            } else {
-              throw UnsupportedError('Unsupported field: $field');
-            }
-          }
+        final revivable = ConstantReader(object).revive();
+        var hasClosure = true;
+        if (revivable.accessor.isEmpty) {
+          // Use the default constructor
+          sb.write(
+            '${removeGeneratedCodePrefixSymbols(visitor.classType.element.name)}(',
+          );
+        } else if (revivable.accessor.contains('.')) {
+          // Use the getter
+          sb.write(revivable.accessor);
+          hasClosure = false;
+        } else {
+          // Use the factory constructor
+          sb.write(
+            '${removeGeneratedCodePrefixSymbols(visitor.classType.element.name)}.${revivable.accessor}(',
+          );
         }
-        sb.write(')');
+
+        for (final pa in revivable.positionalArguments) {
+          sb.write('${_compileObjectSourceCode(pa)}, ');
+        }
+        for (final na in revivable.namedArguments.entries) {
+          sb.write('${na.key}: ${_compileObjectSourceCode(na.value)}, ');
+        }
+        if (hasClosure) {
+          sb.write(')');
+        }
       }
     }
     return sb.toString();

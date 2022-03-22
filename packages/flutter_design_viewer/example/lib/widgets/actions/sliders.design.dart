@@ -38,8 +38,8 @@ final generatedWidgetsActionsSlidersRangeAdjustableSliderPage =
             defaultValue: null,
             defaultValueCode: '''null''',
             viewerInitSelectorParam: DesignParamSubscriber(
-              defaultValue: 0.0,
               key: 'value',
+              defaultValue: 0.0,
             ),
             documentation: null,
           ),

@@ -13,6 +13,7 @@ part 'buttons.design.dart';
 )
 class Button extends StatelessWidget {
   /// The child of the button, positioned in the middle of the container.
+  @DesignField(parameter: DesignParamWidgetPlaceholder(size: Size(100, 100)))
   final Widget child;
 
   /// Callback when the button is pressed. If `null`, the button is disabled.

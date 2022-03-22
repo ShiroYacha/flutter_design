@@ -106,7 +106,6 @@ final generatedWidgetsMiscAvatarDuoPage = ViewerDocumentPage(
             viewerInitSelectorParam: AvatarModel(
               uri:
                   'https://images.unsplash.com/photo-1529778873920-4da4926a72c2',
-              radius: 30.0,
             ),
             documentation: null,
           ),
