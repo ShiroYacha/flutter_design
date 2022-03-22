@@ -39,13 +39,15 @@ The current design encapsulates the [ElevatedButton](https://api.flutter.dev/flu
             typeName: 'Widget',
             isNullable: false,
             defaultValue: null,
-            defaultValueCode: '''null''',
+            defaultValueCode: "null",
             viewerInitSelectorParam: DesignParamWidgetPlaceholder(
               size: Size(
                 100.0,
                 100.0,
               ),
             ),
+            viewerInitValueCode:
+                '''DesignParamWidgetPlaceholder(size: Size(100.0, 100.0, ), )''',
             documentation:
                 '''/// The child of the button, positioned in the middle of the container.''',
           ),
@@ -55,7 +57,8 @@ The current design encapsulates the [ElevatedButton](https://api.flutter.dev/flu
             typeName: 'void Function()',
             isNullable: true,
             defaultValue: null,
-            defaultValueCode: '''null''',
+            defaultValueCode: "null",
+            viewerInitValueCode: "null",
             documentation:
                 '''/// Callback when the button is pressed. If `null`, the button is disabled.''',
           ),
@@ -101,10 +104,11 @@ class Button extends StatelessWidget {
             typeName: 'String',
             isNullable: false,
             defaultValue: null,
-            defaultValueCode: null,
+            defaultValueCode: '''null''',
             viewerInitSelectorParam: DesignParamStringLorem(
               length: 10,
             ),
+            viewerInitValueCode: '''DesignParamStringLorem(length: 10, )''',
             documentation: null,
           ),
           FieldMetaData(
@@ -113,7 +117,8 @@ class Button extends StatelessWidget {
             typeName: 'void Function()',
             isNullable: true,
             defaultValue: null,
-            defaultValueCode: '''null''',
+            defaultValueCode: "null",
+            viewerInitValueCode: "null",
             documentation:
                 '''/// Callback when the button is pressed. If `null`, the button is disabled.''',
           ),

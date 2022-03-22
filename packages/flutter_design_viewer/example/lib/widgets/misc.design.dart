@@ -33,9 +33,11 @@ https://www.figma.com/
             typeName: 'String',
             isNullable: false,
             defaultValue: null,
-            defaultValueCode: null,
+            defaultValueCode: '''null''',
             viewerInitSelectorParam:
                 'https://images.unsplash.com/photo-1529778873920-4da4926a72c2',
+            viewerInitValueCode:
+                "'https://images.unsplash.com/photo-1529778873920-4da4926a72c2'",
             documentation: null,
           ),
           FieldMetaData(
@@ -44,7 +46,8 @@ https://www.figma.com/
             typeName: 'double',
             isNullable: false,
             defaultValue: 30.0,
-            defaultValueCode: '''30.0''',
+            defaultValueCode: "30.0",
+            viewerInitValueCode: "30.0",
             documentation: null,
           ),
         ],
@@ -106,11 +109,13 @@ final generatedWidgetsMiscAvatarDuoPage = ViewerDocumentPage(
             typeName: 'AvatarModel',
             isNullable: false,
             defaultValue: null,
-            defaultValueCode: '''null''',
+            defaultValueCode: "null",
             viewerInitSelectorParam: AvatarModel(
               uri:
                   'https://images.unsplash.com/photo-1529778873920-4da4926a72c2',
             ),
+            viewerInitValueCode:
+                '''AvatarModel(uri: 'https://images.unsplash.com/photo-1529778873920-4da4926a72c2', )''',
             documentation: null,
           ),
           FieldMetaData(
@@ -122,7 +127,9 @@ final generatedWidgetsMiscAvatarDuoPage = ViewerDocumentPage(
                 uri:
                     'https://cdn.omlet.co.uk/images/originals/sleeping_kitten.jpg'),
             defaultValueCode:
-                '''const AvatarModel(uri: 'https://cdn.omlet.co.uk/images/originals/sleeping_kitten.jpg')''',
+                "const AvatarModel(uri: 'https://cdn.omlet.co.uk/images/originals/sleeping_kitten.jpg')",
+            viewerInitValueCode:
+                "const AvatarModel(uri: 'https://cdn.omlet.co.uk/images/originals/sleeping_kitten.jpg')",
             documentation: null,
           ),
         ],

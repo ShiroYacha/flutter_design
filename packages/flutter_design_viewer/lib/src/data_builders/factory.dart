@@ -39,6 +39,7 @@ class DataBuilderRegistry {
   List<DataBuilder> getOptionsFor(
     Type type,
     dynamic parameter,
+    String? parameterStringValue,
   ) {
     final options = allBuilders[type]?.map((e) {
           if (parameter == null) {
@@ -48,7 +49,7 @@ class DataBuilderRegistry {
         }).toList() ??
         [];
     if (options.isEmpty) {
-      options.add(DesignReadonlyBuilder(parameter));
+      options.add(DesignReadonlyBuilder(parameter, parameterStringValue));
     }
     return options;
   }
@@ -61,6 +62,7 @@ class DataBuilderRegistry {
             ...getOptionsFor(
               kvp.value.type,
               kvp.value.viewerInitSelectorParam ?? kvp.value.defaultValue,
+              kvp.value.viewerInitValueCode,
             ),
             if (kvp.value.isNullable) DesignNullBuilder(),
           ]

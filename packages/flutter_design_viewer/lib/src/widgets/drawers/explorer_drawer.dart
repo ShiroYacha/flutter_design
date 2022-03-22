@@ -51,7 +51,8 @@ class ExplorerDrawer extends HookConsumerWidget {
                 ),
               ).asMouseClickRegion,
               if (screenBreakpoint.index == ScreenBreakpoint.desktop.index)
-                Paddings.right20(
+                Padding(
+                  padding: const EdgeInsets.only(right: 20, bottom: 24),
                   child: GestureDetector(
                     child: Icon(
                       explorerPinned ? Icons.push_pin : Icons.push_pin_outlined,

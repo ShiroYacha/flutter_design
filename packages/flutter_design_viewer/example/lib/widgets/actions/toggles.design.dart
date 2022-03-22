@@ -34,10 +34,11 @@ final generatedWidgetsActionsTogglesToggleButtonPage = ViewerDocumentPage(
             typeName: 'String',
             isNullable: false,
             defaultValue: null,
-            defaultValueCode: null,
+            defaultValueCode: '''null''',
             viewerInitSelectorParam: DesignParamStringLorem(
               length: 10,
             ),
+            viewerInitValueCode: '''DesignParamStringLorem(length: 10, )''',
             documentation: null,
           ),
           FieldMetaData(
@@ -46,7 +47,8 @@ final generatedWidgetsActionsTogglesToggleButtonPage = ViewerDocumentPage(
             typeName: 'Color',
             isNullable: false,
             defaultValue: Colors.red,
-            defaultValueCode: '''Colors.red''',
+            defaultValueCode: "Colors.red",
+            viewerInitValueCode: "Colors.red",
             documentation: null,
           ),
           FieldMetaData(
@@ -55,11 +57,13 @@ final generatedWidgetsActionsTogglesToggleButtonPage = ViewerDocumentPage(
             typeName: 'bool',
             isNullable: false,
             defaultValue: false,
-            defaultValueCode: '''false''',
+            defaultValueCode: "false",
             viewerInitSelectorParam: DesignParamSubscriber(
               key: 'active',
               defaultValue: false,
             ),
+            viewerInitValueCode:
+                '''DesignParamSubscriber(key: 'active', defaultValue: false, )''',
             documentation: null,
           ),
           FieldMetaData(
@@ -68,10 +72,11 @@ final generatedWidgetsActionsTogglesToggleButtonPage = ViewerDocumentPage(
             typeName: 'void Function(bool)',
             isNullable: true,
             defaultValue: null,
-            defaultValueCode: '''null''',
+            defaultValueCode: "null",
             viewerInitSelectorParam: DesignParamPublisher(
               key: 'active',
             ),
+            viewerInitValueCode: '''DesignParamPublisher(key: 'active', )''',
             documentation: null,
           ),
         ],

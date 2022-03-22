@@ -156,9 +156,12 @@ ${await _extractSourceFromElement(
     final buffer = StringBuffer();
     (await resolver.astNodeFor(element))!
         .accept(ToSourceIgnoringDesignAnnotationsVisitor(buffer));
+    return _formatCode(buffer.toString());
+  }
+
+  String _formatCode(String code) {
     return DartFormatter().format(
-      buffer
-          .toString()
+      code
           // Add commas to all probable places
           .replaceAll('[^(]);', ',);')
           .replaceAll('[^;]})', ',})'),
@@ -249,6 +252,10 @@ ${await _extractSourceFromElement(
                   ? _designFieldChecker.firstAnnotationOfExact(p)
                   : null
               : null;
+      // Compute default value code
+      final defaultValueCode = !e.type.isDartCoreString
+          ? '"${e.defaultValueCode}"'
+          : "'''${e.defaultValueCode}'''";
       // Compile initial data builder selector code
       final initialSelectorParam =
           _compileObjectSourceCode(designFieldReader?.getField('parameter'));
@@ -263,9 +270,10 @@ FieldMetaData(
   type: $type,
   typeName: '$typeName',
   isNullable: ${e.isNullable},
-  defaultValue: ${e.defaultValueCode},
-  defaultValueCode: ${!e.type.isDartCoreString ? "'''${e.defaultValueCode}'''" : e.defaultValueCode},
+  defaultValue: ${e.defaultValueCode != null ? e.defaultValueCode! : null},
+  defaultValueCode: $defaultValueCode,
   $initialSelectorParamCode
+  viewerInitValueCode: ${initialSelectorParam.isNotEmpty == true ? initialSelectorParam.startsWith("'") && initialSelectorParam.endsWith("'") ? '"$initialSelectorParam"' : "'''$initialSelectorParam'''" : defaultValueCode},
   documentation: ${fieldDocumentation != null ? "'''$fieldDocumentation'''" : null},
 ),''',
       );

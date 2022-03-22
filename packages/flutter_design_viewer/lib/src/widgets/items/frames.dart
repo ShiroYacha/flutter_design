@@ -282,6 +282,8 @@ class CompontentFrameDataDisplay extends HookConsumerWidget {
                         SelectableContainer(
                           color: theme.dialogBackgroundColor,
                           child: ExpandablePanel(
+                            controller:
+                                ExpandableController(initialExpanded: true),
                             theme: ExpandableThemeData(
                               iconPadding: EdgeInsets.zero,
                               iconColor: theme.colorScheme.onBackground,

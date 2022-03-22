@@ -37,11 +37,13 @@ final generatedWidgetsActionsSlidersRangeAdjustableSliderPage =
             typeName: 'double',
             isNullable: false,
             defaultValue: null,
-            defaultValueCode: '''null''',
+            defaultValueCode: "null",
             viewerInitSelectorParam: DesignParamSubscriber(
               key: 'value',
               defaultValue: 0.0,
             ),
+            viewerInitValueCode:
+                '''DesignParamSubscriber(key: 'value', defaultValue: 0.0, )''',
             documentation: null,
           ),
           FieldMetaData(
@@ -50,10 +52,11 @@ final generatedWidgetsActionsSlidersRangeAdjustableSliderPage =
             typeName: 'void Function(double)',
             isNullable: false,
             defaultValue: null,
-            defaultValueCode: '''null''',
+            defaultValueCode: "null",
             viewerInitSelectorParam: DesignParamPublisher(
               key: 'value',
             ),
+            viewerInitValueCode: '''DesignParamPublisher(key: 'value', )''',
             documentation: null,
           ),
           FieldMetaData(
@@ -62,7 +65,8 @@ final generatedWidgetsActionsSlidersRangeAdjustableSliderPage =
             typeName: 'double',
             isNullable: false,
             defaultValue: 100.0,
-            defaultValueCode: '''100.0''',
+            defaultValueCode: "100.0",
+            viewerInitValueCode: "100.0",
             documentation: null,
           ),
           FieldMetaData(
@@ -71,7 +75,8 @@ final generatedWidgetsActionsSlidersRangeAdjustableSliderPage =
             typeName: 'double',
             isNullable: false,
             defaultValue: 0.0,
-            defaultValueCode: '''0.0''',
+            defaultValueCode: "0.0",
+            viewerInitValueCode: "0.0",
             documentation: null,
           ),
           FieldMetaData(
@@ -80,7 +85,8 @@ final generatedWidgetsActionsSlidersRangeAdjustableSliderPage =
             typeName: 'bool',
             isNullable: false,
             defaultValue: true,
-            defaultValueCode: '''true''',
+            defaultValueCode: "true",
+            viewerInitValueCode: "true",
             documentation: null,
           ),
         ],

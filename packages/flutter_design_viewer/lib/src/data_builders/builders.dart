@@ -11,7 +11,11 @@ import '../theme.dart';
 import 'designers.dart';
 
 class DesignReadonlyBuilder extends DataBuilder<dynamic, dynamic> {
-  DesignReadonlyBuilder([dynamic parameter]) : super(parameter);
+  String? parameterStringValue;
+  DesignReadonlyBuilder(
+    dynamic parameter,
+    this.parameterStringValue,
+  ) : super(parameter);
 
   @override
   dynamic build(BuildContext context, String field) {
@@ -23,7 +27,10 @@ class DesignReadonlyBuilder extends DataBuilder<dynamic, dynamic> {
     BuildContext context,
     UpdateDataBuilder<dynamic, dynamic> updateBuilder,
   ) {
-    return const SizedBox.shrink();
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Text(parameterStringValue ?? 'N/A'),
+    );
   }
 
   @override

@@ -226,6 +226,9 @@ class FieldMetaData with _$FieldMetaData {
     /// will be used.
     dynamic viewerInitSelectorParam,
 
+    /// Initial value in string format
+    String? viewerInitValueCode,
+
     /// Documentation on the field
     String? documentation,
   }) = _FieldMetaData;

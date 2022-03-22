@@ -2082,6 +2082,7 @@ class _$FieldMetaDataTearOff {
       String? defaultValueCode,
       dynamic defaultValue,
       dynamic viewerInitSelectorParam,
+      String? viewerInitValueCode,
       String? documentation}) {
     return _FieldMetaData(
       name: name,
@@ -2091,6 +2092,7 @@ class _$FieldMetaDataTearOff {
       defaultValueCode: defaultValueCode,
       defaultValue: defaultValue,
       viewerInitSelectorParam: viewerInitSelectorParam,
+      viewerInitValueCode: viewerInitValueCode,
       documentation: documentation,
     );
   }
@@ -2129,6 +2131,9 @@ mixin _$FieldMetaData {
   /// will be used.
   dynamic get viewerInitSelectorParam => throw _privateConstructorUsedError;
 
+  /// Initial value in string format
+  String? get viewerInitValueCode => throw _privateConstructorUsedError;
+
   /// Documentation on the field
   String? get documentation => throw _privateConstructorUsedError;
 
@@ -2150,6 +2155,7 @@ abstract class $FieldMetaDataCopyWith<$Res> {
       String? defaultValueCode,
       dynamic defaultValue,
       dynamic viewerInitSelectorParam,
+      String? viewerInitValueCode,
       String? documentation});
 }
 
@@ -2171,6 +2177,7 @@ class _$FieldMetaDataCopyWithImpl<$Res>
     Object? defaultValueCode = freezed,
     Object? defaultValue = freezed,
     Object? viewerInitSelectorParam = freezed,
+    Object? viewerInitValueCode = freezed,
     Object? documentation = freezed,
   }) {
     return _then(_value.copyWith(
@@ -2202,6 +2209,10 @@ class _$FieldMetaDataCopyWithImpl<$Res>
           ? _value.viewerInitSelectorParam
           : viewerInitSelectorParam // ignore: cast_nullable_to_non_nullable
               as dynamic,
+      viewerInitValueCode: viewerInitValueCode == freezed
+          ? _value.viewerInitValueCode
+          : viewerInitValueCode // ignore: cast_nullable_to_non_nullable
+              as String?,
       documentation: documentation == freezed
           ? _value.documentation
           : documentation // ignore: cast_nullable_to_non_nullable
@@ -2225,6 +2236,7 @@ abstract class _$FieldMetaDataCopyWith<$Res>
       String? defaultValueCode,
       dynamic defaultValue,
       dynamic viewerInitSelectorParam,
+      String? viewerInitValueCode,
       String? documentation});
 }
 
@@ -2248,6 +2260,7 @@ class __$FieldMetaDataCopyWithImpl<$Res>
     Object? defaultValueCode = freezed,
     Object? defaultValue = freezed,
     Object? viewerInitSelectorParam = freezed,
+    Object? viewerInitValueCode = freezed,
     Object? documentation = freezed,
   }) {
     return _then(_FieldMetaData(
@@ -2279,6 +2292,10 @@ class __$FieldMetaDataCopyWithImpl<$Res>
           ? _value.viewerInitSelectorParam
           : viewerInitSelectorParam // ignore: cast_nullable_to_non_nullable
               as dynamic,
+      viewerInitValueCode: viewerInitValueCode == freezed
+          ? _value.viewerInitValueCode
+          : viewerInitValueCode // ignore: cast_nullable_to_non_nullable
+              as String?,
       documentation: documentation == freezed
           ? _value.documentation
           : documentation // ignore: cast_nullable_to_non_nullable
@@ -2298,6 +2315,7 @@ class _$_FieldMetaData extends _FieldMetaData with DiagnosticableTreeMixin {
       this.defaultValueCode,
       this.defaultValue,
       this.viewerInitSelectorParam,
+      this.viewerInitValueCode,
       this.documentation})
       : super._();
 
@@ -2338,12 +2356,16 @@ class _$_FieldMetaData extends _FieldMetaData with DiagnosticableTreeMixin {
   final dynamic viewerInitSelectorParam;
   @override
 
+  /// Initial value in string format
+  final String? viewerInitValueCode;
+  @override
+
   /// Documentation on the field
   final String? documentation;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'FieldMetaData(name: $name, type: $type, typeName: $typeName, isNullable: $isNullable, defaultValueCode: $defaultValueCode, defaultValue: $defaultValue, viewerInitSelectorParam: $viewerInitSelectorParam, documentation: $documentation)';
+    return 'FieldMetaData(name: $name, type: $type, typeName: $typeName, isNullable: $isNullable, defaultValueCode: $defaultValueCode, defaultValue: $defaultValue, viewerInitSelectorParam: $viewerInitSelectorParam, viewerInitValueCode: $viewerInitValueCode, documentation: $documentation)';
   }
 
   @override
@@ -2359,6 +2381,7 @@ class _$_FieldMetaData extends _FieldMetaData with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty('defaultValue', defaultValue))
       ..add(DiagnosticsProperty(
           'viewerInitSelectorParam', viewerInitSelectorParam))
+      ..add(DiagnosticsProperty('viewerInitValueCode', viewerInitValueCode))
       ..add(DiagnosticsProperty('documentation', documentation));
   }
 
@@ -2379,6 +2402,8 @@ class _$_FieldMetaData extends _FieldMetaData with DiagnosticableTreeMixin {
             const DeepCollectionEquality().equals(
                 other.viewerInitSelectorParam, viewerInitSelectorParam) &&
             const DeepCollectionEquality()
+                .equals(other.viewerInitValueCode, viewerInitValueCode) &&
+            const DeepCollectionEquality()
                 .equals(other.documentation, documentation));
   }
 
@@ -2392,6 +2417,7 @@ class _$_FieldMetaData extends _FieldMetaData with DiagnosticableTreeMixin {
       const DeepCollectionEquality().hash(defaultValueCode),
       const DeepCollectionEquality().hash(defaultValue),
       const DeepCollectionEquality().hash(viewerInitSelectorParam),
+      const DeepCollectionEquality().hash(viewerInitValueCode),
       const DeepCollectionEquality().hash(documentation));
 
   @JsonKey(ignore: true)
@@ -2409,6 +2435,7 @@ abstract class _FieldMetaData extends FieldMetaData {
       String? defaultValueCode,
       dynamic defaultValue,
       dynamic viewerInitSelectorParam,
+      String? viewerInitValueCode,
       String? documentation}) = _$_FieldMetaData;
   const _FieldMetaData._() : super._();
 
@@ -2447,6 +2474,10 @@ abstract class _FieldMetaData extends FieldMetaData {
   /// the initial value and the default value is specified, the [viewerInitSelectorParam]
   /// will be used.
   dynamic get viewerInitSelectorParam;
+  @override
+
+  /// Initial value in string format
+  String? get viewerInitValueCode;
   @override
 
   /// Documentation on the field
