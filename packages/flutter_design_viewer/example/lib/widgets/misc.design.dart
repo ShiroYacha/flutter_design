@@ -17,7 +17,9 @@ final generatedWidgetsMiscAvatarPage = ViewerDocumentPage(
       id: 'component_anatomy',
       title: 'Anatomy',
       ctorName: 'Avatar',
-      designLink: '''https://www.figma.com/''',
+      designLink: '''
+https://www.figma.com/
+''',
       builder: ViewerWidgetBuilder(
         build: (context, factory) => Avatar(
           uri: factory.build(context, 'uri'),

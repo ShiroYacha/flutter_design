@@ -12,12 +12,14 @@ final generatedWidgetsActionsButtonsButtonPage = ViewerDocumentPage(
   id: 'button',
   namespace: ['widgets', 'actions', 'buttons'],
   title: 'Button',
-  subtitle:
-      '''A button is a box area or text that communicates and triggers user actions when clicked.''',
-  description:
-      '''The current design encapsulates the [ElevatedButton](https://api.flutter.dev/flutter/material/ElevatedButton-class.html),
+  subtitle: '''
+A button is a box area or text that communicates and triggers user actions when clicked.
+''',
+  description: '''
+The current design encapsulates the [ElevatedButton](https://api.flutter.dev/flutter/material/ElevatedButton-class.html),
       [OutlinedButton](https://api.flutter.dev/flutter/material/ElevatedButton-class.html) and [TextButton](https://api.flutter.dev/flutter/material/TextButton-class.html)
-      from Material design.''',
+      from Material design.
+''',
   sections: [
     ViewerSectionUnion.component(
       id: 'component_anatomy',

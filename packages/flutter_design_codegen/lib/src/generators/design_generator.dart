@@ -165,7 +165,7 @@ ${await _extractSourceFromElement(
   ) {
     final reader = annotation.read(field);
     if (reader.isNull) return null;
-    return "'''${reader.stringValue}'''";
+    return "'''\n${reader.stringValue}\n'''";
   }
 
   /// TODO: improve this

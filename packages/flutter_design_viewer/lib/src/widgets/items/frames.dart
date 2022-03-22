@@ -114,28 +114,36 @@ class ComponentFramePanel extends HookConsumerWidget {
                       DisplayMode.widgetCodeSideBySide;
               return SizedBox(
                 height: widgetDisplayHeight,
-                child: NSplitter(
-                  // Use a key composed of the current builder instance & side by side
-                  // to invalidate the initial fraction if needed
-                  key: ValueKey('${viewerWidgetBuilder.hashCode}_$sideBySide'),
-                  initialFractions: sideBySide
-                      // Display side by side if data builder or code is shown
-                      ? [0.5, 0.5]
-                      // Display widget fully if only showing widget
-                      : [1.0, 0.0],
-                  items: [
-                    const ComponentFrameWidgetDisplay(),
-                    if (showDataBuilder)
-                      CompontentFrameDataDisplay(
-                        dataBuildersNotifier: dataBuilders,
-                      )
-                    else if (localViewerState.displayMode ==
-                        DisplayMode.widgetCodeSideBySide)
-                      const CompontentFrameCodeDisplay(expand: true)
-                    else
-                      Container(),
-                  ],
-                ),
+                child: LayoutBuilder(builder: (context, constraints) {
+                  final maxWidth = constraints.maxWidth;
+                  const rightPanelWidth = 600;
+                  final rightPortion = rightPanelWidth / maxWidth;
+                  return NSplitter(
+                    // Use a key composed of the current builder instance & side by side
+                    // to invalidate the initial fraction if needed
+                    key:
+                        ValueKey('${viewerWidgetBuilder.hashCode}_$sideBySide'),
+                    initialFractions: sideBySide
+                        // Display side by side if data builder or code is shown
+                        ? rightPortion < 0.5
+                            ? [1 - rightPortion, rightPortion]
+                            : [0.5, 0.5]
+                        // Display widget fully if only showing widget
+                        : [1.0, 0.0],
+                    items: [
+                      const ComponentFrameWidgetDisplay(),
+                      if (showDataBuilder)
+                        CompontentFrameDataDisplay(
+                          dataBuildersNotifier: dataBuilders,
+                        )
+                      else if (localViewerState.displayMode ==
+                          DisplayMode.widgetCodeSideBySide)
+                        const CompontentFrameCodeDisplay(expand: true)
+                      else
+                        Container(),
+                    ],
+                  );
+                }),
               );
             },
           ),
