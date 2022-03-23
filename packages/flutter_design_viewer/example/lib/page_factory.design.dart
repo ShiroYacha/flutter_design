@@ -15,6 +15,7 @@ final generatedComponentPages = <ViewerDocumentPage>[
   generatedWidgetsMiscAvatarDuoPage,
   generatedWidgetsLayoutsContainersSpacedRowPage,
   generatedWidgetsLayoutsContainersResponsiveEvenRowPage,
+  generatedWidgetsLayoutsContainersResponsiveSizedBoxPage,
   generatedWidgetsActionsButtonsButtonPage,
   generatedWidgetsActionsTogglesToggleButtonPage,
   generatedWidgetsActionsSlidersRangeAdjustableSliderPage,

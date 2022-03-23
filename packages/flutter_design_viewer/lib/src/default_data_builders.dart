@@ -30,8 +30,8 @@ final defaultBuilders = <Type, List<DataBuilderCreator>>{
     subConnectorDataBuilderCreator,
   ],
   double: [
-    ([p]) => p != null && p is double
-        ? DesignDoubleBuilder(p)
+    ([p]) => p != null && (p is double || p is int)
+        ? DesignDoubleBuilder(p is int ? p.toDouble() : p)
         : DesignDoubleBuilder(),
     subConnectorDataBuilderCreator,
   ],

@@ -1,0 +1,33 @@
+{
+  "folders": [
+    {
+      "name": "root",
+      "path": "."
+    },
+    {
+      "name": "design",
+      "path": "packages/flutter_design"
+    },
+    {
+      "name": "design_annotation",
+      "path": "packages/flutter_design_annotation"
+    },
+    {
+      "name": "design_codegen",
+      "path": "packages/flutter_design_codegen"
+    },
+    {
+      "name": "design_viewer",
+      "path": "packages/flutter_design_viewer"
+    },
+    {
+      "name": "example",
+      "path": "packages/flutter_design_viewer/example"
+    },
+    {
+      "name": "website",
+      "path": "website"
+    },
+  ],
+  "settings": {}
+}

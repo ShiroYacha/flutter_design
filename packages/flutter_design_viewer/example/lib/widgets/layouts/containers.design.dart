@@ -188,3 +188,136 @@ class ResponsiveEvenRow extends StatelessWidget {
     ),
   ],
 );
+
+// ignore_for_file: type=lint
+final generatedWidgetsLayoutsContainersResponsiveSizedBoxPage =
+    ViewerDocumentPage(
+  id: 'responsiveSizedBox',
+  namespace: ['widgets', 'layouts', 'containers'],
+  title: 'ResponsiveSizedBox',
+  subtitle: '''
+A `SizedBox` that responsively adapt it's `width` based on the
+screen factor.
+''',
+  description: '''
+It is very common on smaller screens to stretch the content horizontally. However 
+on bigger screens, it is better to center its content with a fixed max width.
+
+''',
+  sections: [
+    ViewerSectionUnion.component(
+      id: 'component_anatomy',
+      title: 'Anatomy',
+      ctorName: 'ResponsiveSizedBox',
+      designLink: null,
+      builder: ViewerWidgetBuilder(
+        build: (context, factory) => ResponsiveSizedBox(
+          child: factory.build(context, 'child'),
+          widthWhenConstrained: factory.build(context, 'widthWhenConstrained'),
+          paddingWhenConstrained:
+              factory.build(context, 'paddingWhenConstrained'),
+          centeredWhenConstrained:
+              factory.build(context, 'centeredWhenConstrained'),
+          breakpoint: factory.build(context, 'breakpoint'),
+        ),
+        fieldMetaDataset: const [
+          FieldMetaData(
+            name: 'child',
+            type: Widget,
+            typeName: 'Widget',
+            isNullable: false,
+            defaultValue: null,
+            defaultValueCode: "null",
+            viewerInitSelectorParam: DesignParamWidgetPlaceholder(
+              size: Size.infinite,
+            ),
+            viewerInitValueCode:
+                '''DesignParamWidgetPlaceholder(size: Size.infinite, )''',
+            documentation: '''/// The child widget''',
+          ),
+          FieldMetaData(
+            name: 'widthWhenConstrained',
+            type: double,
+            typeName: 'double',
+            isNullable: false,
+            defaultValue: 400.0,
+            defaultValueCode: "400.0",
+            viewerInitValueCode: "400.0",
+            documentation:
+                '''/// The maximum size of the child widget when constrained''',
+          ),
+          FieldMetaData(
+            name: 'paddingWhenConstrained',
+            type: EdgeInsets,
+            typeName: 'EdgeInsets',
+            isNullable: false,
+            defaultValue: const EdgeInsets.all(20),
+            defaultValueCode: "const EdgeInsets.all(20)",
+            viewerInitValueCode: "const EdgeInsets.all(20)",
+            documentation:
+                '''/// The padding of the child widget when constrained''',
+          ),
+          FieldMetaData(
+            name: 'centeredWhenConstrained',
+            type: bool,
+            typeName: 'bool',
+            isNullable: false,
+            defaultValue: true,
+            defaultValueCode: "true",
+            viewerInitValueCode: "true",
+            documentation:
+                '''/// Indicates if the child should be wrapped in a [Center] when constrained''',
+          ),
+          FieldMetaData(
+            name: 'breakpoint',
+            type: double,
+            typeName: 'double',
+            isNullable: false,
+            defaultValue: 420,
+            defaultValueCode: "420",
+            viewerInitValueCode: "420",
+            documentation:
+                '''/// The breakpoint from which the child widget gets constrained''',
+          ),
+        ],
+      ),
+      sourceCode: const ViewerSourceCode(
+          location: 'package:viewer_example/widgets/layouts/containers.dart',
+          code: '''
+/// Built from the following function 
+(context, factory) => ResponsiveSizedBox(child: factory.build(context, 'child'),widthWhenConstrained: factory.build(context, 'widthWhenConstrained'),paddingWhenConstrained: factory.build(context, 'paddingWhenConstrained'),centeredWhenConstrained: factory.build(context, 'centeredWhenConstrained'),breakpoint: factory.build(context, 'breakpoint'),)
+
+/// Widget
+class ResponsiveSizedBox extends StatelessWidget {
+  const ResponsiveSizedBox(
+      {required this.child,
+      this.widthWhenConstrained = 400.0,
+      this.paddingWhenConstrained = const EdgeInsets.all(20),
+      this.centeredWhenConstrained = true,
+      this.breakpoint = 420,
+      Key? key})
+      : super(key: key);
+  final Widget child;
+  final double widthWhenConstrained;
+  final EdgeInsets paddingWhenConstrained;
+  final bool centeredWhenConstrained;
+  final double breakpoint;
+  @override
+  Widget build(BuildContext context) {
+    final bool constrained = MediaQuery.of(context).size.width >= breakpoint;
+    final content = Padding(
+        padding: constrained ? paddingWhenConstrained : EdgeInsets.zero,
+        child: SizedBox(
+            width: constrained ? widthWhenConstrained : null, child: child));
+    return centeredWhenConstrained ? Center(child: content) : content;
+  }
+}
+
+'''),
+    ),
+    const ViewerSectionUnion.apiDocs(
+      id: 'apiDocs',
+      title: 'API reference',
+    ),
+  ],
+);

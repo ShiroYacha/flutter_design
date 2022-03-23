@@ -34,7 +34,9 @@ class TrackedNavigatorObserver extends NavigatorObserver {
       WidgetsBinding.instance?.scheduleFrameCallback((timeStamp) {
         try {
           final uri = uriName.split(routePathNameSeparator).first;
-          viewerStateNotifier.update((state) => state.copyWith(uri: uri));
+          if (uri.isNotEmpty) {
+            viewerStateNotifier.update((state) => state.copyWith(uri: uri));
+          }
         } catch (e) {
           // ignore: avoid_print
           print('Unable to save current uri (full name: $uriName) due to: $e');
