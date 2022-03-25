@@ -41,6 +41,7 @@ dependencies:
   flutter_staggered_grid_view: ^0.6.1
   flutter_highlight: ^0.7.0
   flutter_colorpicker: ^1.0.3
+  sticky_headers: ^0.2.0
   # media
   flutter_svg: ^1.0.3
   flutter_feather_icons: ^2.0.0+1

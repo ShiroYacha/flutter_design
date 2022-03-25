@@ -10,6 +10,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:vrouter/vrouter.dart';
+import 'package:sticky_headers/sticky_headers.dart';
 
 class ExplorerDrawer extends HookConsumerWidget {
   const ExplorerDrawer({
@@ -23,6 +24,7 @@ class ExplorerDrawer extends HookConsumerWidget {
     final explorerPinned =
         ref.watch(viewerStateProvider.select((e) => e.explorerPinned));
     final screenBreakpoint = ref.watch(screenBreakpointProvider);
+    final scrollController = useScrollController();
     return Container(
       padding: SpacingDesign.paddingVertical16,
       decoration: BoxDecoration(
@@ -33,9 +35,7 @@ class ExplorerDrawer extends HookConsumerWidget {
         ),
       ),
       width: 300,
-      child: ListView(
-        key: const PageStorageKey<String>('ExplorerListView'),
-        controller: useScrollController(),
+      child: Column(
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -66,14 +66,21 @@ class ExplorerDrawer extends HookConsumerWidget {
                 ),
             ],
           ),
-          Spacers.v20,
-          ...rootPages.fold(
-            [],
-            (previousValue, element) => [
-              ...previousValue,
-              PageGroup(groupPage: element),
-              const Divider(),
-            ],
+          Expanded(
+            child: ListView(
+              key: const PageStorageKey<String>('ExplorerListView'),
+              controller: scrollController,
+              children: [
+                Spacers.v20,
+                ...rootPages.fold(
+                  [],
+                  (previousValue, element) => [
+                    ...previousValue,
+                    PageGroup(groupPage: element),
+                  ],
+                ),
+              ],
+            ),
           ),
         ],
       ),
@@ -92,14 +99,16 @@ class PageGroup extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Paddings.all20(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          PageGroupHeader(groupPage: groupPage),
-          Spacers.v10,
-          ...groupPage.children.map((e) => PageGroupNode(viewerPage: e)),
-          Spacers.v10,
-        ],
+      child: StickyHeader(
+        header: PageGroupHeader(groupPage: groupPage),
+        content: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Spacers.v10,
+            ...groupPage.children.map((e) => PageGroupNode(viewerPage: e)),
+            Spacers.v10,
+          ],
+        ),
       ),
     );
   }
@@ -203,11 +212,17 @@ class PageGroupHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Text(
-      groupPage.namespace.isEmpty
-          ? groupPage.title.toUpperCase()
-          : groupPage.title,
-      style: theme.textTheme.subtitle2?.copyWith(color: theme.hintColor),
+    return Container(
+      color: theme.backgroundColor,
+      width: double.infinity,
+      height: 40,
+      alignment: Alignment.centerLeft,
+      child: Text(
+        groupPage.namespace.isEmpty
+            ? groupPage.title.toUpperCase()
+            : groupPage.title,
+        style: theme.textTheme.subtitle2?.copyWith(color: theme.hintColor),
+      ),
     );
   }
 }

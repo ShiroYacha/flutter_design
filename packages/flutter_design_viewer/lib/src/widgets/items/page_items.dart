@@ -11,6 +11,7 @@ import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:ionicons/ionicons.dart';
 import 'package:vrouter/vrouter.dart';
 
 import '../../utils.dart';
@@ -109,6 +110,7 @@ class TextDescriptionStyle {
       ),
     );
   }
+
   factory TextDescriptionStyle.section(BuildContext context) {
     final theme = Theme.of(context);
     return TextDescriptionStyle._(
@@ -122,6 +124,21 @@ class TextDescriptionStyle {
       ),
     );
   }
+
+  factory TextDescriptionStyle.subSection(BuildContext context) {
+    final theme = Theme.of(context);
+    return TextDescriptionStyle._(
+      titleStyle: theme.textTheme.headline4?.copyWith(
+        fontWeight: FontWeight.w800,
+        color: theme.colorScheme.onBackground,
+      ),
+      descriptionStyle: theme.textTheme.headline6?.copyWith(
+        height: 1.4,
+        fontWeight: FontWeight.w200,
+      ),
+    );
+  }
+
   factory TextDescriptionStyle.paragraph(BuildContext context) {
     final theme = Theme.of(context);
     return TextDescriptionStyle._(
@@ -138,10 +155,12 @@ class TitleDescription extends StatelessWidget {
   final TextDescriptionStyle style;
   final String? title;
   final String? description;
+  final IconData? icon;
   const TitleDescription({
     required this.style,
     this.title,
     this.description,
+    this.icon,
     Key? key,
   }) : super(key: key);
 
@@ -151,9 +170,20 @@ class TitleDescription extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (title != null) ...[
-          SelectableText(
-            '$title',
-            style: style.titleStyle,
+          Row(
+            children: [
+              if (icon != null) ...[
+                Icon(
+                  icon,
+                  size: style.titleStyle?.fontSize,
+                ),
+                Spacers.h10,
+              ],
+              SelectableText(
+                '$title',
+                style: style.titleStyle,
+              ),
+            ],
           ),
           Spacers.v16,
         ],
@@ -205,9 +235,10 @@ class ComponentSection extends HookConsumerWidget {
                 HookBuilder(builder: (context) {
                   _scrollIntoViewIfUrlEndsWithId(context, element.id);
                   return TitleDescription(
-                    style: TextDescriptionStyle.section(context),
+                    style: TextDescriptionStyle.subSection(context),
                     title: element.title,
                     description: element.description,
+                    icon: Ionicons.cube_outline,
                   );
                 }),
                 Spacers.v16,

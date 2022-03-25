@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 
+import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_design_viewer/src/design_theme.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -44,6 +45,25 @@ class ViewerState with _$ViewerState {
     @Default(false) bool explorerPinned,
     String? uri,
   }) = _ViewerState;
+
+  factory ViewerState.createDefault(ViewerSettings viewerSettings) =>
+      ViewerState(
+        viewMode: ViewMode.themes,
+        displayMode: DisplayMode.widgetCodeSideBySide,
+        themeMode: ThemeMode.dark,
+        showDataBuilderByDefault: true,
+        expandExplorerNodesByDefault: true,
+        targetDeviceId: Devices.ios.iPhone12.identifier.toString(),
+        targetDeviceIds: [
+          Devices.ios.iPhone12.identifier.toString(),
+          Devices.ios.iPad.identifier.toString(),
+          Devices.macOS.wideMonitor.identifier.toString(),
+        ],
+        targetLocaleId: viewerSettings.enabledLocales.keys.first,
+        targetLocaleIds: viewerSettings.enabledLocales.keys.toList(),
+        targetThemeId: viewerSettings.enabledThemes.keys.first,
+        targetThemeIds: viewerSettings.enabledThemes.keys.toList(),
+      );
 
   factory ViewerState.fromJson(Map<String, dynamic> json) =>
       _$ViewerStateFromJson(json);

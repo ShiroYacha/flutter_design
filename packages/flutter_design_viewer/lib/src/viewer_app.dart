@@ -118,22 +118,7 @@ class DesignSystemViewerRouter extends HookConsumerWidget {
         final cache = await ViewerState.getFromStorage();
         viewerStateNotifier.state = cache?.isValid == true
             ? cache!
-            : ViewerState(
-                viewMode: ViewMode.themes,
-                displayMode: DisplayMode.widgetCodeSideBySide,
-                themeMode: ThemeMode.dark,
-                showDataBuilderByDefault: true,
-                expandExplorerNodesByDefault: true,
-                targetDeviceId: Devices.ios.iPhone12.identifier.toString(),
-                targetDeviceIds: [
-                  Devices.ios.iPhone12.identifier.toString(),
-                  Devices.android.samsungGalaxyS20.identifier.toString(),
-                ],
-                targetLocaleId: viewerSettings.enabledLocales.keys.first,
-                targetLocaleIds: viewerSettings.enabledLocales.keys.toList(),
-                targetThemeId: viewerSettings.enabledThemes.keys.first,
-                targetThemeIds: viewerSettings.enabledThemes.keys.toList(),
-              );
+            : ViewerState.createDefault(viewerSettings);
         // Restore cached URI if possible (not doing it in Web because the user can open
         // multiple tabs).
         if (!kIsWeb &&
