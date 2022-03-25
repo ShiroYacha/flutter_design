@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// TODO: document this
 class DesignTheme {
   final ThemeData materialTheme;
 

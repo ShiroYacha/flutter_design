@@ -7,8 +7,26 @@ part of 'sliders.dart';
 // **************************************************************************
 
 // ignore_for_file: type=lint
+// ignore_for_file: unused_element
 typedef _$FunctionAliasForOnChangedViaRangeAdjustableSlider = void Function(
     double);
+
+class _$RangeAdjustableSliderParamBuilder extends ComponentParamBuilder {
+  final dynamic value;
+  final dynamic onChanged;
+  final dynamic max;
+  final dynamic min;
+  final dynamic allowsDecimal;
+
+  const _$RangeAdjustableSliderParamBuilder({
+    required this.value,
+    required this.onChanged,
+    this.max,
+    this.min,
+    this.allowsDecimal,
+  }) : super();
+}
+
 final generatedWidgetsActionsSlidersRangeAdjustableSliderPage =
     ViewerDocumentPage(
   id: 'rangeAdjustableSlider',
@@ -18,8 +36,8 @@ final generatedWidgetsActionsSlidersRangeAdjustableSliderPage =
   description: null,
   sections: [
     ViewerSectionUnion.component(
-      id: 'component_anatomy',
-      title: 'Anatomy',
+      id: 'component_range_adjustable_slider',
+      title: 'RangeAdjustableSlider()',
       ctorName: 'RangeAdjustableSlider',
       designLink: null,
       builder: ViewerWidgetBuilder(
@@ -36,6 +54,8 @@ final generatedWidgetsActionsSlidersRangeAdjustableSliderPage =
             type: double,
             typeName: 'double',
             isNullable: false,
+            isRequired: true,
+            isNamed: true,
             defaultValue: null,
             defaultValueCode: "null",
             viewerInitSelectorParam: DesignParamSubscriber(
@@ -51,6 +71,8 @@ final generatedWidgetsActionsSlidersRangeAdjustableSliderPage =
             type: _$FunctionAliasForOnChangedViaRangeAdjustableSlider,
             typeName: 'void Function(double)',
             isNullable: false,
+            isRequired: true,
+            isNamed: true,
             defaultValue: null,
             defaultValueCode: "null",
             viewerInitSelectorParam: DesignParamPublisher(
@@ -64,6 +86,8 @@ final generatedWidgetsActionsSlidersRangeAdjustableSliderPage =
             type: double,
             typeName: 'double',
             isNullable: false,
+            isRequired: false,
+            isNamed: true,
             defaultValue: 100.0,
             defaultValueCode: "100.0",
             viewerInitValueCode: "100.0",
@@ -74,6 +98,8 @@ final generatedWidgetsActionsSlidersRangeAdjustableSliderPage =
             type: double,
             typeName: 'double',
             isNullable: false,
+            isRequired: false,
+            isNamed: true,
             defaultValue: 0.0,
             defaultValueCode: "0.0",
             viewerInitValueCode: "0.0",
@@ -84,6 +110,8 @@ final generatedWidgetsActionsSlidersRangeAdjustableSliderPage =
             type: bool,
             typeName: 'bool',
             isNullable: false,
+            isRequired: false,
+            isNamed: true,
             defaultValue: true,
             defaultValueCode: "true",
             viewerInitValueCode: "true",

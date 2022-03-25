@@ -1,3 +1,5 @@
+import 'interface.dart';
+
 /// Flags a class as needing to be processed by flutter_design_codegen
 /// to generate into an importable design system viewer page.
 /// It also allows passing options to customize the builder's behavior.
@@ -78,5 +80,25 @@ class DesignField {
 
   const DesignField({
     this.parameter,
+  });
+}
+
+class DesignExamples {
+  final List<DesignExample> examples;
+
+  const DesignExamples({
+    required this.examples,
+  });
+}
+
+class DesignExample {
+  final String title;
+  final String? description;
+  final ComponentParamBuilder builder;
+
+  const DesignExample({
+    required this.title,
+    this.description,
+    required this.builder,
   });
 }

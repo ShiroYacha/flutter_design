@@ -925,6 +925,7 @@ class _$ViewerSectionUnionTearOff {
       required String ctorName,
       String? designLink,
       required ViewerWidgetBuilder builder,
+      List<ViewerComponentExample> examples = const [],
       required ViewerSourceCode sourceCode}) {
     return ViewerComponentSection(
       id: id,
@@ -933,6 +934,7 @@ class _$ViewerSectionUnionTearOff {
       ctorName: ctorName,
       designLink: designLink,
       builder: builder,
+      examples: examples,
       sourceCode: sourceCode,
     );
   }
@@ -973,6 +975,7 @@ mixin _$ViewerSectionUnion {
             String ctorName,
             String? designLink,
             ViewerWidgetBuilder builder,
+            List<ViewerComponentExample> examples,
             ViewerSourceCode sourceCode)
         component,
     required TResult Function(String id, String title, String? description)
@@ -991,6 +994,7 @@ mixin _$ViewerSectionUnion {
             String ctorName,
             String? designLink,
             ViewerWidgetBuilder builder,
+            List<ViewerComponentExample> examples,
             ViewerSourceCode sourceCode)?
         component,
     TResult Function(String id, String title, String? description)? apiDocs,
@@ -1008,6 +1012,7 @@ mixin _$ViewerSectionUnion {
             String ctorName,
             String? designLink,
             ViewerWidgetBuilder builder,
+            List<ViewerComponentExample> examples,
             ViewerSourceCode sourceCode)?
         component,
     TResult Function(String id, String title, String? description)? apiDocs,
@@ -1219,6 +1224,7 @@ class _$ViewerParagraphSection extends ViewerParagraphSection
             String ctorName,
             String? designLink,
             ViewerWidgetBuilder builder,
+            List<ViewerComponentExample> examples,
             ViewerSourceCode sourceCode)
         component,
     required TResult Function(String id, String title, String? description)
@@ -1240,6 +1246,7 @@ class _$ViewerParagraphSection extends ViewerParagraphSection
             String ctorName,
             String? designLink,
             ViewerWidgetBuilder builder,
+            List<ViewerComponentExample> examples,
             ViewerSourceCode sourceCode)?
         component,
     TResult Function(String id, String title, String? description)? apiDocs,
@@ -1260,6 +1267,7 @@ class _$ViewerParagraphSection extends ViewerParagraphSection
             String ctorName,
             String? designLink,
             ViewerWidgetBuilder builder,
+            List<ViewerComponentExample> examples,
             ViewerSourceCode sourceCode)?
         component,
     TResult Function(String id, String title, String? description)? apiDocs,
@@ -1349,6 +1357,7 @@ abstract class $ViewerComponentSectionCopyWith<$Res>
       String ctorName,
       String? designLink,
       ViewerWidgetBuilder builder,
+      List<ViewerComponentExample> examples,
       ViewerSourceCode sourceCode});
 
   $ViewerWidgetBuilderCopyWith<$Res> get builder;
@@ -1374,6 +1383,7 @@ class _$ViewerComponentSectionCopyWithImpl<$Res>
     Object? ctorName = freezed,
     Object? designLink = freezed,
     Object? builder = freezed,
+    Object? examples = freezed,
     Object? sourceCode = freezed,
   }) {
     return _then(ViewerComponentSection(
@@ -1401,6 +1411,10 @@ class _$ViewerComponentSectionCopyWithImpl<$Res>
           ? _value.builder
           : builder // ignore: cast_nullable_to_non_nullable
               as ViewerWidgetBuilder,
+      examples: examples == freezed
+          ? _value.examples
+          : examples // ignore: cast_nullable_to_non_nullable
+              as List<ViewerComponentExample>,
       sourceCode: sourceCode == freezed
           ? _value.sourceCode
           : sourceCode // ignore: cast_nullable_to_non_nullable
@@ -1434,6 +1448,7 @@ class _$ViewerComponentSection extends ViewerComponentSection
       required this.ctorName,
       this.designLink,
       required this.builder,
+      this.examples = const [],
       required this.sourceCode})
       : super._();
 
@@ -1461,6 +1476,11 @@ class _$ViewerComponentSection extends ViewerComponentSection
 
   /// Widget builder to construct the widget with available data builders.
   final ViewerWidgetBuilder builder;
+  @JsonKey()
+  @override
+
+  /// Examples with the constructor
+  final List<ViewerComponentExample> examples;
   @override
 
   /// Widget source code information.
@@ -1468,7 +1488,7 @@ class _$ViewerComponentSection extends ViewerComponentSection
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ViewerSectionUnion.component(id: $id, title: $title, description: $description, ctorName: $ctorName, designLink: $designLink, builder: $builder, sourceCode: $sourceCode)';
+    return 'ViewerSectionUnion.component(id: $id, title: $title, description: $description, ctorName: $ctorName, designLink: $designLink, builder: $builder, examples: $examples, sourceCode: $sourceCode)';
   }
 
   @override
@@ -1482,6 +1502,7 @@ class _$ViewerComponentSection extends ViewerComponentSection
       ..add(DiagnosticsProperty('ctorName', ctorName))
       ..add(DiagnosticsProperty('designLink', designLink))
       ..add(DiagnosticsProperty('builder', builder))
+      ..add(DiagnosticsProperty('examples', examples))
       ..add(DiagnosticsProperty('sourceCode', sourceCode));
   }
 
@@ -1498,6 +1519,7 @@ class _$ViewerComponentSection extends ViewerComponentSection
             const DeepCollectionEquality()
                 .equals(other.designLink, designLink) &&
             const DeepCollectionEquality().equals(other.builder, builder) &&
+            const DeepCollectionEquality().equals(other.examples, examples) &&
             const DeepCollectionEquality()
                 .equals(other.sourceCode, sourceCode));
   }
@@ -1511,6 +1533,7 @@ class _$ViewerComponentSection extends ViewerComponentSection
       const DeepCollectionEquality().hash(ctorName),
       const DeepCollectionEquality().hash(designLink),
       const DeepCollectionEquality().hash(builder),
+      const DeepCollectionEquality().hash(examples),
       const DeepCollectionEquality().hash(sourceCode));
 
   @JsonKey(ignore: true)
@@ -1532,13 +1555,14 @@ class _$ViewerComponentSection extends ViewerComponentSection
             String ctorName,
             String? designLink,
             ViewerWidgetBuilder builder,
+            List<ViewerComponentExample> examples,
             ViewerSourceCode sourceCode)
         component,
     required TResult Function(String id, String title, String? description)
         apiDocs,
   }) {
-    return component(
-        id, title, description, ctorName, designLink, builder, sourceCode);
+    return component(id, title, description, ctorName, designLink, builder,
+        examples, sourceCode);
   }
 
   @override
@@ -1554,12 +1578,13 @@ class _$ViewerComponentSection extends ViewerComponentSection
             String ctorName,
             String? designLink,
             ViewerWidgetBuilder builder,
+            List<ViewerComponentExample> examples,
             ViewerSourceCode sourceCode)?
         component,
     TResult Function(String id, String title, String? description)? apiDocs,
   }) {
-    return component?.call(
-        id, title, description, ctorName, designLink, builder, sourceCode);
+    return component?.call(id, title, description, ctorName, designLink,
+        builder, examples, sourceCode);
   }
 
   @override
@@ -1575,14 +1600,15 @@ class _$ViewerComponentSection extends ViewerComponentSection
             String ctorName,
             String? designLink,
             ViewerWidgetBuilder builder,
+            List<ViewerComponentExample> examples,
             ViewerSourceCode sourceCode)?
         component,
     TResult Function(String id, String title, String? description)? apiDocs,
     required TResult orElse(),
   }) {
     if (component != null) {
-      return component(
-          id, title, description, ctorName, designLink, builder, sourceCode);
+      return component(id, title, description, ctorName, designLink, builder,
+          examples, sourceCode);
     }
     return orElse();
   }
@@ -1630,6 +1656,7 @@ abstract class ViewerComponentSection extends ViewerSectionUnion {
       required String ctorName,
       String? designLink,
       required ViewerWidgetBuilder builder,
+      List<ViewerComponentExample> examples,
       required ViewerSourceCode sourceCode}) = _$ViewerComponentSection;
   const ViewerComponentSection._() : super._();
 
@@ -1654,6 +1681,9 @@ abstract class ViewerComponentSection extends ViewerSectionUnion {
 
   /// Widget builder to construct the widget with available data builders.
   ViewerWidgetBuilder get builder;
+
+  /// Examples with the constructor
+  List<ViewerComponentExample> get examples;
 
   /// Widget source code information.
   ViewerSourceCode get sourceCode;
@@ -1780,6 +1810,7 @@ class _$ViewerApiDocsSection extends ViewerApiDocsSection
             String ctorName,
             String? designLink,
             ViewerWidgetBuilder builder,
+            List<ViewerComponentExample> examples,
             ViewerSourceCode sourceCode)
         component,
     required TResult Function(String id, String title, String? description)
@@ -1801,6 +1832,7 @@ class _$ViewerApiDocsSection extends ViewerApiDocsSection
             String ctorName,
             String? designLink,
             ViewerWidgetBuilder builder,
+            List<ViewerComponentExample> examples,
             ViewerSourceCode sourceCode)?
         component,
     TResult Function(String id, String title, String? description)? apiDocs,
@@ -1821,6 +1853,7 @@ class _$ViewerApiDocsSection extends ViewerApiDocsSection
             String ctorName,
             String? designLink,
             ViewerWidgetBuilder builder,
+            List<ViewerComponentExample> examples,
             ViewerSourceCode sourceCode)?
         component,
     TResult Function(String id, String title, String? description)? apiDocs,
@@ -1889,6 +1922,261 @@ abstract class ViewerApiDocsSection extends ViewerSectionUnion {
   @override
   @JsonKey(ignore: true)
   $ViewerApiDocsSectionCopyWith<ViewerApiDocsSection> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+class _$ViewerComponentExampleTearOff {
+  const _$ViewerComponentExampleTearOff();
+
+  _ViewerComponentExample call(
+      {required String id,
+      required String title,
+      required String description,
+      required ViewerWidgetBuilder builder}) {
+    return _ViewerComponentExample(
+      id: id,
+      title: title,
+      description: description,
+      builder: builder,
+    );
+  }
+}
+
+/// @nodoc
+const $ViewerComponentExample = _$ViewerComponentExampleTearOff();
+
+/// @nodoc
+mixin _$ViewerComponentExample {
+  /// Id of the example.
+  String get id => throw _privateConstructorUsedError;
+
+  /// Title of the example.
+  String get title => throw _privateConstructorUsedError;
+
+  /// Description of the example.
+  String get description => throw _privateConstructorUsedError;
+
+  /// Widget builder to construct the widget with available data builders.
+  ViewerWidgetBuilder get builder => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $ViewerComponentExampleCopyWith<ViewerComponentExample> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ViewerComponentExampleCopyWith<$Res> {
+  factory $ViewerComponentExampleCopyWith(ViewerComponentExample value,
+          $Res Function(ViewerComponentExample) then) =
+      _$ViewerComponentExampleCopyWithImpl<$Res>;
+  $Res call(
+      {String id,
+      String title,
+      String description,
+      ViewerWidgetBuilder builder});
+
+  $ViewerWidgetBuilderCopyWith<$Res> get builder;
+}
+
+/// @nodoc
+class _$ViewerComponentExampleCopyWithImpl<$Res>
+    implements $ViewerComponentExampleCopyWith<$Res> {
+  _$ViewerComponentExampleCopyWithImpl(this._value, this._then);
+
+  final ViewerComponentExample _value;
+  // ignore: unused_field
+  final $Res Function(ViewerComponentExample) _then;
+
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? title = freezed,
+    Object? description = freezed,
+    Object? builder = freezed,
+  }) {
+    return _then(_value.copyWith(
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      title: title == freezed
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      description: description == freezed
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+      builder: builder == freezed
+          ? _value.builder
+          : builder // ignore: cast_nullable_to_non_nullable
+              as ViewerWidgetBuilder,
+    ));
+  }
+
+  @override
+  $ViewerWidgetBuilderCopyWith<$Res> get builder {
+    return $ViewerWidgetBuilderCopyWith<$Res>(_value.builder, (value) {
+      return _then(_value.copyWith(builder: value));
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$ViewerComponentExampleCopyWith<$Res>
+    implements $ViewerComponentExampleCopyWith<$Res> {
+  factory _$ViewerComponentExampleCopyWith(_ViewerComponentExample value,
+          $Res Function(_ViewerComponentExample) then) =
+      __$ViewerComponentExampleCopyWithImpl<$Res>;
+  @override
+  $Res call(
+      {String id,
+      String title,
+      String description,
+      ViewerWidgetBuilder builder});
+
+  @override
+  $ViewerWidgetBuilderCopyWith<$Res> get builder;
+}
+
+/// @nodoc
+class __$ViewerComponentExampleCopyWithImpl<$Res>
+    extends _$ViewerComponentExampleCopyWithImpl<$Res>
+    implements _$ViewerComponentExampleCopyWith<$Res> {
+  __$ViewerComponentExampleCopyWithImpl(_ViewerComponentExample _value,
+      $Res Function(_ViewerComponentExample) _then)
+      : super(_value, (v) => _then(v as _ViewerComponentExample));
+
+  @override
+  _ViewerComponentExample get _value => super._value as _ViewerComponentExample;
+
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? title = freezed,
+    Object? description = freezed,
+    Object? builder = freezed,
+  }) {
+    return _then(_ViewerComponentExample(
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      title: title == freezed
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      description: description == freezed
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+      builder: builder == freezed
+          ? _value.builder
+          : builder // ignore: cast_nullable_to_non_nullable
+              as ViewerWidgetBuilder,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_ViewerComponentExample extends _ViewerComponentExample
+    with DiagnosticableTreeMixin {
+  const _$_ViewerComponentExample(
+      {required this.id,
+      required this.title,
+      required this.description,
+      required this.builder})
+      : super._();
+
+  @override
+
+  /// Id of the example.
+  final String id;
+  @override
+
+  /// Title of the example.
+  final String title;
+  @override
+
+  /// Description of the example.
+  final String description;
+  @override
+
+  /// Widget builder to construct the widget with available data builders.
+  final ViewerWidgetBuilder builder;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'ViewerComponentExample(id: $id, title: $title, description: $description, builder: $builder)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'ViewerComponentExample'))
+      ..add(DiagnosticsProperty('id', id))
+      ..add(DiagnosticsProperty('title', title))
+      ..add(DiagnosticsProperty('description', description))
+      ..add(DiagnosticsProperty('builder', builder));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _ViewerComponentExample &&
+            const DeepCollectionEquality().equals(other.id, id) &&
+            const DeepCollectionEquality().equals(other.title, title) &&
+            const DeepCollectionEquality()
+                .equals(other.description, description) &&
+            const DeepCollectionEquality().equals(other.builder, builder));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(id),
+      const DeepCollectionEquality().hash(title),
+      const DeepCollectionEquality().hash(description),
+      const DeepCollectionEquality().hash(builder));
+
+  @JsonKey(ignore: true)
+  @override
+  _$ViewerComponentExampleCopyWith<_ViewerComponentExample> get copyWith =>
+      __$ViewerComponentExampleCopyWithImpl<_ViewerComponentExample>(
+          this, _$identity);
+}
+
+abstract class _ViewerComponentExample extends ViewerComponentExample {
+  const factory _ViewerComponentExample(
+      {required String id,
+      required String title,
+      required String description,
+      required ViewerWidgetBuilder builder}) = _$_ViewerComponentExample;
+  const _ViewerComponentExample._() : super._();
+
+  @override
+
+  /// Id of the example.
+  String get id;
+  @override
+
+  /// Title of the example.
+  String get title;
+  @override
+
+  /// Description of the example.
+  String get description;
+  @override
+
+  /// Widget builder to construct the widget with available data builders.
+  ViewerWidgetBuilder get builder;
+  @override
+  @JsonKey(ignore: true)
+  _$ViewerComponentExampleCopyWith<_ViewerComponentExample> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -2078,7 +2366,9 @@ class _$FieldMetaDataTearOff {
       {required String name,
       required Type type,
       required String typeName,
+      required bool isRequired,
       required bool isNullable,
+      required bool isNamed,
       String? defaultValueCode,
       dynamic defaultValue,
       dynamic viewerInitSelectorParam,
@@ -2088,7 +2378,9 @@ class _$FieldMetaDataTearOff {
       name: name,
       type: type,
       typeName: typeName,
+      isRequired: isRequired,
       isNullable: isNullable,
+      isNamed: isNamed,
       defaultValueCode: defaultValueCode,
       defaultValue: defaultValue,
       viewerInitSelectorParam: viewerInitSelectorParam,
@@ -2112,8 +2404,14 @@ mixin _$FieldMetaData {
   /// Display type name of the field
   String get typeName => throw _privateConstructorUsedError;
 
-  /// Flag if the field is option
+  /// Flag if the field is required
+  bool get isRequired => throw _privateConstructorUsedError;
+
+  /// Flag if the field is nullable
   bool get isNullable => throw _privateConstructorUsedError;
+
+  /// Flag if the field is named (if not, it is positional)
+  bool get isNamed => throw _privateConstructorUsedError;
 
   /// Default value in string format
   String? get defaultValueCode => throw _privateConstructorUsedError;
@@ -2151,7 +2449,9 @@ abstract class $FieldMetaDataCopyWith<$Res> {
       {String name,
       Type type,
       String typeName,
+      bool isRequired,
       bool isNullable,
+      bool isNamed,
       String? defaultValueCode,
       dynamic defaultValue,
       dynamic viewerInitSelectorParam,
@@ -2173,7 +2473,9 @@ class _$FieldMetaDataCopyWithImpl<$Res>
     Object? name = freezed,
     Object? type = freezed,
     Object? typeName = freezed,
+    Object? isRequired = freezed,
     Object? isNullable = freezed,
+    Object? isNamed = freezed,
     Object? defaultValueCode = freezed,
     Object? defaultValue = freezed,
     Object? viewerInitSelectorParam = freezed,
@@ -2193,9 +2495,17 @@ class _$FieldMetaDataCopyWithImpl<$Res>
           ? _value.typeName
           : typeName // ignore: cast_nullable_to_non_nullable
               as String,
+      isRequired: isRequired == freezed
+          ? _value.isRequired
+          : isRequired // ignore: cast_nullable_to_non_nullable
+              as bool,
       isNullable: isNullable == freezed
           ? _value.isNullable
           : isNullable // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isNamed: isNamed == freezed
+          ? _value.isNamed
+          : isNamed // ignore: cast_nullable_to_non_nullable
               as bool,
       defaultValueCode: defaultValueCode == freezed
           ? _value.defaultValueCode
@@ -2232,7 +2542,9 @@ abstract class _$FieldMetaDataCopyWith<$Res>
       {String name,
       Type type,
       String typeName,
+      bool isRequired,
       bool isNullable,
+      bool isNamed,
       String? defaultValueCode,
       dynamic defaultValue,
       dynamic viewerInitSelectorParam,
@@ -2256,7 +2568,9 @@ class __$FieldMetaDataCopyWithImpl<$Res>
     Object? name = freezed,
     Object? type = freezed,
     Object? typeName = freezed,
+    Object? isRequired = freezed,
     Object? isNullable = freezed,
+    Object? isNamed = freezed,
     Object? defaultValueCode = freezed,
     Object? defaultValue = freezed,
     Object? viewerInitSelectorParam = freezed,
@@ -2276,9 +2590,17 @@ class __$FieldMetaDataCopyWithImpl<$Res>
           ? _value.typeName
           : typeName // ignore: cast_nullable_to_non_nullable
               as String,
+      isRequired: isRequired == freezed
+          ? _value.isRequired
+          : isRequired // ignore: cast_nullable_to_non_nullable
+              as bool,
       isNullable: isNullable == freezed
           ? _value.isNullable
           : isNullable // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isNamed: isNamed == freezed
+          ? _value.isNamed
+          : isNamed // ignore: cast_nullable_to_non_nullable
               as bool,
       defaultValueCode: defaultValueCode == freezed
           ? _value.defaultValueCode
@@ -2311,7 +2633,9 @@ class _$_FieldMetaData extends _FieldMetaData with DiagnosticableTreeMixin {
       {required this.name,
       required this.type,
       required this.typeName,
+      required this.isRequired,
       required this.isNullable,
+      required this.isNamed,
       this.defaultValueCode,
       this.defaultValue,
       this.viewerInitSelectorParam,
@@ -2333,8 +2657,16 @@ class _$_FieldMetaData extends _FieldMetaData with DiagnosticableTreeMixin {
   final String typeName;
   @override
 
-  /// Flag if the field is option
+  /// Flag if the field is required
+  final bool isRequired;
+  @override
+
+  /// Flag if the field is nullable
   final bool isNullable;
+  @override
+
+  /// Flag if the field is named (if not, it is positional)
+  final bool isNamed;
   @override
 
   /// Default value in string format
@@ -2365,7 +2697,7 @@ class _$_FieldMetaData extends _FieldMetaData with DiagnosticableTreeMixin {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'FieldMetaData(name: $name, type: $type, typeName: $typeName, isNullable: $isNullable, defaultValueCode: $defaultValueCode, defaultValue: $defaultValue, viewerInitSelectorParam: $viewerInitSelectorParam, viewerInitValueCode: $viewerInitValueCode, documentation: $documentation)';
+    return 'FieldMetaData(name: $name, type: $type, typeName: $typeName, isRequired: $isRequired, isNullable: $isNullable, isNamed: $isNamed, defaultValueCode: $defaultValueCode, defaultValue: $defaultValue, viewerInitSelectorParam: $viewerInitSelectorParam, viewerInitValueCode: $viewerInitValueCode, documentation: $documentation)';
   }
 
   @override
@@ -2376,7 +2708,9 @@ class _$_FieldMetaData extends _FieldMetaData with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty('name', name))
       ..add(DiagnosticsProperty('type', type))
       ..add(DiagnosticsProperty('typeName', typeName))
+      ..add(DiagnosticsProperty('isRequired', isRequired))
       ..add(DiagnosticsProperty('isNullable', isNullable))
+      ..add(DiagnosticsProperty('isNamed', isNamed))
       ..add(DiagnosticsProperty('defaultValueCode', defaultValueCode))
       ..add(DiagnosticsProperty('defaultValue', defaultValue))
       ..add(DiagnosticsProperty(
@@ -2394,7 +2728,10 @@ class _$_FieldMetaData extends _FieldMetaData with DiagnosticableTreeMixin {
             const DeepCollectionEquality().equals(other.type, type) &&
             const DeepCollectionEquality().equals(other.typeName, typeName) &&
             const DeepCollectionEquality()
+                .equals(other.isRequired, isRequired) &&
+            const DeepCollectionEquality()
                 .equals(other.isNullable, isNullable) &&
+            const DeepCollectionEquality().equals(other.isNamed, isNamed) &&
             const DeepCollectionEquality()
                 .equals(other.defaultValueCode, defaultValueCode) &&
             const DeepCollectionEquality()
@@ -2413,7 +2750,9 @@ class _$_FieldMetaData extends _FieldMetaData with DiagnosticableTreeMixin {
       const DeepCollectionEquality().hash(name),
       const DeepCollectionEquality().hash(type),
       const DeepCollectionEquality().hash(typeName),
+      const DeepCollectionEquality().hash(isRequired),
       const DeepCollectionEquality().hash(isNullable),
+      const DeepCollectionEquality().hash(isNamed),
       const DeepCollectionEquality().hash(defaultValueCode),
       const DeepCollectionEquality().hash(defaultValue),
       const DeepCollectionEquality().hash(viewerInitSelectorParam),
@@ -2431,7 +2770,9 @@ abstract class _FieldMetaData extends FieldMetaData {
       {required String name,
       required Type type,
       required String typeName,
+      required bool isRequired,
       required bool isNullable,
+      required bool isNamed,
       String? defaultValueCode,
       dynamic defaultValue,
       dynamic viewerInitSelectorParam,
@@ -2453,8 +2794,16 @@ abstract class _FieldMetaData extends FieldMetaData {
   String get typeName;
   @override
 
-  /// Flag if the field is option
+  /// Flag if the field is required
+  bool get isRequired;
+  @override
+
+  /// Flag if the field is nullable
   bool get isNullable;
+  @override
+
+  /// Flag if the field is named (if not, it is positional)
+  bool get isNamed;
   @override
 
   /// Default value in string format

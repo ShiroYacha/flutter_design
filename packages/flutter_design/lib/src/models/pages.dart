@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_design_annotation/flutter_design_annotation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:recase/recase.dart';
 
@@ -152,6 +153,9 @@ class ViewerSectionUnion with _$ViewerSectionUnion implements Searchable {
     /// Widget builder to construct the widget with available data builders.
     required ViewerWidgetBuilder builder,
 
+    /// Examples with the constructor
+    @Default([]) List<ViewerComponentExample> examples,
+
     /// Widget source code information.
     required ViewerSourceCode sourceCode,
   }) = ViewerComponentSection;
@@ -171,6 +175,26 @@ class ViewerSectionUnion with _$ViewerSectionUnion implements Searchable {
 
   @override
   List<SearchableElement> get searchableElements => [];
+}
+
+/// Component example for a specific widget constructor
+@freezed
+class ViewerComponentExample with _$ViewerComponentExample {
+  const ViewerComponentExample._();
+
+  const factory ViewerComponentExample({
+    /// Id of the example.
+    required String id,
+
+    /// Title of the example.
+    required String title,
+
+    /// Description of the example.
+    required String description,
+
+    /// Widget builder to construct the widget with available data builders.
+    required ViewerWidgetBuilder builder,
+  }) = _ViewerComponentExample;
 }
 
 /// Function to build a widget with the context and a data builder factory
@@ -207,8 +231,14 @@ class FieldMetaData with _$FieldMetaData {
     /// Display type name of the field
     required String typeName,
 
-    /// Flag if the field is option
+    /// Flag if the field is required
+    required bool isRequired,
+
+    /// Flag if the field is nullable
     required bool isNullable,
+
+    /// Flag if the field is named (if not, it is positional)
+    required bool isNamed,
 
     /// Default value in string format
     String? defaultValueCode,

@@ -157,6 +157,32 @@ class ComponentSection extends HookConsumerWidget {
               widgetDisplayHeight: widgetDisplayHeight,
             ),
           ),
+          if (component.examples.isNotEmpty)
+            ...component.examples.fold(
+              [],
+              (previousValue, element) => [
+                ...previousValue,
+                Spacers.v20,
+                TitleDescription(
+                  style: TextDescriptionStyle.section(context),
+                  title: element.title,
+                  description: element.description,
+                ),
+                Spacers.v16,
+                ProviderScope(
+                  overrides: [
+                    viewerComponentSectionProvider.overrideWithValue(
+                      component.copyWith(
+                        builder: element.builder,
+                      ),
+                    ),
+                  ],
+                  child: ComponentFramePanel(
+                    widgetDisplayHeight: widgetDisplayHeight,
+                  ),
+                ),
+              ],
+            ),
         ],
       ),
     );

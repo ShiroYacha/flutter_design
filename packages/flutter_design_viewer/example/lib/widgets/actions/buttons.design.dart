@@ -7,8 +7,30 @@ part of 'buttons.dart';
 // **************************************************************************
 
 // ignore_for_file: type=lint
+// ignore_for_file: unused_element
 typedef _$FunctionAliasForOnPressedViaButton = void Function();
 typedef _$FunctionAliasForOnPressedViaButtonLabel = void Function();
+
+class _$ButtonParamBuilder extends ComponentParamBuilder {
+  final dynamic child;
+  final dynamic onPressed;
+
+  const _$ButtonParamBuilder({
+    required this.child,
+    this.onPressed,
+  }) : super();
+}
+
+class _$ButtonLabelParamBuilder extends ComponentParamBuilder {
+  final dynamic label;
+  final dynamic onPressed;
+
+  const _$ButtonLabelParamBuilder({
+    required this.label,
+    this.onPressed,
+  }) : super();
+}
+
 final generatedWidgetsActionsButtonsButtonPage = ViewerDocumentPage(
   id: 'button',
   namespace: ['widgets', 'actions', 'buttons'],
@@ -23,8 +45,8 @@ The current design encapsulates the [ElevatedButton](https://api.flutter.dev/flu
 ''',
   sections: [
     ViewerSectionUnion.component(
-      id: 'component_anatomy',
-      title: 'Anatomy',
+      id: 'component_button',
+      title: 'Button()',
       ctorName: 'Button',
       designLink: null,
       builder: ViewerWidgetBuilder(
@@ -38,6 +60,8 @@ The current design encapsulates the [ElevatedButton](https://api.flutter.dev/flu
             type: Widget,
             typeName: 'Widget',
             isNullable: false,
+            isRequired: true,
+            isNamed: true,
             defaultValue: null,
             defaultValueCode: "null",
             viewerInitSelectorParam: DesignParamWidgetPlaceholder(
@@ -56,6 +80,8 @@ The current design encapsulates the [ElevatedButton](https://api.flutter.dev/flu
             type: _$FunctionAliasForOnPressedViaButton,
             typeName: 'void Function()',
             isNullable: true,
+            isRequired: false,
+            isNamed: true,
             defaultValue: null,
             defaultValueCode: "null",
             viewerInitValueCode: "null",
@@ -89,7 +115,7 @@ class Button extends StatelessWidget {
     ),
     ViewerSectionUnion.component(
       id: 'component_button_label',
-      title: 'Button.label',
+      title: 'Button.label()',
       ctorName: 'Button.label',
       designLink: null,
       builder: ViewerWidgetBuilder(
@@ -103,6 +129,8 @@ class Button extends StatelessWidget {
             type: String,
             typeName: 'String',
             isNullable: false,
+            isRequired: true,
+            isNamed: true,
             defaultValue: null,
             defaultValueCode: '''null''',
             viewerInitSelectorParam: DesignParamStringLorem(
@@ -116,6 +144,8 @@ class Button extends StatelessWidget {
             type: _$FunctionAliasForOnPressedViaButtonLabel,
             typeName: 'void Function()',
             isNullable: true,
+            isRequired: false,
+            isNamed: true,
             defaultValue: null,
             defaultValueCode: "null",
             viewerInitValueCode: "null",

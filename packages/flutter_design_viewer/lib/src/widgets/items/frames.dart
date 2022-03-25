@@ -44,6 +44,8 @@ class ComponentFramePanel extends HookConsumerWidget {
     final viewerState = ref.watch(viewerStateProvider);
     final viewerWidgetBuilder =
         ref.watch(viewerComponentSectionProvider.select((v) => v.builder));
+    final rightPanelInitialWidth = ref
+        .watch(viewerSettingsProvider.select((v) => v.rightPanelInitialWidth));
     final dataBuilderRegistry = ref.watch(dataBuilderRegistryProvider);
     final selectedViewMode = useState(viewerState.viewMode);
     final selectedDisplayMode = useState(viewerState.displayMode);
@@ -54,10 +56,11 @@ class ComponentFramePanel extends HookConsumerWidget {
     // Assemble data builders
     final showDataBuilder = useState(viewerState.showDataBuilderByDefault);
     final dataBuilderOptions = useMemoized(
-        () => dataBuilderRegistry.getAllOptionsFor(
-              {for (var k in viewerWidgetBuilder.fieldMetaDataset) k.name: k},
-            ),
-        [viewerWidgetBuilder]);
+      () => dataBuilderRegistry.getAllOptionsFor(
+        {for (var k in viewerWidgetBuilder.fieldMetaDataset) k.name: k},
+      ),
+      [viewerWidgetBuilder],
+    );
     final dataBuilders = useState({
       for (var k in viewerWidgetBuilder.fieldMetaDataset.where((e) =>
           dataBuilderOptions.containsKey(e.name) &&
@@ -116,8 +119,7 @@ class ComponentFramePanel extends HookConsumerWidget {
                 height: widgetDisplayHeight,
                 child: LayoutBuilder(builder: (context, constraints) {
                   final maxWidth = constraints.maxWidth;
-                  const rightPanelWidth = 600;
-                  final rightPortion = rightPanelWidth / maxWidth;
+                  final rightPortion = rightPanelInitialWidth / maxWidth;
                   return NSplitter(
                     // Use a key composed of the current builder instance & side by side
                     // to invalidate the initial fraction if needed

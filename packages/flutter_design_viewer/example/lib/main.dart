@@ -39,6 +39,7 @@ void main() async {
         githubLink:
             'https://github.com/ShiroYacha/flutter_design/tree/main/packages/flutter_design_viewer/example',
         widgetDisplayHeight: 500,
+        rightPanelInitialWidth: 500,
       ),
       dataBuilders: {
         String: [

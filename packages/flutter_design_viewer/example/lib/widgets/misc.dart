@@ -10,7 +10,8 @@ part 'misc.design.dart';
 )
 class Avatar extends StatelessWidget {
   @DesignField(
-      parameter: 'https://images.unsplash.com/photo-1529778873920-4da4926a72c2')
+    parameter: 'https://images.unsplash.com/photo-1529778873920-4da4926a72c2',
+  )
   final String uri;
 
   final double radius;

@@ -7,6 +7,18 @@ part of 'misc.dart';
 // **************************************************************************
 
 // ignore_for_file: type=lint
+// ignore_for_file: unused_element
+
+class _$AvatarParamBuilder extends ComponentParamBuilder {
+  final dynamic uri;
+  final dynamic radius;
+
+  const _$AvatarParamBuilder({
+    required this.uri,
+    this.radius,
+  }) : super();
+}
+
 final generatedWidgetsMiscAvatarPage = ViewerDocumentPage(
   id: 'avatar',
   namespace: ['widgets', 'misc'],
@@ -15,8 +27,8 @@ final generatedWidgetsMiscAvatarPage = ViewerDocumentPage(
   description: null,
   sections: [
     ViewerSectionUnion.component(
-      id: 'component_anatomy',
-      title: 'Anatomy',
+      id: 'component_avatar',
+      title: 'Avatar()',
       ctorName: 'Avatar',
       designLink: '''
 https://www.figma.com/
@@ -32,6 +44,8 @@ https://www.figma.com/
             type: String,
             typeName: 'String',
             isNullable: false,
+            isRequired: true,
+            isNamed: true,
             defaultValue: null,
             defaultValueCode: '''null''',
             viewerInitSelectorParam:
@@ -45,6 +59,8 @@ https://www.figma.com/
             type: double,
             typeName: 'double',
             isNullable: false,
+            isRequired: false,
+            isNamed: true,
             defaultValue: 30.0,
             defaultValueCode: "30.0",
             viewerInitValueCode: "30.0",
@@ -85,6 +101,18 @@ class Avatar extends StatelessWidget {
 );
 
 // ignore_for_file: type=lint
+// ignore_for_file: unused_element
+
+class _$AvatarDuoParamBuilder extends ComponentParamBuilder {
+  final dynamic left;
+  final dynamic right;
+
+  const _$AvatarDuoParamBuilder({
+    required this.left,
+    this.right,
+  }) : super();
+}
+
 final generatedWidgetsMiscAvatarDuoPage = ViewerDocumentPage(
   id: 'avatarDuo',
   namespace: ['widgets', 'misc'],
@@ -93,8 +121,8 @@ final generatedWidgetsMiscAvatarDuoPage = ViewerDocumentPage(
   description: null,
   sections: [
     ViewerSectionUnion.component(
-      id: 'component_anatomy',
-      title: 'Anatomy',
+      id: 'component_avatar_duo',
+      title: 'AvatarDuo()',
       ctorName: 'AvatarDuo',
       designLink: null,
       builder: ViewerWidgetBuilder(
@@ -108,6 +136,8 @@ final generatedWidgetsMiscAvatarDuoPage = ViewerDocumentPage(
             type: AvatarModel,
             typeName: 'AvatarModel',
             isNullable: false,
+            isRequired: true,
+            isNamed: true,
             defaultValue: null,
             defaultValueCode: "null",
             viewerInitSelectorParam: AvatarModel(
@@ -123,6 +153,8 @@ final generatedWidgetsMiscAvatarDuoPage = ViewerDocumentPage(
             type: AvatarModel,
             typeName: 'AvatarModel',
             isNullable: false,
+            isRequired: false,
+            isNamed: true,
             defaultValue: const AvatarModel(
                 uri:
                     'https://cdn.omlet.co.uk/images/originals/sleeping_kitten.jpg'),

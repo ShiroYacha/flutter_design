@@ -33,7 +33,7 @@ class SpacedRow extends StatelessWidget {
 /// A responsive wrapping row that tries to fit as much widget
 /// evenly as possible based on the screen constraints.
 /// It will try to spread out its children to multiple row if necessary.
-@Design(/*...*/)
+@design
 class ResponsiveEvenRow extends StatelessWidget {
   /// The width threshold to be partitioned to display the widgets in a staggered grid
   final double widthThreshold;
@@ -88,6 +88,28 @@ on bigger screens, it is better to center its content with a fixed max width.
 ''',
 )
 class ResponsiveSizedBox extends StatelessWidget {
+  @DesignExamples(examples: [
+    DesignExample(
+      title: 'Example red',
+      description: 'Example case with red infinite placeholder as child',
+      builder: _$ResponsiveSizedBoxParamBuilder(
+        child: DesignParamWidgetPlaceholder(
+          color: Colors.red,
+          size: Size.infinite,
+        ),
+      ),
+    ),
+    DesignExample(
+      title: 'Example blue',
+      description: 'Example case with blue infinite placeholder as child',
+      builder: _$ResponsiveSizedBoxParamBuilder(
+        child: DesignParamWidgetPlaceholder(
+          color: Colors.blue,
+          size: Size.infinite,
+        ),
+      ),
+    ),
+  ])
   const ResponsiveSizedBox({
     required this.child,
     this.widthWhenConstrained = 400.0,

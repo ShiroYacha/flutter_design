@@ -13,8 +13,13 @@ import 'package:meta/meta.dart';
 const _annotationsToIgnore = [
   'design',
   'Design',
+  'TDesign',
   'designField',
   'DesignField',
+  'TDesignField',
+  'designExamples',
+  'DesignExamples',
+  'TDesignExamples',
 ];
 
 /// A visitor used to write a source representation of a visited AST node (and

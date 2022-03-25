@@ -11,10 +11,7 @@ abstract class TDataBuilder<TWidget, TBuildContext, TData, TParameter> {
   TParameter parameter;
   TDataBuilder(this.parameter);
   String get name;
-  TData build(
-    TBuildContext context,
-    String field,
-  );
+  TData build(TBuildContext context, String field);
   TWidget buildDesigner(
     TBuildContext context,
     TUpdateDataBuilder<TWidget, TBuildContext, TData, TParameter> updateBuilder,
@@ -27,4 +24,8 @@ abstract class TDataBuilder<TWidget, TBuildContext, TData, TParameter> {
 abstract class TDataBuilderFactory<TBuildContext> {
   const TDataBuilderFactory();
   T build<T>(TBuildContext context, String field);
+}
+
+abstract class ComponentParamBuilder {
+  const ComponentParamBuilder();
 }

@@ -7,6 +7,18 @@ part of 'containers.dart';
 // **************************************************************************
 
 // ignore_for_file: type=lint
+// ignore_for_file: unused_element
+
+class _$SpacedRowParamBuilder extends ComponentParamBuilder {
+  final dynamic children;
+  final dynamic spacing;
+
+  const _$SpacedRowParamBuilder({
+    required this.children,
+    this.spacing,
+  }) : super();
+}
+
 final generatedWidgetsLayoutsContainersSpacedRowPage = ViewerDocumentPage(
   id: 'spacedRow',
   namespace: ['widgets', 'layouts', 'containers'],
@@ -15,8 +27,8 @@ final generatedWidgetsLayoutsContainersSpacedRowPage = ViewerDocumentPage(
   description: null,
   sections: [
     ViewerSectionUnion.component(
-      id: 'component_anatomy',
-      title: 'Anatomy',
+      id: 'component_spaced_row',
+      title: 'SpacedRow()',
       ctorName: 'SpacedRow',
       designLink: null,
       builder: ViewerWidgetBuilder(
@@ -30,6 +42,8 @@ final generatedWidgetsLayoutsContainersSpacedRowPage = ViewerDocumentPage(
             type: List<Widget>,
             typeName: 'List<Widget>',
             isNullable: false,
+            isRequired: true,
+            isNamed: true,
             defaultValue: null,
             defaultValueCode: "null",
             viewerInitValueCode: "null",
@@ -40,6 +54,8 @@ final generatedWidgetsLayoutsContainersSpacedRowPage = ViewerDocumentPage(
             type: double,
             typeName: 'double',
             isNullable: false,
+            isRequired: false,
+            isNamed: true,
             defaultValue: 10.0,
             defaultValueCode: "10.0",
             viewerInitValueCode: "10.0",
@@ -79,6 +95,22 @@ class SpacedRow extends StatelessWidget {
 );
 
 // ignore_for_file: type=lint
+// ignore_for_file: unused_element
+
+class _$ResponsiveEvenRowParamBuilder extends ComponentParamBuilder {
+  final dynamic childrenCount;
+  final dynamic widthThreshold;
+  final dynamic mainAxisSpacing;
+  final dynamic crossAxisSpacing;
+
+  const _$ResponsiveEvenRowParamBuilder({
+    required this.childrenCount,
+    this.widthThreshold,
+    this.mainAxisSpacing,
+    this.crossAxisSpacing,
+  }) : super();
+}
+
 final generatedWidgetsLayoutsContainersResponsiveEvenRowPage =
     ViewerDocumentPage(
   id: 'responsiveEvenRow',
@@ -88,8 +120,8 @@ final generatedWidgetsLayoutsContainersResponsiveEvenRowPage =
   description: null,
   sections: [
     ViewerSectionUnion.component(
-      id: 'component_anatomy',
-      title: 'Anatomy',
+      id: 'component_responsive_even_row',
+      title: 'ResponsiveEvenRow()',
       ctorName: 'ResponsiveEvenRow',
       designLink: null,
       builder: ViewerWidgetBuilder(
@@ -105,6 +137,8 @@ final generatedWidgetsLayoutsContainersResponsiveEvenRowPage =
             type: int,
             typeName: 'int',
             isNullable: false,
+            isRequired: true,
+            isNamed: true,
             defaultValue: null,
             defaultValueCode: "null",
             viewerInitSelectorParam: 4,
@@ -118,6 +152,8 @@ final generatedWidgetsLayoutsContainersResponsiveEvenRowPage =
             type: double,
             typeName: 'double',
             isNullable: false,
+            isRequired: false,
+            isNamed: true,
             defaultValue: 300.0,
             defaultValueCode: "300.0",
             viewerInitValueCode: "300.0",
@@ -129,6 +165,8 @@ final generatedWidgetsLayoutsContainersResponsiveEvenRowPage =
             type: double,
             typeName: 'double',
             isNullable: false,
+            isRequired: false,
+            isNamed: true,
             defaultValue: 10.0,
             defaultValueCode: "10.0",
             viewerInitValueCode: "10.0",
@@ -139,6 +177,8 @@ final generatedWidgetsLayoutsContainersResponsiveEvenRowPage =
             type: double,
             typeName: 'double',
             isNullable: false,
+            isRequired: false,
+            isNamed: true,
             defaultValue: 10.0,
             defaultValueCode: "10.0",
             viewerInitValueCode: "10.0",
@@ -190,6 +230,24 @@ class ResponsiveEvenRow extends StatelessWidget {
 );
 
 // ignore_for_file: type=lint
+// ignore_for_file: unused_element
+
+class _$ResponsiveSizedBoxParamBuilder extends ComponentParamBuilder {
+  final dynamic child;
+  final dynamic widthWhenConstrained;
+  final dynamic paddingWhenConstrained;
+  final dynamic centeredWhenConstrained;
+  final dynamic breakpoint;
+
+  const _$ResponsiveSizedBoxParamBuilder({
+    required this.child,
+    this.widthWhenConstrained,
+    this.paddingWhenConstrained,
+    this.centeredWhenConstrained,
+    this.breakpoint,
+  }) : super();
+}
+
 final generatedWidgetsLayoutsContainersResponsiveSizedBoxPage =
     ViewerDocumentPage(
   id: 'responsiveSizedBox',
@@ -206,8 +264,8 @@ on bigger screens, it is better to center its content with a fixed max width.
 ''',
   sections: [
     ViewerSectionUnion.component(
-      id: 'component_anatomy',
-      title: 'Anatomy',
+      id: 'component_responsive_sized_box',
+      title: 'ResponsiveSizedBox()',
       ctorName: 'ResponsiveSizedBox',
       designLink: null,
       builder: ViewerWidgetBuilder(
@@ -226,6 +284,8 @@ on bigger screens, it is better to center its content with a fixed max width.
             type: Widget,
             typeName: 'Widget',
             isNullable: false,
+            isRequired: true,
+            isNamed: true,
             defaultValue: null,
             defaultValueCode: "null",
             viewerInitSelectorParam: DesignParamWidgetPlaceholder(
@@ -240,6 +300,8 @@ on bigger screens, it is better to center its content with a fixed max width.
             type: double,
             typeName: 'double',
             isNullable: false,
+            isRequired: false,
+            isNamed: true,
             defaultValue: 400.0,
             defaultValueCode: "400.0",
             viewerInitValueCode: "400.0",
@@ -251,6 +313,8 @@ on bigger screens, it is better to center its content with a fixed max width.
             type: EdgeInsets,
             typeName: 'EdgeInsets',
             isNullable: false,
+            isRequired: false,
+            isNamed: true,
             defaultValue: const EdgeInsets.all(20),
             defaultValueCode: "const EdgeInsets.all(20)",
             viewerInitValueCode: "const EdgeInsets.all(20)",
@@ -262,6 +326,8 @@ on bigger screens, it is better to center its content with a fixed max width.
             type: bool,
             typeName: 'bool',
             isNullable: false,
+            isRequired: false,
+            isNamed: true,
             defaultValue: true,
             defaultValueCode: "true",
             viewerInitValueCode: "true",
@@ -273,6 +339,8 @@ on bigger screens, it is better to center its content with a fixed max width.
             type: double,
             typeName: 'double',
             isNullable: false,
+            isRequired: false,
+            isNamed: true,
             defaultValue: 420,
             defaultValueCode: "420",
             viewerInitValueCode: "420",
@@ -281,6 +349,184 @@ on bigger screens, it is better to center its content with a fixed max width.
           ),
         ],
       ),
+      examples: [
+        ViewerComponentExample(
+          id: 'responsivesizedbox_0_example',
+          title: 'Example red',
+          description: 'Example case with red infinite placeholder as child',
+          builder: ViewerWidgetBuilder(
+            build: (context, factory) => ResponsiveSizedBox(
+              child: factory.build(context, 'child'),
+              widthWhenConstrained:
+                  factory.build(context, 'widthWhenConstrained'),
+              paddingWhenConstrained:
+                  factory.build(context, 'paddingWhenConstrained'),
+              centeredWhenConstrained:
+                  factory.build(context, 'centeredWhenConstrained'),
+              breakpoint: factory.build(context, 'breakpoint'),
+            ),
+            fieldMetaDataset: const [
+              FieldMetaData(
+                name: 'child',
+                type: Widget,
+                typeName: 'Widget',
+                isNullable: false,
+                isRequired: true,
+                isNamed: true,
+                defaultValue: null,
+                defaultValueCode: "null",
+                viewerInitSelectorParam: DesignParamWidgetPlaceholder(
+                  color: Colors.red,
+                  size: Size.infinite,
+                ),
+                viewerInitValueCode:
+                    '''DesignParamWidgetPlaceholder(color: Colors.red, size: Size.infinite, )''',
+                documentation: '''/// The child widget''',
+              ),
+              FieldMetaData(
+                name: 'widthWhenConstrained',
+                type: double,
+                typeName: 'double',
+                isNullable: false,
+                isRequired: false,
+                isNamed: true,
+                defaultValue: 400.0,
+                defaultValueCode: "400.0",
+                viewerInitValueCode: "400.0",
+                documentation:
+                    '''/// The maximum size of the child widget when constrained''',
+              ),
+              FieldMetaData(
+                name: 'paddingWhenConstrained',
+                type: EdgeInsets,
+                typeName: 'EdgeInsets',
+                isNullable: false,
+                isRequired: false,
+                isNamed: true,
+                defaultValue: const EdgeInsets.all(20),
+                defaultValueCode: "const EdgeInsets.all(20)",
+                viewerInitValueCode: "const EdgeInsets.all(20)",
+                documentation:
+                    '''/// The padding of the child widget when constrained''',
+              ),
+              FieldMetaData(
+                name: 'centeredWhenConstrained',
+                type: bool,
+                typeName: 'bool',
+                isNullable: false,
+                isRequired: false,
+                isNamed: true,
+                defaultValue: true,
+                defaultValueCode: "true",
+                viewerInitValueCode: "true",
+                documentation:
+                    '''/// Indicates if the child should be wrapped in a [Center] when constrained''',
+              ),
+              FieldMetaData(
+                name: 'breakpoint',
+                type: double,
+                typeName: 'double',
+                isNullable: false,
+                isRequired: false,
+                isNamed: true,
+                defaultValue: 420,
+                defaultValueCode: "420",
+                viewerInitValueCode: "420",
+                documentation:
+                    '''/// The breakpoint from which the child widget gets constrained''',
+              ),
+            ],
+          ),
+        ),
+        ViewerComponentExample(
+          id: 'responsivesizedbox_1_example',
+          title: 'Example blue',
+          description: 'Example case with blue infinite placeholder as child',
+          builder: ViewerWidgetBuilder(
+            build: (context, factory) => ResponsiveSizedBox(
+              child: factory.build(context, 'child'),
+              widthWhenConstrained:
+                  factory.build(context, 'widthWhenConstrained'),
+              paddingWhenConstrained:
+                  factory.build(context, 'paddingWhenConstrained'),
+              centeredWhenConstrained:
+                  factory.build(context, 'centeredWhenConstrained'),
+              breakpoint: factory.build(context, 'breakpoint'),
+            ),
+            fieldMetaDataset: const [
+              FieldMetaData(
+                name: 'child',
+                type: Widget,
+                typeName: 'Widget',
+                isNullable: false,
+                isRequired: true,
+                isNamed: true,
+                defaultValue: null,
+                defaultValueCode: "null",
+                viewerInitSelectorParam: DesignParamWidgetPlaceholder(
+                  color: Colors.blue,
+                  size: Size.infinite,
+                ),
+                viewerInitValueCode:
+                    '''DesignParamWidgetPlaceholder(color: Colors.blue, size: Size.infinite, )''',
+                documentation: '''/// The child widget''',
+              ),
+              FieldMetaData(
+                name: 'widthWhenConstrained',
+                type: double,
+                typeName: 'double',
+                isNullable: false,
+                isRequired: false,
+                isNamed: true,
+                defaultValue: 400.0,
+                defaultValueCode: "400.0",
+                viewerInitValueCode: "400.0",
+                documentation:
+                    '''/// The maximum size of the child widget when constrained''',
+              ),
+              FieldMetaData(
+                name: 'paddingWhenConstrained',
+                type: EdgeInsets,
+                typeName: 'EdgeInsets',
+                isNullable: false,
+                isRequired: false,
+                isNamed: true,
+                defaultValue: const EdgeInsets.all(20),
+                defaultValueCode: "const EdgeInsets.all(20)",
+                viewerInitValueCode: "const EdgeInsets.all(20)",
+                documentation:
+                    '''/// The padding of the child widget when constrained''',
+              ),
+              FieldMetaData(
+                name: 'centeredWhenConstrained',
+                type: bool,
+                typeName: 'bool',
+                isNullable: false,
+                isRequired: false,
+                isNamed: true,
+                defaultValue: true,
+                defaultValueCode: "true",
+                viewerInitValueCode: "true",
+                documentation:
+                    '''/// Indicates if the child should be wrapped in a [Center] when constrained''',
+              ),
+              FieldMetaData(
+                name: 'breakpoint',
+                type: double,
+                typeName: 'double',
+                isNullable: false,
+                isRequired: false,
+                isNamed: true,
+                defaultValue: 420,
+                defaultValueCode: "420",
+                viewerInitValueCode: "420",
+                documentation:
+                    '''/// The breakpoint from which the child widget gets constrained''',
+              ),
+            ],
+          ),
+        ),
+      ],
       sourceCode: const ViewerSourceCode(
           location: 'package:viewer_example/widgets/layouts/containers.dart',
           code: '''

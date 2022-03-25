@@ -7,6 +7,18 @@ part of 'home_screen.dart';
 // **************************************************************************
 
 // ignore_for_file: type=lint
+// ignore_for_file: unused_element
+
+class _$HomeScreenParamBuilder extends ComponentParamBuilder {
+  final dynamic body;
+  final dynamic appbar;
+
+  const _$HomeScreenParamBuilder({
+    required this.body,
+    this.appbar,
+  }) : super();
+}
+
 final generatedScreensHomeScreenHomeScreenPage = ViewerDocumentPage(
   id: 'homeScreen',
   namespace: ['screens', 'home_screen'],
@@ -15,8 +27,8 @@ final generatedScreensHomeScreenHomeScreenPage = ViewerDocumentPage(
   description: null,
   sections: [
     ViewerSectionUnion.component(
-      id: 'component_anatomy',
-      title: 'Anatomy',
+      id: 'component_home_screen',
+      title: 'HomeScreen()',
       ctorName: 'HomeScreen',
       designLink: null,
       builder: ViewerWidgetBuilder(
@@ -30,6 +42,8 @@ final generatedScreensHomeScreenHomeScreenPage = ViewerDocumentPage(
             type: Widget,
             typeName: 'Widget',
             isNullable: false,
+            isRequired: true,
+            isNamed: true,
             defaultValue: null,
             defaultValueCode: "null",
             viewerInitValueCode: "null",
@@ -40,6 +54,8 @@ final generatedScreensHomeScreenHomeScreenPage = ViewerDocumentPage(
             type: AppBar,
             typeName: 'AppBar',
             isNullable: true,
+            isRequired: false,
+            isNamed: true,
             defaultValue: null,
             defaultValueCode: "null",
             viewerInitValueCode: "null",
