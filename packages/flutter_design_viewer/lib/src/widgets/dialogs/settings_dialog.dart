@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:ionicons/ionicons.dart';
 
@@ -35,6 +36,7 @@ class SettingsDialog extends HookConsumerWidget {
             ? mediaQuery.size.height
             : mediaQuery.size.height * 0.8,
         child: SingleChildScrollView(
+          controller: useScrollController(),
           child: Padding(
             padding: SpacingDesign.paddingAll20,
             child: Column(

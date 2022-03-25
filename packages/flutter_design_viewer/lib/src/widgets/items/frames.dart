@@ -218,6 +218,7 @@ class CompontentFrameCodeDisplay extends HookConsumerWidget {
         fit: expand ? StackFit.expand : StackFit.passthrough,
         children: [
           SingleChildScrollView(
+            controller: useScrollController(),
             child: Paddings.bottom40(
               child: HighlightView(
                 sourceCode.code,
@@ -277,6 +278,7 @@ class CompontentFrameDataDisplay extends HookConsumerWidget {
               child: Text('No data found'),
             )
           : ListView(
+              controller: useScrollController(),
               children: viewerWidgetBuilder.fieldMetaDataset.fold<List<Widget>>(
                   <Widget>[],
                   (pe, v) => [
@@ -284,8 +286,7 @@ class CompontentFrameDataDisplay extends HookConsumerWidget {
                         SelectableContainer(
                           color: theme.dialogBackgroundColor,
                           child: ExpandablePanel(
-                            controller:
-                                ExpandableController(initialExpanded: true),
+                            controller: ExpandableController(),
                             theme: ExpandableThemeData(
                               iconPadding: EdgeInsets.zero,
                               iconColor: theme.colorScheme.onBackground,
@@ -675,9 +676,8 @@ class ScrollableFrame extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final scrollController = useScrollController();
     return SingleChildScrollView(
-      controller: scrollController,
+      controller: useScrollController(),
       child: child,
     );
   }

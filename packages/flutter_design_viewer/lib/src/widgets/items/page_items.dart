@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_design/flutter_design.dart';
@@ -24,28 +26,65 @@ class TableOfContents extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: sections
-          .map(
-            (e) => TextButton.icon(
-              onPressed: () {
-                VRouter.of(context).to('#${e.id}');
-              },
-              icon: Icon(
-                FeatherIcons.cornerDownRight,
-                color: theme.primaryColor,
-              ),
-              label: Text(
-                e.title,
-                style: theme.textTheme.headline6?.copyWith(
-                  color: theme.primaryColor,
+      children: sections.fold(
+          [],
+          (previousValue, element) => [
+                ...previousValue,
+                _TableOfContentEntry(
+                  id: element.id,
+                  title: element.title,
                 ),
-              ),
-            ),
-          )
-          .toList(),
+                ...element.maybeMap(
+                  component: (component) =>
+                      component.examples.map((e) => _TableOfContentEntry(
+                            id: e.id,
+                            title: e.title,
+                            level: 1,
+                          )),
+                  orElse: () => [],
+                ),
+              ]),
+    );
+  }
+}
+
+class _TableOfContentEntry extends StatelessWidget {
+  const _TableOfContentEntry({
+    Key? key,
+    required this.id,
+    required this.title,
+    this.level = 0,
+  }) : super(key: key);
+
+  final String id;
+  final String title;
+  final int level;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final sizeFactor = 1 / pow(level + 1, 1 / 3);
+    return Padding(
+      padding: EdgeInsets.only(left: level * 16),
+      child: TextButton.icon(
+        onPressed: () {
+          VRouter.of(context).to('#$id');
+        },
+        icon: Icon(
+          FeatherIcons.cornerDownRight,
+          color: theme.primaryColor,
+          size: 24 * sizeFactor,
+        ),
+        label: Text(
+          title,
+          style: theme.textTheme.headline6?.copyWith(
+            color: theme.primaryColor,
+            fontSize: 24 * sizeFactor,
+          ),
+        ),
+      ),
     );
   }
 }
@@ -162,12 +201,15 @@ class ComponentSection extends HookConsumerWidget {
               [],
               (previousValue, element) => [
                 ...previousValue,
-                Spacers.v20,
-                TitleDescription(
-                  style: TextDescriptionStyle.section(context),
-                  title: element.title,
-                  description: element.description,
-                ),
+                Spacers.v40,
+                HookBuilder(builder: (context) {
+                  _scrollIntoViewIfUrlEndsWithId(context, element.id);
+                  return TitleDescription(
+                    style: TextDescriptionStyle.section(context),
+                    title: element.title,
+                    description: element.description,
+                  );
+                }),
                 Spacers.v16,
                 ProviderScope(
                   overrides: [
@@ -237,6 +279,7 @@ void _scrollIntoViewIfUrlEndsWithId(BuildContext context, String id) {
     if (router.url.endsWith(id)) {
       ensureScrollableVisible(context);
     }
+    return null;
   }, [router.url]);
 }
 
@@ -379,6 +422,7 @@ class ApiDocsSection extends HookConsumerWidget {
                                 ? Padding(
                                     padding: SpacingDesign.paddingAll16,
                                     child: SingleChildScrollView(
+                                      controller: useScrollController(),
                                       child: Text(
                                         e.documentation!,
                                         style: GoogleFonts.robotoMono(),

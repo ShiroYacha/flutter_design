@@ -3,8 +3,9 @@ import 'package:flutter_design/flutter_design.dart';
 import 'package:flutter_design_viewer/flutter_design_viewer.dart';
 import 'package:flutter_design_viewer/src/measures.dart';
 import 'package:flutter_design_viewer/src/widgets/items/page_items.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+import '../scaffolds/root_scaffold.dart';
 
 final currentPageProvider =
     Provider<ViewerDocumentPage>((ref) => throw UnimplementedError());
@@ -15,8 +16,9 @@ class PageScreen extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final viewerState = ref.watch(viewerStateProvider);
     final currentPage = ref.watch(currentPageProvider);
+    final mainScrollController = ref.watch(mainScrollControllerProvider);
     return SingleChildScrollView(
-      controller: useScrollController(),
+      controller: mainScrollController,
       padding: SpacingDesign.paddingAll40,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

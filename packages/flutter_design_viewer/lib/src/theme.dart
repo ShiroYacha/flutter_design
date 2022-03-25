@@ -4,8 +4,8 @@ import 'measures.dart';
 
 final _primaryColor = Colors.amber.shade700;
 final _primaryDarkColor = Colors.amber.shade600;
-final _secondaryColor = Colors.amber.shade600;
-final _secondaryDarkColor = Colors.amber.shade400;
+final _secondaryColor = Colors.teal.shade600;
+final _secondaryDarkColor = Colors.teal.shade400;
 const _backgroundLightest = Color(0xFFFAFAFA);
 const _backgroundLight = Color(0xFFF1F1F1);
 const _backgroundDark = Color(0xFF1C1C1C);

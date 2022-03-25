@@ -156,7 +156,8 @@ class _SizePainter extends CustomPainter {
     final tp = TextPainter(
       textDirection: TextDirection.ltr,
       text: TextSpan(
-        text: '(${value.width.floor()}, ${value.height.floor()})',
+        text:
+            '(${value.width.isInfinite ? 'Inf' : value.width.floor()}, ${value.height.isInfinite ? 'Inf' : value.height.floor()})',
         style: theme.textTheme.caption,
       ),
     );
