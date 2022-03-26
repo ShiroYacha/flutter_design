@@ -6,6 +6,7 @@ import 'package:flutter_design_viewer/flutter_design_viewer.dart';
 import 'package:flutter_design_viewer/src/measures.dart';
 import 'package:flutter_design_viewer/src/widgets/items/buttons.dart';
 import 'package:flutter_design_viewer/src/widgets/scaffolds/root_scaffold.dart';
+import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:ionicons/ionicons.dart';
@@ -23,6 +24,7 @@ class ExplorerDrawer extends HookConsumerWidget {
     final rootPages = ref.watch(pageGroupsProvider);
     final explorerPinned =
         ref.watch(viewerStateProvider.select((e) => e.explorerPinned));
+    final rootScaffoldKey = ref.watch(rootScaffoldKeyProvider);
     final screenBreakpoint = ref.watch(screenBreakpointProvider);
     final scrollController = useScrollController();
     return Container(
@@ -59,8 +61,14 @@ class ExplorerDrawer extends HookConsumerWidget {
                       size: 18,
                     ),
                     onTap: () {
+                      final newExplorerPinned = !explorerPinned;
+                      // Close the drawer as it's getting pinned
+                      if (newExplorerPinned &&
+                          rootScaffoldKey.currentState?.isDrawerOpen == true) {
+                        rootScaffoldKey.currentState!.openEndDrawer();
+                      }
                       ref.watch(viewerStateProvider.notifier).update((state) =>
-                          state.copyWith(explorerPinned: !explorerPinned));
+                          state.copyWith(explorerPinned: newExplorerPinned));
                     },
                   ).asMouseClickRegion,
                 ),
@@ -126,7 +134,10 @@ class PageGroupNode extends HookConsumerWidget {
     final router = VRouter.of(context);
     final isTopLevel = viewerPage.namespace.length <= 1;
     final rootScaffoldKey = ref.watch(rootScaffoldKeyProvider);
-    final isSelected = router.path == viewerPage.uri;
+    final isSelected = (router.url.lastIndexOf('#') > 0
+            ? router.url.substring(0, router.url.lastIndexOf('#'))
+            : router.url) ==
+        viewerPage.uri;
     final label = SizedBox(
       width: double.infinity,
       child: Padding(
@@ -149,55 +160,130 @@ class PageGroupNode extends HookConsumerWidget {
     final collapsedGroupUris = ref.watch(collapsedGroupUrisProvider);
     final collapsedGroupUrisNotifier =
         ref.watch(collapsedGroupUrisProvider.notifier);
-    return viewerPage.maybeMap(
-        group: (group) {
-          final controller = ExpandableController(
-            initialExpanded: (expandExplorerNodesByDefault &&
-                    !collapsedGroupUris.contains(group.uri)) ||
-                group.uri == router.path,
-          );
-          controller.addListener(() {
-            if (!controller.expanded) {
-              collapsedGroupUrisNotifier.state.add(group.uri);
-            } else {
-              collapsedGroupUrisNotifier.state.remove(group.uri);
-            }
-          });
-          return ExpandablePanel(
-            key: Key(group.id),
-            controller: controller,
-            theme: ExpandableThemeData(
-              hasIcon: group.children.isNotEmpty,
-              iconSize: 16,
-              iconColor: theme.colorScheme.onBackground,
-              iconPlacement: ExpandablePanelIconPlacement.right,
-              headerAlignment: ExpandablePanelHeaderAlignment.center,
-              expandIcon: Ionicons.chevron_forward_outline,
-              collapseIcon: Ionicons.chevron_down_outline,
-              tapBodyToCollapse: false,
-              tapHeaderToExpand: true,
+    return viewerPage.map(
+      group: (group) {
+        final controller = ExpandableController(
+          initialExpanded: (expandExplorerNodesByDefault &&
+                  !collapsedGroupUris.contains(group.uri)) ||
+              group.uri == router.path,
+        );
+        controller.addListener(() {
+          if (!controller.expanded) {
+            collapsedGroupUrisNotifier.state.add(group.uri);
+          } else {
+            collapsedGroupUrisNotifier.state.remove(group.uri);
+          }
+        });
+        return ExpandablePanel(
+          key: Key(group.id),
+          controller: controller,
+          theme: ExpandableThemeData(
+            hasIcon: group.children.isNotEmpty,
+            iconSize: 16,
+            iconColor: theme.colorScheme.onBackground,
+            iconPlacement: ExpandablePanelIconPlacement.right,
+            headerAlignment: ExpandablePanelHeaderAlignment.center,
+            expandIcon: Ionicons.chevron_forward_outline,
+            collapseIcon: Ionicons.chevron_down_outline,
+            tapBodyToCollapse: false,
+            tapHeaderToExpand: true,
+          ),
+          header: label,
+          collapsed: const SizedBox.shrink(),
+          expanded: Column(
+            children: group.children.fold(
+              [],
+              (previousValue, element) =>
+                  [...previousValue, PageGroupNode(viewerPage: element)],
             ),
-            header: label,
-            collapsed: const SizedBox.shrink(),
-            expanded: Column(
-              children: group.children.fold(
-                [],
-                (previousValue, element) =>
-                    [...previousValue, PageGroupNode(viewerPage: element)],
+          ),
+        );
+      },
+      document: (document) => Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          LinkableClickableContainer(
+            uri: Uri().resolve('#${viewerPage.uri}'),
+            onTap: () {
+              if (rootScaffoldKey.currentState?.isDrawerOpen == true) {
+                rootScaffoldKey.currentState!.openEndDrawer();
+              }
+              router.to(document.uri);
+            },
+            child: label,
+          ),
+          if (isSelected)
+            ...document.sections.map(
+              (e) => _ExplorerSectionEntry(
+                viewerPage: viewerPage,
+                section: e,
+                rootScaffoldKey: rootScaffoldKey,
+                router: router,
               ),
             ),
-          );
-        },
-        orElse: () => LinkableClickableContainer(
-              uri: Uri().resolve('#${viewerPage.uri}'),
-              onTap: () {
-                if (rootScaffoldKey.currentState?.isDrawerOpen == true) {
-                  rootScaffoldKey.currentState!.openEndDrawer();
-                }
-                router.toSegments(viewerPage.segments);
-              },
-              child: label,
-            ));
+        ],
+      ),
+    );
+  }
+}
+
+class _ExplorerSectionEntry extends StatelessWidget {
+  const _ExplorerSectionEntry({
+    Key? key,
+    required this.viewerPage,
+    required this.section,
+    required this.rootScaffoldKey,
+    required this.router,
+  }) : super(key: key);
+
+  final ViewerPageUnion viewerPage;
+  final ViewerSectionUnion section;
+  final GlobalKey<ScaffoldState> rootScaffoldKey;
+  final InitializedVRouterSailor router;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return LinkableClickableContainer(
+      uri: Uri().resolve('#${viewerPage.id}#${section.id}'),
+      onTap: () {
+        if (rootScaffoldKey.currentState?.isDrawerOpen == true) {
+          rootScaffoldKey.currentState!.openEndDrawer();
+        }
+        router.to('${viewerPage.uri}#${section.id}');
+      },
+      child: SizedBox(
+        width: double.infinity,
+        child: Padding(
+          padding: EdgeInsets.only(
+            left: 20.0 * (viewerPage.namespace.length),
+            top: 8,
+            bottom: 8,
+          ),
+          child: RichText(
+              text: TextSpan(children: [
+            WidgetSpan(
+              alignment: PlaceholderAlignment.top,
+              child: Paddings.right6(
+                child: Icon(
+                  FeatherIcons.cornerDownRight,
+                  color: theme.primaryColor,
+                  size: 12,
+                ),
+              ),
+            ),
+            TextSpan(
+              text: section.title,
+              style: theme.textTheme.subtitle1!.copyWith(
+                fontWeight: FontWeight.w300,
+                color: theme.highlightColor,
+              ),
+            ),
+          ])),
+        ),
+      ),
+    ).asMouseClickRegion;
   }
 }
 

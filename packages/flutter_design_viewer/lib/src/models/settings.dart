@@ -51,6 +51,7 @@ class ViewerState with _$ViewerState {
         viewMode: ViewMode.themes,
         displayMode: DisplayMode.widgetCodeSideBySide,
         themeMode: ThemeMode.dark,
+        explorerPinned: true,
         showDataBuilderByDefault: true,
         expandExplorerNodesByDefault: true,
         targetDeviceId: Devices.ios.iPhone12.identifier.toString(),

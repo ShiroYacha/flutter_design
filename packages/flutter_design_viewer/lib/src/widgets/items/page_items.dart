@@ -71,7 +71,11 @@ class _TableOfContentEntry extends StatelessWidget {
       padding: EdgeInsets.only(left: level * 16),
       child: TextButton.icon(
         onPressed: () {
-          VRouter.of(context).to('#$id');
+          VRouter.of(context).to(
+            VRouter.of(context).url,
+            hash: id,
+            isReplacement: true,
+          );
         },
         icon: Icon(
           FeatherIcons.cornerDownRight,
