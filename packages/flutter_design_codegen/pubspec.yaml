@@ -1,20 +1,20 @@
 name: flutter_design_codegen
 description: Code generator for [flutter_design](https://pub.dev/packages/flutter_design). Check out the documentation on the official [website](https://flutterdesign.io).
-version: 0.0.11-pre+1
+version: 0.0.12-pre+1
 homepage: https://flutterdesign.io/
 
 environment:
   sdk: ">=2.15.1 <3.0.0"
 
 dependencies:
-  analyzer: 3.2.0
+  analyzer: ^3.2.0
   build: ^2.2.1
   build_resolvers: ^2.0.0
   collection: ^1.15.0
-  dart_style: 2.2.1
-  # flutter_design_annotation: ^0.0.11-pre+1
-  flutter_design_annotation:
-    path: ../flutter_design_annotation
+  dart_style: ^2.2.1
+  flutter_design_annotation: ^0.0.12-pre+1
+  # flutter_design_annotation:
+  #   path: ../flutter_design_annotation
   glob: ^2.0.2
   meta: ^1.7.0
   path: ^1.8.0

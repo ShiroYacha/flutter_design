@@ -216,10 +216,8 @@ ${fieldMetaDatasetModel.map((e) => '${e.isRequired ? 'required' : ''} this.${e.n
     for (final example in examples) {
       final index = examples.indexOf(example);
       final builder = example.getField('builder');
-      print('builder = $builder');
       final revivable =
-          builder != null ? ConstantReader(builder).revive() : null;
-      print('revivable = $revivable');
+          builder?.isNull == false ? ConstantReader(builder).revive() : null;
       // Construct field metadata code
       final fieldMetaDatasetModel = _compileFieldMetaDatasetModel(
         clazz: clazz,

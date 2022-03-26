@@ -126,8 +126,8 @@ runApp(
           'en-US': const Locale('en', 'US'),
         },
         enabledThemes: {
-          'light': ThemeData.light(),
-          'dark': ThemeData.dark(),
+          'light': DesignTheme(materialTheme: ThemeData.light()),
+          'dark': DesignTheme(materialTheme: ThemeData.dark()),
         },
       ),
       pageGroups: buildComponentPageTree(componentPages: generatedComponentPages),

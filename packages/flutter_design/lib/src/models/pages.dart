@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_design_annotation/flutter_design_annotation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:recase/recase.dart';
 

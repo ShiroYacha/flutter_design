@@ -78,27 +78,20 @@ class DesignField {
   /// will be used.
   final dynamic parameter;
 
+  /// Default constructor
   const DesignField({
     this.parameter,
   });
 }
 
+/// Provide examples based on a specific constructor. The generated examples will be displayed
+/// as subsections following the section of the constructor widget designer.
 class DesignExamples {
+  /// A set of examples using the annotated constructor.
   final List<DesignExample> examples;
 
+  /// Default constructor
   const DesignExamples({
     required this.examples,
-  });
-}
-
-class DesignExample {
-  final String title;
-  final String? description;
-  final ComponentParamBuilder builder;
-
-  const DesignExample({
-    required this.title,
-    this.description,
-    required this.builder,
   });
 }

@@ -1,3 +1,7 @@
+## 0.0.12-pre+1
+
+* Add core features, fix bugs and stablize code.
+
 ## 0.0.11-pre+1
 
 * Add core features, fix bugs and stablize code.

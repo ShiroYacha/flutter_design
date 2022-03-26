@@ -20,8 +20,8 @@ void main() {
           'de-DE': const Locale('de', 'DE'),
         },
         enabledThemes: {
-          'light': ThemeData.light(),
-          'dark': ThemeData.dark(),
+          'light': DesignTheme(materialTheme: ThemeData.light()),
+          'dark': DesignTheme(materialTheme: ThemeData.dark()),
         },
         widgetDisplayHeight: 500,
       ),
