@@ -86,6 +86,27 @@ class DesignField {
 
 /// Provide examples based on a specific constructor. The generated examples will be displayed
 /// as subsections following the section of the constructor widget designer.
+/// 
+/// Example: used on a ctor to create an example
+///
+/// class Avatar extends StatelessWidget {
+///   final String uri;
+///
+///   @DesignExamples(
+///     examples: [
+///       DesignExample(
+///         title: 'An example',
+///         description: 'This is an example',
+///         builder: _$AvatarParamBuilder(uri: 'https://example.com/image'),
+///       ),
+///     ],
+///   )
+///   const Avatar({
+///     required this.uri,
+///     this.radius = 30.0,
+///     Key? key,
+///   }) : super(key: key);
+/// }
 class DesignExamples {
   /// A set of examples using the annotated constructor.
   final List<DesignExample> examples;
@@ -93,5 +114,25 @@ class DesignExamples {
   /// Default constructor
   const DesignExamples({
     required this.examples,
+  });
+}
+
+/// An example description.
+/// 
+/// (This is not an annotation to be used!)
+class DesignExample {
+  /// Title of the example
+  final String title;
+
+  /// Description of the example
+  final String? description;
+
+  /// Component param builder of the example
+  final ComponentParamBuilder builder;
+
+  const DesignExample({
+    required this.title,
+    this.description,
+    required this.builder,
   });
 }

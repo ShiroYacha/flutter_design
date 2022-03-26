@@ -1,4 +1,4 @@
-## 0.0.12-pre+1
+## 0.0.12-pre+2
 
 * Add core features, fix bugs and stablize code.
 

@@ -1,6 +1,6 @@
 name: flutter_design
 description: A complete framework with tools to help you bootstrap your design system.
-version: 0.0.12-pre+1
+version: 0.0.12-pre+2
 homepage: https://flutterdesign.io/
 
 environment:
@@ -11,7 +11,7 @@ dependencies:
   flutter:
     sdk: flutter
   # internal
-  flutter_design_annotation: ^0.0.12-pre+1
+  flutter_design_annotation: ^0.0.12-pre+2
   # flutter_design_annotation:
   #   path: ../flutter_design_annotation
   # data

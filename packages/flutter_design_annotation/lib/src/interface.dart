@@ -32,21 +32,3 @@ abstract class TDataBuilderFactory<TBuildContext> {
 abstract class ComponentParamBuilder {
   const ComponentParamBuilder();
 }
-
-/// An example description
-class DesignExample {
-  /// Title of the example
-  final String title;
-
-  /// Description of the example
-  final String? description;
-
-  /// Component param builder of the example
-  final ComponentParamBuilder builder;
-
-  const DesignExample({
-    required this.title,
-    this.description,
-    required this.builder,
-  });
-}

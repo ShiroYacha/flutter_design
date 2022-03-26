@@ -30,10 +30,10 @@ dependencies:
   flutter:
     sdk: flutter
   # internal
-  flutter_design: ^0.0.12-pre+1
+  flutter_design: ^0.0.12-pre+2
   # flutter_design:
   #   path: ../../flutter_design
-  flutter_design_viewer: ^0.0.12-pre+1
+  flutter_design_viewer: ^0.0.12-pre+2
   # flutter_design_viewer:
   #   path: ../
   # icon
@@ -53,7 +53,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_design_codegen: ^0.0.12-pre+1
+  flutter_design_codegen: ^0.0.12-pre+2
   # flutter_design_codegen:
   #   path: ../../flutter_design_codegen
   build_runner: ^2.1.7
