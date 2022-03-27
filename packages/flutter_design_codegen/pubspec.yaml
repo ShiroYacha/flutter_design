@@ -12,9 +12,9 @@ dependencies:
   build_resolvers: ^2.0.0
   collection: ^1.15.0
   dart_style: ^2.2.1
-  flutter_design_annotation: ^0.0.12-pre+2
-  # flutter_design_annotation:
-  #   path: ../flutter_design_annotation
+  # flutter_design_annotation: ^0.0.12-pre+2
+  flutter_design_annotation:
+    path: ../flutter_design_annotation
   glob: ^2.0.2
   meta: ^1.7.0
   path: ^1.8.0

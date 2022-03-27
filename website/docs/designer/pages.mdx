@@ -35,7 +35,8 @@ Each document page contains a list of sections of following types, displayed in 
 `ViewerComponentSection`, a component section contains the widget designer. It uses the specified meta data of the constructor to render the widget and allows 
 the user to play with dynamic runtime data using the data builders.
 
-Using the `@Design` annotation, each public constructor (named or factory) will generate a component section. 
+Using the `@Design` annotation, each public constructor (named or factory) will generate a component section. You can also use the `@DesignExamples` annotation on
+public constructors which would generate a component example section for each example provided on the constructor.
 
 :::note
 For more information on the specifics of the component section, please refer to [Widget designer](/docs/designer/widget_designer)

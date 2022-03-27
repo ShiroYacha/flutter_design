@@ -13,7 +13,7 @@ The `id` of the component will be the class name in camelCase. The `title` will 
 
 ### Component section
 
-A single component section called `Anatomy` will be created for the default public constructor of the class. The section contains a `ViewerWidgetBuilder` which contains 
+A component section named after the constructor will be created for the each public constructor of the class. The section contains a `ViewerWidgetBuilder` which contains 
 all the meta data required to construct the widget using its constructor. The builder will scan all the fields (optional, named, positional, etc.) and store their metadata into a `fieldMetaDataset` field so 
 later the designer would know how to construct thoses fields using [DataBuilders](/docs/designer/data_builder). 
 
@@ -33,6 +33,10 @@ Futuremore, the source code of the constructor will be extracted into a source c
 The source is extracted using the [analyzer](https://pub.dev/packages/analyzer) via the [abstract syntax tree (AST)](https://en.wikipedia.org/wiki/Abstract_syntax_tree) and formatted using [dart_style](https://github.com/dart-lang/dart_style) with some auto injected commas. Hence 
 the code might be a bit different than what you have actually written, e.g. the comments are gone, the formatting might be different, etc.
 :::
+
+A parameter builder class named `_${NAME_OF_CONSTRUCTOR_IN_PASCAL_CASE}ParamBuilder` will also be generated for each constructor. It can be used to configure the examples: if a constructor is annotated with `@DesignExamples`, component example subsection will be generated for each `DesignExample`. The generated sub section has a similar structure to the component section where the user can configure 
+the initial values of each field. 
+
 
 ### API docs section
 

@@ -9,8 +9,6 @@ import 'package:viewer_example/page_factory.design.dart';
 import 'data_builders.dart';
 
 void main() async {
-  // Load themes using apppainter & json_theme
-  WidgetsFlutterBinding.ensureInitialized();
   // Recommended to make history browsing work better in web
   setPathUrlStrategy();
   // Prepare material themes

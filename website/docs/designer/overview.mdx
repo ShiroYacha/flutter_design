@@ -35,6 +35,18 @@ void main() {
       pageGroups: [
         // Your custom pages
         ...buildGroupedPageTrees(docPages),
+        // Theme pages (you can also opt out of the material 3 themes)
+        buildThemePageGroup(
+          themes: {
+            for (final e in themes.entries) e.key: e.value.materialTheme,
+          },
+          useMaterial3: false,
+          iconDataset: List.generate(
+            0xea33 - 0xe900,
+            (index) => IoniconsData(index + 0xe900),
+            growable: false,
+          ),
+        ),
         // Generated @design/@Design annotated pages
         buildComponentPageTree(componentPages: generatedComponentPages),
       ],
