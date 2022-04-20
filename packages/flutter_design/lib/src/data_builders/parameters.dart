@@ -26,6 +26,7 @@ class DesignParamStringLorem with _$DesignParamStringLorem {
 /// The generated data is of type `Widget`
 @freezed
 class DesignParamWidgetPlaceholder with _$DesignParamWidgetPlaceholder {
+  const DesignParamWidgetPlaceholder._();
   const factory DesignParamWidgetPlaceholder({
     /// Background color of the placeholder
     @Default(Colors.amber) Color color,
@@ -33,6 +34,9 @@ class DesignParamWidgetPlaceholder with _$DesignParamWidgetPlaceholder {
     /// Size of the placeholder
     @Default(Size(100, 100)) Size size,
   }) = _DesignParamWidgetPlaceholder;
+
+  static const DesignParamWidgetPlaceholder infinite =
+      DesignParamWidgetPlaceholder(size: Size.infinite);
 }
 
 /// Configures a widget placeholder list generator. Each placeholder

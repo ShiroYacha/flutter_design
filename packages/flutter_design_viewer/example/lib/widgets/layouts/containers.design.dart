@@ -376,10 +376,11 @@ on bigger screens, it is better to center its content with a fixed max width.
                 defaultValue: null,
                 defaultValueCode: "null",
                 viewerInitSelectorParam: DesignParamWidgetPlaceholder(
+                  color: Colors.red,
                   size: Size.infinite,
                 ),
                 viewerInitValueCode:
-                    '''DesignParamWidgetPlaceholder(size: Size.infinite, )''',
+                    '''DesignParamWidgetPlaceholder(color: Colors.red, size: Size.infinite, )''',
                 documentation: '''/// The child widget''',
               ),
               FieldMetaData(
@@ -463,10 +464,11 @@ on bigger screens, it is better to center its content with a fixed max width.
                 defaultValue: null,
                 defaultValueCode: "null",
                 viewerInitSelectorParam: DesignParamWidgetPlaceholder(
+                  color: Colors.blue,
                   size: Size.infinite,
                 ),
                 viewerInitValueCode:
-                    '''DesignParamWidgetPlaceholder(size: Size.infinite, )''',
+                    '''DesignParamWidgetPlaceholder(color: Colors.blue, size: Size.infinite, )''',
                 documentation: '''/// The child widget''',
               ),
               FieldMetaData(

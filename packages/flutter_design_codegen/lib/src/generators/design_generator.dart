@@ -408,8 +408,18 @@ ViewerComponentExample(
     if (objectTypeElement != null) {
       final visitor = ModelVisitor();
       objectTypeElement.visitChildren(visitor);
+      // Compile iterable
+      if (visitor.classType.isDartCoreList) {
+        final values = object!.toListValue()!;
+        sb.write('[');
+        for (final e in values) {
+          sb.write(_compileObjectSourceCode(e));
+          sb.write(',');
+        }
+        sb.write(']');
+      }
       // Compile base types
-      if (visitor.classType.isBaseType) {
+      else if (visitor.classType.isBaseType) {
         sb.write(_readLiteralAnnotationValue(object));
       }
       // Compile object type, ignore null element types, e.g. null, functions, etc.

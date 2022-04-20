@@ -53,6 +53,7 @@ class DesignSystemViewerApp extends HookConsumerWidget {
   final String? initialRoute;
   final Widget? branding;
   final ViewerSettings settings;
+  final ViewerState? initialState;
   final List<ViewerGroupPage> pageGroups;
   final Map<Type, List<DataBuilderCreator>> dataBuilders;
   final DesignerBuilder? designerBuilder;
@@ -61,9 +62,10 @@ class DesignSystemViewerApp extends HookConsumerWidget {
     required this.pageGroups,
     required this.settings,
     this.dataBuilders = const {},
-    this.branding,
     this.initialRoute,
     this.designerBuilder,
+    this.branding,
+    this.initialState,
     Key? key,
   }) : super(key: key);
 
@@ -83,7 +85,10 @@ class DesignSystemViewerApp extends HookConsumerWidget {
           designerBuilder ?? (ctx, theme, child) => child,
         ),
       ],
-      child: DesignSystemViewerRouter(initialRoute: initialRoute),
+      child: DesignSystemViewerRouter(
+        initialRoute: initialRoute,
+        initialState: initialState,
+      ),
     );
   }
 
@@ -101,8 +106,10 @@ class DesignSystemViewerApp extends HookConsumerWidget {
 
 class DesignSystemViewerRouter extends HookConsumerWidget {
   final String? initialRoute;
+  final ViewerState? initialState;
   const DesignSystemViewerRouter({
     this.initialRoute,
+    this.initialState,
     Key? key,
   }) : super(key: key);
   @override
@@ -118,7 +125,7 @@ class DesignSystemViewerRouter extends HookConsumerWidget {
         final cache = await ViewerState.getFromStorage();
         viewerStateNotifier.state = cache?.isValid == true
             ? cache!
-            : ViewerState.createDefault(viewerSettings);
+            : (initialState ?? ViewerState.createDefault(viewerSettings));
         // Restore cached URI if possible (not doing it in Web because the user can open
         // multiple tabs).
         if (!kIsWeb &&

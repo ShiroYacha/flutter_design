@@ -324,11 +324,11 @@ class __$DesignParamWidgetPlaceholderCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_DesignParamWidgetPlaceholder
-    with DiagnosticableTreeMixin
-    implements _DesignParamWidgetPlaceholder {
+class _$_DesignParamWidgetPlaceholder extends _DesignParamWidgetPlaceholder
+    with DiagnosticableTreeMixin {
   const _$_DesignParamWidgetPlaceholder(
-      {this.color = Colors.amber, this.size = const Size(100, 100)});
+      {this.color = Colors.amber, this.size = const Size(100, 100)})
+      : super._();
 
   @JsonKey()
   @override
@@ -378,9 +378,10 @@ class _$_DesignParamWidgetPlaceholder
 }
 
 abstract class _DesignParamWidgetPlaceholder
-    implements DesignParamWidgetPlaceholder {
+    extends DesignParamWidgetPlaceholder {
   const factory _DesignParamWidgetPlaceholder({Color color, Size size}) =
       _$_DesignParamWidgetPlaceholder;
+  const _DesignParamWidgetPlaceholder._() : super._();
 
   @override
 
